@@ -38,12 +38,12 @@ class ClientsController extends BaseController {
     try {
       const user = await this.model.findOne({
         where: { email: email },
-        // include: [
-        //   this.appointmentModel,
-        //   this.journalentryModel,
-        //   this.therapistModel,
-        //   this.clientsTherapistsModel,
-        // ],
+        include: [
+          this.appointmentModel,
+          this.journalentryModel,
+          this.therapistModel,
+          this.clientsTherapistsModel,
+        ],
       });
       return res.json(user);
     } catch (err) {

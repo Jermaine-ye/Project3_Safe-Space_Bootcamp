@@ -1,5 +1,4 @@
-import React from 'react';
-import { Button, Card, Text, Title } from '@mantine/core';
+import React from "react";
 
 export default function CalendarFull() {
   return <div>CalendarFull</div>;

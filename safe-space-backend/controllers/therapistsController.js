@@ -35,11 +35,13 @@ class TherapistsController {
 
   //get one therapist for therapist own profile and get all blocked dates for therapist and client
   async getOne(req, res) {
-    const { therapistId } = req.params;
+    const { emailTherapist } = req.body;
     try {
-      const output = await this.model.findByPk(therapistId, {
+      const output = await this.model.findOne({
+        where: { email: emailTherapist },
         include: this.blockedDateModel,
       });
+
       return res.json(output);
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });

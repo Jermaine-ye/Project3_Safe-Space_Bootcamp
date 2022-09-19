@@ -1,6 +1,6 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   Button,
   Card,
@@ -11,41 +11,41 @@ import {
   Form,
   Input,
   Textarea,
-} from '@mantine/core';
-import { DatePicker } from '@mantine/dates';
+} from "@mantine/core";
+import { DatePicker } from "@mantine/dates";
 
-import { BACKEND_URL } from '../constants.js';
+import { BACKEND_URL } from "../constants.js";
 
 const JournalForm = () => {
-  const [date, setDate] = useState('');
-  const [input1, setInput1] = useState('');
-  const [input2, setInput2] = useState('');
-  const [input3, setInput3] = useState('');
+  const [date, setDate] = useState("");
+  const [input1, setInput1] = useState("");
+  const [input2, setInput2] = useState("");
+  const [input3, setInput3] = useState("");
 
-  const [dueDate, setDueDate] = useState('');
-  const [clientName, setClientName] = useState('');
-  const [therapistName, setTherapistName] = useState('');
+  const [dueDate, setDueDate] = useState("");
+  const [clientName, setClientName] = useState("");
+  const [therapistName, setTherapistName] = useState("");
   // const [templateid, setTemplateId] = useState('');
   const templateid = 1;
 
-  const [title1, setTitle1] = useState('');
-  const [title2, setTitle2] = useState('');
-  const [title3, setTitle3] = useState('');
+  const [title1, setTitle1] = useState("");
+  const [title2, setTitle2] = useState("");
+  const [title3, setTitle3] = useState("");
 
   const Navigate = useNavigate();
 
   const handleChange = (event) => {
     switch (event.target.name) {
-      case 'date':
+      case "date":
         setDate(event.target.value);
         break;
-      case 'input1':
+      case "input1":
         setInput1(event.target.value);
         break;
-      case 'input2':
+      case "input2":
         setInput2(event.target.value);
         break;
-      case 'input3':
+      case "input3":
         setInput3(event.target.value);
         break;
       default:
@@ -54,7 +54,7 @@ const JournalForm = () => {
 
   const template1Qns = (templateid) => {
     if (templateid == 1) {
-      setTitle1('Topics  I want to discuss and goals for the session: ');
+      setTitle1("Topics  I want to discuss and goals for the session: ");
       setTitle2(
         `How do I feel about these things and how do they affect my life? ${(
           <br />
@@ -63,7 +63,7 @@ const JournalForm = () => {
       setTitle3(`Main insights and takeaways from session: ${(<br />)}
 (including possible actions and follow ups)`);
     } else if (templateid == 2) {
-      setTitle1('Focus Topics and goals for the session:');
+      setTitle1("Focus Topics and goals for the session:");
       setTitle2(
         `How did my partner react to this discussion? ${(
           <br />
@@ -117,12 +117,12 @@ const JournalForm = () => {
         input3,
       })
       .then((res) => {
-        setDate('');
-        setInput1('');
-        setInput2('');
-        setInput3('');
+        setDate("");
+        setInput1("");
+        setInput2("");
+        setInput3("");
 
-        console.log('resdata:', res.data);
+        console.log("resdata:", res.data);
         Navigate(`/journals/${res.data.id}`);
       })
       .catch((err) => {

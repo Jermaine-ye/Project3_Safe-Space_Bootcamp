@@ -15,7 +15,7 @@ class ClientsRouter {
     // );
 
     //get all clients_therapists (for client to rechoose) <<< just do getOne client and do junction table include. Dont do getallclients_therapist
-    router.get("/", this.controller.getAll.bind(this.controller));
+    router.get("/", this.auth, this.controller.getAll.bind(this.controller));
     //get one client (for both client own profile and therapist)
     // router.get("/", this.controller.getOne.bind(this.controller));
 

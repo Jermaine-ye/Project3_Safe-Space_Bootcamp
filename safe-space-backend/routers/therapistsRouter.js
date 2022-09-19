@@ -10,16 +10,12 @@ class TherapistsRouter {
     //get all clients(for therapist)
     router.get(
       "/clients",
-
+      this.auth,
       this.controller.getAll.bind(this.controller)
     );
 
     //get one therapist (for therapist own profile) and can get all blocked dates (for client and therapist)
-    router.get(
-      "/:therapistId",
-      this.auth,
-      this.controller.getOne.bind(this.controller)
-    );
+    router.get("/", this.auth, this.controller.getOne.bind(this.controller));
 
     //create one blocked date (for therapist)
     router.post(
