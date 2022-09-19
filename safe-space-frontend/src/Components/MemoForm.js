@@ -30,6 +30,7 @@ const MemoForm = () => {
   const [instructions, setInstructions] = useState('');
   const [riskFactors, setRiskFactors] = useState('');
 
+  let params = useParams();
   const Navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -96,8 +97,14 @@ const MemoForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
 
+    //back end route is different from BE route.
+    //check what type of data you want get access first then check index.js app.use (all the way below to see the relatvent router to grab the get/put etc)
+
+    // memo/${:clientId}/${:memoId}
+    // not front end route like what u have done below!!!
+
+    axios
       .post(`${BACKEND_URL}/therapist/patients/:clientId/newmemo`, {
         date,
         general,

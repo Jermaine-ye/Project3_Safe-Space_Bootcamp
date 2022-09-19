@@ -13,7 +13,6 @@ import {
   Textarea,
 } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
-
 import { BACKEND_URL } from '../constants.js';
 
 const JournalForm = () => {
@@ -32,6 +31,7 @@ const JournalForm = () => {
   const [title2, setTitle2] = useState('');
   const [title3, setTitle3] = useState('');
 
+   let params = useParams();
   const Navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -51,6 +51,30 @@ const JournalForm = () => {
       default:
     }
   };
+
+
+  //Need to get the set template and set the due date & Journal ID & Therapist ID & Template ID
+  const journalTemplate = () => {
+  const [templateIndex, setTemplateIndex] = useState();
+  const [template, setTemplate] = useState();
+ 
+// get all to know there is an empty null=> new journal entry => 
+
+
+  
+  useEffect(() => {
+    // If there is a templateIndex, retrieve the sighting data
+    if (templateIndex) {
+      axios
+        .get(`${BACKEND_URL}/journal/${params.clientId}/${params.journalId}/`)
+        .then((response) => {
+          setTemplate(response.data);
+        });
+    }
+    // Only run this effect on change to sightingIndex
+  }, [templateIndex]);
+
+
 
   const template1Qns = (templateid) => {
     if (templateid == 1) {
@@ -74,43 +98,140 @@ const JournalForm = () => {
     }
   };
 
-  // Need to get the set template and set the due date & Journal ID & Therapist ID & Template ID
-  // const Sighting = () => {
-  // const [sightingIndex, setSightingIndex] = useState();
-  // const [sighting, setSighting] = useState();
+const singleTemplate = (templateId) => {
+    return (
+      <Container ClassName="Form-body" size="sm" px="xs">
+        <Grid justify="center" align="center">
+          <form onSubmit={handleSubmit}>
+            <label>Journal Entry</label>
 
-  // useEffect(() => {
-  //   // If there is a sightingIndex, retrieve the sighting data
-  //   if (sightingIndex) {
-  //     axios
-  //       .get(`${BACKEND_URL}/sightings/${sightingIndex}`)
-  //       .then((response) => {
-  //         setSighting(response.data);
-  //       });
-  //   }
-  //   // Only run this effect on change to sightingIndex
-  // }, [sightingIndex]);
+            <label>Date Due:</label>
+            {/* <input
+        type="datetime-local"
+        name="date"
+        value={date}
+        onChange={handleChange}
+      /> */}
+            <br />
 
-  // const params = useParams();
-  // if (sightingIndex !== params.sightingIndex) {
-  //   setSightingIndex(params.sightingIndex);
-  // }
+            <br />
+            <label>Date:</label>
+            <DatePicker
+              placeholder="Pick date"
+              value={date}
+              onChange={setDate}
+            />
+            <br />
 
-  // // Store a new JSX element for each property in sighting details
-  // const sightingDetails = [];
-  // if (sighting) {
-  //   for (const key in sighting) {
-  //     sightingDetails.push(
-  //       <Card.Text key={key}>{`${key}: ${sighting[key]}`}</Card.Text>
-  //     );
-  //   }
-  // }
+            <label>Topics I want to discuss and goals for the session:</label>
+            <Textarea
+              value={input1}
+              onChange={handleChange}
+              placeholder="what has been bothering you?"
+            />
+            <br />
+            <label>
+              How do I feel about these things and how do they affect my life?
+            Do I already see ways to help myself get over them?
+            </label>
+            <Textarea
+              name="notes"
+              value={input2}
+              onChange={handleChange}
+              placeholder="what are your thoughts?"
+            />
+            <br />
+            <label>Main insights and takeaways from session: 
+            (including possible actions and follow ups)</label>
+            <Textarea
+              name="notes"
+              value={input3}
+              onChange={handleChange}
+              placeholder="what are your thoughts?"
+            />
+            <br />
+            <Button variant="light" type="submit">
+              Submit
+            </Button>
+          </form>
+        </Grid>
+      </Container>
+    );
+  }
+  const coupleTemplate = (templateId) => {
+    return (
+      <Container ClassName="Form-body" size="sm" px="xs">
+        <Grid justify="center" align="center">
+          <form onSubmit={handleSubmit}>
+            <label>Journal Entry</label>
+
+            <label>Date Due:</label>
+            {/* <input
+        type="datetime-local"
+        name="date"
+        value={date}
+        onChange={handleChange}
+      /> */}
+            <br />
+
+            <br />
+            <label>Date:</label>
+            <DatePicker
+              placeholder="Pick date"
+              value={date}
+              onChange={setDate}
+            />
+            <br />
+
+            <label>Focus Topics and goals for the session:</label>
+            <Textarea
+              value={input1}
+              onChange={handleChange}
+              placeholder="what has been bothering you?"
+            />
+            <br />
+            <label>
+       How did my partner react to this discussion? 
+       What feelings and insights did he/she express?
+            </label>
+            <Textarea
+              name="notes"
+              value={input2}
+              onChange={handleChange}
+              placeholder="what are your thoughts?"
+            />
+            <br />
+            <label>My main insights and takeaways from session:
+(including possible actions and follow ups)</label>
+            <Textarea
+              name="notes"
+              value={input3}
+              onChange={handleChange}
+              placeholder="what are your thoughts?"
+            />
+            <br />
+            <Button variant="light" type="submit">
+              Submit
+            </Button>
+          </form>
+        </Grid>
+      </Container>
+    );
+  }
+
+
+
+
+
+
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
       // .post(`${BACKEND_URL}/client/${clientId}/journal/new`, {
-      .post(`${BACKEND_URL}/client/:clientId/journal/new`, {
+      .post(`${BACKEND_URL}/client/${clientId}/journal/new`, {
         date,
         input1,
         input2,

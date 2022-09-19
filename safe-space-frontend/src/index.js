@@ -45,7 +45,6 @@ root.render(
         <Route path="/" element={<App />}>
           {/* Route that renders home content */}
           <Route index element={<LandingPage />} />
-
           <Route path="/index" element={<LandingPage />} />
           {/* Route that renders about,advice,services,FAQ,Support page */}
           <Route path="/about" element={<About />} />
@@ -53,22 +52,7 @@ root.render(
           <Route path="/faq" element={<FAQ />} />
           <Route path="/services" element={<Services />} />
           <Route path="/support" element={<SupportResources />} />
-
-          {/* Route that renders evaluation screen */}
-          <Route path="/evaluation" element={<EvaluationScreen />}>
-            {/* Route that renders evaluation form */}
-            <Route
-              path="/evaluation/1"
-              element={<EvaluationFormPreference />}
-            />
-            {/* Route that renders evaluation form */}
-            <Route path="/evaluation/2" element={<EvaluationFormSpecialty />} />
-            {/* Route that renders evaluation results */}
-          </Route>
-          <Route path="/evaluation/results" element={<EvaluationResults />} />
-          {/* Route that renders evaluation results */}
-          <Route path="/particulars" element={<PersonalParticularsForm />} />
-          {/* Route that renders clientdashboard screen */}
+          {/* here we want to do auth0 functions, check authentication only when user clicks log in or sign up button. We tag the isAuthenticated to the onclick of the buttons. BUT WE NEED TO THINK OF HOW TO REDIRECT THEM PROPERLY. Probably useNavigate hook, check isAuthtenticated on useEffect, if authtenticated, grab the user as an async await function. Then use the user.role to redirect them to either client or therapist portal. */}
           <Route path="/client/" element={<DashboardClientScreen />}>
             {/* Route that renders all journal listings of client on client's portal */}
             <Route path="/client/journals" element={<JournalList />} />
@@ -96,39 +80,37 @@ root.render(
           <Route
             path="/therapist/patients/:clientId"
             element={<PatientProfile />}
-          />
+          />{' '}
+          */}
           {/* Route that renders appt history for the indiv patient on therapists's portal */}
           <Route
             path="/therapist/patients/:clientId/history"
             element={<PrevApptHistory />}
-          />
+          />{' '}
+          */}
           {/* Route that renders assigning of journal template to indiv patient on therapists's portal */}
           <Route
             path="/therapist/patients/:clientId/newjournal"
             element={<JournalAssignment />}
           />
-
-          {/* Route that renders new Journal template form of client on therapist portal ?? but if there's already a therapist assignment component?? */}
-          {/* <Route
-            path="/therapist/:clientId/journal/new"
-            element={<JournalTemplate />}
-          /> */}
           {/* Route that renders indiv journal done by indiv patient on therapists's portal */}
           <Route
             path="/therapist/patients/:clientId/journal/:journalId"
             element={<JournalSingle />}
-          />
+          />{' '}
+          */}
           {/* Route that renders indiv memo by therapist(past & present) abt the indiv patient on therapists's portal */}
           <Route
             path="/therapist/patients/:clientId/memos/:memoId"
             element={<MemoSingle />}
-          />
+          />{' '}
+          */}
           {/* Route that renders blank new memo for the indiv patient on therapists's portal */}
           <Route
             path="/therapist/patients/:clientId/newmemo"
             element={<MemoForm />}
-          />
-
+          />{' '}
+          */}
           {/* Route that matches all other paths */}
           <Route path="*" element={'Nothing here!'} />
         </Route>
