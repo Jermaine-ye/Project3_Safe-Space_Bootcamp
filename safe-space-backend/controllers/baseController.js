@@ -7,18 +7,7 @@ class BaseController {
 
   async getAll(req, res) {
     try {
-      console.log("hello!");
       const output = await this.model.findAll();
-      return res.json(output);
-    } catch (err) {
-      return res.status(400).json({ error: true, msg: err });
-    }
-  }
-
-  async getOne(req, res) {
-    const { Id } = req.params;
-    try {
-      const output = await this.model.findByPk(Id);
       return res.json(output);
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });
