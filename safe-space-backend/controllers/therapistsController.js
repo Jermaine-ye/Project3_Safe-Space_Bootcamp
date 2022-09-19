@@ -50,10 +50,10 @@ class TherapistsController {
 
   //create one blocked date for therapist
   async insertOne(req, res) {
-    const { blockedDate, therapistId } = req.body;
+    const { date, therapistId } = req.body;
     try {
       const newBlockedDate = await this.blockedDateModel.create({
-        blockedDate: blockedDate,
+        date: date,
         therapistId: therapistId,
       });
       return res.json(newBlockedDate);

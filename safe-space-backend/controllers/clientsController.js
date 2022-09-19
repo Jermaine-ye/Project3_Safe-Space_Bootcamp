@@ -7,13 +7,15 @@ class ClientsController {
     therapistModel,
     clientsTherapistsModel,
     appointmentModel,
-    journalentryModel
+    journalentryModel,
+    specializationTherapistsModel
   ) {
     this.model = model;
     this.therapistModel = therapistModel;
     this.clientsTherapistsModel = clientsTherapistsModel;
     this.appointmentModel = appointmentModel;
     this.journalentryModel = journalentryModel;
+    this.specializationTherapistsModel = specializationTherapistsModel;
   }
 
   // // get all appointments for client
@@ -39,10 +41,10 @@ class ClientsController {
       const user = await this.model.findOne({
         where: { email: emailClient },
         include: [
-          this.appointmentModel,
-          this.journalentryModel,
+          // this.appointmentModel,
+          // this.journalentryModel,
           this.therapistModel,
-          this.clientsTherapistsModel,
+          // this.clientsTherapistsModel,
         ],
       });
       return res.json(user);
@@ -68,13 +70,13 @@ class ClientsController {
       therapistConfirmed,
       specializationId,
       genderPreference,
-      agepreferenceId,
+      ageId,
       languageId,
       religionId,
-      dailymoodId,
+      dailymood,
       description,
       active,
-      chosenTherapy,
+      chosenTherapist,
       createdAt,
       endedAt,
       feedback,
@@ -96,16 +98,16 @@ class ClientsController {
           therapistConfirmed: therapistConfirmed,
           specializationId: specializationId,
           genderPreference: genderPreference,
-          agepreferenceId: agepreferenceId,
+          ageId: ageId,
           languageId: languageId,
           religionId: religionId,
-          dailymoodId: dailymoodId,
+          dailymood: dailymood,
           description: description,
           active: active,
         },
         {
           through: {
-            chosenTherapy: chosenTherapy,
+            chosenTherapist: chosenTherapist,
             createdAt: createdAt,
             endedAt: endedAt,
             feedback: feedback,
@@ -148,28 +150,32 @@ class ClientsController {
     } = req.body;
     try {
       //allTherapists is an array of objects
+      console.log("hi");
       const allTherapists = await this.therapistModel.findAll({
         where: {
-          agerangeId: ageId,
+          ageId: ageId,
           religionId: religionId,
           gender: gender,
           languageId: languageId,
         },
-        include: [
-          {
-            model: this.clientsTherapistsModel,
-            where: {
-              specializationId: specializationId,
-            },
-          },
-        ],
+        // include: [
+        //   {
+        //     model: this.specializationTherapistsModel,
+        //     where: {
+        //       specializationId: specializationId,
+        //     },
+        //   },
+        // ],
       });
 
+      // console.log(allTherapists);
+
       const resultTherapist = allTherapists.map(async (therapist) => {
+        // await console.log("indiv object", therapist);
         const newRelation = await this.clientsTherapistsModel.create({
           clientId: clientId,
-          therapistId: therapist.therapistId,
-          chosenTherapy: false,
+          therapistId: therapist.dataValues.id,
+          chosenTherapist: false,
         });
         return newRelation;
       });

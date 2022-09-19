@@ -37,11 +37,11 @@ class AppointmentsController {
 
   //create one appointment for therapist and client
   async insertOne(req, res) {
-    const { startDateTime, endDateTime, therapistId, clientId } = req.body;
+    const { startDatetime, endDatetime, therapistId, clientId } = req.body;
     try {
       const newAppointment = await this.model.create({
-        startDatetime: startDateTime,
-        endDatetime: endDateTime,
+        startDatetime: startDatetime,
+        endDatetime: endDatetime,
         createdAt: new Date(),
         therapistId: therapistId,
         clientId: clientId,
@@ -56,13 +56,13 @@ class AppointmentsController {
   //update one appointment for client
   async updateOne(req, res) {
     const { appointmentId } = req.params;
-    const { startDateTime, endDateTime } = req.body;
+    const { startDatetime, endDatetime } = req.body;
     try {
       const data = await this.model.findByPk(appointmentId);
 
       await data.update({
-        startDatetime: startDateTime,
-        endDatetime: endDateTime,
+        startDatetime: startDatetime,
+        endDatetime: endDatetime,
       });
 
       return res.json(data);
