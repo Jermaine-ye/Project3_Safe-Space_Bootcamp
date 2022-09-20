@@ -107,7 +107,7 @@ const MemoForm = () => {
     axios
       .post(`${BACKEND_URL}/therapist/patients/:clientId/newmemo`, {
         date,
-        general,
+        general,s
         behavior,
         contentTherapy,
         therapeuticInt,

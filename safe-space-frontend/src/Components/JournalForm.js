@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import {user} from '@auth0/auth0-react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
   Button,
@@ -14,6 +15,7 @@ import {
 } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
 import { BACKEND_URL } from '../constants.js';
+import { Auth0Client } from '@auth0/auth0-spa-js';
 
 const JournalForm = () => {
   const [date, setDate] = useState('');
@@ -56,19 +58,22 @@ const JournalForm = () => {
   //Need to get the set template and set the due date & Journal ID & Therapist ID & Template ID
   const journalTemplate = () => {
   const [templateIndex, setTemplateIndex] = useState();
-  const [template, setTemplate] = useState();
+  const [template, setTemplate] = useState(null);
  
 // get all to know there is an empty null=> new journal entry => 
 
 
   
   useEffect(() => {
+    console.log({user})
     // If there is a templateIndex, retrieve the sighting data
-    if (templateIndex) {
+    if (template== null) {
       axios
         .get(`${BACKEND_URL}/journal/${params.clientId}/${params.journalId}/`)
         .then((response) => {
           setTemplate(response.data);
+template1Qns(res);
+
         });
     }
     // Only run this effect on change to sightingIndex
