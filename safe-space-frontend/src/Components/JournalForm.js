@@ -27,7 +27,6 @@ const JournalForm = () => {
   const [input3, setInput3] = useState('');
 
   const [dueDate, setDueDate] = useState('');
-  const [clientName, setClientName] = useState('');
   const [therapistName, setTherapistName] = useState('');
   const [journaltemplateid, setJournalTemplateId] = useState(null);
   // get all to know there is an empty null=> new journal entry =>
@@ -39,15 +38,16 @@ const JournalForm = () => {
   //   const [title3, setTitle3] = useState('');
 
   //need to get a use effect to get the client information to get the journal template (see ryoji example)
-  useEffect(() => {
-    if (journaltemplateid == null) {
-      axios.get(`${BACKEND_URL}/journals/${clientId}`).then((response) => {
-        console.log('response', response);
-        setAllJournalEntryInfo(response.data);
-        // template1Qns(response.data.XXX));
-      });
-    }
-  }, []);
+const [allTherapistInfo, setAllTherapistInfo] = useState([])
+
+useEffect(()=>{
+if(isAuthenticated){
+let response = await axios.get(`${BACKEND_URL}/clients/${emailCLient}`);;
+    setAllTherapistInfo(response.data.therapists);
+}
+})
+
+// DONT UNDERSTAND HOW THE ABOVE LINKS TO THE CLIENT ID BELOW ?
 
   //Need to get the set template and set the due date & Journal ID & Therapist ID & Template ID
 

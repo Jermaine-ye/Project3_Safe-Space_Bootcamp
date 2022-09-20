@@ -32,9 +32,28 @@ export default function JournalList() {
     getJournalListings();
   }, []);
 
-  // const journalList = journalListings.map((listing,index) => (
+  const journalList = journalListings.map((listing,index) => (
+<div key={index}>
+  <div>
+    //need the therapist name
+  </div>
+  <div>
+    //need the created at date (where the client submitted the entry)
+  </div>
+    <div>
+   
+    (what about daily mood?? which table are we mapping from this?)
+  </div>
+  <div>
+    <Link to={`${listing.XXXX}`}>{index}</Link>
+  </div>
 
-  // ))
+
+
+
+
+</div>
+  ))
 
   return <div>{JournalList}</div>;
 }
