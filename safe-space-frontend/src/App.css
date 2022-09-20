@@ -7,6 +7,19 @@
   pointer-events: none;
 }
 
+html,
+body {
+  height: 90%;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -35,4 +48,68 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.Nav-bar {
+  padding-left: 30px;
+  padding-right: 30px;
+  width: 100%;
+  padding-bottom: 20px;
+  background-color: #283c63;
+}
+
+.Nav-bar a {
+  align-content: center;
+  color: #ffff;
+  text-decoration: none;
+}
+.Nav-bar-wrapper {
+  height: 100px;
+  padding-left: 50px;
+  padding-right: 50px;
+
+  background-color: #283c63;
+}
+
+/* Content for landing page */
+.Page-body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.Content-container {
+  min-height: 100%;
+  position: relative;
+}
+
+.Content-body {
+  padding: 10px;
+  /* to buffer footer height */
+  padding-bottom: 280px;
+}
+
+/* Footer elements */
+
+.Footer-container {
+  position: absolute;
+  max-height: fit-content;
+  padding-top: 20px;
+  width: 100%;
+  bottom: 0;
+  color: #ffff;
+  background-color: #283c63;
+}
+.Footer-container a {
+  align-content: center;
+  color: #ffff;
+  text-decoration: none;
+}
+
+/* Client Dashboard */
+
+.Form-body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
