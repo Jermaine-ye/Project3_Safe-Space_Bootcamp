@@ -18,7 +18,7 @@ class ClientsRouter {
 
     //get one client (for both client own profile and therapist)
     router.get(
-      "/",
+      "/:email",
       // this.auth,
       this.controller.getOne.bind(this.controller)
     );

@@ -1,9 +1,10 @@
-import React from 'react';
+import React from "react";
 
 export default function JournalList() {
-  return <div>JournalList
-  
-    const params = useParams();
+  return (
+    <div>
+      JournalList
+      {/* const params = useParams();
   if (sightingIndex !== params.sightingIndex) {
     setSightingIndex(params.sightingIndex);
   }
@@ -19,6 +20,7 @@ export default function JournalList() {
   }
   
   
-  
-  </div>;
+   */}
+    </div>
+  );
 }
