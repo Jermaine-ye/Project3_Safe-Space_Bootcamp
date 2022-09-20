@@ -26,14 +26,15 @@ const db = require("./db/models/index");
 // const { listing, user } = db;
 const {
   client,
-  memo_entries,
-  clients_therapists,
+  memoentry,
+  client_therapists,
   religion,
   age,
   language,
   specialization,
-  appointments,
-  journal_entries,
+  specialization_therapists,
+  appointment,
+  journalentry,
   journaltemplate,
   recommendationarticle,
   therapist,
@@ -49,11 +50,11 @@ const checkJwt = auth({
 // const listingsController = new ListingsController(listing, user);
 
 //FOR CLIENT get one appt, update one appt, delete one appt, create one appt. FOR THERAPISTS get all appt, get one appt, create one appt.
-// const appointmentsController = new AppointmentsController(
-//   appointments,
-//   client,
-//   therapist
-// );
+const appointmentsController = new AppointmentsController(
+  appointment,
+  client,
+  therapist
+);
 
 //FOR CLIENT getone therapist, get all journals, get all appointments, update one client, update one clients_therapist, get all clients_therapists, create one client, get one client. FOR THERAPISTS get one client, update one client, get all clients_therapist,update one clients_therapist.
 //FOR CLIENT update one client, get all therapists, create many clients_therapists.
@@ -61,28 +62,29 @@ const checkJwt = auth({
 const clientsController = new ClientsController(
   client,
   therapist,
-  clients_therapists,
-  appointments,
-  journal_entries,
+  client_therapists,
+  appointment,
+  journalentry,
+  specialization,
+  specialization_therapists,
   religion,
   age,
-  language,
-  specialization
+  language
 );
 
 //FOR CLIENT, get all and get one recommendation articles
-// const articlesController = new ArticlesController(recommendationarticle);
+const articlesController = new ArticlesController(recommendationarticle);
 
 //FOR CLIENT update one journal. FOR THERAPISTS, get all journals, get one journal, create one journal,
-// const journalsController = new JournalsController(
-//   client,
-//   therapist,
-//   journal_entries,
-//   journaltemplate
-// );
+const journalsController = new JournalsController(
+  journalentry,
+  journaltemplate,
+  client,
+  therapist
+);
 
 //FOR THERAPIST, get all memos, get one memo, create one memo.
-// const memosController = new MemosController(client, therapist, memo_entries);
+const memosController = new MemosController(memoentry, client, therapist);
 
 //FOR THERAPIST, get all clients, get one therapist, get all blocked dates, create one blocked date, delete one blocked date.
 //FOR CLIENT, get all blocked dates.
@@ -91,7 +93,7 @@ const therapistsController = new TherapistsController(
   therapist,
   client,
   blockeddate,
-  clients_therapists
+  client_therapists
 );
 
 // initializing Routers
@@ -101,22 +103,22 @@ const therapistsController = new TherapistsController(
 //   checkJwt
 // ).routes();
 
-// const appointmentsRouter = new AppointmentsRouter(
-//   appointmentsController
-// ).routes();
+const appointmentsRouter = new AppointmentsRouter(
+  appointmentsController
+).routes();
 
 const clientsRouter = new ClientsRouter(clientsController, checkJwt).routes();
 
-// const journalsRouter = new JournalsRouter(journalsController).routes();
+const journalsRouter = new JournalsRouter(journalsController).routes();
 
-// const memosRouter = new MemosRouter(memosController).routes();
+const memosRouter = new MemosRouter(memosController).routes();
 
 const therapistsRouter = new TherapistsRouter(
   therapistsController,
   checkJwt
 ).routes();
 
-// const articlesRouter = new ArticlesRouter(articlesController).routes();
+const articlesRouter = new ArticlesRouter(articlesController).routes();
 
 const PORT = process.env.PORT;
 const app = express();
@@ -133,12 +135,12 @@ app.use(express.json());
 // enable and use router
 // app.use("/listings", listingsRouter);
 
-// app.use("/appointments", appointmentsRouter);
+app.use("/appointments", appointmentsRouter);
 app.use("/clients", clientsRouter);
-// app.use("/journals", journalsRouter);
-// app.use("/memos", memosRouter);
+app.use("/journals", journalsRouter);
+app.use("/memos", memosRouter);
 app.use("/therapists", therapistsRouter);
-// app.use("/articles", articlesRouter);
+app.use("/articles", articlesRouter);
 
 app.listen(PORT, () => {
   console.log(`Express app listening on port ${PORT}!`);

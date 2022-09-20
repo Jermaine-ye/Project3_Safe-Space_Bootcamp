@@ -5,31 +5,31 @@ module.exports = {
     await queryInterface.bulkInsert("religions", [
       {
         // id: 1,
-        religion: "No_preference",
+        name: "No Preference",
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
         // id: 2,
-        religion: "Christianity",
+        name: "Christianity",
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
         // id: 3,
-        religion: "Buddhism",
+        name: "Buddhism",
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
         // id: 4,
-        religion: "Muslim",
+        name: "Islam",
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
         // id: 5,
-        religion: "Hindu",
+        name: "Hinduism",
         created_at: new Date(),
         updated_at: new Date(),
       },

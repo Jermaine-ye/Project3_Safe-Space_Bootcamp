@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class BlockedDate extends Model {
+  class Blockeddate extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.therapist);
     }
   }
-  BlockedDate.init(
+  Blockeddate.init(
     {
       // id: DataTypes.INTEGER,
-      blockedDate: DataTypes.DATE,
-      therapistsId: {
+      date: DataTypes.DATE,
+      therapistId: {
         type: DataTypes.INTEGER,
         references: {
           model: "therapist",
@@ -30,5 +30,5 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     }
   );
-  return BlockedDate;
+  return Blockeddate;
 };

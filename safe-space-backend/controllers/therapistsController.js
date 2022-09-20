@@ -17,14 +17,15 @@ class TherapistsController {
       const user = await this.model.findOne({
         where: { email: email },
       });
-      console.log(user);
+      console.log(user.dataValues.id);
       //getting id of therapist
-      const { id } = user;
+      const targetnum = user.dataValues.id;
+      console.log(targetnum);
 
       // const { therapistID } = req.body;
       const output = await this.clientTherapistsModel.findAll({
         where: {
-          therapistId: id,
+          therapistId: targetnum,
         },
       });
       return res.json(output);
@@ -50,10 +51,10 @@ class TherapistsController {
 
   //create one blocked date for therapist
   async insertOne(req, res) {
-    const { blockedDate, therapistId } = req.body;
+    const { date, therapistId } = req.body;
     try {
       const newBlockedDate = await this.blockedDateModel.create({
-        blockedDate: blockedDate,
+        date: date,
         therapistId: therapistId,
       });
       return res.json(newBlockedDate);

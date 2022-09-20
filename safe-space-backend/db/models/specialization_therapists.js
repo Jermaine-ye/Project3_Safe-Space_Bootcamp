@@ -9,21 +9,35 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.therapist);
-      this.belongsTo(models.specialization);
+      this.belongsTo(
+        models.therapist
+        //   , {
+        //   foreignKey: "therapistId",
+        //   as: "specialize",
+        //   onDelete: "CASCADE",
+        // }
+      );
+      this.belongsTo(
+        models.specialization
+        //   , {
+        //   foreignKey: "specializationId",
+        //   as: "specialization",
+        //   onDelete: "CASCADE",
+        // }
+      );
     }
   }
   Specialization_Therapists.init(
     {
       // id: DataTypes.INTEGER,
-      therapistsId: {
+      therapistId: {
         type: DataTypes.INTEGER,
         references: {
           model: "therapist",
           key: "id",
         },
       },
-      clientsId: {
+      specializationId: {
         type: DataTypes.INTEGER,
         references: {
           model: "specialization",

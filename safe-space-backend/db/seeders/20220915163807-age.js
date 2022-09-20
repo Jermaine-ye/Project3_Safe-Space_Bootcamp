@@ -5,25 +5,25 @@ module.exports = {
     await queryInterface.bulkInsert("ages", [
       {
         // id: 1,
-        age_range: "20-29",
+        name: "20-29",
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
         // id: 2,
-        age_range: "30-39",
+        name: "30-39",
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
         // id: 3,
-        age_range: "40-49",
+        name: "40-49",
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
         // id: 4,
-        age_range: "50-59",
+        name: "50-59",
         created_at: new Date(),
         updated_at: new Date(),
       },

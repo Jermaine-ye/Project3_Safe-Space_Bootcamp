@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   Religion.init(
     {
       // id: DataTypes.INTEGER,
-      religion: DataTypes.STRING,
+      name: DataTypes.STRING,
       // therapistsId: {
       //   type: DataTypes.INTEGER,
       //   references: {

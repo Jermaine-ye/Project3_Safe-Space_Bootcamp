@@ -12,18 +12,25 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsToMany(models.specialization, {
         through: "specialization_therapists",
       });
+      // this.hasMany(models.specialization_therapists, {
+      //   // foreignKey: "therapistId",
+      //   //   as: "specialize",
+      // });
       this.belongsToMany(models.client, {
         through: "client_therapists",
       });
-      this.belongsToMany(models.client, {
-        through: "appointments",
-      });
-      this.belongsToMany(models.client, {
-        through: "memo_entries",
-      });
-      this.belongsToMany(models.client, {
-        through: "journal_entries",
-      });
+      this.hasMany(models.appointment);
+      this.hasMany(models.memoentry);
+      this.hasMany(models.journalentry);
+      // this.belongsToMany(models.client, {
+      //   through: "appointments",
+      // });
+      // this.belongsToMany(models.client, {
+      //   through: "memo_entries",
+      // });
+      // this.belongsToMany(models.client, {
+      //   through: "journal_entries",
+      // });
       this.hasMany(models.blockeddate);
       this.belongsTo(models.age);
       this.belongsTo(models.language);
@@ -44,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
       educationQualification: DataTypes.STRING,
       admin: DataTypes.BOOLEAN,
       // set agepreference_id
-      agerangeId: {
+      ageId: {
         type: DataTypes.INTEGER,
         references: {
           model: "age",

@@ -48,7 +48,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
       // set agepreference_id
-      agerange_id: {
+      age_id: {
         type: Sequelize.INTEGER,
         references: {
           model: "ages",

@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
 
-      blocked_date: {
+      date: {
         type: Sequelize.DATE,
       },
       created_at: {

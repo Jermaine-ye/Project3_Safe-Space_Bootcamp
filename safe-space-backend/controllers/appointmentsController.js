@@ -26,9 +26,10 @@ class AppointmentsController {
 
   //get one appointment for therapist and client
   async getOne(req, res) {
-    const { appointmentId } = req.params;
+    console.log("getone running");
+    const { apptId } = req.params;
     try {
-      const output = await this.model.findByPk(appointmentId);
+      const output = await this.model.findByPk(apptId);
       return res.json(output);
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });
@@ -37,12 +38,13 @@ class AppointmentsController {
 
   //create one appointment for therapist and client
   async insertOne(req, res) {
-    const { startDateTime, endDateTime, therapistId, clientId } = req.body;
+    const { startDatetime, endDatetime, therapistId, clientId } = req.body;
     try {
       const newAppointment = await this.model.create({
-        startDatetime: startDateTime,
-        endDatetime: endDateTime,
+        startDatetime: startDatetime,
+        endDatetime: endDatetime,
         createdAt: new Date(),
+        updatedAt: new Date(),
         therapistId: therapistId,
         clientId: clientId,
         currentTherapist: true,
@@ -55,14 +57,15 @@ class AppointmentsController {
 
   //update one appointment for client
   async updateOne(req, res) {
-    const { appointmentId } = req.params;
-    const { startDateTime, endDateTime } = req.body;
+    const { apptId } = req.params;
+    const { startDatetime, endDatetime } = req.body;
     try {
-      const data = await this.model.findByPk(appointmentId);
+      const data = await this.model.findByPk(apptId);
 
       await data.update({
-        startDatetime: startDateTime,
-        endDatetime: endDateTime,
+        startDatetime: startDatetime,
+        endDatetime: endDatetime,
+        updatedAt: new Date(),
       });
 
       return res.json(data);
@@ -73,13 +76,13 @@ class AppointmentsController {
 
   //delete one appointment for client
   async deleteOne(req, res) {
-    const { appointmentId } = req.params;
+    const { apptId } = req.params;
     try {
-      const data = await this.model.findByPk(appointmentId);
+      const data = await this.model.findByPk(apptId);
 
       await data.destroy();
 
-      return res.json(appointmentId);
+      return res.json(apptId);
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });
     }

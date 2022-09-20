@@ -9,8 +9,8 @@ module.exports = {
         last_name: "Choudhury",
         email: "tarin@choudhury.com",
         password: "Password123",
-        photo_link: "",
-        agerange_id: 2,
+        photo_link: "abc",
+        age_id: 2,
         religion_id: 1,
         gender: "Female",
         description:
@@ -32,7 +32,7 @@ module.exports = {
         email: "lilian@ong.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 3,
+        age_id: 3,
         religion_id: 1,
         gender: "Female",
         description:
@@ -54,7 +54,7 @@ module.exports = {
         email: "maltrish@kaur.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 1,
+        age_id: 1,
         religion_id: 1,
         gender: "Female",
         description:
@@ -76,7 +76,7 @@ module.exports = {
         email: "caroline@ho.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 3,
+        age_id: 3,
         religion_id: 1,
         gender: "Female",
         description:
@@ -98,7 +98,7 @@ module.exports = {
         email: "glennamarie@meenachi.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 2,
+        age_id: 2,
         religion_id: 4,
         gender: "Female",
         description:
@@ -120,7 +120,7 @@ module.exports = {
         email: "abigail@yang.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 3,
+        age_id: 3,
         religion_id: 2,
         gender: "Female",
         description:
@@ -142,7 +142,7 @@ module.exports = {
         email: "lenca@yew.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 3,
+        age_id: 3,
         religion_id: 2,
         gender: "Female",
         description:
@@ -164,7 +164,7 @@ module.exports = {
         email: "joyce@low.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 4,
+        age_id: 4,
         religion_id: 1,
         gender: "Female",
         description:
@@ -186,7 +186,7 @@ module.exports = {
         email: "ian@ong.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 3,
+        age_id: 3,
         religion_id: 1,
         gender: "Male",
         description:
@@ -208,7 +208,7 @@ module.exports = {
         email: "shengchua@tok.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 1,
+        age_id: 1,
         religion_id: 1,
         gender: "Male",
         description:
@@ -230,7 +230,7 @@ module.exports = {
         email: "mounyee@lim.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 4,
+        age_id: 4,
         religion_id: 1,
         gender: "Male",
         description:
@@ -252,7 +252,7 @@ module.exports = {
         email: "ada@chung.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 4,
+        age_id: 4,
         religion_id: 1,
         gender: "Female",
         description:
@@ -274,7 +274,7 @@ module.exports = {
         email: "rathi@lieberum.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 1,
+        age_id: 1,
         religion_id: 4,
         gender: "Female",
         description:
@@ -296,7 +296,7 @@ module.exports = {
         email: "linah@loh.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 4,
+        age_id: 4,
         religion_id: 3,
         gender: "Female",
         description:
@@ -318,7 +318,7 @@ module.exports = {
         email: "liam@loh.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 3,
+        age_id: 3,
         religion_id: 3,
         gender: "Female",
         description:
@@ -338,7 +338,7 @@ module.exports = {
         email: "kayden@perera.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 1,
+        age_id: 1,
         religion_id: 1,
         gender: "Female",
         description:
@@ -358,7 +358,7 @@ module.exports = {
         email: "jeanette@houmayune.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 2,
+        age_id: 2,
         religion_id: 4,
         gender: "Female",
         description:
@@ -378,7 +378,7 @@ module.exports = {
         email: "priyahnisha@n.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 4,
+        age_id: 4,
         religion_id: 5,
         gender: "Female",
         description:
@@ -398,7 +398,7 @@ module.exports = {
         email: "jospeh@quek.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 1,
+        age_id: 1,
         religion_id: 2,
         gender: "Male",
         description:
@@ -418,7 +418,7 @@ module.exports = {
         email: "punitha@gunasegaran.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 4,
+        age_id: 4,
         religion_id: 5,
         gender: "Female",
         description:
@@ -438,7 +438,7 @@ module.exports = {
         email: "ser@fee.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 1,
+        age_id: 1,
         religion_id: 5,
         gender: "Female",
         description:
@@ -458,7 +458,7 @@ module.exports = {
         email: "alexandra@oh.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 3,
+        age_id: 3,
         religion_id: 1,
         gender: "Female",
         description:
@@ -478,7 +478,7 @@ module.exports = {
         email: "elisabeth@makalew.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 2,
+        age_id: 2,
         religion_id: 2,
         gender: "Female",
         description:
@@ -498,7 +498,7 @@ module.exports = {
         email: "aisha@aisha.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 1,
+        age_id: 1,
         religion_id: 4,
         gender: "Female",
         description:
@@ -518,7 +518,7 @@ module.exports = {
         email: "rashmi@kunzru.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 2,
+        age_id: 2,
         religion_id: 5,
         gender: "Female",
         description:
@@ -538,7 +538,7 @@ module.exports = {
         email: "karen@chok.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 4,
+        age_id: 4,
         religion_id: 2,
         gender: "Female",
         description:
@@ -558,7 +558,7 @@ module.exports = {
         email: "edmund@chong.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 4,
+        age_id: 4,
         religion_id: 3,
         gender: "Male",
         description:
@@ -578,7 +578,7 @@ module.exports = {
         email: "alyssa@fernandez.com",
         password: "Password123",
         photo_link: "abc",
-        agerange_id: 2,
+        age_id: 2,
         religion_id: 1,
         gender: "Female",
         description:

@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsToMany(models.therapist, {
         through: "specialization_therapists",
       });
+      // this.hasMany(models.specialization_therapists, {
+      //   foreignKey: "specializationId",
+      //   as: "specialization_therapists",
+      // });
     }
   }
   Specialization.init(

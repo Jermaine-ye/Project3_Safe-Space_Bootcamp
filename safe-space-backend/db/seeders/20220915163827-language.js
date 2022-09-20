@@ -5,19 +5,19 @@ module.exports = {
     await queryInterface.bulkInsert("languages", [
       {
         // id: 1,
-        language: "EN_CN",
+        name: "English and Chinese",
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
         // id: 2,
-        language: "EN_TM",
+        name: "English and Tamil",
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
         // id: 3,
-        language: "EN_MA",
+        name: "English and Malay",
         created_at: new Date(),
         updated_at: new Date(),
       },

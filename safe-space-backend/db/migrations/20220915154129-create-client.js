@@ -67,7 +67,7 @@ module.exports = {
         },
       },
       // set agepreference_id
-      agepreference_id: {
+      age_id: {
         type: Sequelize.INTEGER,
         references: {
           model: "ages",
@@ -89,6 +89,9 @@ module.exports = {
           model: "religions",
           key: "id",
         },
+      },
+      dailymood: {
+        type: Sequelize.INTEGER,
       },
     });
   },

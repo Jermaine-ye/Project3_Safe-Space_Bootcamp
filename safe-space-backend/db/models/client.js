@@ -16,15 +16,18 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsToMany(models.therapist, {
         through: "client_therapists",
       });
-      this.belongsToMany(models.therapist, {
-        through: "appointments",
-      });
-      this.belongsToMany(models.therapist, {
-        through: "memo_entries",
-      });
-      this.belongsToMany(models.therapist, {
-        through: "journal_entries",
-      });
+      this.hasMany(models.appointment);
+      this.hasMany(models.memoentry);
+      this.hasMany(models.journalentry);
+      // this.belongsToMany(models.therapist, {
+      //   through: "appointments",
+      // });
+      // this.belongsToMany(models.therapist, {
+      //   through: "memo_entries",
+      // });
+      // this.belongsToMany(models.therapist, {
+      //   through: "journal_entries",
+      // });
     }
   }
   Client.init(
@@ -53,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       // set agepreference_id
-      agepreferenceId: {
+      ageId: {
         type: DataTypes.INTEGER,
         references: {
           model: "age",
@@ -75,6 +78,9 @@ module.exports = (sequelize, DataTypes) => {
           model: "religion",
           key: "id",
         },
+      },
+      dailymood: {
+        type: DataTypes.INTEGER,
       },
     },
     {

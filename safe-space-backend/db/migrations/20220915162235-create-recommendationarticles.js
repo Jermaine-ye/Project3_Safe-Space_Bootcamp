@@ -15,7 +15,7 @@ module.exports = {
       author: {
         type: Sequelize.STRING,
       },
-      contents: {
+      content: {
         type: Sequelize.TEXT,
       },
       created_at: {

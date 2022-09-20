@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Memo_Entries extends Model {
+  class Journalentry extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,39 +11,44 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.belongsTo(models.client);
       this.belongsTo(models.therapist);
+      this.belongsTo(models.journaltemplate);
     }
   }
-  Memo_Entries.init(
+  Journalentry.init(
     {
       // id: DataTypes.INTEGER,
       createdAt: DataTypes.DATE,
-      generalInput: DataTypes.TEXT,
-      behaviorInput: DataTypes.TEXT,
-      contenttherapyInput: DataTypes.TEXT,
-      therapeuticintInput: DataTypes.TEXT,
-      diagnosesInput: DataTypes.TEXT,
-      instructionsInput: DataTypes.TEXT,
-      riskfactorsInput: DataTypes.TEXT,
-      therapistsId: {
+      dueBy: DataTypes.DATE,
+      input1: DataTypes.TEXT,
+      input2: DataTypes.TEXT,
+      input3: DataTypes.TEXT,
+      therapistId: {
         type: DataTypes.INTEGER,
         references: {
           model: "therapist",
           key: "id",
         },
       },
-      clientsId: {
+      clientId: {
         type: DataTypes.INTEGER,
         references: {
           model: "client",
           key: "id",
         },
       },
+      journaltemplateId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: "journaltemplate",
+          key: "id",
+        },
+      },
     },
     {
       sequelize,
-      modelName: "memo_entries",
+      modelName: "journalentry",
       underscored: true,
     }
   );
-  return Memo_Entries;
+  return Journalentry;
 };

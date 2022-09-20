@@ -43,7 +43,7 @@ class JournalsController {
       const newJournal = await this.model.create({
         createdAt: new Date(),
         dueBy: dueBy,
-        templateId: templateId,
+        journaltemplateId: templateId,
         clientId: clientId,
         therapistId: therapistId,
       });

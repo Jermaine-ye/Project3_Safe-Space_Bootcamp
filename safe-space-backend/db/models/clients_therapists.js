@@ -20,14 +20,14 @@ module.exports = (sequelize, DataTypes) => {
       feedback: DataTypes.STRING,
       createdAt: DataTypes.DATE,
       endedAt: DataTypes.DATE,
-      therapistsId: {
+      therapistId: {
         type: DataTypes.INTEGER,
         references: {
           model: "therapist",
           key: "id",
         },
       },
-      clientsId: {
+      clientId: {
         type: DataTypes.INTEGER,
         references: {
           model: "client",

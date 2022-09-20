@@ -1,32 +1,23 @@
 "use strict";
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("memo_entries", {
+    await queryInterface.createTable("journalentries", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      general_input: {
+      due_by: {
+        type: Sequelize.DATE,
+      },
+      input1: {
         type: Sequelize.TEXT,
       },
-      behavior_input: {
+      input2: {
         type: Sequelize.TEXT,
       },
-      content_therapy_input: {
-        type: Sequelize.TEXT,
-      },
-      therapeuticint_input: {
-        type: Sequelize.TEXT,
-      },
-      diagnoses_input: {
-        type: Sequelize.TEXT,
-      },
-      instructions_input: {
-        type: Sequelize.TEXT,
-      },
-      risk_factors_input: {
+      input3: {
         type: Sequelize.TEXT,
       },
       created_at: {
@@ -51,9 +42,16 @@ module.exports = {
           key: "id",
         },
       },
+      journaltemplate_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "journaltemplates",
+          key: "id",
+        },
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("memo_entries");
+    await queryInterface.dropTable("journalentries");
   },
 };
