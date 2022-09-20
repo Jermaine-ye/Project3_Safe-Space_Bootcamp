@@ -34,9 +34,9 @@ const JournalForm = () => {
   const [clientId, setClientId] = useState('');
   const [allJournalEntryInfo, setAllJournalEntryInfo] = useState(null);
 
-  const [title1, setTitle1] = useState('');
-  const [title2, setTitle2] = useState('');
-  const [title3, setTitle3] = useState('');
+  //   const [title1, setTitle1] = useState('');
+  //   const [title2, setTitle2] = useState('');
+  //   const [title3, setTitle3] = useState('');
 
   //need to get a use effect to get the client information to get the journal template (see ryoji example)
   useEffect(() => {
@@ -60,34 +60,6 @@ const JournalForm = () => {
       });
     }
   }, []);
-
-  // Store a new JSX element for each property in listing details
-  // const journalEntryDetails = [];
-  // if (listing) {
-  //   for (const key in listing) {
-  //     listingDetails.push(
-  //       <Card.Text key={key}>{`${key}: ${listing[key]}`}</Card.Text>
-  //     );
-  //   }
-  // }
-
-  const handleChange = (event) => {
-    switch (event.target.name) {
-      case 'date':
-        setDate(event.target.value);
-        break;
-      case 'input1':
-        setInput1(event.target.value);
-        break;
-      case 'input2':
-        setInput2(event.target.value);
-        break;
-      case 'input3':
-        setInput3(event.target.value);
-        break;
-      default:
-    }
-  };
 
   const template1Qns = (templateid) => {
     if (templateid == 1) {

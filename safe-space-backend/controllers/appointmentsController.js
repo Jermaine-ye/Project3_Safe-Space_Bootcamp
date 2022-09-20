@@ -12,7 +12,7 @@ class AppointmentsController {
   async getAll(req, res) {
     try {
       console.log('get all appointments!');
-      const therapistId = req.params;
+      const { therapistId } = req.params;
       const output = await this.model.findAll({
         where: {
           therapistId: therapistId,

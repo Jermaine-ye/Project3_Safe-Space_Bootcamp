@@ -82,6 +82,7 @@ export function AuthProvider({ children }) {
     gender,
     religion,
     clientInfo,
+    therapistInfo,
   };
 
   return (

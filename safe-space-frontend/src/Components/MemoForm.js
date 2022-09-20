@@ -1,6 +1,6 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   Button,
   Card,
@@ -11,17 +11,16 @@ import {
   Form,
   Input,
   Textarea,
-} from '@mantine/core';
-import { DatePicker } from '@mantine/dates';
+} from "@mantine/core";
+import { DatePicker } from "@mantine/dates";
 
-import { BACKEND_URL } from '../constants.js';
+import { BACKEND_URL } from "../constants.js";
 
 const MemoForm = () => {
+  
   const [date, setDate] = useState('');
-
   const [clientName, setClientName] = useState('');
   const [therapistName, setTherapistName] = useState('');
-
   const [general, setGeneral] = useState('');
   const [behavior, setBehavior] = useState('');
   const [contentTherapy, setContentTherapy] = useState('');
@@ -29,9 +28,9 @@ const MemoForm = () => {
   const [diagnoses, setDiagnoses] = useState('');
   const [instructions, setInstructions] = useState('');
   const [riskFactors, setRiskFactors] = useState('');
-
   let params = useParams();
   const Navigate = useNavigate();
+
 
   const handleChange = (event) => {
     switch (event.target.name) {
@@ -60,40 +59,24 @@ const MemoForm = () => {
         setRiskFactors(event.target.value);
         break;
       default:
+    };
+    // Only run this effect on change to sightingIndex
+  }, [sightingIndex]);
+
+  const params = useParams();
+  if (sightingIndex !== params.sightingIndex) {
+    setSightingIndex(params.sightingIndex);
+  }
+
+  // Store a new JSX element for each property in sighting details
+  const sightingDetails = [];
+  if (sighting) {
+    for (const key in sighting) {
+      sightingDetails.push(
+        <Card.Text key={key}>{`${key}: ${sighting[key]}`}</Card.Text>
+      );
     }
-  };
-
-  // Need to get the set template and set the due date & Journal ID & Therapist ID & Template ID
-  // const Sighting = () => {
-  // const [sightingIndex, setSightingIndex] = useState();
-  // const [sighting, setSighting] = useState();
-
-  // useEffect(() => {
-  //   // If there is a sightingIndex, retrieve the sighting data
-  //   if (sightingIndex) {
-  //     axios
-  //       .get(`${BACKEND_URL}/sightings/${sightingIndex}`)
-  //       .then((response) => {
-  //         setSighting(response.data);
-  //       });
-  //   }
-  //   // Only run this effect on change to sightingIndex
-  // }, [sightingIndex]);
-
-  // const params = useParams();
-  // if (sightingIndex !== params.sightingIndex) {
-  //   setSightingIndex(params.sightingIndex);
-  // }
-
-  // // Store a new JSX element for each property in sighting details
-  // const sightingDetails = [];
-  // if (sighting) {
-  //   for (const key in sighting) {
-  //     sightingDetails.push(
-  //       <Card.Text key={key}>{`${key}: ${sighting[key]}`}</Card.Text>
-  //     );
-  //   }
-  // }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -105,7 +88,7 @@ const MemoForm = () => {
     // not front end route like what u have done below!!!
 
     axios
-      .post(`${BACKEND_URL}/therapist/patients/${params.clientId}/newmemo`, {
+      .post(`${BACKEND_URL}/therapist/patients/${clientId}/newmemo`, {
         date,
         general,
         behavior,
@@ -131,7 +114,6 @@ const MemoForm = () => {
       .catch((err) => {
         console.log(err);
       });
-  };
 
   return (
     <Container ClassName="Form-body" size="sm" px="xs">
@@ -197,6 +179,6 @@ const MemoForm = () => {
       </Grid>
     </Container>
   );
-};
-
+  };
+  
 export default MemoForm;
