@@ -14,7 +14,7 @@ class BaseController {
     }
   }
   async getOne(req, res) {
-    const { Id } = req.params;
+    const Id = req.params;
     try {
       const output = await this.model.findByPk(Id);
       return res.json(output);
