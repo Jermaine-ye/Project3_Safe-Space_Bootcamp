@@ -27,7 +27,7 @@ const db = require("./db/models/index");
 const {
   client,
   memoentry,
-  clients_therapists,
+  client_therapists,
   religion,
   age,
   language,
@@ -62,14 +62,14 @@ const appointmentsController = new AppointmentsController(
 const clientsController = new ClientsController(
   client,
   therapist,
-  clients_therapists,
+  client_therapists,
   appointment,
   journalentry,
+  specialization,
   specialization_therapists,
   religion,
   age,
-  language,
-  specialization
+  language
 );
 
 //FOR CLIENT, get all and get one recommendation articles
@@ -93,7 +93,7 @@ const therapistsController = new TherapistsController(
   therapist,
   client,
   blockeddate,
-  clients_therapists
+  client_therapists
 );
 
 // initializing Routers
