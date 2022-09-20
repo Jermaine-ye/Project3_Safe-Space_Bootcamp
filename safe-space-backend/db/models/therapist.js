@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsToMany(models.specialization, {
         through: "specialization_therapists",
       });
+      // this.hasMany(models.specialization_therapists, {
+      //   // foreignKey: "therapistId",
+      //   //   as: "specialize",
+      // });
       this.belongsToMany(models.client, {
         through: "client_therapists",
       });

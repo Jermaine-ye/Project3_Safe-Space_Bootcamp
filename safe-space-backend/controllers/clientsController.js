@@ -1,20 +1,23 @@
 const cors = require("cors");
+const { Op } = require("sequelize");
 // const BaseController = require("./baseController");
 
 class ClientsController {
   constructor(
     model,
     therapistModel,
-    clientsTherapistsModel,
+    clientTherapistsModel,
     appointmentModel,
     journalentryModel,
+    specializationModel,
     specializationTherapistsModel
   ) {
     this.model = model;
     this.therapistModel = therapistModel;
-    this.clientsTherapistsModel = clientsTherapistsModel;
+    this.clientTherapistsModel = clientTherapistsModel;
     this.appointmentModel = appointmentModel;
     this.journalentryModel = journalentryModel;
+    this.specializationModel = specializationModel;
     this.specializationTherapistsModel = specializationTherapistsModel;
   }
 
@@ -41,10 +44,9 @@ class ClientsController {
       const user = await this.model.findOne({
         where: { email: emailClient },
         include: [
-          // this.appointmentModel,
-          // this.journalentryModel,
+          this.appointmentModel,
+          this.journalentryModel,
           this.therapistModel,
-          // this.clientsTherapistsModel,
         ],
       });
       return res.json(user);
@@ -53,11 +55,11 @@ class ClientsController {
     }
   }
 
-  //update one client when therapist is dropped and set to new value when therapist is added. update one client when client is inactive. update one client after evaluation to change its preferences. update the junction table clients_therapists. update the description by the therapist of the indiv patient.
+  //update one client when therapist is dropped and set to new value when therapist is added. update one client when client is inactive. update one client after evaluation to change its preferences. update the description by the therapist of the indiv patient.
   //after evaluation form is submitted, we check if user has been authenticated. If user has been authenticated, we first run getOne, then we run updateOne to update particulars. If user not authenticated, we run insertOne to create account, then we run updateOne.
   //After that, we query therapist table to grab all therapists that fit the client's preferences and we bulkcreate clients_therapists? i.e. call insertBulk.
   //Separately, after initial sign up, users add their particulars and submit to database. This updateOne is called.
-  async updateOne(req, res) {
+  async updateOneClient(req, res) {
     const {
       emailClient,
       firstName,
@@ -76,46 +78,55 @@ class ClientsController {
       dailymood,
       description,
       active,
-      chosenTherapist,
-      createdAt,
-      endedAt,
-      feedback,
     } = req.body;
     try {
       const data = await this.model.findOne({
         where: { email: emailClient },
       });
+      const response = await data.update({
+        firstName: firstName,
+        lastName: lastName,
+        phoneNumber: phoneNumber,
+        photoLink: photoLink,
+        ageClient: age,
+        gender: gender,
+        maritalStatus: maritalStatus,
+        therapistConfirmed: therapistConfirmed,
+        specializationId: specializationId,
+        genderPreference: genderPreference,
+        ageId: ageId,
+        languageId: languageId,
+        religionId: religionId,
+        dailymood: dailymood,
+        description: description,
+        active: active,
+      });
+      return res.json(response);
+    } catch (err) {
+      return res.status(400).json({ error: true, msg: err });
+    }
+  }
 
-      await data.update(
-        {
-          firstName: firstName,
-          lastName: lastName,
-          phoneNumber: phoneNumber,
-          photoLink: photoLink,
-          ageClient: age,
-          gender: gender,
-          maritalStatus: maritalStatus,
-          therapistConfirmed: therapistConfirmed,
-          specializationId: specializationId,
-          genderPreference: genderPreference,
-          ageId: ageId,
-          languageId: languageId,
-          religionId: religionId,
-          dailymood: dailymood,
-          description: description,
-          active: active,
-        },
-        {
-          through: {
-            chosenTherapist: chosenTherapist,
-            createdAt: createdAt,
-            endedAt: endedAt,
-            feedback: feedback,
-          },
-        }
-      );
+  //update the junction table clients_therapists. Sometimes need to pair this with updateOneClient. Run this after evaluationform etc.
 
-      return res.json(data);
+  async updateOneTherapistClient(req, res) {
+    console.log("hi");
+    const { chosenTherapist, endedAt, feedback, therapistID, clientID } =
+      req.body;
+    try {
+      const data = await this.clientTherapistsModel.findOne({
+        where: { clientId: clientID, therapistId: therapistID },
+      });
+      console.log(data);
+
+      const response = await data.update({
+        chosenTherapist: chosenTherapist,
+        updatedAt: new Date(),
+        endedAt: endedAt,
+        feedback: feedback,
+      });
+
+      return res.json(response);
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });
     }
@@ -141,7 +152,7 @@ class ClientsController {
   //After that, we query therapist table to grab all therapists that fit the client's preferences and we bulkcreate clients_therapists?
   async insertBulk(req, res) {
     const {
-      specializationId,
+      specializationID,
       ageId,
       religionId,
       gender,
@@ -151,36 +162,80 @@ class ClientsController {
     try {
       //allTherapists is an array of objects
       console.log("hi");
+      const nextTherapists = await this.specializationTherapistsModel.findAll({
+        where: {
+          specializationId: specializationID,
+          // "$specialize.specializationId$": specializationID,
+        },
+      });
+      const secondSelectedTherapists = nextTherapists.map((elem) => {
+        return elem.therapistId;
+      });
+
+      console.log(secondSelectedTherapists);
+
       const allTherapists = await this.therapistModel.findAll({
         where: {
           ageId: ageId,
           religionId: religionId,
           gender: gender,
           languageId: languageId,
+          // specializationId: specializationID,
+          // "$specialize.specializationId$": specializationID,
         },
         // include: [
         //   {
-        //     model: this.specializationTherapistsModel,
-        //     where: {
-        //       specializationId: specializationId,
+        //     // model: this.specializationTherapistsModel,
+        //     through: {
+        //       // model: this.specializationTherapistsModel,
+        //       where: { specializationId: specializationID },
+        //       attributes: ["specializationId"],
         //     },
+        //   },
+        // ],
+
+        // include: "specialize",
+        // include: [
+        //   {
+        //     model: this.specializationTherapistsModel,
+        //     // required: true,
+        //     as: "specialize",
+        //     // where: {
+        //     //   specializationId: specializationId,
+        //     // },
         //   },
         // ],
       });
 
-      // console.log(allTherapists);
+      const firstSelectedTherapists = allTherapists.map((elem) => {
+        return elem.id;
+      });
 
-      const resultTherapist = allTherapists.map(async (therapist) => {
+      console.log(firstSelectedTherapists);
+
+      let finalTherapists = [];
+      firstSelectedTherapists.forEach((therapist) => {
+        if (secondSelectedTherapists.indexOf(therapist) !== -1) {
+          console.log("yay");
+          finalTherapists.push(therapist);
+        }
+      });
+
+      console.log(finalTherapists);
+
+      finalTherapists.map(async (therapist) => {
         // await console.log("indiv object", therapist);
-        const newRelation = await this.clientsTherapistsModel.create({
+        const newRelation = await this.clientTherapistsModel.create({
           clientId: clientId,
-          therapistId: therapist.dataValues.id,
+          therapistId: therapist,
           chosenTherapist: false,
+          // endedAt: new Date(),
+          //To remove endedAt non null from migration table.
         });
         return newRelation;
       });
 
-      return res.json(resultTherapist);
+      return res.json("inserted evaluation results into clientTherapistModel");
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });
     }

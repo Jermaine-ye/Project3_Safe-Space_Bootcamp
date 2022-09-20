@@ -24,7 +24,13 @@ class ClientsRouter {
     );
 
     //update one client (for both client and therapist)
-    router.put("/", this.controller.updateOne.bind(this.controller));
+    router.put("/", this.controller.updateOneClient.bind(this.controller));
+
+    //update one clientTherapist (for both client and therapist)
+    router.put(
+      "/clientTherapist",
+      this.controller.updateOneTherapistClient.bind(this.controller)
+    );
 
     //create one client (for client)
     router.post("/", this.controller.insertOne.bind(this.controller));
