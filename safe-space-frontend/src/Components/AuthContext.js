@@ -1,110 +1,87 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
-// import { auth, database } from "../Db/Firebase";
-// import {
-//   createUserWithEmailAndPassword,
-//   updateProfile,
-//   signInWithEmailAndPassword,
-// } from "firebase/auth";
-// import { setDoc, doc } from "firebase/firestore";
+import React, { useContext, useEffect, useState } from 'react';
+import axios from 'axios';
+import { BACKEND_URL } from '../constants';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const AuthContext = React.createContext();
 
 export function useAuth() {
   return useContext(AuthContext);
 }
-
+// USE THIS TO STORE STATES.
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState();
+  //set user data that you are going to pass down to different componenet.
+  const [currentUser, setCurrentUser] = useState([]);
+  const [clientInfo, setClientInfo] = useState();
+  const [therapistInfo, setTherapistInfo] = useState();
+  //reset this to true when you finish editing the files
+  const [loading, setLoading] = useState(false);
 
-  const [loading, setLoading] = useState(true);
+  // states for evaluation form. PUT request all at results page
+  const [speciality, setSpeciality] = useState(1);
+  const [age, setAge] = useState('');
+  const [language, setLanguage] = useState(1);
+  const [gender, setGender] = useState(1);
+  const [religion, setReligion] = useState(1);
 
-  async function signup(name, email, password) {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(async (cred) => {
-        console.log("Signed Up", cred.user.uid);
+  // functions required to setState in other components
+  const updateClientData = (data) => {
+    console.log(`updated client info`, data);
+    setCurrentUser(data);
+  };
 
-        return cred;
-      })
-      .then(async (cred) => {
-        console.log("sent to db");
-        console.log(cred);
-        try {
-          console.log(cred.user.uid, email, name);
-          console.log(database);
-          console.log("try", "catch");
+  const updateClientInfo = (data) => {
+    console.log(`updated client info`, data);
+    setClientInfo(data);
+  };
 
-          await updateProfile(auth.currentUser, { displayName: name });
-          await setDoc(
-            doc(
-              database,
-              `users`,
-              `${cred.user.uid}`,
-              "profile",
-              `${cred.user.uid}_profile`
-            ),
-            {
-              uid: cred.user.uid,
-              email: email,
-              name: name,
-              gender: "",
-              age: "",
-              smoker: "",
-              height: "",
-              religion: "",
-              location: "",
-              funfact: "",
-              bio: "",
-              promptfield: "",
-              image: [],
-            }
-          );
+  const updateTherapistInfo = (data) => {
+    console.log(`updated therapist info`, data);
+    setTherapistInfo(data);
+  };
 
-          await setDoc(
-            doc(
-              database,
-              `users`,
-              `${cred.user.uid}`,
-              `hearts`,
-              `${cred.user.uid}_hearts`
-            ),
-            {
-              uid: [],
-            }
-          );
-        } catch (error) {
-          console.log(error);
-        }
-      })
+  const updateSpeciality = (info) => {
+    console.log(`updated client's speciality`, info);
+    setSpeciality(info);
+  };
 
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+  const updateAge = (info) => {
+    console.log(`updated client's age preference`, info);
+    setAge(info);
+  };
 
-  async function login(email, password) {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log("Signed in! Welcome!", userCredential.user);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+  const updateLanguage = (info) => {
+    console.log(`updated client's language preference`, info);
+    setLanguage(info);
+  };
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user);
-      setLoading(false);
-      console.log(user);
-    });
-    return unsubscribe;
-  }, []);
+  const updateGender = (info) => {
+    console.log(`updated client's gender preference`, info);
+    setGender(info);
+  };
 
+  const updateReligion = (info) => {
+    console.log(`updated client's religion preference`, info);
+    setReligion(info);
+  };
+
+  // States and Functions that are passed down and USE by ALL components.
   const value = {
-    user,
-    signup,
-    login,
+    updateClientData,
+    updateSpeciality,
+    updateAge,
+    updateLanguage,
+    updateGender,
+    updateReligion,
+    updateClientInfo,
+    updateTherapistInfo,
+    currentUser,
+    speciality,
+    age,
+    language,
+    gender,
+    religion,
+    clientInfo,
   };
 
   return (

@@ -1,18 +1,6 @@
-const cors = require("cors");
-// const BaseController = require("./baseController");
-
-class JournalsController {
-  constructor(model, journaltemplateModel, clientModel, therapistModel) {
-    this.model = model;
-    this.journaltemplateModel = journaltemplateModel;
-    this.clientModel = clientModel;
-    this.therapistModel = therapistModel;
-  }
-
-  //get all journals of a particular client (for therapist)
-  async getAll(req, res) {
+async getAll(req, res) {
     try {
-      const { clientId } = req.params;
+      const clientId = req.params;
       const output = await this.model.findAll({
         where: {
           clientId: clientId,
@@ -37,7 +25,7 @@ class JournalsController {
 
   //create one journal assignment for individual client using journal template id (for therapist)
   async insertOne(req, res) {
-    const { clientId } = req.params;
+    const clientId = req.params;
     const { dueBy, templateId, therapistId } = req.body;
     try {
       const newJournal = await this.model.create({
@@ -55,7 +43,7 @@ class JournalsController {
 
   //update one journal for client
   async updateOne(req, res) {
-    const { journalId } = req.params;
+    const journalId = req.params;
     const { input1, input2, input3 } = req.body;
     try {
       const data = await this.model.findByPk(journalId);
@@ -71,6 +59,3 @@ class JournalsController {
       return res.status(400).json({ error: true, msg: err });
     }
   }
-}
-
-module.exports = JournalsController;

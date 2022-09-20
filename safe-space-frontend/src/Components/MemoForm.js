@@ -105,9 +105,9 @@ const MemoForm = () => {
     // not front end route like what u have done below!!!
 
     axios
-      .post(`${BACKEND_URL}/therapist/patients/:clientId/newmemo`, {
+      .post(`${BACKEND_URL}/therapist/patients/${params.clientId}/newmemo`, {
         date,
-        general,s
+        general,
         behavior,
         contentTherapy,
         therapeuticInt,

@@ -1,4 +1,4 @@
-const cors = require("cors");
+const cors = require('cors');
 // const BaseController = require("./baseController");
 
 class TherapistsController {
@@ -12,7 +12,7 @@ class TherapistsController {
   // get all clients for therapist
   async getAll(req, res) {
     try {
-      const { email } = req.body;
+      const email = req.params;
       //getting therapist user obj
       const user = await this.model.findOne({
         where: { email: email },
@@ -36,7 +36,7 @@ class TherapistsController {
 
   //get one therapist for therapist own profile and get all blocked dates for therapist and client
   async getOne(req, res) {
-    const { emailTherapist } = req.body;
+    const emailTherapist = req.params;
     try {
       const output = await this.model.findOne({
         where: { email: emailTherapist },
@@ -65,7 +65,7 @@ class TherapistsController {
 
   //delete one blocked date for therapist
   async deleteOne(req, res) {
-    const { blockeddateId } = req.params;
+    const blockeddateId = req.params;
     try {
       const data = await this.blockedDateModel.findByPk(blockeddateId);
 

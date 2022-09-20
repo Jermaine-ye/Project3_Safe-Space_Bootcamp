@@ -1,5 +1,5 @@
-const cors = require("cors");
-const { Op } = require("sequelize");
+const cors = require('cors');
+const { Op } = require('sequelize');
 // const BaseController = require("./baseController");
 
 class ClientsController {
@@ -39,10 +39,10 @@ class ClientsController {
 
   //get one client for therapist and client(for own profile). And get all journalentries and all appointments of the client. And get therapist info of current therapist for indiv client. And get all the clients_therapists info for indiv client.
   async getOne(req, res) {
-    const { emailClient } = req.body;
+    const email = req.params;
     try {
       const user = await this.model.findOne({
-        where: { email: emailClient },
+        where: { email: email },
         include: [
           this.appointmentModel,
           this.journalentryModel,
@@ -110,7 +110,7 @@ class ClientsController {
   //update the junction table clients_therapists. Sometimes need to pair this with updateOneClient. Run this after evaluationform etc.
 
   async updateOneTherapistClient(req, res) {
-    console.log("hi");
+    console.log('hi');
     const { chosenTherapist, endedAt, feedback, therapistID, clientID } =
       req.body;
     try {
@@ -161,7 +161,7 @@ class ClientsController {
     } = req.body;
     try {
       //allTherapists is an array of objects
-      console.log("hi");
+      console.log('hi');
       const nextTherapists = await this.specializationTherapistsModel.findAll({
         where: {
           specializationId: specializationID,
@@ -216,7 +216,7 @@ class ClientsController {
       let finalTherapists = [];
       firstSelectedTherapists.forEach((therapist) => {
         if (secondSelectedTherapists.indexOf(therapist) !== -1) {
-          console.log("yay");
+          console.log('yay');
           finalTherapists.push(therapist);
         }
       });
@@ -235,7 +235,7 @@ class ClientsController {
         return newRelation;
       });
 
-      return res.json("inserted evaluation results into clientTherapistModel");
+      return res.json('inserted evaluation results into clientTherapistModel');
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });
     }
