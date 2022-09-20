@@ -111,23 +111,16 @@ class ClientsController {
 
   async updateOneTherapistClient(req, res) {
     console.log("hi");
-    const {
-      chosenTherapist,
-      endedAt,
-      feedback,
-      therapistID,
-      clientID,
-      createdAt,
-    } = req.body;
+    const { chosenTherapist, endedAt, feedback, therapistID, clientID } =
+      req.body;
     try {
-      const data = await this.clientsTherapistsModel.findOne({
+      const data = await this.clientTherapistsModel.findOne({
         where: { clientId: clientID, therapistId: therapistID },
       });
       console.log(data);
 
       const response = await data.update({
         chosenTherapist: chosenTherapist,
-        createdAt: createdAt,
         updatedAt: new Date(),
         endedAt: endedAt,
         feedback: feedback,
@@ -236,7 +229,7 @@ class ClientsController {
           clientId: clientId,
           therapistId: therapist,
           chosenTherapist: false,
-          endedAt: new Date(),
+          // endedAt: new Date(),
           //To remove endedAt non null from migration table.
         });
         return newRelation;
