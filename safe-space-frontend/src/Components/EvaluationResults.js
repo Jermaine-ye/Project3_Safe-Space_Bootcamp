@@ -33,7 +33,7 @@ export default function EvaluationResults() {
       audience: process.env.REACT_APP_AUDIENCE,
       scope: process.env.REACT_APP_SCOPE,
     });
-    const response = await axios.post(
+    const response = await axios.put(
       `${BACKEND_URL}/clients`,
       {
         //refer BE controller

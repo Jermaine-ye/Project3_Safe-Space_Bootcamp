@@ -18,7 +18,7 @@ class ClientsRouter {
 
     //get one client (for both client own profile and therapist)
     router.get(
-      "/",
+      "/:email",
       // this.auth,
       this.controller.getOne.bind(this.controller)
     );
@@ -33,7 +33,7 @@ class ClientsRouter {
     );
 
     //create one client (for client)
-    router.post("/", this.controller.insertOne.bind(this.controller));
+    router.post("/newClient", this.controller.insertOne.bind(this.controller));
 
     //bulkCreate many clients_therapists for client after evaluation results are out
     router.post(

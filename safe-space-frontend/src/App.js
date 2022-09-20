@@ -28,6 +28,8 @@ import { AuthProvider } from "./Components/AuthContext";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function App() {
+  const [isAdmin, setIsAdmin] = useState([]);
+
   const {
     isAuthenticated,
     user,
@@ -35,6 +37,12 @@ export default function App() {
     logout,
     getAccessTokenSilently,
   } = useAuth0();
+
+  // useEffect(() => {
+  //   console.log(user);
+  //   setIsAdmin(user[`https://any-namespace/roles`]);
+  // }, []);
+
   return (
     <AuthProvider>
       <div className="App">

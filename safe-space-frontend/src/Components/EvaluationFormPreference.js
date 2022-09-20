@@ -4,50 +4,72 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 
 export default function EvaluationFormPreference() {
+  const navigate = useNavigate();
+
+  const { updateAge, updateLanguage, updateGender, updateReligion } = useAuth();
+
   const questions = [
     {
       questionText: "State your preferred language.",
       answerOptions: [
-        { answerText: "English and Chinese", isCorrect: true },
-        { answerText: "English and Tamil", isCorrect: false },
-        { answerText: "English and Malay", isCorrect: false },
+        { answerText: "English and Chinese", value: "1", isClicked: true },
+        { answerText: "English and Tamil", value: "2", isClicked: true },
+        { answerText: "English and Malay", value: "3", isClicked: true },
       ],
     },
     {
       questionText: "What is your preferred gender of the therapist?",
       answerOptions: [
-        { answerText: "Male", isCorrect: true },
-        { answerText: "Female", isCorrect: false },
+        { answerText: "Male", value: "male", isClicked: true },
+        { answerText: "Female", value: "female", isClicked: true },
       ],
     },
     {
       questionText: "Indicate your religion if any.",
       answerOptions: [
-        { answerText: "No Preference", isCorrect: true },
-        { answerText: "Christianity", isCorrect: false },
-        { answerText: "Buddhism", isCorrect: true },
-        { answerText: "Muslim", isCorrect: false },
-        { answerText: "Hindu", isCorrect: true },
+        { answerText: "No Preference", value: "1", isClicked: true },
+        { answerText: "Christianity", value: "2", isClicked: true },
+        { answerText: "Buddhism", value: "3", isClicked: true },
+        { answerText: "Islam", value: "4", isClicked: true },
+        { answerText: "Hinduism", value: "5", isClicked: true },
       ],
     },
     {
       questionText:
         "What is the age of the therapist you are comfortable with.",
       answerOptions: [
-        { answerText: "20 to 29 years old", isCorrect: true },
-        { answerText: "30 to 39 years old", isCorrect: false },
-        { answerText: "40 to 49 years old", isCorrect: true },
-        { answerText: "50 to 59 years old", isCorrect: false },
+        { answerText: "20 to 29 years old", value: "1", isClicked: true },
+        { answerText: "30 to 39 years old", value: "2", isClicked: true },
+        { answerText: "40 to 49 years old", value: "3", isClicked: true },
+        { answerText: "50 to 59 years old", value: "4", isClicked: true },
       ],
     },
   ];
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
 
-  const handleAnswerOptionClick = async () => {
-    // if (isCorrect) {
-    //   // setState here
-    // }
+  const handleAnswerOptionClick = async (isClicked) => {
+    if (isClicked) {
+      // setState here
+      if (questions[currentQuestion] === 1) {
+        updateLanguage(
+          questions[currentQuestion].answerOptions[currentQuestion].value
+        );
+      } else if (questions[currentQuestion] === 2) {
+        updateGender(
+          questions[currentQuestion].answerOptions[currentQuestion].value
+        );
+      } else if (questions[currentQuestion] === 3) {
+        updateReligion(
+          questions[currentQuestion].answerOptions[currentQuestion].value
+        );
+      } else if (questions[currentQuestion] === 4) {
+        updateAge(
+          questions[currentQuestion].answerOptions[currentQuestion].value
+        );
+      }
+    }
+
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < questions.length) {
       setCurrentQuestion(nextQuestion);
@@ -70,7 +92,9 @@ export default function EvaluationFormPreference() {
       </div>
       <div className="answer-section">
         {questions[currentQuestion].answerOptions.map((answerOption) => (
-          <button onClick={() => handleAnswerOptionClick()}>
+          <button
+            onClick={() => handleAnswerOptionClick(answerOption.isClicked)}
+          >
             {answerOption.answerText}
           </button>
         ))}

@@ -32,20 +32,26 @@ export default function NavBar() {
     getAccessTokenSilently,
   } = useAuth0();
   const navigate = useNavigate();
-  const { updateClientData } = useAuth();
+  const {
+    updateClientData,
+    updateClientInfo,
+    currentUser,
+    updateTherapistInfo,
+  } = useAuth();
 
   const handleLogin = async () => {
     console.log("Client logging in!");
     loginWithRedirect();
   };
 
+  // update user information once they sign up and login in.
   const updateClient = async (user) => {
     const accessToken = await getAccessTokenSilently({
       audience: process.env.REACT_APP_AUDIENCE,
       scope: process.env.REACT_APP_SCOPE,
     });
     const response = await axios.post(
-      `${BACKEND_URL}/clients`,
+      `${BACKEND_URL}/clients/newClient`,
       {
         //refer BE controller
         email: user.email,
@@ -57,14 +63,34 @@ export default function NavBar() {
     );
     await updateClientData(response.data);
 
-    //  navigate("/index");
+    // navigate("/index");
+  };
+
+  // getting the specific user/therapist and their IDs respectively.
+  const getAllInfo = async () => {
+    await updateClient(user);
+
+    //from auth0
+    console.log(user);
+    //from authContext
+    console.log(currentUser);
+    console.log(user[`https://any-namespace/roles`].length === 0);
+
+    if (user[`https://any-namespace/roles`].length === 0) {
+      const response = await axios.get(`${BACKEND_URL}/clients/${user.email}`);
+
+      updateClientInfo(response.data);
+    } else {
+      const response = await axios.get(
+        `${BACKEND_URL}/therapists/${user.email}`
+      );
+      updateTherapistInfo(response.data);
+    }
   };
 
   useEffect(() => {
     if (isAuthenticated) {
-      updateClient(user);
-    } else {
-      console.log("not logged in");
+      getAllInfo();
     }
   }, [isAuthenticated]);
 

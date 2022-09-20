@@ -11,7 +11,7 @@ export default function EvaluationFormSpecialty() {
     {
       questionText: "Are you facing drug addiction problems?",
       answerOptions: [
-        { answerText: "Yes", isCorrect: true, specialization: "addiction" },
+        { answerText: "Yes", isCorrect: true, specialization: "1" },
         { answerText: "No", isCorrect: false },
       ],
     },
@@ -19,7 +19,7 @@ export default function EvaluationFormSpecialty() {
       questionText:
         "Are you facing issues with your marriage life or relationship with your loved ones?",
       answerOptions: [
-        { answerText: "Yes", isCorrect: true, specialization: "relationship" },
+        { answerText: "Yes", isCorrect: true, specialization: "2" },
         { answerText: "No", isCorrect: false },
       ],
     },
@@ -30,7 +30,7 @@ export default function EvaluationFormSpecialty() {
         {
           answerText: "Yes",
           isCorrect: true,
-          specialization: "clinical mental",
+          specialization: "3",
         },
         { answerText: "No", isCorrect: false },
       ],
@@ -41,7 +41,7 @@ export default function EvaluationFormSpecialty() {
         {
           answerText: "Yes",
           isCorrect: true,
-          specialization: "clinical mental",
+          specialization: "4",
         },
         { answerText: "No", isCorrect: false },
       ],
@@ -53,7 +53,7 @@ export default function EvaluationFormSpecialty() {
         {
           answerText: "Yes",
           isCorrect: true,
-          specialization: "eating concerns/body image",
+          specialization: "5",
         },
         { answerText: "No", isCorrect: false },
       ],
@@ -65,7 +65,7 @@ export default function EvaluationFormSpecialty() {
         {
           answerText: "Yes",
           isCorrect: true,
-          specialization: "abuse/selfharm",
+          specialization: "6",
         },
         { answerText: "No", isCorrect: false },
       ],
@@ -81,10 +81,16 @@ export default function EvaluationFormSpecialty() {
   const handleAnswerOptionClick = async (isCorrect) => {
     if (isCorrect) {
       // setState here
-      console.log(questions.answerOptions.specialization);
-      makeSpeciality(questions.answerOptions.specialization);
+      console.log(questions);
+      console.log(questions.answerOptions);
+      console.log(
+        questions[currentQuestion].answerOptions[currentQuestion].specialization
+      );
+      makeSpeciality(
+        questions[currentQuestion].answerOptions[currentQuestion].specialization
+      );
       // nav to results page
-      // navigate("/evaluation/results")
+      navigate("/evaluation/results");
     }
 
     const nextQuestion = currentQuestion + 1;
