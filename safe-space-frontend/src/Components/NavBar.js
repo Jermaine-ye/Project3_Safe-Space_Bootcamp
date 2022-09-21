@@ -138,6 +138,8 @@ export default function NavBar() {
             <button onClick={handleSignUp}>Sign Up</button>
           </Grid.Col> */}
         </Grid>
+
+        <Link to="/client/journal/:journalId/new">Journal</Link>
       </Container>
     </div>
   );

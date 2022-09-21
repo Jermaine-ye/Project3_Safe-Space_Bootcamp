@@ -27,6 +27,7 @@ import SupportResources from './Components/StaticInfo/SupportResources';
 import { AuthProvider } from './Components/AuthContext';
 import { useAuth0 } from '@auth0/auth0-react';
 import CalendarDashboard from './Components/CalendarDashboard';
+import { Button } from '@mantine/core';
 
 export default function App() {
   const [isAdmin, setIsAdmin] = useState([]);
@@ -48,14 +49,17 @@ export default function App() {
     <AuthProvider>
       <div className="App">
         {/* Placeholder for ease of use */}
-        <button
+        <Button
+          className="Logout-Button"
+          variant="light"
           onClick={() => {
             logout();
             navigate('/');
           }}
         >
+          {' '}
           LOG OUT
-        </button>
+        </Button>
         <Routes>
           {/* check for admin boolean and render client and therapist pages according.  */}
           <Route path="/" element={<LandingPage />} />
