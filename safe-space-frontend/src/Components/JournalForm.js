@@ -25,6 +25,7 @@ const JournalForm = () => {
   const [input1, setInput1] = useState('');
   const [input2, setInput2] = useState('');
   const [input3, setInput3] = useState('');
+  const { user, isAuthenticated, isLoading } = useAuth0();
 
   const [dueDate, setDueDate] = useState('');
   const [therapistName, setTherapistName] = useState('');
@@ -38,16 +39,23 @@ const JournalForm = () => {
   //   const [title3, setTitle3] = useState('');
 
   //need to get a use effect to get the client information to get the journal template (see ryoji example)
-const [allTherapistInfo, setAllTherapistInfo] = useState([])
+  const [allTherapistInfo, setAllTherapistInfo] = useState([]);
 
-useEffect(()=>{
-if(isAuthenticated){
-let response = await axios.get(`${BACKEND_URL}/clients/${emailCLient}`);;
+  //in real app, pls do not hardcode JonSnow, instead extract the user from AuthProvider
+  const callApi = async () => {
+    let response = await axios.get(`${BACKEND_URL}/clients/jon@snow.com`);
+    // it should be ${emailClient}
     setAllTherapistInfo(response.data.therapists);
-}
-})
+  };
 
-// DONT UNDERSTAND HOW THE ABOVE LINKS TO THE CLIENT ID BELOW ?
+  useEffect(() => {
+    if (isAuthenticated) {
+      console.log(user);
+      callApi();
+    }
+  });
+
+  // DONT UNDERSTAND HOW THE ABOVE LINKS TO THE CLIENT ID BELOW ?
 
   //Need to get the set template and set the due date & Journal ID & Therapist ID & Template ID
 

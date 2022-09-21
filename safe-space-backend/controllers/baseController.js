@@ -13,7 +13,6 @@ class BaseController {
       return res.status(400).json({ error: true, msg: err });
     }
   }
-
   async getOne(req, res) {
     const Id = req.params;
     try {

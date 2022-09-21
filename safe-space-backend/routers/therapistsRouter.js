@@ -21,6 +21,13 @@ class TherapistsRouter {
       this.controller.getOne.bind(this.controller)
     );
 
+    //for consultation sample
+    // router.post(
+    //   '/:emailTherapist',
+    //   // this.auth,
+    //   this.controller.postOne.bind(this.controller)
+    // );
+
     //create one blocked date (for therapist)
     router.post(
       '/blockeddate',

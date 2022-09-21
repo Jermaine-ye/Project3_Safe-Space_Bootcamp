@@ -26,39 +26,34 @@ export default function JournalSingle(props) {
   //   getSightingsData();
   // }, [sightingIndex]);
 
+  return (
+    <div>
+      <div>
+        {console.log(sighting, sightingIndex)}
 
-
-
-  return <div><div>
-      {console.log(sighting, sightingIndex)}
-      {Object.keys(sighting).length > 0 ? (
-        <div>
+        {Object.keys(sighting).length > 0 ? (
           <div>
-            <p>Report Number: {sighting.REPORT_NUMBER}</p>
+            <div>
+              <p>Report Number: {sighting.REPORT_NUMBER}</p>
+            </div>
+            <div>
+              <p>
+                Date: {sighting.DATE}/{sighting.MONTH}/{sighting.YEAR}
+              </p>
+            </div>
+            <div>
+              <p>
+                Area: {sighting.STATE}/{sighting.COUNTY}
+              </p>
+            </div>
+            <div>
+              <p>Witness Report: {sighting.OBSERVED}</p>
+            </div>
           </div>
-          <div>
-            <p>
-              Date: {sighting.DATE}/{sighting.MONTH}/{sighting.YEAR}
-            </p>
-          </div>
-          <div>
-            <p>
-              Area: {sighting.STATE}/{sighting.COUNTY}
-            </p>
-          </div>
-          <div>
-            <p>Witness Report: {sighting.OBSERVED}</p>
-          </div>
-        </div>
-      ) : (
-        <p>Data Unavailable</p>
-      )}
+        ) : (
+          <p>Data Unavailable</p>
+        )}
+      </div>
     </div>
-  
-  
-  
-  
-  
-  
-  </div>;
+  );
 }
