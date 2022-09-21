@@ -46,8 +46,10 @@ class ClientsController {
       const user = await this.model.findOne({
         where: { email: email },
         include: [
-          this.appointmentModel,
-          this.journalentryModel,
+          { model: this.appointmentModel, include: [this.therapistModel] },
+          { model: this.journalentryModel, include: [this.therapistModel] },
+          // this.appointmentModel,
+          // this.journalentryModel,
           this.therapistModel,
         ],
       });
