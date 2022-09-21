@@ -21,9 +21,10 @@ export default function CalendarDashboard() {
   const handleSelected = (event) => {
     setModalVisible(true);
     setSelected(event);
-
+    console.log("this is running");
     const { id, type, user } = event;
-
+    console.log(event);
+    console.log(selected);
     // if (type === "appt" && user === "client") {
     // } else if (type === "appt" && user === "therapist") {
     // } else if (type === "blocked date") {
@@ -53,6 +54,7 @@ export default function CalendarDashboard() {
     if (isAuthenticated) {
       console.log(user);
       if (user && user[`https://any-namespace/roles`].length !== 0) {
+        console.log(therapistInfo);
         //this is therapist acct
         //so get all blocked dates and appts
         //blocked dates can be gotten from therapistinfo usecontext
@@ -64,7 +66,7 @@ export default function CalendarDashboard() {
 
       if (user && user[`https://any-namespace/roles`].length === 0) {
         //this is the client acct
-
+        console.log(clientInfo);
         //get all appts and prev journal entries of the client. Can get from clientInfo!
         getClientApptsJournals();
       }
@@ -99,8 +101,8 @@ export default function CalendarDashboard() {
         type: "appt",
         user: "client",
         title: `Appointment with therapist ${firstName} ${lastName}`,
-        start: startTime,
-        end: endTime,
+        start: new Date(startTime),
+        end: new Date(endTime),
       };
 
       if (therapistAppts.length !== 0) {
@@ -128,8 +130,8 @@ export default function CalendarDashboard() {
         type: "journal",
         user: "client",
         title: `Journal under therapist ${firstName} ${lastName}`,
-        start: startTime,
-        end: endTime,
+        start: new Date(startTime),
+        end: new Date(endTime),
       };
 
       if (clientJournals.length !== 0) {
@@ -147,6 +149,7 @@ export default function CalendarDashboard() {
 
   const getOwnBlockedDate = () => {
     const { blockeddates } = therapistInfo;
+    console.log(therapistInfo);
 
     blockeddates.forEach((blockDate) => {
       const date = blockDate.date;
@@ -158,8 +161,8 @@ export default function CalendarDashboard() {
         type: "blocked date",
         title: "Blocked Date",
         user: "therapist",
-        start: date,
-        end: date,
+        start: new Date(date),
+        end: new Date(date),
       };
 
       if (therapistBlockedDate.length !== 0) {
@@ -178,6 +181,7 @@ export default function CalendarDashboard() {
   };
 
   const getAllTherapistApptCalendar = async () => {
+    console.log(therapistInfo);
     const { id } = therapistInfo;
     let apptDatesResponse = await axios.get(
       `${BACKEND_URL}/appointments/therapist/${id}`
@@ -185,8 +189,9 @@ export default function CalendarDashboard() {
     let apptDates = await apptDatesResponse.data;
 
     apptDates.forEach((date) => {
-      const startTime = date.startDatetime;
-      const endTime = date.endDatetime;
+      console.log(date);
+      const startTime = new Date(date.startDatetime);
+      const endTime = new Date(date.endDatetime);
       const clientID = date.clientId;
       const { firstName, lastName } = date.client;
       const apptID = date.id;
@@ -213,19 +218,35 @@ export default function CalendarDashboard() {
     });
   };
 
-  const MyCalendar = (props) => (
-    <div>
-      <Calendar
-        localizer={localizer}
-        events={allEvents}
-        startAccessor="start"
-        endAccessor="end"
-        selected={selected}
-        onSelectEvent={handleSelected}
-        style={{ height: 500 }}
-      />
-    </div>
-  );
+  //allEvents are to be an array of objects.
+  // const allEvents = [
+  //   {
+  //     title: "Blocked Date",
+  //     user: "therapist",
+  //     start: "2022-09-20 10:56:13.488 +0900",
+  //     end: "2022-09-20 10:56:13.488 +0900",
+  //   },
+  //   {
+  //     title: "Blocked Date2",
+  //     user: "therapist",
+  //     start: "2022-09-20 10:56:13.488 +0900",
+  //     end: "2022-09-20 10:56:13.488 +0900",
+  //   },
+  // ];
+
+  // const MyCalendar = (props) => (
+  //   <div>
+  //     <Calendar
+  //       localizer={localizer}
+  //       events={allEvents}
+  //       startAccessor="start"
+  //       endAccessor="end"
+  //       selected={selected}
+  //       onSelectEvent={handleSelected}
+  //       style={{ height: 500 }}
+  //     />
+  //   </div>
+  // );
 
   // const getAllTherapistBlockedDates = async () => {
   //   let emailTherapist = currTherapist.email;
@@ -282,9 +303,31 @@ export default function CalendarDashboard() {
     <div>
       CalendarDashboard
       {user && user[`https://any-namespace/roles`].length !== 0 ? (
-        <div>THERAPIST CALENDAR</div>
+        <>
+          <div>THERAPIST CALENDAR</div>
+          <Calendar
+            localizer={localizer}
+            events={allEvents}
+            startAccessor="start"
+            endAccessor="end"
+            selected={selected}
+            onSelectEvent={handleSelected}
+            style={{ height: 500 }}
+          />
+        </>
       ) : (
-        <div>CLIENT CALENDAR</div>
+        <>
+          <div>CLIENT CALENDAR</div>
+          <Calendar
+            localizer={localizer}
+            events={allEvents}
+            startAccessor="start"
+            endAccessor="end"
+            selected={selected}
+            onSelectEvent={handleSelected}
+            style={{ height: 500 }}
+          />
+        </>
       )}
       {modalVisible ? <CalendarModal item={selected} /> : null}
     </div>

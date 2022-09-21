@@ -12,7 +12,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   //set user data that you are going to pass down to different componenet.
   const [currentUser, setCurrentUser] = useState([]);
-  const [clientInfo, setClientInfo] = useState();
+  const [clientInfo, setClientInfo] = useState([]);
   const [therapistInfo, setTherapistInfo] = useState();
   //reset this to true when you finish editing the files
   const [loading, setLoading] = useState(false);
