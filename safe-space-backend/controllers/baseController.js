@@ -13,9 +13,8 @@ class BaseController {
       return res.status(400).json({ error: true, msg: err });
     }
   }
-
   async getOne(req, res) {
-    const { Id } = req.params;
+    const Id = req.params;
     try {
       const output = await this.model.findByPk(Id);
       return res.json(output);
