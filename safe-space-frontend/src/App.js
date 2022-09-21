@@ -29,7 +29,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 export default function App() {
   const [isAdmin, setIsAdmin] = useState([]);
-
+  const navigate = useNavigate();
   const {
     isAuthenticated,
     user,
@@ -50,6 +50,7 @@ export default function App() {
         <button
           onClick={() => {
             logout();
+            navigate("/index");
           }}
         >
           LOG OUT

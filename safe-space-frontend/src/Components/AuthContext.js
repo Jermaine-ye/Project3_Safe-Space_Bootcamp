@@ -26,7 +26,7 @@ export function AuthProvider({ children }) {
 
   // function required to setState in other components
   const updateClientData = (data) => {
-    console.log(`updated client info`, data);
+    console.log(`updated client info for ID`, data);
     setCurrentUser(data);
   };
 
@@ -82,6 +82,7 @@ export function AuthProvider({ children }) {
     gender,
     religion,
     clientInfo,
+    therapistInfo,
   };
 
   return (

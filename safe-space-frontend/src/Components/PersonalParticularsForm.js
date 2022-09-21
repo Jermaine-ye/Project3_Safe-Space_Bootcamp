@@ -36,7 +36,7 @@ export default function PersonalParticularsForm() {
   // essentially needed to update specfic client.
   useEffect(() => {
     setUser();
-  }, []);
+  }, [user]);
 
   const CLIENT_IMAGE_FOLDER_NAME = "client images";
   const uploadImage = async (e, file, user) => {
