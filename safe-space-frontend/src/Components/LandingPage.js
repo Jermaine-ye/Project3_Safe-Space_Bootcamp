@@ -60,7 +60,11 @@ export default function LandingPage() {
     <div>
       <NavBar />
       <h1>LandingPage</h1>
-
+      {/* <button
+        onClick={() => logout({ returnTo: process.env.REACT_APP_REDIRECT })}
+      >
+        Logout
+      </button> */}
       <Footer />
     </div>
   );

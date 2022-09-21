@@ -50,19 +50,21 @@ export default function NavBar() {
       audience: process.env.REACT_APP_AUDIENCE,
       scope: process.env.REACT_APP_SCOPE,
     });
-    const response = await axios.post(
-      `${BACKEND_URL}/clients/newClient`,
-      {
-        //refer BE controller
-        email: user.email,
-        password: user.password,
-      },
-      {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      }
-    );
-    await updateClientData(response.data);
 
+    if (user[`https://any-namespace/roles`].length === 0) {
+      const response = await axios.post(
+        `${BACKEND_URL}/clients/newClient`,
+        {
+          //refer BE controller
+          email: user.email,
+          password: user.password,
+        },
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      );
+      await updateClientData(response.data);
+    }
     // navigate("/index");
   };
 
@@ -125,6 +127,9 @@ export default function NavBar() {
           </Grid.Col>
           <Grid.Col span="auto">
             <Link to="/support">Support Resources</Link>
+          </Grid.Col>
+          <Grid.Col span="auto">
+            <Link to="/therapist/calendardash">Calendar Dashboard</Link>
           </Grid.Col>
           <Grid.Col span="auto">
             <button onClick={handleLogin}>Login</button>

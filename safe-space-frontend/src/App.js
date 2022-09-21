@@ -26,6 +26,7 @@ import Services from './Components/StaticInfo/Services';
 import SupportResources from './Components/StaticInfo/SupportResources';
 import { AuthProvider } from './Components/AuthContext';
 import { useAuth0 } from '@auth0/auth0-react';
+import CalendarDashboard from './Components/CalendarDashboard';
 
 export default function App() {
   const [isAdmin, setIsAdmin] = useState([]);
@@ -102,6 +103,11 @@ export default function App() {
           {/* Route that renders therapist dashboard */}
           <Route path="/therapist/" element={<DashboardTherapistScreen />} />
           {/* Route that renders full calendar of therapist on therapists's portal */}
+          <Route
+            path="/therapist/calendardash"
+            element={<CalendarDashboard />}
+          />
+          {/* Route that renders indiv profile of patient on therapists's portal */}
           <Route path="/therapist/calendar" element={<CalendarFull />} />
           {/* Route that renders indiv profile of patient on therapists's portal */}
           <Route
