@@ -40,6 +40,8 @@ class ClientsController {
   //get one client for therapist and client(for own profile). And get all journalentries and all appointments of the client. And get therapist info of current therapist for indiv client. And get all the clients_therapists info for indiv client.
   async getOne(req, res) {
     const { email } = req.params;
+    console.log(email);
+    console.log(req.params);
     try {
       const user = await this.model.findOne({
         where: { email: email },
@@ -81,6 +83,7 @@ class ClientsController {
       description,
       active,
     } = req.body;
+    // const { emailClient } = req.params;
     try {
       const data = await this.model.findOne({
         where: { email: emailClient },

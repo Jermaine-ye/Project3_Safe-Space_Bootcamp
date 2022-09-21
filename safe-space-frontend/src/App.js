@@ -1,16 +1,6 @@
-import logo from "./logo.svg";
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
-import { storage } from "./DB/firebase.js";
-import {
-  // getStorage,
-  getDownloadURL,
-  ref as sRef,
-  uploadBytes,
-} from "firebase/storage";
-import { useAuth0 } from "@auth0/auth0-react";
-
 import LandingPage from "./Components/LandingPage";
 import EvaluationScreen from "./Screens/EvaluationScreen";
 import EvaluationFormPreference from "./Components/EvaluationFormPreference";
@@ -34,18 +24,40 @@ import Advice from "./Components/StaticInfo/Advice";
 import FAQ from "./Components/StaticInfo/FAQ";
 import Services from "./Components/StaticInfo/Services";
 import SupportResources from "./Components/StaticInfo/SupportResources";
-import CalendarDashboard from "./Components/CalendarDashboard";
 import { AuthProvider } from "./Components/AuthContext";
+import { useAuth0 } from "@auth0/auth0-react";
+import CalendarDashboard from "./Components/CalendarDashboard";
 
-const CLIENT_IMAGE_FOLDER_NAME = "client images";
+export default function App() {
+  const [isAdmin, setIsAdmin] = useState([]);
+  const navigate = useNavigate();
+  const {
+    isAuthenticated,
+    user,
+    loginWithRedirect,
+    logout,
+    getAccessTokenSilently,
+  } = useAuth0();
 
-function App() {
+  // useEffect(() => {
+  //   console.log(user);
+  //   setIsAdmin(user[`https://any-namespace/roles`]);
+  // }, []);
+
   return (
-    <div className="App">
-      <AuthProvider>
+    <AuthProvider>
+      <div className="App">
+        {/* Placeholder for ease of use */}
+        <button
+          onClick={() => {
+            logout();
+            navigate("/index");
+          }}
+        >
+          LOG OUT
+        </button>
         <Routes>
-          {/* Route that provides base app UI */}
-          {/* Route that renders home content */}
+          {/* check for admin boolean and render client and therapist pages according.  */}
           <Route path="/" element={<LandingPage />} />
           {/* Route that renders about,advice,services,FAQ,Support page */}
           <Route path="/about" element={<About />} />
@@ -53,7 +65,22 @@ function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/services" element={<Services />} />
           <Route path="/support" element={<SupportResources />} />
-          {/* here we want to do auth0 functions, check authentication only when user clicks log in or sign up button. We tag the isAuthenticated to the onclick of the buttons. BUT WE NEED TO THINK OF HOW TO REDIRECT THEM PROPERLY. Probably useNavigate hook, check isAuthtenticated on useEffect, if authtenticated, grab the user as an async await function. Then use the user.role to redirect them to either client or therapist portal. */}
+
+          {/* Route that renders evaluation screen */}
+          <Route path="/evaluation" element={<EvaluationScreen />}>
+            {/* Route that renders evaluation form */}
+            <Route
+              path="/evaluation/1"
+              element={<EvaluationFormPreference />}
+            />
+            {/* Route that renders evaluation form */}
+            <Route path="/evaluation/2" element={<EvaluationFormSpecialty />} />
+            {/* Route that renders evaluation results */}
+          </Route>
+          <Route path="/evaluation/results" element={<EvaluationResults />} />
+          {/* Route that renders evaluation results */}
+          <Route path="/particulars" element={<PersonalParticularsForm />} />
+          {/* Route that renders clientdashboard screen */}
           <Route path="/client/" element={<DashboardClientScreen />}>
             {/* Route that renders all journal listings of client on client's portal */}
             <Route path="/client/journals" element={<JournalList />} />
@@ -86,38 +113,43 @@ function App() {
           <Route
             path="/therapist/patients/:clientId"
             element={<PatientProfile />}
-          />{" "}
+          />
           {/* Route that renders appt history for the indiv patient on therapists's portal */}
           <Route
             path="/therapist/patients/:clientId/history"
             element={<PrevApptHistory />}
-          />{" "}
+          />
           {/* Route that renders assigning of journal template to indiv patient on therapists's portal */}
           <Route
             path="/therapist/patients/:clientId/newjournal"
             element={<JournalAssignment />}
           />
+
+          {/* Route that renders new Journal template form of client on therapist portal ?? but if there's already a therapist assignment component?? */}
+          {/* <Route
+            path="/therapist/:clientId/journal/new"
+            element={<JournalTemplate />}
+          /> */}
           {/* Route that renders indiv journal done by indiv patient on therapists's portal */}
           <Route
             path="/therapist/patients/:clientId/journal/:journalId"
             element={<JournalSingle />}
-          />{" "}
+          />
           {/* Route that renders indiv memo by therapist(past & present) abt the indiv patient on therapists's portal */}
           <Route
             path="/therapist/patients/:clientId/memos/:memoId"
             element={<MemoSingle />}
-          />{" "}
+          />
           {/* Route that renders blank new memo for the indiv patient on therapists's portal */}
           <Route
             path="/therapist/patients/:clientId/newmemo"
             element={<MemoForm />}
-          />{" "}
+          />
+
           {/* Route that matches all other paths */}
           <Route path="*" element={"Nothing here!"} />
         </Routes>
-      </AuthProvider>
-    </div>
+      </div>
+    </AuthProvider>
   );
 }
-
-export default App;

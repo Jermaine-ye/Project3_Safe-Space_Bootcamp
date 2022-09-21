@@ -33,7 +33,7 @@ class ClientsRouter {
     );
 
     //create one client (for client)
-    router.post("/", this.controller.insertOne.bind(this.controller));
+    router.post("/newClient", this.controller.insertOne.bind(this.controller));
 
     //bulkCreate many clients_therapists for client after evaluation results are out
     router.post(

@@ -90,12 +90,8 @@ export default function NavBar() {
   useEffect(() => {
     console.log(`in effect`);
     if (isAuthenticated) {
-      console.log(user);
       getAllInfo();
-      updateClient();
-      console.log("maybe?");
-    } else {
-      console.log("loggedout");
+      // updateClient();
     }
   }, []);
 

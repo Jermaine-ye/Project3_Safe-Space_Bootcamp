@@ -24,9 +24,9 @@ export function AuthProvider({ children }) {
   const [gender, setGender] = useState(1);
   const [religion, setReligion] = useState(1);
 
-  // functions required to setState in other components
+  // function required to setState in other components
   const updateClientData = (data) => {
-    console.log(`updated client info`, data);
+    console.log(`updated client info for ID`, data);
     setCurrentUser(data);
   };
 
