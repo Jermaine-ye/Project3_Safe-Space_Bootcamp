@@ -13,7 +13,10 @@ class AppointmentsRouter {
     //delete one appt (for client)
     router.delete("/:apptId", this.controller.deleteOne.bind(this.controller));
     //get all appts (for therapist)
-    router.get("/:therapistId", this.controller.getAll.bind(this.controller));
+    router.get(
+      "/therapist/:therapistId",
+      this.controller.getAll.bind(this.controller)
+    );
     //create one appt (for both therapist and client)
     router.post("/", this.controller.insertOne.bind(this.controller));
 
