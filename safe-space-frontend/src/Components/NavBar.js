@@ -73,7 +73,6 @@ export default function NavBar() {
     //from auth0
     console.log(user);
     //from authContext
-    console.log(currentUser);
     console.log(user[`https://any-namespace/roles`].length === 0);
 
     if (user[`https://any-namespace/roles`].length === 0) {
@@ -89,10 +88,12 @@ export default function NavBar() {
   };
 
   useEffect(() => {
+    console.log(`in effect`);
     if (isAuthenticated) {
       getAllInfo();
+      // updateClient();
     }
-  }, [isAuthenticated]);
+  }, []);
 
   return (
     <div>

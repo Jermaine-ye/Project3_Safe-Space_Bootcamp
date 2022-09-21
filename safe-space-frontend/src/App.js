@@ -29,7 +29,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 export default function App() {
   const [isAdmin, setIsAdmin] = useState([]);
-
+  const navigate = useNavigate();
   const {
     isAuthenticated,
     user,
@@ -50,13 +50,14 @@ export default function App() {
         <button
           onClick={() => {
             logout();
+            navigate("/index");
           }}
         >
           LOG OUT
         </button>
         <Routes>
           {/* check for admin boolean and render client and therapist pages according.  */}
-          <Route path="/index" element={<LandingPage />} />
+          <Route path="/" element={<LandingPage />} />
           {/* Route that renders about,advice,services,FAQ,Support page */}
           <Route path="/about" element={<About />} />
           <Route path="/advice" element={<Advice />} />

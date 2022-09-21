@@ -81,6 +81,7 @@ class ClientsController {
       description,
       active,
     } = req.body;
+    // const { emailClient } = req.params;
     try {
       const data = await this.model.findOne({
         where: { email: emailClient },

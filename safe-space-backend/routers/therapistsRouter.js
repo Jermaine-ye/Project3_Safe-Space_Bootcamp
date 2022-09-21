@@ -9,14 +9,14 @@ class TherapistsRouter {
   routes() {
     //get all clients(for therapist)
     router.get(
-      "/clients",
+      "/clients/:email",
       // this.auth,
       this.controller.getAll.bind(this.controller)
     );
 
     //get one therapist (for therapist own profile) and can get all blocked dates (for client and therapist)
     router.get(
-      "/",
+      "/:emailTherapist",
       // this.auth,
       this.controller.getOne.bind(this.controller)
     );
