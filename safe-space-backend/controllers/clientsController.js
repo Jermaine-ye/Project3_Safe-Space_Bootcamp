@@ -10,7 +10,8 @@ class ClientsController {
     appointmentModel,
     journalentryModel,
     specializationModel,
-    specializationTherapistsModel
+    specializationTherapistsModel,
+    memoentryModel
   ) {
     this.model = model;
     this.therapistModel = therapistModel;
@@ -19,6 +20,7 @@ class ClientsController {
     this.journalentryModel = journalentryModel;
     this.specializationModel = specializationModel;
     this.specializationTherapistsModel = specializationTherapistsModel;
+    this.memoentryModel = memoentryModel;
   }
 
   // // get all appointments for client
@@ -51,6 +53,7 @@ class ClientsController {
           // this.appointmentModel,
           // this.journalentryModel,
           this.therapistModel,
+          this.memoentryModel,
         ],
       });
       return res.json(user);

@@ -102,7 +102,7 @@ export default function App() {
           </Route>
           {/* Route that renders therapist dashboard */}
           <Route path="/therapist/" element={<DashboardTherapistScreen />} />
-          {/* Route that renders full calendar of therapist on therapists's portal */}
+          {/* Route that renders full calendar of therapist on therapists's portal. TO REMOVE FROM THIS ROUTER LATER. */}
           <Route
             path="/therapist/calendardash"
             element={<CalendarDashboard />}
@@ -116,7 +116,7 @@ export default function App() {
           />
           {/* Route that renders appt history for the indiv patient on therapists's portal */}
           <Route
-            path="/therapist/patients/:clientId/history"
+            path="/therapist/patients/indiv/history"
             element={<PrevApptHistory />}
           />
           {/* Route that renders assigning of journal template to indiv patient on therapists's portal */}

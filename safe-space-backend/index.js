@@ -67,6 +67,7 @@ const clientsController = new ClientsController(
   journalentry,
   specialization,
   specialization_therapists,
+  memoentry,
   religion,
   age,
   language
