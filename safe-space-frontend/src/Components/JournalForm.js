@@ -114,7 +114,8 @@ const JournalForm = () => {
         console.log('resdata:', res.data);
         console.log('Journal Submit Success!!');
         Navigate(
-          `/therapist/patients/${res.data.clientId}/journal/${res.data.id}`
+          // `/therapist/patients/${res.data.clientId}/journal/${res.data.id}`
+          `/client/journals/${res.data.id}`
         );
       })
       .catch((err) => {
