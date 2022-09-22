@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
 class ClientsRouter {
@@ -18,7 +18,7 @@ class ClientsRouter {
 
     //get one client (for both client own profile and therapist)
     router.get(
-      "/:email",
+      '/:email',
       // this.auth,
       this.controller.getOne.bind(this.controller)
     );
@@ -27,20 +27,20 @@ class ClientsRouter {
     router.get(`/`, this.controller.getAll.bind(this.controller));
 
     //update one client (for both client and therapist)
-    router.put("/", this.controller.updateOneClient.bind(this.controller));
+    router.put('/', this.controller.updateOneClient.bind(this.controller));
 
     //update one clientTherapist (for both client and therapist)
     router.put(
-      "/clientTherapist",
+      '/clientTherapist',
       this.controller.updateOneTherapistClient.bind(this.controller)
     );
 
     //create one client (for client)
-    router.post("/newClient", this.controller.insertOne.bind(this.controller));
+    router.post('/newClient', this.controller.insertOne.bind(this.controller));
 
     //bulkCreate many clients_therapists for client after evaluation results are out
     router.post(
-      "/therapists",
+      '/therapists',
       this.controller.insertBulk.bind(this.controller)
     );
 

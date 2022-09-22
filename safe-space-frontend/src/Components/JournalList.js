@@ -1,26 +1,61 @@
-import React from "react";
+// import axios from 'axios';
+// import React, { useState, useEffect } from 'react';
+// // import { user } from '@auth0/auth0-react';
+// import { Link, useNavigate, useParams } from 'react-router-dom';
+// import {
+//   Button,
+//   Card,
+//   Text,
+//   Title,
+//   Grid,
+//   Container,
+//   Form,
+//   Input,
+//   Textarea,
+// } from '@mantine/core';
+// import { DatePicker } from '@mantine/dates';
+// import { BACKEND_URL } from '../constants.js';
+// import { Auth0Client } from '@auth0/auth0-spa-js';
+// import { useAuth0 } from '@auth0/auth0-react';
+// const params = useParams();
+
+// export default function JournalList() {
+//   const [journalListings, setJournalListings] = useState([]);
+
+//   const getJournalListings = async () => {
+//     const data = await axios.get(`${BACKEND_URL}/journals/${params.clientId}`);
+//     console.log(data);
+//     setJournalListings(data.data);
+//   };
+
+//   useEffect(() => {
+//     getJournalListings();
+//   }, []);
+
+//   const journalList = journalListings.map((listing,index) => (
+// <div key={index}>
+//   <div>
+//     //need the therapist name
+//   </div>
+//   <div>
+//     //need the created at date (where the client submitted the entry)
+//   </div>
+//     <div>
+
+//     (what about daily mood?? which table are we mapping from this?)
+//   </div>
+//   <div>
+//     <Link to={`${listing.XXXX}`}>{index}</Link>
+//   </div>
+
+// </div>
+//   ))
+
+//   return <div>{JournalList}</div>;
+// }
+
+import React from 'react';
 
 export default function JournalList() {
-  return (
-    <div>
-      JournalList
-      {/* const params = useParams();
-  if (sightingIndex !== params.sightingIndex) {
-    setSightingIndex(params.sightingIndex);
-  }
-
-  // Store a new JSX element for each property in sighting details
-  const sightingDetails = [];
-  if (sighting) {
-    for (const key in sighting) {
-      sightingDetails.push(
-        <Card.Text key={key}>{`${key}: ${sighting[key]}`}</Card.Text>
-      );
-    }
-  }
-  
-  
-   */}
-    </div>
-  );
+  return <div>JournalList</div>;
 }

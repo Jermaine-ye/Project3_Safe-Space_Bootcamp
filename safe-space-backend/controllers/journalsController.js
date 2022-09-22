@@ -1,4 +1,4 @@
-const cors = require("cors");
+const cors = require('cors');
 // const BaseController = require("./baseController");
 
 class JournalsController {
@@ -16,6 +16,7 @@ class JournalsController {
         where: {
           clientId: clientId,
         },
+        order: ['created_at', 'DESC'],
       });
       return res.json(output);
     } catch (err) {
@@ -27,7 +28,7 @@ class JournalsController {
   async getOne(req, res) {
     const { clientId, journalId } = req.params;
     try {
-      const output = await this.model.findByPk(journalId);
+      const output = await this.model.findByPk(journalId.journalId);
       return res.json(output);
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });
@@ -54,12 +55,16 @@ class JournalsController {
 
   //update one journal for client
   async updateOne(req, res) {
+    console.log(req.body);
     const journalId = req.params;
-    const { input1, input2, input3 } = req.body;
+    console.log('journalid:', journalId);
+    const { updatedAt, input1, input2, input3 } = req.body;
     try {
-      const data = await this.model.findByPk(journalId);
+      const data = await this.model.findByPk(journalId.journalId);
+      console.log('data: ', data);
 
       await data.update({
+        updatedAt: updatedAt,
         input1: input1,
         input2: input2,
         input3: input3,

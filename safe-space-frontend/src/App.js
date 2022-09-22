@@ -34,19 +34,7 @@ import PrivateRoutesClient from "./PrivateRoutesClient";
 // export const AuthContext = createContext();
 
 export default function App() {
-  // const [currentUser, setCurrentUser] = useState([]);
-  // const [clientInfo, setClientInfo] = useState([]);
-  // const [therapistInfo, setTherapistInfo] = useState();
-  // //reset this to true when you finish editing the files
-  // const [loading, setLoading] = useState(false);
-
-  // // states for evaluation form. PUT request all at results page
-  // const [speciality, setSpeciality] = useState(1);
-  // const [age, setAge] = useState("");
-  // const [language, setLanguage] = useState(1);
-  // const [gender, setGender] = useState(1);
-  // const [religion, setReligion] = useState(1);
-
+  const [isAdmin, setIsAdmin] = useState([]);
   const navigate = useNavigate();
   const {
     isAuthenticated,
@@ -56,67 +44,6 @@ export default function App() {
     getAccessTokenSilently,
   } = useAuth0();
 
-  // const updateClientData = (data) => {
-  //   console.log(`updated client info for ID`, data);
-  //   setCurrentUser(data);
-  // };
-
-  // const updateClientInfo = (data) => {
-  //   console.log(`updated client info`, data);
-  //   setClientInfo(data);
-  // };
-
-  // const updateTherapistInfo = (data) => {
-  //   console.log(`updated therapist info`, data);
-  //   setTherapistInfo(data);
-  // };
-
-  // const updateSpeciality = (info) => {
-  //   console.log(`updated client's speciality`, info);
-  //   setSpeciality(info);
-  // };
-
-  // const updateAge = (info) => {
-  //   console.log(`updated client's age preference`, info);
-  //   setAge(info);
-  // };
-
-  // const updateLanguage = (info) => {
-  //   console.log(`updated client's language preference`, info);
-  //   setLanguage(info);
-  // };
-
-  // const updateGender = (info) => {
-  //   console.log(`updated client's gender preference`, info);
-  //   setGender(info);
-  // };
-
-  // const updateReligion = (info) => {
-  //   console.log(`updated client's religion preference`, info);
-  //   setReligion(info);
-  // };
-
-  // // States and Functions that are passed down and USE by ALL components.
-  // const value = {
-  //   updateClientData,
-  //   updateSpeciality,
-  //   updateAge,
-  //   updateLanguage,
-  //   updateGender,
-  //   updateReligion,
-  //   updateClientInfo,
-  //   updateTherapistInfo,
-  //   currentUser,
-  //   speciality,
-  //   age,
-  //   language,
-  //   gender,
-  //   religion,
-  //   clientInfo,
-  //   therapistInfo,
-  // };
-  // <AuthContext.Provider value={value}> <AuthContext.Provider>
-  // =============================================================
   // useEffect(() => {
   //   console.log(user);
   //   setIsAdmin(user[`https://any-namespace/roles`]);
@@ -129,6 +56,7 @@ export default function App() {
         <button
           onClick={() => {
             logout();
+            navigate("/index");
           }}
         >
           LOG OUT

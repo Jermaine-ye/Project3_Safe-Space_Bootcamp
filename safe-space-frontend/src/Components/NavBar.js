@@ -188,6 +188,19 @@ export default function NavBar() {
             )}
           </Grid.Col> */}
         </Grid>
+
+        <Link to="/client/journal/:journalId/new">Journal</Link>
+        <br />
+        <Link to="/client/journals/:journalId">Journal Single</Link>
+        <br />
+        <Link to="/client/journals">Journal List</Link>
+        <br />
+        <Link to="/therapist/patients/:clientId/newmemo">Memo Form</Link>
+        <br />
+        <Link to="/therapist/patients/:clientId/memos/:memoId">
+          Memo Single
+        </Link>
+        <br />
       </Container>
     </div>
   );
