@@ -81,6 +81,27 @@ export default function NavBar() {
       const response = await axios.get(`${BACKEND_URL}/clients/${user.email}`);
 
       updateClientInfo(response.data);
+
+      let allTher = response.data.therapists;
+      let currTher;
+      allTher.forEach((ther) => {
+        const { id, client_therapists, firstName, lastName, email } = ther;
+        const { chosenTherapist, endedAt } = client_therapists;
+
+        if (chosenTherapist && endedAt === null) {
+          currTher = {
+            id: id,
+            name: `${firstName} ${lastName}`,
+            email: email,
+          };
+          console.log(currTher);
+        }
+      });
+
+      const therResponse = await axios.get(
+        `${BACKEND_URL}/therapists/${currTher.email}`
+      );
+      updateTherapistInfo(therResponse.data);
     } else {
       const response = await axios.get(
         `${BACKEND_URL}/therapists/${user.email}`
