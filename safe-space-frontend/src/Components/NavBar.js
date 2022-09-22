@@ -154,6 +154,12 @@ export default function NavBar() {
             <Link to="/therapist/calendardash">Calendar Dashboard</Link>
           </Grid.Col>
           <Grid.Col span="auto">
+            <Link to="/client/therapist">Therapist Info for Client</Link>
+          </Grid.Col>
+          <Grid.Col span="auto">
+            <Link to="/therapist/patients/indiv/history">PrevApptHistory</Link>
+          </Grid.Col>
+          <Grid.Col span="auto">
             <button onClick={handleLogin}>Login</button>
           </Grid.Col>
           {/* <Grid.Col span="auto">

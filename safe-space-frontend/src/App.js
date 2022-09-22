@@ -106,7 +106,7 @@ export default function App() {
           </Route>
           {/* Route that renders therapist dashboard */}
           <Route path="/therapist/" element={<DashboardTherapistScreen />} />
-          {/* Route that renders full calendar of therapist on therapists's portal */}
+          {/* Route that renders full calendar of therapist on therapists's portal. TO REMOVE FROM THIS ROUTER LATER. */}
           <Route
             path="/therapist/calendardash"
             element={<CalendarDashboard />}
