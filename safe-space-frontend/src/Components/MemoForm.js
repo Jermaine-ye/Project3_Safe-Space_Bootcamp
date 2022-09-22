@@ -42,7 +42,8 @@ const MemoForm = () => {
     // let response = await axios.get(`${BACKEND_URL}/clients/jon@snow.com`);
 
     // should be getting info from the therapist side instead of the client??
-    let response = await axios.get(`${BACKEND_URL}/clients/${user.email}`);
+    let response = await axios.get(`${BACKEND_URL}/therapists/clients/:email`);
+    // let response = await axios.get(`${BACKEND_URL}/clients/${user.email}`);
     // it should be ${emailClient}
     console.log('user detailed information: ', response.data);
     console.log('clientId: ', response.data.id);
