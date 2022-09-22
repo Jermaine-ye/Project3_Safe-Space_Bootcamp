@@ -70,7 +70,7 @@ export default function NavBar() {
 
   // getting the specific user/therapist and their IDs respectively.
   const getAllInfo = async () => {
-    await updateClient(user);
+    // await updateClient(user);
 
     //from auth0
     console.log(user);
@@ -83,6 +83,7 @@ export default function NavBar() {
       updateClientInfo(response.data);
 
       let allTher = response.data.therapists;
+      console.log(allTher);
       let currTher;
       allTher.forEach((ther) => {
         const { id, client_therapists, firstName, lastName, email } = ther;
