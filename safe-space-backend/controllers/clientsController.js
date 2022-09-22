@@ -141,11 +141,13 @@ class ClientsController {
   async insertOne(req, res) {
     const { email, password } = req.body;
     try {
-      const newClient = await this.model.create({
-        email: email,
-        password: password,
-        active: true,
-        admin: false,
+      const newClient = await this.model.findOrCreate({
+        where: { email: email },
+        defaults: {
+          password: password,
+          active: true,
+          admin: false,
+        },
       });
       return res.json(newClient);
     } catch (err) {

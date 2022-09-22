@@ -16,6 +16,10 @@ import { DatePicker } from '@mantine/dates';
 import { BACKEND_URL } from '../constants.js';
 import { Auth0Client } from '@auth0/auth0-spa-js';
 import { useAuth0 } from '@auth0/auth0-react';
+import angry from '../images/angry.png';
+import crying from '../images/sad.png';
+import happy from '../images/smiling-face.png';
+import sad from '../images/frown.png';
 
 const MemoForm = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -45,7 +49,8 @@ const MemoForm = () => {
     setclientId(response.data.id);
     setClientFirstName(response.data.firstName);
     setClientLastName(response.data.lastName);
-    // setPatientMood();
+    setPatientMood(response.data.dailymood);
+    console.log(patientMood);
   };
 
   useEffect(() => {
@@ -57,6 +62,26 @@ const MemoForm = () => {
       callApi();
     }
   }, [user]);
+
+  const moodIcon = (input) => {
+    console.log('checkmood: ', patientMood);
+    switch (input) {
+      case 1:
+        return <img src={happy} alt="" width="50" height="50" />;
+
+      case 2:
+        return <img src={sad} alt="" width="50" height="50" />;
+
+      case 3:
+        return <img src={crying} alt="" width="50" height="50" />;
+
+      case 4:
+        return <img src={angry} alt="" width="50" height="50" />;
+
+      default:
+        return null;
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -104,8 +129,14 @@ const MemoForm = () => {
           <br />
           <label>Memo Entry</label>
           <br />
-          <label>Date:</label>
-          <h5>{new Date().toLocaleDateString()}</h5>
+          <br />
+          <label>Date: {new Date().toLocaleDateString()}</label>
+
+          <br />
+          <br />
+          <label>Patient Mood: {moodIcon(patientMood)}</label>
+
+          <br />
           <br />
 
           <label>General Notes:</label>
