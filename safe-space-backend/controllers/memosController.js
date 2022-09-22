@@ -1,4 +1,4 @@
-const cors = require("cors");
+const cors = require('cors');
 // const BaseController = require("./baseController");
 
 class MemosController {
@@ -16,6 +16,7 @@ class MemosController {
         where: {
           clientId: clientId,
         },
+        order: ['created_at', 'DESC'],
       });
       return res.json(output);
     } catch (err) {

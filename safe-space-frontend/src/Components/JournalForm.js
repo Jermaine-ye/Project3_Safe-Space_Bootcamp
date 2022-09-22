@@ -21,7 +21,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 const JournalForm = () => {
   const params = useParams();
   const Navigate = useNavigate();
-  const [date, setDate] = useState('');
+  const [updatedAt, setUpdatedAt] = useState('');
   const [input1, setInput1] = useState('');
   const [input2, setInput2] = useState('');
   const [input3, setInput3] = useState('');
@@ -29,12 +29,9 @@ const JournalForm = () => {
 
   const [dueDate, setDueDate] = useState('');
 
-  const [journalTemplateid, setJournalTemplateId] = useState(null);
   // get all to know there is an empty null=> new journal entry =>
   const [clientId, setClientId] = useState('');
   const [journalId, setJournalId] = useState('');
-
-  const [allJournalEntryInfo, setAllJournalEntryInfo] = useState(null);
 
   const [latestJournalEntry, setLatestJournalEntry] = useState('');
 
@@ -52,16 +49,15 @@ const JournalForm = () => {
     setLatestJournalEntry(response.data.journalentries.length);
     console.log(
       'latest journal entry index position Id:',
-      response.data.journalentries[Number(latestJournalEntry)].id
+      response.data.journalentries[0].id
     );
 
-    setJournalId(response.data.journalentries[Number(latestJournalEntry)].id);
-    console.log('journal Id:', journalId);
+    setJournalId(response.data.journalentries[0].id);
+    console.log(response.data.journalentries[0].id);
 
-    setJournalTemplateId(response.data.journalentries[1].journaltemplateId);
-    template1Qns(journalTemplateid);
-    console.log(journalTemplateid);
-    setDueDate(response.data.journalentries[0].dueBy);
+    template1Qns(response.data.journalentries[0].journaltemplateId);
+
+    setDueDate(response.data.journalentries[1].dueBy);
     console.log('client Id: ', response.data.id);
     setClientId(response.data.id);
   };
@@ -97,23 +93,29 @@ const JournalForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('test: ', journalId);
+    console.log(updatedAt);
+    console.log(input1);
+    console.log(input2);
+    console.log(input3);
     axios
 
       .put(`${BACKEND_URL}/journals/${journalId}`, {
-        date,
+        updatedAt,
         input1,
         input2,
         input3,
       })
       .then((res) => {
-        setDate('');
+        setUpdatedAt('');
         setInput1('');
         setInput2('');
         setInput3('');
 
         console.log('resdata:', res.data);
         console.log('Journal Submit Success!!');
-        Navigate(`/journals/${res.data.id}`);
+        Navigate(
+          `/therapist/patients/${res.data.clientId}/journal/${res.data.id}`
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -121,7 +123,7 @@ const JournalForm = () => {
   };
 
   return (
-    <Container ClassName="Form-body" size="sm" px="xs">
+    <Container className="Form-body" size="sm" px="xs">
       <Grid justify="center" align="center">
         <form onSubmit={handleSubmit}>
           <label>Journal Entry</label>
@@ -136,7 +138,11 @@ const JournalForm = () => {
 
           <br />
           <label>Date:</label>
-          <DatePicker placeholder="Pick date" value={date} onChange={setDate} />
+          <DatePicker
+            placeholder="Pick date"
+            value={updatedAt}
+            onChange={setUpdatedAt}
+          />
           <br />
 
           <label>{title1}</label>

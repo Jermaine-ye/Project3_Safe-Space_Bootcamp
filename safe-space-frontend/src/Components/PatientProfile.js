@@ -106,3 +106,7 @@
 //     </div>
 //   );
 // }
+
+export default function PatientProfile() {
+  return <h1>lala</h1>;
+}
