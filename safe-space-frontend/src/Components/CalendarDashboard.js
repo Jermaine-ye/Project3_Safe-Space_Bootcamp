@@ -21,24 +21,6 @@ export default function CalendarDashboard() {
   const [modalVisible, setModalVisible] = useState(false);
   const navigate = useNavigate();
 
-  const handleSelected = (event) => {
-    setModalVisible(true);
-    setSelected(event);
-    console.log("this is running");
-    const { id, type, user } = event;
-    console.log(event);
-    console.log(selected);
-    // if (type === "appt" && user === "client") {
-    // } else if (type === "appt" && user === "therapist") {
-    // } else if (type === "blocked date") {
-    // } else if (type === "journal") {
-    // }
-
-    // //event is an object with values of start, end, etc.
-    // //if i can get the id of this event, i can then useNavigate to navigate them to the relevant links
-    // console.info("[handleSelected - event]", event);
-  };
-
   const [currTherapist, setCurrTherapist] = useState({});
 
   const [therapistBlockedDate, setTherapistBlockedDate] = useState([]);
@@ -50,8 +32,10 @@ export default function CalendarDashboard() {
   //allEvents are to be an array of objects.
   const [allEvents, setAllEvents] = useState([]);
   const [newMadeAppt, setNewMadeAppt] = useState();
+  const [newBlockedDate, setNewBlockedDate] = useState();
 
   const [createNew, setCreateNew] = useState(false);
+  const [createBlocked, setCreateBlocked] = useState(false);
 
   const [newEvent, setNewEvent] = useState({
     start: new Date(),
@@ -60,6 +44,14 @@ export default function CalendarDashboard() {
     type: "appt",
     therapistId: 0,
     clientId: 0,
+  });
+
+  const [newBlocked, setNewBlocked] = useState({
+    start: new Date(),
+    end: new Date(),
+    title: "Blocked Date",
+    type: "blocked date",
+    therapistId: 0,
   });
 
   let currTher;
@@ -123,6 +115,34 @@ export default function CalendarDashboard() {
     });
   }
 
+  const handleSelected = (event) => {
+    setModalVisible(true);
+    setSelected(event);
+    console.log("this is running");
+    const { id, type, user } = event;
+    console.log(event);
+    console.log(selected);
+    // if (type === "appt" && user === "client") {
+    // } else if (type === "appt" && user === "therapist") {
+    // } else if (type === "blocked date") {
+    // } else if (type === "journal") {
+    // }
+
+    // //event is an object with values of start, end, etc.
+    // //if i can get the id of this event, i can then useNavigate to navigate them to the relevant links
+    // console.info("[handleSelected - event]", event);
+  };
+
+  const handleNavigateFull = (event) => {
+    console.log(event);
+    //TO CHANGE TO CORRECT ROUTE LATER.
+    if (user[`https://any-namespace/roles`].length !== 0) {
+      navigate("../therapist/calendar");
+    } else {
+      navigate("../client/calendar");
+    }
+  };
+
   const getClientApptsJournals = async () => {
     console.log(clientInfo);
     const { appointments, journalentries, therapists } = clientInfo;
@@ -172,8 +192,16 @@ export default function CalendarDashboard() {
     });
 
     await journalentries.forEach((data) => {
-      const endDate = new Date(data.dueBy);
-      const startDate = new Date(endDate.getTime() - 86400000);
+      let endDate;
+      if (data.input1.length !== 0) {
+        endDate = new Date(data.updatedAt);
+      } else {
+        endDate = new Date(data.dueBy);
+      }
+
+      // const endDate = new Date(data.dueBy);
+      const startDate = new Date(endDate.getTime() - 3600000);
+      // const startDate = new Date(endDate.getTime() - 86400000);
       const therapistID = data.therapistId;
       const { firstName, lastName } = data.therapist;
       const journalID = data.id;
@@ -185,6 +213,7 @@ export default function CalendarDashboard() {
         title: `Journal under therapist ${firstName} ${lastName}`,
         start: startDate,
         end: endDate,
+        allday: true,
       };
 
       if (clientJournals.length !== 0) {
@@ -217,7 +246,7 @@ export default function CalendarDashboard() {
         id: ID,
         type: "blocked date",
         title: `THERAPIST UNAVALIABLE - ${therapistInfo.firstName} ${therapistInfo.lastName}`,
-        user: "therapist",
+        user: "client",
         start: startDate,
         end: endDate,
       };
@@ -549,6 +578,42 @@ export default function CalendarDashboard() {
     }
   };
 
+  const handleBlockedSubmit = async () => {
+    const { start } = newBlocked;
+
+    let newObj = {
+      date: start,
+      therapistId: therapistInfo.id,
+    };
+
+    console.log(newObj);
+
+    let response = await axios.post(
+      `${BACKEND_URL}/therapists/blockeddate`,
+      newObj
+    );
+
+    console.log(response);
+
+    const { id, date } = response.data;
+    const blockDate = date;
+    const startDate = new Date(blockDate);
+    const endDate = new Date(startDate.getTime() + 86400000);
+
+    const newBlockedEvent = {
+      id: id,
+      type: "blocked date",
+      user: "therapist",
+      title: `Blocked Date`,
+      start: startDate,
+      end: endDate,
+    };
+
+    getOwnInfoForTherapist();
+    setNewBlockedDate(newBlockedEvent);
+    setCreateBlocked(false);
+  };
+
   const { updateClientInfo, updateTherapistInfo } = useAuth();
   // getting the specific user/therapist and their IDs respectively.
   const getOwnInfoForClient = async () => {
@@ -637,6 +702,8 @@ export default function CalendarDashboard() {
             selected={selected}
             onSelectEvent={handleSelected}
             style={{ height: 500 }}
+            defaultView="week"
+            toolbar={false}
           />
         </>
       ) : (
@@ -650,11 +717,49 @@ export default function CalendarDashboard() {
             selected={selected}
             onSelectEvent={handleSelected}
             style={{ height: 500 }}
+            defaultView="week"
+            // components={{ toolbar: false }}
+            toolbar={false}
           />
         </>
       )}
-      {modalVisible ? <CalendarModal item={selected} /> : null}
-      <button onClick={() => setCreateNew(!createNew)}>+ Create </button>
+      {modalVisible ? (
+        <CalendarModal item={selected} setModalVisible={setModalVisible} />
+      ) : null}
+      <br />
+      <br />
+      <button onClick={() => handleNavigateFull()}>See Full Calendar </button>
+      <button onClick={() => setCreateNew(!createNew)}>
+        + Create Appointment{" "}
+      </button>
+      {user && user[`https://any-namespace/roles`].length !== 0 ? (
+        <>
+          <button onClick={() => setCreateBlocked(!createBlocked)}>
+            + Create Blocked Date{" "}
+          </button>
+
+          {createBlocked ? (
+            <>
+              <h4>Create New Blocked Date</h4>
+              <DateTimePicker
+                placeholderText="Start Date and Time"
+                value={newBlocked.start}
+                // selected={newBlocked.start}
+                onChange={(start) => setNewBlocked({ ...newBlocked, start })}
+              />
+              <DateTimePicker
+                placeholderText="End Date and Time"
+                value={newBlocked.end}
+                // selected={newBlocked.end}
+                onChange={(end) => setNewBlocked({ ...newBlocked, end })}
+              />
+              <button onClick={() => handleBlockedSubmit()}>
+                Submit Blocked Date
+              </button>
+            </>
+          ) : null}
+        </>
+      ) : null}
       {createNew ? (
         <>
           <h4>Create New Appointment</h4>
