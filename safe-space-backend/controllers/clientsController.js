@@ -10,7 +10,8 @@ class ClientsController extends BaseController {
     appointmentModel,
     journalentryModel,
     specializationModel,
-    specializationTherapistsModel
+    specializationTherapistsModel,
+    memoentryModel
   ) {
     super(model);
     this.therapistModel = therapistModel;
@@ -19,6 +20,7 @@ class ClientsController extends BaseController {
     this.journalentryModel = journalentryModel;
     this.specializationModel = specializationModel;
     this.specializationTherapistsModel = specializationTherapistsModel;
+    this.memoentryModel = memoentryModel;
   }
 
   // // get all appointments for client
@@ -46,9 +48,12 @@ class ClientsController extends BaseController {
       const user = await this.model.findOne({
         where: { email: email },
         include: [
-          this.appointmentModel,
-          this.journalentryModel,
+          { model: this.appointmentModel, include: [this.therapistModel] },
+          { model: this.journalentryModel, include: [this.therapistModel] },
+          // this.appointmentModel,
+          // this.journalentryModel,
           this.therapistModel,
+          this.memoentryModel,
         ],
       });
       return res.json(user);

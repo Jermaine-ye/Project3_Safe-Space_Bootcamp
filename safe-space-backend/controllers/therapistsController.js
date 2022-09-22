@@ -40,7 +40,7 @@ class TherapistsController {
     try {
       const output = await this.model.findOne({
         where: { email: emailTherapist },
-        include: this.blockedDateModel,
+        include: [this.blockedDateModel, this.clientModel],
       });
 
       return res.json(output);
@@ -65,7 +65,8 @@ class TherapistsController {
 
   //delete one blocked date for therapist
   async deleteOne(req, res) {
-    const blockeddateId = req.params;
+    const { blockeddateId } = req.params;
+    console.log(blockeddateId);
     try {
       const data = await this.blockedDateModel.findByPk(blockeddateId);
 

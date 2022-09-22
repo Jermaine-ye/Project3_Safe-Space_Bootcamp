@@ -74,7 +74,7 @@ export default function NavBar() {
 
   // getting the specific user/therapist and their IDs respectively.
   const getAllInfo = async () => {
-    await updateClient(user);
+    // await updateClient(user);
 
     //from auth0
     console.log(user);
@@ -85,6 +85,28 @@ export default function NavBar() {
       const response = await axios.get(`${BACKEND_URL}/clients/${user.email}`);
       console.log(`Client info response 0`, response.data);
       updateClientInfo(response.data);
+
+      let allTher = response.data.therapists;
+      console.log(allTher);
+      let currTher;
+      allTher.forEach((ther) => {
+        const { id, client_therapists, firstName, lastName, email } = ther;
+        const { chosenTherapist, endedAt } = client_therapists;
+
+        if (chosenTherapist && endedAt === null) {
+          currTher = {
+            id: id,
+            name: `${firstName} ${lastName}`,
+            email: email,
+          };
+          console.log(currTher);
+        }
+      });
+
+      const therResponse = await axios.get(
+        `${BACKEND_URL}/therapists/${currTher.email}`
+      );
+      updateTherapistInfo(therResponse.data);
     } else {
       const response = await axios.get(
         `${BACKEND_URL}/therapists/${user.email}`
@@ -92,38 +114,6 @@ export default function NavBar() {
       updateTherapistInfo(response.data);
     }
   };
-
-  // const getAllClient = async () => {
-  //   const response = await axios.get(`${BACKEND_URL}/clients`);
-  //   console.log(response.data);
-  //   setAllClients(response.data);
-  //   // findClient();
-  // };
-
-  // const findClient = () => {
-  //   allClients.forEach((client) => {
-  //     let { email } = client;
-  //     if (allEmails.length === 0) {
-  //       setAllEmail([email]);
-  //     } else {
-  //       setAllEmail([...allEmails, email]);
-  //     }
-  //   });
-  // };
-
-  // const doesNotContain = (index, list) => {
-  //   var i;
-  //   for (i = 0; i < list.length; i++) {
-  //     if (list[i].email === index) {
-  //       return false;
-  //     }
-  //   }
-  //   return true;
-  // };
-
-  // if(allEmails.length <= allClient.length &&  doesNotContain(allEmails, allClients)) {
-  //  findClient()
-  // }
 
   useEffect(() => {
     console.log(`in effect`);
@@ -142,8 +132,6 @@ export default function NavBar() {
       // updateClient();
     }
   }, [user]);
-
-  // const toClient = user[`https://any-namespace/roles`].length === 0;
 
   return (
     <div>
@@ -175,6 +163,15 @@ export default function NavBar() {
           </Grid.Col>
           <Grid.Col span="auto">
             <Link to="/support">Support Resources</Link>
+          </Grid.Col>
+          <Grid.Col span="auto">
+            <Link to="/therapist/calendardash">Calendar Dashboard</Link>
+          </Grid.Col>
+          <Grid.Col span="auto">
+            <Link to="/client/therapist">Therapist Info for Client</Link>
+          </Grid.Col>
+          <Grid.Col span="auto">
+            <Link to="/therapist/patients/indiv/history">PrevApptHistory</Link>
           </Grid.Col>
           <Grid.Col span="auto">
             <button onClick={handleLogin}>Login</button>
