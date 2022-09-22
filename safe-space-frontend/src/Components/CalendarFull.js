@@ -92,7 +92,7 @@ export default function CalendarFull() {
     newMadeAppt,
     clientInfo,
     therapistInfo,
-    modalVisible
+    modalVisible,
   ]);
 
   if (user && user[`https://any-namespace/roles`].length === 0) {

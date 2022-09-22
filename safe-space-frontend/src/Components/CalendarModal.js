@@ -61,6 +61,7 @@ export default function CalendarModal(props) {
       props.setModalVisible(false);
     } else {
       console.log(type);
+      console.log(id);
 
       const response = await axios.delete(`${BACKEND_URL}/therapists/${id}`);
 
