@@ -1,8 +1,8 @@
 const cors = require("cors");
 const { Op } = require("sequelize");
-// const BaseController = require("./baseController");
+const BaseController = require("./baseController");
 
-class ClientsController {
+class ClientsController extends BaseController {
   constructor(
     model,
     therapistModel,
@@ -12,7 +12,7 @@ class ClientsController {
     specializationModel,
     specializationTherapistsModel
   ) {
-    this.model = model;
+    super(model);
     this.therapistModel = therapistModel;
     this.clientTherapistsModel = clientTherapistsModel;
     this.appointmentModel = appointmentModel;
@@ -71,6 +71,7 @@ class ClientsController {
       age,
       gender,
       maritalStatus,
+      // eval
       therapistConfirmed,
       specializationId,
       genderPreference,
@@ -81,11 +82,13 @@ class ClientsController {
       description,
       active,
     } = req.body;
+
     // const { emailClient } = req.params;
     try {
       const data = await this.model.findOne({
         where: { email: emailClient },
       });
+      console.log(data);
       const response = await data.update({
         firstName: firstName,
         lastName: lastName,
@@ -139,11 +142,13 @@ class ClientsController {
   async insertOne(req, res) {
     const { email, password } = req.body;
     try {
-      const newClient = await this.model.create({
-        email: email,
-        password: password,
-        active: true,
-        admin: false,
+      const newClient = await this.model.findOrCreate({
+        where: { email: email },
+        defaults: {
+          password: password,
+          active: true,
+          admin: false,
+        },
       });
       return res.json(newClient);
     } catch (err) {
@@ -162,6 +167,7 @@ class ClientsController {
       languageId,
       clientId,
     } = req.body;
+    console.log(req.body);
     try {
       //allTherapists is an array of objects
       console.log("hi");

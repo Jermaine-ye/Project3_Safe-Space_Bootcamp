@@ -17,7 +17,11 @@ module.exports = (sequelize, DataTypes) => {
       //   //   as: "specialize",
       // });
       this.belongsToMany(models.client, {
-        through: "client_therapists",
+        through: {
+          model: "client_therapists",
+          unique: false,
+        },
+        constraints: false,
       });
       this.hasMany(models.appointment);
       this.hasMany(models.memoentry);

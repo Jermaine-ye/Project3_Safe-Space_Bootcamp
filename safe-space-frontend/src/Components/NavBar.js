@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext } from "react";
 import axios from "axios";
 import {
   Button,
@@ -20,10 +20,12 @@ import { BACKEND_URL } from "../constants";
 import { useContext, useEffect, useState } from "react";
 import { useAuth } from "./AuthContext";
 import { useAuth0 } from "@auth0/auth0-react";
-
+// import { AuthContext } from "../App";
 import sslogo from "../images/sslogo.png";
 
 export default function NavBar() {
+  // const hello = useContext(AuthContext);
+
   const {
     isAuthenticated,
     user,
@@ -32,6 +34,7 @@ export default function NavBar() {
     getAccessTokenSilently,
   } = useAuth0();
   const navigate = useNavigate();
+
   const {
     updateClientData,
     updateClientInfo,
@@ -45,24 +48,27 @@ export default function NavBar() {
   };
 
   // update user information once they sign up and login in.
+
   const updateClient = async (user) => {
     const accessToken = await getAccessTokenSilently({
       audience: process.env.REACT_APP_AUDIENCE,
       scope: process.env.REACT_APP_SCOPE,
     });
-    const response = await axios.post(
-      `${BACKEND_URL}/clients/newClient`,
-      {
-        //refer BE controller
-        email: user.email,
-        password: user.password,
-      },
-      {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      }
-    );
-    await updateClientData(response.data);
 
+    if (user[`https://any-namespace/roles`].length === 0) {
+      const response = await axios.post(
+        `${BACKEND_URL}/clients/newClient`,
+        {
+          //refer BE controller
+          email: user.email,
+          password: user.password,
+        },
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      );
+      await updateClientData(response.data);
+    }
     // navigate("/index");
   };
 
@@ -77,7 +83,7 @@ export default function NavBar() {
 
     if (user[`https://any-namespace/roles`].length === 0) {
       const response = await axios.get(`${BACKEND_URL}/clients/${user.email}`);
-
+      console.log(`Client info response 0`, response.data);
       updateClientInfo(response.data);
     } else {
       const response = await axios.get(
@@ -87,13 +93,57 @@ export default function NavBar() {
     }
   };
 
+  // const getAllClient = async () => {
+  //   const response = await axios.get(`${BACKEND_URL}/clients`);
+  //   console.log(response.data);
+  //   setAllClients(response.data);
+  //   // findClient();
+  // };
+
+  // const findClient = () => {
+  //   allClients.forEach((client) => {
+  //     let { email } = client;
+  //     if (allEmails.length === 0) {
+  //       setAllEmail([email]);
+  //     } else {
+  //       setAllEmail([...allEmails, email]);
+  //     }
+  //   });
+  // };
+
+  // const doesNotContain = (index, list) => {
+  //   var i;
+  //   for (i = 0; i < list.length; i++) {
+  //     if (list[i].email === index) {
+  //       return false;
+  //     }
+  //   }
+  //   return true;
+  // };
+
+  // if(allEmails.length <= allClient.length &&  doesNotContain(allEmails, allClients)) {
+  //  findClient()
+  // }
+
   useEffect(() => {
     console.log(`in effect`);
+    console.log(isAuthenticated);
+
+    // getAllClient();
+    // if (
+    //   allEmails.length <= allClients.length &&
+    //   doesNotContain(allEmails, allClients)
+    // ) {
+    //   findClient();
+    //}
     if (isAuthenticated) {
+      console.log(`running`);
       getAllInfo();
       // updateClient();
     }
-  }, []);
+  }, [user]);
+
+  // const toClient = user[`https://any-namespace/roles`].length === 0;
 
   return (
     <div>
@@ -109,7 +159,7 @@ export default function NavBar() {
           </Grid.Col>
 
           <Grid.Col span="auto">
-            <Link to="/index">Home</Link>
+            <Link to="/">Home</Link>
           </Grid.Col>
           <Grid.Col span="auto">
             <Link to="/about">About Us</Link>
@@ -129,8 +179,16 @@ export default function NavBar() {
           <Grid.Col span="auto">
             <button onClick={handleLogin}>Login</button>
           </Grid.Col>
-          {/* <Grid.Col span="auto">
-            <button onClick={handleSignUp}>Sign Up</button>
+          {/* <Grid.Col>
+            {toClient ? (
+              <button onCick={() => navigate("/client/")}>
+                clientdashboard
+              </button>
+            ) : (
+              <button onCick={() => navigate("/therapist/")}>
+                therapistdashboard
+              </button>
+            )}
           </Grid.Col> */}
         </Grid>
       </Container>

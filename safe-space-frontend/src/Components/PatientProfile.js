@@ -25,7 +25,7 @@ export default function PatientProfile() {
     console.log(currentUser);
     if (clientId) {
       axios.get(`${BACKEND_URL}/client/${user.email}`).then((response) => {
-        setClientDetails(response);
+        setClientDetails(response.data);
       });
     }
   }, [clientId, user]);

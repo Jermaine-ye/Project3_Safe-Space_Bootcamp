@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useContext, useEffect } from "react";
 
-import { Button, Card, Text, Title } from '@mantine/core';
+import { Button, Card, Text, Title } from "@mantine/core";
 // import { useNavigate, useParams, useLocation } from 'react-router-dom';
 // import { useContext, useEffect, useState } from 'react';
-import NavBar from '../NavBar';
-import Footer from '../Footer';
+import NavBar from "../NavBar";
+import Footer from "../Footer";
+import { AuthContext } from "../../App";
 
 export default function About() {
+  // const hello = useContext(AuthContext);
+
+  // useEffect(() => {
+  //   console.log(hello);
+  // });
+
   return (
     <div>
       <NavBar />

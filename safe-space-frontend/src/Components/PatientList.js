@@ -34,9 +34,6 @@ export default function PatientList() {
           <Card.Body>
             {/*replace all placeholders with imported data */}
             <Card.Title>firstName and lastName</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">
-              Card Subtitle
-            </Card.Subtitle>
             <Card.Text>Has the patient checked today?</Card.Text>
             <input type="checkbox" name="checkedin" />
             <Card.Text>Journal Submitted?</Card.Text>
@@ -55,7 +52,7 @@ export default function PatientList() {
     <div>
       <h2>PatientList</h2>
       {clientListPreview}
-      <button onClick={(e) => navigate(-1)}>back</button>
+      <Link to="/">Home</Link>
     </div>
   );
 }
