@@ -50,7 +50,8 @@ const MemoForm = () => {
     setClientFirstName(response.data.firstName);
     setClientLastName(response.data.lastName);
     setPatientMood(response.data.dailymood);
-    console.log(patientMood);
+    setTherapistId(response.data.therapists[0].id);
+    console.log(response.data.therapists[0].id);
   };
 
   useEffect(() => {
@@ -92,9 +93,10 @@ const MemoForm = () => {
     // memo/${:clientId}/${:memoId}
     // not front end route like what u have done below!!!
     // should be getting info from the therapist side instead of the client??
-
+    console.log(clientId);
     axios
-      .post(`${BACKEND_URL}/${clientId}`, {
+
+      .post(`${BACKEND_URL}/memos/${clientId}`, {
         therapistId,
         generalInput,
         behaviorInput,
@@ -114,7 +116,10 @@ const MemoForm = () => {
         setRiskfactorsInput('');
 
         console.log('resdata:', res.data);
-        Navigate(`/therapist/patients/:clientId/memos/${res.data.id}`);
+        console.log('Memo Submit Success!!');
+        Navigate(
+          `/therapist/patients/${res.data.clientId}/memos/${res.data.id}`
+        );
         // see if can grab the client ID and memo ID from the back end in res.data.id
         // /therapist/patients/:clientId/memos/:memoId
       })
@@ -131,6 +136,14 @@ const MemoForm = () => {
           <br />
           <br />
           <label>Date: {new Date().toLocaleDateString()}</label>
+
+          <br />
+          <br />
+
+          <label>
+            {' '}
+            Patient Name: {clientFirstName} {clientLastName}
+          </label>
 
           <br />
           <br />

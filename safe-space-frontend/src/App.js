@@ -119,10 +119,10 @@ export default function App() {
             element={<PatientProfile />}
           />
           {/* Route that renders appt history for the indiv patient on therapists's portal */}
-          <Route
+          {/* <Route
             path="/therapist/patients/:clientId/history"
             element={<PrevApptHistory />}
-          />
+          /> */}
           {/* Route that renders assigning of journal template to indiv patient on therapists's portal */}
           <Route
             path="/therapist/patients/:clientId/newjournal"

@@ -28,7 +28,7 @@ class JournalsController {
   async getOne(req, res) {
     const { clientId, journalId } = req.params;
     try {
-      const output = await this.model.findByPk(journalId);
+      const output = await this.model.findByPk(journalId.journalId);
       return res.json(output);
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });

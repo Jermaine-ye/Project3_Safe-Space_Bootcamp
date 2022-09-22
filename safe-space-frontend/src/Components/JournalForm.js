@@ -17,6 +17,7 @@ import { DatePicker } from '@mantine/dates';
 import { BACKEND_URL } from '../constants.js';
 import { Auth0Client } from '@auth0/auth0-spa-js';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth } from './AuthContext';
 
 const JournalForm = () => {
   const params = useParams();
@@ -26,6 +27,7 @@ const JournalForm = () => {
   const [input2, setInput2] = useState('');
   const [input3, setInput3] = useState('');
   const { user, isAuthenticated, isLoading } = useAuth0();
+  const { clientInfo, therapistInfo } = useAuth();
 
   const [dueDate, setDueDate] = useState('');
 
@@ -33,7 +35,8 @@ const JournalForm = () => {
   const [clientId, setClientId] = useState('');
   const [journalId, setJournalId] = useState('');
 
-  const [latestJournalEntry, setLatestJournalEntry] = useState('');
+  const [therapistFirstName, setTherapistFirstName] = useState('');
+  const [therapistLirstName, setTherapistLirstName] = useState('');
 
   const [title1, setTitle1] = useState('');
   const [title2, setTitle2] = useState('');
@@ -46,11 +49,11 @@ const JournalForm = () => {
     // it should be ${emailClient}
     console.log('user detailed information: ', response.data);
     console.log(response.data.journalentries);
-    setLatestJournalEntry(response.data.journalentries.length);
-    console.log(
-      'latest journal entry index position Id:',
-      response.data.journalentries[0].id
-    );
+
+    console.log(therapistInfo);
+
+    setTherapistFirstName(response.data.therapists[0].firstName);
+    setTherapistLirstName(response.data.therapists[0].lastName);
 
     setJournalId(response.data.journalentries[0].id);
     console.log(response.data.journalentries[0].id);
@@ -66,6 +69,7 @@ const JournalForm = () => {
     if (isAuthenticated) {
       console.log('user info:', user);
       console.log('email:', user.email);
+      console.log('therapistInfo: ', therapistInfo);
       // setinput1();
       console.log(user);
       callApi();
@@ -128,12 +132,18 @@ const JournalForm = () => {
       <Grid justify="center" align="center">
         <form onSubmit={handleSubmit}>
           <label>Journal Entry</label>
-
+          <br />
+          <br />
+          <label>
+            Therapist: {therapistFirstName} {therapistLirstName}
+          </label>
+          <br />
+          <br />
           <label>Date Due: {new Date(dueDate).toLocaleDateString()}</label>
 
           <br />
           <br />
-          <label>Journal Entry: {latestJournalEntry}</label>
+          <label>Journal Entry: {journalId}</label>
 
           <br />
 
