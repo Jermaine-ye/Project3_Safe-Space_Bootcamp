@@ -10,7 +10,7 @@ class JournalsRouter {
     router.get("/:clientId", this.controller.getAll.bind(this.controller));
     //get one journal of a particular client(for therapist and client?)
     router.get(
-      "/:clientId/:journalId",
+      "/single/:journalId",
       this.controller.getOne.bind(this.controller)
     );
     //create one journal assignment for individual client using journal template (for therapist)

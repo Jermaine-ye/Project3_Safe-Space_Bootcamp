@@ -26,9 +26,9 @@ class JournalsController {
 
   //get one journal of a particular client(for therapist and client?)
   async getOne(req, res) {
-    const { clientId, journalId } = req.params;
+    const { journalId } = req.params;
     try {
-      const output = await this.model.findByPk(journalId.journalId);
+      const output = await this.model.findByPk(journalId);
       return res.json(output);
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });

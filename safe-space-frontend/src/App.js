@@ -31,7 +31,6 @@ import { AuthProvider } from "./Components/AuthContext";
 import { useAuth0 } from "@auth0/auth0-react";
 import PrivateRoutes from "./PrivateRoutes";
 import PrivateRoutesClient from "./PrivateRoutesClient";
-import Unsplash from "unsplash-js";
 
 // export const AuthContext = createContext();
 
@@ -156,10 +155,10 @@ export default function App() {
             element={<JournalTemplate />}
             /> */}
             {/* Route that renders indiv journal done by indiv patient on therapists's portal */}
-            <Route
+            {/* <Route
               path="/therapist/patients/:clientId/journal/:journalId"
               element={<JournalSingle />}
-            />
+            /> */}
             {/* Route that renders indiv memo by therapist(past & present) abt the indiv patient on therapists's portal */}
             <Route
               path="/therapist/patients/:clientId/memos/:memoId"

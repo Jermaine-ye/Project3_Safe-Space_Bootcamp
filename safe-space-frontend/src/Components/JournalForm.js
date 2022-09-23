@@ -51,11 +51,6 @@ const JournalForm = () => {
   //  therapist api calls
   useEffect(() => {}, []);
 
-  const params = useParams();
-  if (clientId !== params.clientId) {
-    setClientId(params.clientId);
-  }
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -63,11 +58,11 @@ const JournalForm = () => {
     console.log(input1);
     console.log(input2);
     console.log(input3);
-    axios.put(`${BACKEND_URL}/journals/${clientId}`, {
-      dueBy,
-      input1,
-      input2,
-      input3,
+    axios.post(`${BACKEND_URL}/journals/${clientInfo.id}`, {
+      updatedAt: new Date(),
+      input1: input1,
+      input2: input2,
+      input3: input3,
     });
   };
 
