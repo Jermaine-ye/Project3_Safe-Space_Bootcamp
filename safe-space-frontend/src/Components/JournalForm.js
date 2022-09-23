@@ -62,6 +62,7 @@ const JournalForm = () => {
 
     setDueDate(response.data.journalentries[1].dueBy);
     console.log('client Id: ', response.data.id);
+    // setJournalId()
     setClientId(response.data.id);
   };
 
@@ -97,10 +98,7 @@ const JournalForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('test: ', journalId);
-    console.log(updatedAt);
-    console.log(input1);
-    console.log(input2);
-    console.log(input3);
+
     axios
 
       .put(`${BACKEND_URL}/journals/${journalId}`, {

@@ -220,6 +220,9 @@ export default function NavBar() {
             <Link to="/therapist/patients/indiv/history">PrevApptHistory</Link>
           </Grid.Col>
           <Grid.Col span="auto">
+            <Link to="/client/">Client Side bar</Link>
+          </Grid.Col>
+          <Grid.Col span="auto">
             <button onClick={handleLogin}>Login</button>
           </Grid.Col>
           {/* <Grid.Col>

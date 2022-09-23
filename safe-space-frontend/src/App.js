@@ -31,6 +31,7 @@ import { AuthProvider } from './Components/AuthContext';
 import { useAuth0 } from '@auth0/auth0-react';
 import PrivateRoutes from './PrivateRoutes';
 import PrivateRoutesClient from './PrivateRoutesClient';
+import SidebarClient from './Components/SidebarClient';
 import Unsplash from 'unsplash-js';
 
 // export const AuthContext = createContext();
@@ -82,7 +83,10 @@ export default function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/services" element={<Services />} />
           <Route path="/support" element={<SupportResources />} />
-          {/* ===========================================================================CLIENT PORTAL============================================================================================ */}
+          {/* ========================= to test side bar for client */}
+          ===========================================================================CLIENT
+          PORTAL============================================================================================
+          */}
           {/* SET PRIVATE ROUTES FOR CLIENT */}
           {/* SET OUTLETS FOR SCREENS. */}
           <Route element={<PrivateRoutesClient />}>
@@ -108,6 +112,13 @@ export default function App() {
             {/* Route that renders clientdashboard screen */}
 
             <Route path="/client/" element={<DashboardClientScreen />}>
+              {/* Route that renders link to sidebar */}
+              {/* <Route path="/client/sidebar" element={<SidebarClient />} />
+              {/* ====================== */}
+              {/*  */}
+
+              <Route path="/client/:clientId" element={<PatientProfile />} />
+
               {/* Route that renders all journal listings of client on client's portal */}
               <Route path="/client/journals" element={<JournalList />} />
               {/* Route that renders all journal listings of client on client's portal */}
@@ -182,7 +193,6 @@ export default function App() {
             />
           </Route>
           {/* SET PRIVATE ROUTES FOR THERAPIST */}
-
           {/* Route that matches all other paths */}
           <Route path="*" element={'Nothing here!'} />
         </Routes>
