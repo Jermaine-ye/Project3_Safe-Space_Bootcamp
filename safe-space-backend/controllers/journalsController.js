@@ -11,7 +11,7 @@ class JournalsController {
 
   async getAll(req, res) {
     try {
-      const clientId = req.params;
+      const { clientId } = req.params;
       const output = await this.model.findAll({
         where: {
           clientId: clientId,
@@ -37,16 +37,18 @@ class JournalsController {
 
   //create one journal assignment for individual client using journal template id (for therapist)
   async insertOne(req, res) {
-    const clientId = req.params;
+    const { clientId } = req.params;
     const { dueBy, templateId, therapistId } = req.body;
+    console.log(req.body);
+    console.log(req.params);
     try {
       const newJournal = await this.model.create({
-        createdAt: new Date(),
         dueBy: dueBy,
         journaltemplateId: templateId,
         clientId: clientId,
         therapistId: therapistId,
       });
+      console.log(newJournal);
       return res.json(newJournal);
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });
@@ -56,7 +58,7 @@ class JournalsController {
   //update one journal for client
   async updateOne(req, res) {
     console.log(req.body);
-    const journalId = req.params;
+    const { journalId } = req.params;
     console.log("journalid:", journalId);
     const { updatedAt, input1, input2, input3 } = req.body;
     try {
@@ -68,6 +70,7 @@ class JournalsController {
         input1: input1,
         input2: input2,
         input3: input3,
+        updatedAt: new Date(),
       });
 
       return res.json(data);

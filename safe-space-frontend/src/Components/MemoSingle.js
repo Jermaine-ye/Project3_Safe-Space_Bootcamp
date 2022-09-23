@@ -1,7 +1,7 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 // import { user } from '@auth0/auth0-react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   Button,
   Card,
@@ -12,37 +12,40 @@ import {
   Form,
   Input,
   Textarea,
-} from '@mantine/core';
+} from "@mantine/core";
 
-import { BACKEND_URL } from '../constants.js';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useAuth } from './AuthContext';
+import { BACKEND_URL } from "../constants.js";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "./AuthContext";
 
 export default function MemoSingle(props) {
   const navigate = useNavigate();
   const { user, isAuthenticated, therapistInfo } = useAuth0();
-  const [clientId, setClientId] = useState('');
-  const [memoId, setMemoId] = useState('');
-  const [memoDetails, setMemoDetails] = useState('');
-  const [clientDetails, setClientDetails] = useState('');
+  const [clientId, setClientId] = useState("");
+  const [memoId, setMemoId] = useState("");
+  const [memoDetails, setMemoDetails] = useState("");
+  const [clientDetails, setClientDetails] = useState("");
 
   // to test if this theory works
-  const [generalInput, setGeneralInput] = useState('');
-  const [behaviorInput, setBehaviorInput] = useState('');
-  const [contenttherapyInput, setContenttherapyInput] = useState('');
-  const [therapeuticintInput, setTherapeuticintInput] = useState('');
-  const [diagnosesInput, setDiagnosesInput] = useState('');
-  const [instructionsInput, setInstructionsInput] = useState('');
-  const [riskfactorsInput, setRiskfactorsInput] = useState('');
-  const [clientFirstName, setClientFirstName] = useState('');
-  const [clientLastName, setClientLastName] = useState('');
+  const [generalInput, setGeneralInput] = useState("");
+  const [behaviorInput, setBehaviorInput] = useState("");
+  const [contenttherapyInput, setContenttherapyInput] = useState("");
+  const [therapeuticintInput, setTherapeuticintInput] = useState("");
+  const [diagnosesInput, setDiagnosesInput] = useState("");
+  const [instructionsInput, setInstructionsInput] = useState("");
+  const [riskfactorsInput, setRiskfactorsInput] = useState("");
+  const [clientFirstName, setClientFirstName] = useState("");
+  const [clientLastName, setClientLastName] = useState("");
 
   const getAllInfo = async () => {};
 
   useEffect(() => {
     if (memoId) {
-      axios.get(`${BACKEND_URL}/memos/${memoId}`).then((res) => {
+      axios.get(`${BACKEND_URL}/memos/single/${memoId}`).then((res) => {
+        setMemoDetails(res.data);
+        console.log(res.data);
         // setMemoDetails(res.data);
+<<<<<<< HEAD
         setMemoDetails(res.data);
         console.log('memo details: ', res.data);
         setGeneralInput(res.data[0].generalInput);
@@ -52,6 +55,16 @@ export default function MemoSingle(props) {
         setDiagnosesInput(res.data[0].diagnosesInput);
         setInstructionsInput(res.data[0].instructionsInput);
         setRiskfactorsInput(res.data[0].riskfactorsInput);
+=======
+        // console.log("memo details: ", res.data);
+        // setGeneralInput(res.data[0].generalInput);
+        // setBehaviorInput(res.data[0].behaviorInput);
+        // setContenttherapyInput(res.data[0].contenttherapyInput);
+        // setTherapeuticintInput(res.data[0].therapeuticintInput);
+        // setDiagnosesInput(res.data[0].diagnosesInput);
+        // setInstructionsInput(res.data[0].instructionsInput);
+        // setRiskfactorsInput(res.data[0].riskfactorsInput);
+>>>>>>> origin/msBranchError
       });
     }
     // getting client info is working.
@@ -98,53 +111,50 @@ export default function MemoSingle(props) {
             <label>Memo Entry</label>
             <br />
             <br />
-            <label>
-              Date: {/* grab date from db */}
-              {memoDetails}
-            </label>
+            <label>Date: {/* grab date from db */}</label>
 
             <br />
             <br />
 
             <label>
-              {' '}
+              {" "}
               {/* Patient Name: {clientDetails.firstName} {clientDetails.lastName} */}
-              Patient Name: {clientFirstName} {clientLastName}
+              Patient Name: {memoDetails.firstName} {memoDetails.lastName}
             </label>
 
             <br />
             <br />
 
             <label>General Notes:</label>
-            {generalInput}
+            {memoDetails.generalInput}
             {/* insert memo info */}
             {/* {memoDetails} */}
             <br />
             <label>Behaviour Observations:</label>
-            {behaviorInput}
+            {memoDetails.behaviorInput}
             {/* {memoDetails.behaviorInput} */}
             <br />
             <label>Content of Today's Therapy:</label>
-            {contenttherapyInput}
+            {memoDetails.contenttherapyInput}
             {/* insert memo info */}
             {/* {memoDetails.contenttherapyInput} */}
             <br />
             <label>Any Therapeutic Intervention Needed?</label>
-            {therapeuticintInput}
+            {memoDetails.therapeuticintInput}
             {/* insert memo info */}
             {/* {memoDetails.therapeuticintInput} */}
             <br />
             <label>Diagnoses:</label>
-            {diagnosesInput}
+            {memoDetails.diagnosesInput}
             {/* insert memo info */}
             {/* {memoDetails.diagnosesInput} */}
             <label>Instructions/Recommendations/Plans</label>
-            {instructionsInput}
+            {memoDetails.instructionsInput}
             {/* insert memo info */}
             {/* {memoDetails.instructionsInput} */}
             <br />
             <label>Notes and Risk Factors:</label>
-            {riskfactorsInput}
+            {memoDetails.riskfactorsInput}
             {/* insert memo info */}
             {/* {memoDetails.riskfactorsInput} */}
             <br />

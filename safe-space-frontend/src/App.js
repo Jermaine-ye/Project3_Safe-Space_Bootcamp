@@ -64,13 +64,13 @@ export default function App() {
         <button
           onClick={() => {
             logout();
-            navigate('/index');
+            navigate("/index");
           }}
         >
           LOG OUT
         </button>
         <button onClick={(e) => navigate(-1)}>back</button>
-        <button onClick={(e) => navigate('/')}>Home</button>
+        <button onClick={(e) => navigate("/")}>Home</button>
         <Routes>
           {/* check for admin boolean and render client and therapist pages according.  */}
           <Route path="/" element={<LandingPage />} />
@@ -125,11 +125,6 @@ export default function App() {
               <Route
                 path="/client/journals/:journalId"
                 element={<JournalSingle />}
-              />
-              {/* Route that renders new journal form of client on client's portal */}
-              <Route
-                path="/client/journal/:journalId/new"
-                element={<JournalForm />}
               />
 
               {/* Route that renders full calendar of client on client's portal */}
@@ -191,10 +186,15 @@ export default function App() {
               path="/therapist/patients/:clientId/allmemo"
               element={<MemoList />}
             />
+            {/* Route that renders new journal form of client on client's portal */}
+            <Route
+              path="/client/journal/:clientId/new"
+              element={<JournalForm />}
+            />
           </Route>
           {/* SET PRIVATE ROUTES FOR THERAPIST */}
           {/* Route that matches all other paths */}
-          <Route path="*" element={'Nothing here!'} />
+          <Route path="*" element={"Nothing here!"} />
         </Routes>
       </div>
     </AuthProvider>

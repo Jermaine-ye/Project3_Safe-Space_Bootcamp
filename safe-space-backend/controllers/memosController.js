@@ -32,13 +32,7 @@ class MemosController {
     const { memoId } = req.params;
     console.log(`getOne params`, req.params);
     try {
-      const output = await this.model.findOne({
-        where: {
-          //screw the client
-          // clientId: clientId,
-          memoId: memoId,
-        },
-      });
+      const output = await this.model.findByPk(memoId);
       console.log(output);
       return res.json(output);
     } catch (err) {
