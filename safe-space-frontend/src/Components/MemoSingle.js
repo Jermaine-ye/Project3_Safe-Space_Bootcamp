@@ -45,17 +45,6 @@ export default function MemoSingle(props) {
         setMemoDetails(res.data);
         console.log(res.data);
         // setMemoDetails(res.data);
-<<<<<<< HEAD
-        setMemoDetails(res.data);
-        console.log('memo details: ', res.data);
-        setGeneralInput(res.data[0].generalInput);
-        setBehaviorInput(res.data[0].behaviorInput);
-        setContenttherapyInput(res.data[0].contenttherapyInput);
-        setTherapeuticintInput(res.data[0].therapeuticintInput);
-        setDiagnosesInput(res.data[0].diagnosesInput);
-        setInstructionsInput(res.data[0].instructionsInput);
-        setRiskfactorsInput(res.data[0].riskfactorsInput);
-=======
         // console.log("memo details: ", res.data);
         // setGeneralInput(res.data[0].generalInput);
         // setBehaviorInput(res.data[0].behaviorInput);
@@ -64,7 +53,6 @@ export default function MemoSingle(props) {
         // setDiagnosesInput(res.data[0].diagnosesInput);
         // setInstructionsInput(res.data[0].instructionsInput);
         // setRiskfactorsInput(res.data[0].riskfactorsInput);
->>>>>>> origin/msBranchError
       });
     }
     // getting client info is working.

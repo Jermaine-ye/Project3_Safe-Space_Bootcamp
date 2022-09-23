@@ -26,7 +26,7 @@ export default function SidebarClient() {
 
     if (clientId) {
       axios
-        .get(`${BACKEND_URL}/clients/key/${params.clientId}`)
+        .get(`${BACKEND_URL}/clients/key/${clientId}`)
         .then((response) => {
           setClientDetails(response.data);
           console.log('client Details: ', response.data);
