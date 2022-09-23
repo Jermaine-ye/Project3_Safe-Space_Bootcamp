@@ -38,6 +38,7 @@
     "react-scripts": "5.0.1",
     "react-select": "^5.4.0",
     "tabler-icons-react": "^1.55.0",
+    "unsplash-js": "^7.0.15",
     "web-vitals": "^3.0.2"
   },
   "scripts": {

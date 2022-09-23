@@ -34,9 +34,10 @@ const JournalForm = () => {
   // get all to know there is an empty null=> new journal entry =>
   const [clientId, setClientId] = useState('');
   const [journalId, setJournalId] = useState('');
+  const [journalEntryNum, setJournalEntryNum] = useState('');
 
   const [therapistFirstName, setTherapistFirstName] = useState('');
-  const [therapistLirstName, setTherapistLirstName] = useState('');
+  const [therapistLastName, setTherapistLastName] = useState('');
 
   const [title1, setTitle1] = useState('');
   const [title2, setTitle2] = useState('');
@@ -48,17 +49,16 @@ const JournalForm = () => {
     let response = await axios.get(`${BACKEND_URL}/clients/${user.email}`);
     // it should be ${emailClient}
     console.log('user detailed information: ', response.data);
-    console.log(response.data.journalentries);
+    console.log(response.data.journalentries.length);
 
     console.log(therapistInfo);
 
     setTherapistFirstName(response.data.therapists[0].firstName);
-    setTherapistLirstName(response.data.therapists[0].lastName);
+    setTherapistLastName(response.data.therapists[0].lastName);
 
-    setJournalId(response.data.journalentries[0].id);
-    console.log(response.data.journalentries[0].id);
+    setJournalEntryNum(response.data.journalentries.length);
 
-    template1Qns(response.data.journalentries[0].journaltemplateId);
+    templateQns(response.data.journalentries[0].journaltemplateId);
 
     setDueDate(response.data.journalentries[1].dueBy);
     console.log('client Id: ', response.data.id);
@@ -76,7 +76,7 @@ const JournalForm = () => {
     }
   }, [user]);
 
-  const template1Qns = (templateid) => {
+  const templateQns = (templateid) => {
     if (templateid == 1) {
       setTitle1('Topics  I want to discuss and goals for the session: ');
       setTitle2(
@@ -135,7 +135,7 @@ const JournalForm = () => {
           <br />
           <br />
           <label>
-            Therapist: {therapistFirstName} {therapistLirstName}
+            Therapist: {therapistFirstName} {therapistLastName}
           </label>
           <br />
           <br />
@@ -143,7 +143,7 @@ const JournalForm = () => {
 
           <br />
           <br />
-          <label>Journal Entry: {journalId}</label>
+          <label>Journal Entry: {journalEntryNum}</label>
 
           <br />
 

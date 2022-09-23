@@ -1,5 +1,5 @@
-import React, { createContext } from "react";
-import axios from "axios";
+import React, { createContext } from 'react';
+import axios from 'axios';
 import {
   Button,
   Card,
@@ -8,20 +8,20 @@ import {
   Image,
   Container,
   Grid,
-} from "@mantine/core";
+} from '@mantine/core';
 import {
   useNavigate,
   useParams,
   useLocation,
   Link,
   Outlet,
-} from "react-router-dom";
-import { BACKEND_URL } from "../constants";
-import { useContext, useEffect, useState } from "react";
-import { useAuth } from "./AuthContext";
-import { useAuth0 } from "@auth0/auth0-react";
+} from 'react-router-dom';
+import { BACKEND_URL } from '../constants';
+import { useContext, useEffect, useState } from 'react';
+import { useAuth } from './AuthContext';
+import { useAuth0 } from '@auth0/auth0-react';
 // import { AuthContext } from "../App";
-import sslogo from "../images/sslogo.png";
+import sslogo from '../images/sslogo.png';
 
 export default function NavBar() {
   // const hello = useContext(AuthContext);
@@ -43,7 +43,7 @@ export default function NavBar() {
   } = useAuth();
 
   const handleLogin = async () => {
-    console.log("Client logging in!");
+    console.log('Client logging in!');
     loginWithRedirect();
   };
 
@@ -183,7 +183,7 @@ export default function NavBar() {
     <div>
       <Container align="center" className="Nav-bar" fluid="true">
         <Grid className="Nav-bar-wrapper" align="center">
-          <Grid.Col span={"auto"}>
+          <Grid.Col span={'auto'}>
             <Image
               width={200}
               src={sslogo}
@@ -199,7 +199,7 @@ export default function NavBar() {
             <Link to="/about">About Us</Link>
           </Grid.Col>
           <Grid.Col span="auto">
-            <Link to="/advice">advice</Link>
+            <Link to="/advice">Advice</Link>
           </Grid.Col>
           <Grid.Col span="auto">
             <Link to="/faq">FAQ</Link>

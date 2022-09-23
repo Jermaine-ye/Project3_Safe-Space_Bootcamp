@@ -9,7 +9,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useAuth } from './AuthContext.js';
 import { Container } from '@mantine/core';
 
-export default function PatientProfile() {
+export default function PatientDashboard() {
   const [clientId, setClientId] = useState();
   const [clientDetails, setClientDetails] = useState({});
   const [template, setTemplate] = useState();
@@ -28,7 +28,6 @@ export default function PatientProfile() {
         .get(`${BACKEND_URL}/clients/key/${params.clientId}`)
         .then((response) => {
           setClientDetails(response.data);
-          console.log('client Details: ', response.data);
         });
     }
     console.log(clientDetails);
@@ -112,14 +111,9 @@ export default function PatientProfile() {
         Memo Form Creation
       </button>
       <button
-        onClick={() => navigate(`/therapist/patients/${clientId}/allmemo`)}
-      >
-        Memo List for this patient
-      </button>
-      <button
         onClick={() => navigate(`/therapist/patients/${clientId}/newjournal`)}
       >
-        journal Assignment form
+        Memo List for this patient
       </button>
       <button onClick={(e) => navigate(-1)}>back</button>
     </div>
