@@ -6,6 +6,8 @@ export default function SidebarClient() {
   const { user } = useAuth0();
 
   useEffect(() => {});
+
+  getName(user);
   //loggout Auth0 will be here
   return <div></div>;
 }

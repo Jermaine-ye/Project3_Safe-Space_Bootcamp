@@ -1,7 +1,7 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 // import { user } from '@auth0/auth0-react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   Button,
   Card,
@@ -12,30 +12,30 @@ import {
   Form,
   Input,
   Textarea,
-} from '@mantine/core';
+} from "@mantine/core";
 
-import { BACKEND_URL } from '../constants.js';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useAuth } from './AuthContext';
+import { BACKEND_URL } from "../constants.js";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "./AuthContext";
 
 export default function MemoSingle(props) {
   const navigate = useNavigate();
   const { user, isAuthenticated, therapistInfo } = useAuth0();
-  const [clientId, setClientId] = useState('');
-  const [memoId, setMemoId] = useState('');
-  const [memoDetails, setMemoDetails] = useState('');
-  const [clientDetails, setClientDetails] = useState('');
+  const [clientId, setClientId] = useState("");
+  const [memoId, setMemoId] = useState("");
+  const [memoDetails, setMemoDetails] = useState("");
+  const [clientDetails, setClientDetails] = useState("");
 
   // to test if this theory works
-  const [generalInput, setGeneralInput] = useState('');
-  const [behaviorInput, setBehaviorInput] = useState('');
-  const [contenttherapyInput, setContenttherapyInput] = useState('');
-  const [therapeuticintInput, setTherapeuticintInput] = useState('');
-  const [diagnosesInput, setDiagnosesInput] = useState('');
-  const [instructionsInput, setInstructionsInput] = useState('');
-  const [riskfactorsInput, setRiskfactorsInput] = useState('');
-  const [clientFirstName, setClientFirstName] = useState('');
-  const [clientLastName, setClientLastName] = useState('');
+  const [generalInput, setGeneralInput] = useState("");
+  const [behaviorInput, setBehaviorInput] = useState("");
+  const [contenttherapyInput, setContenttherapyInput] = useState("");
+  const [therapeuticintInput, setTherapeuticintInput] = useState("");
+  const [diagnosesInput, setDiagnosesInput] = useState("");
+  const [instructionsInput, setInstructionsInput] = useState("");
+  const [riskfactorsInput, setRiskfactorsInput] = useState("");
+  const [clientFirstName, setClientFirstName] = useState("");
+  const [clientLastName, setClientLastName] = useState("");
 
   const getAllInfo = async () => {};
 
@@ -43,8 +43,8 @@ export default function MemoSingle(props) {
     if (memoId) {
       axios.get(`${BACKEND_URL}/memos/${memoId}`).then((res) => {
         // setMemoDetails(res.data);
-        setMemoDetails(res.data.);
-        console.log('memo details: ', res.data);
+        setMemoDetails(res.data);
+        console.log("memo details: ", res.data);
         setGeneralInput(res.data[0].generalInput);
         setBehaviorInput(res.data[0].behaviorInput);
         setContenttherapyInput(res.data[0].contenttherapyInput);
@@ -94,7 +94,7 @@ export default function MemoSingle(props) {
             <br />
 
             <label>
-              {' '}
+              {" "}
               {/* Patient Name: {clientDetails.firstName} {clientDetails.lastName} */}
               Patient Name: {clientFirstName} {clientLastName}
             </label>

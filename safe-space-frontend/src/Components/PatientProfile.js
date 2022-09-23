@@ -1,13 +1,13 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 
-import { BACKEND_URL } from '../constants.js';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useAuth } from './AuthContext.js';
-import { Container } from '@mantine/core';
+import { BACKEND_URL } from "../constants.js";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "./AuthContext.js";
+import { Container } from "@mantine/core";
 
 export default function PatientProfile() {
   const [clientId, setClientId] = useState();
@@ -28,7 +28,6 @@ export default function PatientProfile() {
         .get(`${BACKEND_URL}/clients/key/${params.clientId}`)
         .then((response) => {
           setClientDetails(response.data);
-          console.log('client Details: ', response.data);
         });
     }
     console.log(clientDetails);
@@ -115,11 +114,6 @@ export default function PatientProfile() {
         onClick={() => navigate(`/therapist/patients/${clientId}/allmemo`)}
       >
         Memo List for this patient
-      </button>
-      <button
-        onClick={() => navigate(`/therapist/patients/${clientId}/newjournal`)}
-      >
-        journal Assignment form
       </button>
       <button onClick={(e) => navigate(-1)}>back</button>
     </div>
