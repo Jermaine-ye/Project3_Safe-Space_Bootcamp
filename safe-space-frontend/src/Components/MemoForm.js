@@ -1,6 +1,6 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   Button,
   Card,
@@ -11,62 +11,71 @@ import {
   Form,
   Input,
   Textarea,
-} from '@mantine/core';
-import { DatePicker } from '@mantine/dates';
-import { BACKEND_URL } from '../constants.js';
-import { Auth0Client } from '@auth0/auth0-spa-js';
-import { useAuth0 } from '@auth0/auth0-react';
-import angry from '../images/angry.png';
-import crying from '../images/sad.png';
-import happy from '../images/smiling-face.png';
-import sad from '../images/frown.png';
+} from "@mantine/core";
+import { DatePicker } from "@mantine/dates";
+import { BACKEND_URL } from "../constants.js";
+import { useAuth0 } from "@auth0/auth0-react";
+import angry from "../images/angry.png";
+import crying from "../images/sad.png";
+import happy from "../images/smiling-face.png";
+import sad from "../images/frown.png";
+import { useAuth } from "./AuthContext";
 
 const MemoForm = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
-  const [clientFirstName, setClientFirstName] = useState('');
-  const [clientLastName, setClientLastName] = useState('');
-  const [clientId, setclientId] = useState('');
-  const [therapistId, setTherapistId] = useState('');
-  const [generalInput, setGeneralInput] = useState('');
-  const [behaviorInput, setBehaviorInput] = useState('');
-  const [patientMood, setPatientMood] = useState('');
-  const [contenttherapyInput, setContenttherapyInput] = useState('');
-  const [therapeuticintInput, setTherapeuticintInput] = useState('');
-  const [diagnosesInput, setDiagnosesInput] = useState('');
-  const [instructionsInput, setInstructionsInput] = useState('');
-  const [riskfactorsInput, setRiskfactorsInput] = useState('');
-  const params = useParams();
+
+  const [clientId, setClientId] = useState("");
+  const [generalInput, setGeneralInput] = useState("");
+  const [behaviorInput, setBehaviorInput] = useState("");
+  const [contenttherapyInput, setContenttherapyInput] = useState("");
+  const [therapeuticintInput, setTherapeuticintInput] = useState("");
+  const [diagnosesInput, setDiagnosesInput] = useState("");
+  const [instructionsInput, setInstructionsInput] = useState("");
+  const [riskfactorsInput, setRiskfactorsInput] = useState("");
+  const [clientDetails, setClientDetails] = useState("");
   const Navigate = useNavigate();
+  const { therapistInfo } = useAuth();
 
-  const callApi = async () => {
-    // let response = await axios.get(`${BACKEND_URL}/clients/jon@snow.com`);
+  // const callApi = async () => {
+  //   // let response = await axios.get(`${BACKEND_URL}/clients/jon@snow.com`);
 
-    // should be getting info from the therapist side instead of the client??
-    let response = await axios.get(`${BACKEND_URL}/therapists/clients/:email`);
-    // let response = await axios.get(`${BACKEND_URL}/clients/${user.email}`);
-    // it should be ${emailClient}
-    console.log('user detailed information: ', response.data);
-    console.log('clientId: ', response.data.id);
-    setclientId(response.data.id);
-    setClientFirstName(response.data.firstName);
-    setClientLastName(response.data.lastName);
-    setPatientMood(response.data.dailymood);
-    setTherapistId(response.data.therapists[0].id);
-    console.log(response.data.therapists[0].id);
-  };
+  //   // should be getting info from the therapist side instead of the client??
+  //   let response = await axios.get(`${BACKEND_URL}/${c.email}`);
+  //   // let response = await axios.get(`${BACKEND_URL}/clients/${user.email}`);
+  //   // it should be ${emailClient}
+  //   console.log('user detailed information: ', response.data);
+  //   console.log('clientId: ', response.data.id);
+  //   setclientId(response.data.id);
+  //   setClientFirstName(response.data.firstName);
+  //   setClientLastName(response.data.lastName);
+  //   setPatientMood(response.data.dailymood);
+  //   setTherapistId(response.data.therapists[0].id);
+  //   console.log(response.data.therapists[0].id);
+  // };
+
+  const allClients = therapistInfo.clients;
+
+  // const currentClient = allClients.forEach((elem) => {
+  //   const elemClientID = elem.id;
+  //   if (elemClientID === params.id) {
+  //     setCurrClient(elem);
+  //   }
+  // });
 
   useEffect(() => {
-    if (isAuthenticated) {
-      console.log('user info:', user);
-      console.log('email:', user.email);
-      // setinput1();
-      console.log(user);
-      callApi();
+    console.log(`in effect`);
+    console.log(user);
+
+    if (clientId) {
+      axios.get(`${BACKEND_URL}/clients/key/${clientId}`).then((response) => {
+        setClientDetails(response.data);
+      });
     }
-  }, [user]);
+    console.log(clientDetails);
+  }, [clientId]);
 
   const moodIcon = (input) => {
-    console.log('checkmood: ', patientMood);
+    console.log("checkmood: ", clientDetails.patientMood);
     switch (input) {
       case 1:
         return <img src={happy} alt="" width="50" height="50" />;
@@ -84,7 +93,10 @@ const MemoForm = () => {
         return null;
     }
   };
-
+  const params = useParams();
+  if (clientId !== params.clientId) {
+    setClientId(params.clientId);
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -96,9 +108,8 @@ const MemoForm = () => {
     // should be getting info from the therapist side instead of the client??
     console.log(clientId);
     axios
-
       .post(`${BACKEND_URL}/memos/${clientId}`, {
-        therapistId,
+        therapistId: therapistInfo.id,
         generalInput,
         behaviorInput,
         contenttherapyInput,
@@ -108,16 +119,16 @@ const MemoForm = () => {
         riskfactorsInput,
       })
       .then((res) => {
-        setGeneralInput('');
-        setBehaviorInput('');
-        setContenttherapyInput('');
-        setTherapeuticintInput('');
-        setDiagnosesInput('');
-        setInstructionsInput('');
-        setRiskfactorsInput('');
+        setGeneralInput("");
+        setBehaviorInput("");
+        setContenttherapyInput("");
+        setTherapeuticintInput("");
+        setDiagnosesInput("");
+        setInstructionsInput("");
+        setRiskfactorsInput("");
 
-        console.log('resdata:', res.data);
-        console.log('Memo Submit Success!!');
+        console.log("resdata:", res.data);
+        console.log("Memo Submit Success!!");
         Navigate(
           `/therapist/patients/${res.data.clientId}/memos/${res.data.id}`
         );
@@ -142,13 +153,13 @@ const MemoForm = () => {
           <br />
 
           <label>
-            {' '}
-            Patient Name: {clientFirstName} {clientLastName}
+            {" "}
+            Patient Name: {clientDetails.firstName} {clientDetails.lastName}
           </label>
 
           <br />
           <br />
-          <label>Patient Mood: {moodIcon(patientMood)}</label>
+          <label>Patient Mood: {moodIcon(clientDetails.patientMood)}</label>
 
           <br />
           <br />

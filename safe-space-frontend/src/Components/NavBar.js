@@ -72,9 +72,52 @@ export default function NavBar() {
     // navigate("/index");
   };
 
+  // // getting the specific user/therapist and their IDs respectively.
+  // const getAllInfo = async () => {
+  //   // await updateClient(user);
+
+  //   //from auth0
+  //   console.log(user);
+  //   //from authContext
+  //   console.log(user[`https://any-namespace/roles`].length === 0);
+
+  //   if (user[`https://any-namespace/roles`].length === 0) {
+  //     const response = await axios.get(`${BACKEND_URL}/clients/${user.email}`);
+  //     console.log(`Client info response 0`, response.data);
+  //     updateClientInfo(response.data);
+
+  //     let allTher = response.data.therapists;
+  //     console.log(allTher);
+  //     let currTher;
+  //     allTher.forEach((ther) => {
+  //       const { id, client_therapists, firstName, lastName, email } = ther;
+  //       const { chosenTherapist, endedAt } = client_therapists;
+
+  //       if (chosenTherapist && endedAt === null) {
+  //         currTher = {
+  //           id: id,
+  //           name: `${firstName} ${lastName}`,
+  //           email: email,
+  //         };
+  //         console.log(currTher);
+  //       }
+  //     });
+
+  //     const therResponse = await axios.get(
+  //       `${BACKEND_URL}/therapists/${currTher.email}`
+  //     );
+  //     updateTherapistInfo(therResponse.data);
+  //   } else {
+  //     const response = await axios.get(
+  //       `${BACKEND_URL}/therapists/${user.email}`
+  //     );
+  //     updateTherapistInfo(response.data);
+  //   }
+  // };
+
   // getting the specific user/therapist and their IDs respectively.
   const getAllInfo = async () => {
-    // await updateClient(user);
+    await updateClient(user);
 
     //from auth0
     console.log(user);
@@ -83,30 +126,33 @@ export default function NavBar() {
 
     if (user[`https://any-namespace/roles`].length === 0) {
       const response = await axios.get(`${BACKEND_URL}/clients/${user.email}`);
-      console.log(`Client info response 0`, response.data);
+
       updateClientInfo(response.data);
 
-      let allTher = response.data.therapists;
-      console.log(allTher);
+      let allTher;
       let currTher;
-      allTher.forEach((ther) => {
-        const { id, client_therapists, firstName, lastName, email } = ther;
-        const { chosenTherapist, endedAt } = client_therapists;
 
-        if (chosenTherapist && endedAt === null) {
-          currTher = {
-            id: id,
-            name: `${firstName} ${lastName}`,
-            email: email,
-          };
-          console.log(currTher);
-        }
-      });
+      if (response.data.therapists.length !== 0) {
+        allTher = response.data.therapists;
+        console.log(allTher);
+        allTher.forEach((ther) => {
+          const { id, client_therapists, firstName, lastName, email } = ther;
+          const { chosenTherapist, endedAt } = client_therapists;
 
-      const therResponse = await axios.get(
-        `${BACKEND_URL}/therapists/${currTher.email}`
-      );
-      updateTherapistInfo(therResponse.data);
+          if (chosenTherapist && endedAt === null) {
+            currTher = {
+              id: id,
+              name: `${firstName} ${lastName}`,
+              email: email,
+            };
+            console.log(currTher);
+          }
+        });
+        const therResponse = await axios.get(
+          `${BACKEND_URL}/therapists/${currTher.email}`
+        );
+        updateTherapistInfo(therResponse.data);
+      }
     } else {
       const response = await axios.get(
         `${BACKEND_URL}/therapists/${user.email}`

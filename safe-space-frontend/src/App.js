@@ -16,6 +16,7 @@ import CalendarFull from "./Components/CalendarFull";
 import TherapistInfo from "./Components/TherapistInfo";
 import MemoForm from "./Components/MemoForm";
 import MemoSingle from "./Components/MemoSingle";
+import MemoList from "./Components/MemoList";
 import JournalAssignment from "./Components/JournalAssignment";
 import PrevApptHistory from "./Components/PrevApptHistory";
 import PatientProfile from "./Components/PatientProfile";
@@ -61,7 +62,8 @@ export default function App() {
         >
           LOG OUT
         </button>
-
+        <button onClick={(e) => navigate(-1)}>back</button>
+        <button onClick={(e) => navigate("/")}>Home</button>
         <Routes>
           {/* check for admin boolean and render client and therapist pages according.  */}
           <Route path="/" element={<LandingPage />} />
@@ -130,7 +132,7 @@ export default function App() {
             <Route path="/therapist/calendar" element={<CalendarFull />} />
             {/* Route that renders indiv profile of patient on therapists's portal */}
             <Route
-              path="/therapist/patients/profile/"
+              path="/therapist/patients/:clientId"
               element={<PatientProfile />}
             />
             {/* List of patients that are assigned to the current therapist */}
@@ -166,6 +168,11 @@ export default function App() {
             <Route
               path="/therapist/patients/:clientId/newmemo"
               element={<MemoForm />}
+            />
+            {/* Route that renders the list of memo belonging to the client */}
+            <Route
+              path="/therapist/patients/:clientId/allmemo"
+              element={<MemoList />}
             />
           </Route>
           {/* SET PRIVATE ROUTES FOR THERAPIST */}

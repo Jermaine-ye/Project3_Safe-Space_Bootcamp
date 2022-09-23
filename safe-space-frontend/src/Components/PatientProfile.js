@@ -22,13 +22,16 @@ export default function PatientProfile() {
   useEffect(() => {
     console.log(`in effect`);
     console.log(user);
-    console.log(currentUser);
+
     if (clientId) {
-      axios.get(`${BACKEND_URL}/client/${user.email}`).then((response) => {
-        setClientDetails(response.data);
-      });
+      axios
+        .get(`${BACKEND_URL}/clients/key/${params.clientId}`)
+        .then((response) => {
+          setClientDetails(response.data);
+        });
     }
-  }, [clientId, user]);
+    console.log(clientDetails);
+  }, [clientId]);
 
   const params = useParams();
   if (clientId !== params.clientId) {
@@ -102,6 +105,16 @@ export default function PatientProfile() {
 
       <button>Deactivate</button>
       <button>Patient Apppointment Log</button>
+      <button
+        onClick={() => navigate(`/therapist/patients/${clientId}/newmemo`)}
+      >
+        Memo Form Creation
+      </button>
+      <button
+        onClick={() => navigate(`/therapist/patients/${clientId}/allmemo`)}
+      >
+        Memo List for this patient
+      </button>
       <button onClick={(e) => navigate(-1)}>back</button>
     </div>
   );
