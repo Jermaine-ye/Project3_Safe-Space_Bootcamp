@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       // id: DataTypes.INTEGER,
       createdAt: DataTypes.DATE,
+      updatedAt: DataTypes.DATE,
       generalInput: DataTypes.TEXT,
       behaviorInput: DataTypes.TEXT,
       contenttherapyInput: DataTypes.TEXT,

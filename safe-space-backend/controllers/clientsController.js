@@ -62,6 +62,17 @@ class ClientsController extends BaseController {
     }
   }
 
+  async getOnePk(req, res) {
+    const { clientId } = req.params;
+    console.log(req.params);
+    try {
+      const output = await this.model.findByPk(clientId);
+      return res.json(output);
+    } catch (err) {
+      return res.status(400).json({ error: true, msg: err });
+    }
+  }
+
   //update one client when therapist is dropped and set to new value when therapist is added. update one client when client is inactive. update one client after evaluation to change its preferences. update the description by the therapist of the indiv patient.
   //after evaluation form is submitted, we check if user has been authenticated. If user has been authenticated, we first run getOne, then we run updateOne to update particulars. If user not authenticated, we run insertOne to create account, then we run updateOne.
   //After that, we query therapist table to grab all therapists that fit the client's preferences and we bulkcreate clients_therapists? i.e. call insertBulk.
