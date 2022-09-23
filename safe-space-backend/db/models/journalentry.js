@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       // id: DataTypes.INTEGER,
       createdAt: DataTypes.DATE,
+      updatedAt: DataTypes.DATE,
       dueBy: DataTypes.DATE,
       input1: DataTypes.TEXT,
       input2: DataTypes.TEXT,

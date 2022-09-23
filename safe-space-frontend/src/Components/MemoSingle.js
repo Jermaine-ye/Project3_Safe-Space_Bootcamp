@@ -41,17 +41,18 @@ export default function MemoSingle(props) {
 
   useEffect(() => {
     if (memoId) {
-      axios.get(`${BACKEND_URL}/memos/${memoId}`).then((res) => {
-        // setMemoDetails(res.data);
+      axios.get(`${BACKEND_URL}/memos/single/${memoId}`).then((res) => {
         setMemoDetails(res.data);
-        console.log("memo details: ", res.data);
-        setGeneralInput(res.data[0].generalInput);
-        setBehaviorInput(res.data[0].behaviorInput);
-        setContenttherapyInput(res.data[0].contenttherapyInput);
-        setTherapeuticintInput(res.data[0].therapeuticintInput);
-        setDiagnosesInput(res.data[0].diagnosesInput);
-        setInstructionsInput(res.data[0].instructionsInput);
-        setRiskfactorsInput(res.data[0].riskfactorsInput);
+        console.log(res.data);
+        // setMemoDetails(res.data);
+        // console.log("memo details: ", res.data);
+        // setGeneralInput(res.data[0].generalInput);
+        // setBehaviorInput(res.data[0].behaviorInput);
+        // setContenttherapyInput(res.data[0].contenttherapyInput);
+        // setTherapeuticintInput(res.data[0].therapeuticintInput);
+        // setDiagnosesInput(res.data[0].diagnosesInput);
+        // setInstructionsInput(res.data[0].instructionsInput);
+        // setRiskfactorsInput(res.data[0].riskfactorsInput);
       });
     }
     // getting client info is working.
@@ -85,10 +86,7 @@ export default function MemoSingle(props) {
             <label>Memo Entry</label>
             <br />
             <br />
-            <label>
-              Date: {/* grab date from db */}
-              {memoDetails}
-            </label>
+            <label>Date: {/* grab date from db */}</label>
 
             <br />
             <br />
@@ -96,42 +94,42 @@ export default function MemoSingle(props) {
             <label>
               {" "}
               {/* Patient Name: {clientDetails.firstName} {clientDetails.lastName} */}
-              Patient Name: {clientFirstName} {clientLastName}
+              Patient Name: {memoDetails.firstName} {memoDetails.lastName}
             </label>
 
             <br />
             <br />
 
             <label>General Notes:</label>
-            {generalInput}
+            {memoDetails.generalInput}
             {/* insert memo info */}
             {/* {memoDetails} */}
             <br />
             <label>Behaviour Observations:</label>
-            {behaviorInput}
+            {memoDetails.behaviorInput}
             {/* {memoDetails.behaviorInput} */}
             <br />
             <label>Content of Today's Therapy:</label>
-            {contenttherapyInput}
+            {memoDetails.contenttherapyInput}
             {/* insert memo info */}
             {/* {memoDetails.contenttherapyInput} */}
             <br />
             <label>Any Therapeutic Intervention Needed?</label>
-            {therapeuticintInput}
+            {memoDetails.therapeuticintInput}
             {/* insert memo info */}
             {/* {memoDetails.therapeuticintInput} */}
             <br />
             <label>Diagnoses:</label>
-            {diagnosesInput}
+            {memoDetails.diagnosesInput}
             {/* insert memo info */}
             {/* {memoDetails.diagnosesInput} */}
             <label>Instructions/Recommendations/Plans</label>
-            {instructionsInput}
+            {memoDetails.instructionsInput}
             {/* insert memo info */}
             {/* {memoDetails.instructionsInput} */}
             <br />
             <label>Notes and Risk Factors:</label>
-            {riskfactorsInput}
+            {memoDetails.riskfactorsInput}
             {/* insert memo info */}
             {/* {memoDetails.riskfactorsInput} */}
             <br />
