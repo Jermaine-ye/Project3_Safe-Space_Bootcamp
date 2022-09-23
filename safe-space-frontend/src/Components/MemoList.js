@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { BACKEND_URL } from "../constants.js";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -17,11 +17,12 @@ import {
 // similar to sighting exercises
 export default function PatientList() {
   const [patientsList, setPatientsList] = useState([]);
+  const [clientId, setClientId] = useState();
   const navigate = useNavigate();
 
   const { user } = useAuth0();
-  const [clientList, setClientList] = useState();
-  const [clientDetails, setClientDetails] = useState({});
+  const [memoList, setMemoList] = useState([]);
+  const [memoDetails, setMemoDetails] = useState({});
 
   let finalList;
 
@@ -30,13 +31,19 @@ export default function PatientList() {
   // };
 
   useEffect(() => {
-    axios
-      .get(`${BACKEND_URL}/therapists/clients/${user.email}`)
-      .then((response) => {
-        setClientList(response.data);
+    console.log(`running`);
+    console.log(clientId);
+    if (clientId) {
+      axios.get(`${BACKEND_URL}/memos/${clientId}`).then((response) => {
+        setMemoList(response.data);
       });
+    }
   }, []);
 
+  const params = useParams();
+  if (clientId !== params.clientId) {
+    setClientId(params.clientId);
+  }
   // useEffect(() => {
   //   console.log(clientList);
 
@@ -47,36 +54,31 @@ export default function PatientList() {
   //   // Only run this effect on component mount
   // }, [clientList]);
 
-  if (clientList && clientList.length !== 0) {
-    finalList = clientList.map((clientInfo) => {
-      console.log(clientInfo);
+  if (memoList && memoList.length !== 0) {
+    finalList = memoList.map((memoInfo) => {
+      console.log(memoInfo);
 
       return (
         <div>
           <Link
-            to={`/therapist/patients/${clientInfo.client.id}`}
-            key={clientInfo.client.id}
+            to={`/therapist/patients/${clientId}/memos/${memoInfo.id}`}
+            key={memoInfo.id}
           >
             <Card shadow="sm" p="lg" radius="md" withBorder>
-              {clientInfo.client.id}
               <Group position="apart" mt="md" mb="xs">
                 <Text>
-                  {clientInfo.client.firstName}
+                  {memoInfo.firstName}
 
-                  {clientInfo.client.lastName}
+                  {memoInfo.lastName}
                 </Text>
               </Group>
               <Text size="sm" color="dimmed">
-                have the patient checked in today?
+                memo date
+                {memoInfo.updatedAt}
               </Text>
               <Text size="sm" color="dimmed">
-                Journal Submitted?
-              </Text>
-              <Text size="sm" color="dimmed">
-                Journal Log
-              </Text>
-              <Text size="sm" color="dimmed">
-                Appointment Memo
+                memo id:
+                {memoInfo.id}
               </Text>
             </Card>
           </Link>
@@ -110,9 +112,9 @@ export default function PatientList() {
   }
   return (
     <div>
-      <h2>PatientList</h2>
+      <h2>Memo List</h2>
 
-      {clientList && clientList.length !== 0 ? <ul>{finalList}</ul> : null}
+      {memoList && memoList.length !== 0 ? <ul>{finalList}</ul> : null}
 
       <Link to="/">Home</Link>
     </div>

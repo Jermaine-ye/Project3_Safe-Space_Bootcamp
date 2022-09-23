@@ -1,4 +1,4 @@
-const cors = require('cors');
+const cors = require("cors");
 // const BaseController = require("./baseController");
 
 class TherapistsController {
@@ -27,6 +27,7 @@ class TherapistsController {
         where: {
           therapistId: targetnum,
         },
+        include: this.clientModel,
       });
       return res.json(output);
     } catch (err) {

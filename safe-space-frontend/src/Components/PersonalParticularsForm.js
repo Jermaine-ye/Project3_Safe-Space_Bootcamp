@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { storage } from "../DB/firebase";
 import { BACKEND_URL } from "../constants";
@@ -8,8 +8,10 @@ import {
   ref as storageRef,
   uploadBytes,
 } from "firebase/storage";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth } from "./AuthContext";
+import { AuthContext } from "../App";
 
 const CLIENT_IMAGE_FOLDER_NAME = "client images";
 
@@ -22,15 +24,15 @@ export default function PersonalParticularsForm() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [gender, setGender] = useState("");
   const [age, setAge] = useState("");
-  const [MaritalStatus, setMaritalStatus] = useState("");
-  const [description, setDiscription] = useState("");
+  const [maritalStatus, setMaritalStatus] = useState("");
+  // const [description, setDiscription] = useState("");
   const { user } = useAuth0();
-  const [currentUser, setCurrentUser] = useState(user);
+  const [currentUserr, setCurrentUserr] = useState(user);
 
   const navigate = useNavigate();
 
   const setUser = () => {
-    setCurrentUser(user);
+    setCurrentUserr(user);
   };
 
   // essentially needed to update specfic client.
@@ -88,11 +90,19 @@ export default function PersonalParticularsForm() {
       firstName: firstName,
       lastName: lastName,
       phoneNumber: phoneNumber,
-      gender: gender,
-      age: age,
-      description: description,
-      maritalStatus: MaritalStatus,
       photoLink: imageUrl,
+      ageClient: age,
+      gender: gender,
+      maritalStatus: maritalStatus,
+      therapistConfirmed: false,
+      specializationId: null,
+      genderPreference: null,
+      ageId: null,
+      languageId: null,
+      religionId: null,
+      dailymood: null,
+      description: null,
+      active: true,
       emailClient: user.email,
     });
     navigate("/client/");
@@ -118,9 +128,10 @@ export default function PersonalParticularsForm() {
           onChange={(e) => setLastName(e.target.value)}
         />
         <label>Phone Number:</label>
-        <textarea
+        <input
           className="text-box"
           name="phoneNumber"
+          type="number"
           placeholder="Please enter your contact number."
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
@@ -135,31 +146,33 @@ export default function PersonalParticularsForm() {
           <option value={"Male"}>Male</option>
           <option value={"Female"}>Female</option>
         </select>
+
         <label>Age:</label>
-        <select name="age" value={age} onChange={(e) => setAge(e.target.value)}>
-          <option value={""}>Choose your age range</option>
-          <option value={"20 to 29 years old"}>20 to 29 years old</option>
-          <option value={"30 to 39 years old"}>30 to 39 years old</option>
-          <option value={"40 to 49 years old"}>40 to 49 years old</option>
-          <option value={"50 to 59 years old"}>50 to 59 years old</option>
-        </select>
+        <input
+          name="age"
+          value={age}
+          type="number"
+          placeholder="Please enter your age."
+          onChange={(e) => setAge(e.target.value)}
+        />
+
         <label>Marital Status</label>
         <select
           name="MaritalStatus"
-          value={MaritalStatus}
+          value={maritalStatus}
           onChange={(e) => setMaritalStatus(e.target.value)}
         >
           <option value={""}>State your relationship status</option>
           <option value={"Single"}>Single</option>
           <option value={"Married"}>Married</option>
         </select>
-        <label>Description</label>
+        {/* <label>Description</label>
         <textarea
           name="description"
           value={description}
           onChange={(e) => setDiscription(e.target.value)}
           placeholder="Tell us about you???"
-        />
+        /> */}
         <label>
           Upload your profile images here!
           <input
@@ -176,6 +189,7 @@ export default function PersonalParticularsForm() {
         </label>
         <button>Submit</button>
       </form>
+      <Link to="/">Home</Link>
     </div>
   );
 }

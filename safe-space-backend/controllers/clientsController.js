@@ -1,8 +1,8 @@
-const cors = require('cors');
-const { Op } = require('sequelize');
-// const BaseController = require("./baseController");
+const cors = require("cors");
+const { Op } = require("sequelize");
+const BaseController = require("./baseController");
 
-class ClientsController {
+class ClientsController extends BaseController {
   constructor(
     model,
     therapistModel,
@@ -13,7 +13,7 @@ class ClientsController {
     specializationTherapistsModel,
     memoentryModel
   ) {
-    this.model = model;
+    super(model);
     this.therapistModel = therapistModel;
     this.clientTherapistsModel = clientTherapistsModel;
     this.appointmentModel = appointmentModel;
@@ -62,6 +62,17 @@ class ClientsController {
     }
   }
 
+  async getOnePk(req, res) {
+    const { clientId } = req.params;
+    console.log(req.params);
+    try {
+      const output = await this.model.findByPk(clientId);
+      return res.json(output);
+    } catch (err) {
+      return res.status(400).json({ error: true, msg: err });
+    }
+  }
+
   //update one client when therapist is dropped and set to new value when therapist is added. update one client when client is inactive. update one client after evaluation to change its preferences. update the description by the therapist of the indiv patient.
   //after evaluation form is submitted, we check if user has been authenticated. If user has been authenticated, we first run getOne, then we run updateOne to update particulars. If user not authenticated, we run insertOne to create account, then we run updateOne.
   //After that, we query therapist table to grab all therapists that fit the client's preferences and we bulkcreate clients_therapists? i.e. call insertBulk.
@@ -76,6 +87,7 @@ class ClientsController {
       age,
       gender,
       maritalStatus,
+      // eval
       therapistConfirmed,
       specializationId,
       genderPreference,
@@ -86,11 +98,13 @@ class ClientsController {
       description,
       active,
     } = req.body;
+
     // const { emailClient } = req.params;
     try {
       const data = await this.model.findOne({
         where: { email: emailClient },
       });
+      console.log(data);
       const response = await data.update({
         firstName: firstName,
         lastName: lastName,
@@ -118,7 +132,7 @@ class ClientsController {
   //update the junction table clients_therapists. Sometimes need to pair this with updateOneClient. Run this after evaluationform etc.
 
   async updateOneTherapistClient(req, res) {
-    console.log('hi');
+    console.log("hi");
     const { chosenTherapist, endedAt, feedback, therapistID, clientID } =
       req.body;
     try {
@@ -169,9 +183,10 @@ class ClientsController {
       languageId,
       clientId,
     } = req.body;
+    console.log(req.body);
     try {
       //allTherapists is an array of objects
-      console.log('hi');
+      console.log("hi");
       const nextTherapists = await this.specializationTherapistsModel.findAll({
         where: {
           specializationId: specializationID,
@@ -226,7 +241,7 @@ class ClientsController {
       let finalTherapists = [];
       firstSelectedTherapists.forEach((therapist) => {
         if (secondSelectedTherapists.indexOf(therapist) !== -1) {
-          console.log('yay');
+          console.log("yay");
           finalTherapists.push(therapist);
         }
       });
@@ -245,7 +260,7 @@ class ClientsController {
         return newRelation;
       });
 
-      return res.json('inserted evaluation results into clientTherapistModel');
+      return res.json("inserted evaluation results into clientTherapistModel");
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });
     }

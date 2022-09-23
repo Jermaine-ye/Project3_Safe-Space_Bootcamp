@@ -1,7 +1,7 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 // import { user } from '@auth0/auth0-react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   Button,
   Card,
@@ -12,87 +12,102 @@ import {
   Form,
   Input,
   Textarea,
-} from '@mantine/core';
+} from "@mantine/core";
 
-import { BACKEND_URL } from '../constants.js';
-import { Auth0Client } from '@auth0/auth0-spa-js';
-import { useAuth0 } from '@auth0/auth0-react';
+import { BACKEND_URL } from "../constants.js";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "./AuthContext";
 
 export default function MemoSingle(props) {
-  const params = useParams();
-  const Navigate = useNavigate();
-  const [updatedAt, setUpdatedAt] = useState('');
-  const [input1, setInput1] = useState('');
-  const [input2, setInput2] = useState('');
-  const [input3, setInput3] = useState('');
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const navigate = useNavigate();
+  const { user, isAuthenticated, therapistInfo } = useAuth0();
+  const [clientId, setClientId] = useState("");
+  const [memoId, setMemoId] = useState("");
+  const [memoDetails, setMemoDetails] = useState("");
+  const [clientDetails, setClientDetails] = useState("");
 
-  const [dueDate, setDueDate] = useState('');
-
-  // get all to know there is an empty null=> new journal entry =>
-  const [clientId, setClientId] = useState('');
-  const [journalId, setJournalId] = useState('');
-
-  const [latestJournalEntry, setLatestJournalEntry] = useState('');
-
-  const callApi = async () => {
-    // let response = await axios.get(`${BACKEND_URL}/clients/jon@snow.com`);
-    let response = await axios.get(`${BACKEND_URL}/clients/${user.email}`);
-    // it should be ${emailClient}
-    console.log('user detailed information: ', response.data);
-    console.log(response.data.journalentries);
-    setLatestJournalEntry(response.data.journalentries.length);
-    console.log(
-      'latest journal entry index position Id:',
-      response.data.journalentries[0].id
-    );
-
-    setJournalId(response.data.journalentries[0].id);
-    console.log(response.data.journalentries[0].id);
-
-    setDueDate(response.data.journalentries[1].dueBy);
-    console.log('client Id: ', response.data.id);
-    setClientId(response.data.id);
-  };
+  const getAllInfo = async () => {};
 
   useEffect(() => {
-    if (isAuthenticated) {
-      console.log('user info:', user);
-      console.log('email:', user.email);
-      // setinput1();
-      console.log(user);
-      callApi();
+    if (memoId) {
+      axios.get(`${BACKEND_URL}/memos/${memoId}`).then((res) => {
+        setMemoDetails(res.data);
+      });
     }
-  }, [user]);
+    // getting client info is working.
+    if (clientId) {
+      axios.get(`${BACKEND_URL}/clients/key/${clientId}`).then((response) => {
+        setClientDetails(response.data);
+      });
+    }
 
+    console.log(memoDetails[0]);
+  }, [clientId, memoId]);
+
+  const params = useParams();
+  if (clientId !== params.clientId) {
+    setClientId(params.clientId);
+  }
+
+  if (memoId !== params.memoId) {
+    setMemoId(params.memoId);
+  }
+  let oneMemoDetails = memoDetails[0];
   return (
     <div>
-      {/* //       <div> */}
-      {/* //         {console.log(sighting, sightingIndex)}
-{Object.keys(sighting).length > 0 ? ( */}
+      <Container className="Form-body" size="sm" px="xs">
+        <Grid justify="center" align="center">
+          <form>
+            <br />
+            <label>Memo Entry</label>
+            <br />
+            <br />
+            <label>
+              Date: {/* grab date from db */}
+              {memoDetails.updatedAt}
+            </label>
 
-      {/* //           <div>
-//             <div>
-//               <p>Report Number: {sighting.REPORT_NUMBER}</p>
-//             </div>
-//             <div>
-//               <p>
-//                 Date: {sighting.DATE}/{sighting.MONTH}/{sighting.YEAR}
-//               </p>
-//             </div>
-//             <div>
-//               <p>
-//                 Area: {sighting.STATE}/{sighting.COUNTY}
-//               </p>
-//             </div>
-//             <div>
-//               <p>Witness Report: {sighting.OBSERVED}</p>
-//             </div>
-//           </div>
-//         ) : (
-//           <p>Data Unavailable</p>
-//         )}
-//       </div> */}
+            <br />
+            <br />
+
+            <label>
+              {" "}
+              Patient Name: {clientDetails.firstName} {clientDetails.lastName}
+            </label>
+
+            <br />
+            <br />
+
+            <label>General Notes:</label>
+            {/* insert memo info */}
+            {/* {memoDetails} */}
+            <br />
+            <label>Behaviour Observations:</label>
+            {/* {memoDetails.behaviorInput} */}
+            <br />
+            <label>Content of Today's Therapy:</label>
+            {/* insert memo info */}
+            {/* {memoDetails.contenttherapyInput} */}
+            <br />
+            <label>Any Therapeutic Intervention Needed?</label>
+            {/* insert memo info */}
+            {/* {memoDetails.therapeuticintInput} */}
+            <br />
+            <label>Diagnoses:</label>
+            {/* insert memo info */}
+            {/* {memoDetails.diagnosesInput} */}
+            <label>Instructions/Recommendations/Plans</label>
+            {/* insert memo info */}
+            {/* {memoDetails.instructionsInput} */}
+            <br />
+            <label>Notes and Risk Factors:</label>
+            {/* insert memo info */}
+            {/* {memoDetails.riskfactorsInput} */}
+            <br />
+          </form>
+        </Grid>
+        <button onClick={(e) => navigate(-1)}>back</button>
+      </Container>
     </div>
   );
 }

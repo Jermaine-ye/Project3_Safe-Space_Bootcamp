@@ -14,7 +14,11 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.language);
       this.belongsTo(models.religion);
       this.belongsToMany(models.therapist, {
-        through: "client_therapists",
+        through: {
+          model: "client_therapists",
+          unique: false,
+        },
+        constraints: false,
       });
       this.hasMany(models.appointment);
       this.hasMany(models.memoentry);
