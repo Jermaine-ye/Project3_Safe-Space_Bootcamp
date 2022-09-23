@@ -70,7 +70,7 @@ export default function NavBar() {
 
   // getting the specific user/therapist and their IDs respectively.
   const getAllInfo = async () => {
-    // await updateClient(user);
+    await updateClient(user);
 
     //from auth0
     console.log(user);
@@ -82,27 +82,30 @@ export default function NavBar() {
 
       updateClientInfo(response.data);
 
-      let allTher = response.data.therapists;
-      console.log(allTher);
+      let allTher;
       let currTher;
-      allTher.forEach((ther) => {
-        const { id, client_therapists, firstName, lastName, email } = ther;
-        const { chosenTherapist, endedAt } = client_therapists;
 
-        if (chosenTherapist && endedAt === null) {
-          currTher = {
-            id: id,
-            name: `${firstName} ${lastName}`,
-            email: email,
-          };
-          console.log(currTher);
-        }
-      });
+      if (response.data.therapists.length !== 0) {
+        allTher = response.data.therapists;
+        console.log(allTher);
+        allTher.forEach((ther) => {
+          const { id, client_therapists, firstName, lastName, email } = ther;
+          const { chosenTherapist, endedAt } = client_therapists;
 
-      const therResponse = await axios.get(
-        `${BACKEND_URL}/therapists/${currTher.email}`
-      );
-      updateTherapistInfo(therResponse.data);
+          if (chosenTherapist && endedAt === null) {
+            currTher = {
+              id: id,
+              name: `${firstName} ${lastName}`,
+              email: email,
+            };
+            console.log(currTher);
+          }
+        });
+        const therResponse = await axios.get(
+          `${BACKEND_URL}/therapists/${currTher.email}`
+        );
+        updateTherapistInfo(therResponse.data);
+      }
     } else {
       const response = await axios.get(
         `${BACKEND_URL}/therapists/${user.email}`
@@ -168,16 +171,17 @@ export default function NavBar() {
         </Grid>
 
         <Link to="/client/journal/:journalId/new">Journal</Link>
-        <br/>
-          <Link to="/client/journals/:journalId">Journal Single</Link>
-        <br/>
-          <Link to="/client/journals">Journal List</Link>
-        <br/>
+        <br />
+        <Link to="/client/journals/:journalId">Journal Single</Link>
+        <br />
+        <Link to="/client/journals">Journal List</Link>
+        <br />
         <Link to="/therapist/patients/:clientId/newmemo">Memo Form</Link>
-         <br/>
-        <Link to="/therapist/patients/:clientId/memos/:memoId">Memo Single</Link>
-         <br/>
-        
+        <br />
+        <Link to="/therapist/patients/:clientId/memos/:memoId">
+          Memo Single
+        </Link>
+        <br />
       </Container>
     </div>
   );
