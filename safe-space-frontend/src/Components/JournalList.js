@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
-import { BACKEND_URL } from "../constants.js";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useAuth } from "./AuthContext.js";
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+import { BACKEND_URL } from '../constants.js';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth } from './AuthContext.js';
 import {
   Button,
   Card,
@@ -12,7 +12,7 @@ import {
   Grid,
   Container,
   Group,
-} from "@mantine/core";
+} from '@mantine/core';
 
 export default function JournalList() {
   const [journalList, setJournalList] = useState([]);
@@ -21,41 +21,49 @@ export default function JournalList() {
   const { user, clientInfo, TherapistInfo } = useAuth0();
 
   useEffect(() => {
-    axios.get(`${BACKEND_URL}/journals/${clientInfo.id}`).then((response) => {
-      setJournalList(response.data);
-    });
+    axios
+      .get(`${BACKEND_URL}/clients/${user.email}`)
+
+      .then((response) => {
+        setJournalList(response.data.journalentries);
+        console.log('res.data: ', response.data.journalentries);
+      });
     console.log(clientInfo);
     console.log(journalList);
   }, []);
 
-  const params = useParams();
-  if (journalId !== params.clientId) {
-    setJournalId(params.clientId);
-  }
+  // const params = useParams();
+  // if (journalId !== params.clientId) {
+  //   setJournalId(params.clientId);
+  // }
 
   let finalList;
   if (journalList && journalList.length !== 0) {
     finalList = journalList.map((journalInfo) => {
-      console.log(journalInfo);
+      console.log('journalinfo: ', journalInfo);
+      console.log(journalInfo.id);
 
       return (
         <div>
           <Link to={`/client/journals/${journalInfo.id}`} key={journalInfo.id}>
             <Card shadow="sm" p="lg" radius="md" withBorder>
               <Group position="apart" mt="md" mb="xs">
-                <Text>JOURNAL ID???</Text>
+                <Text>JOURNAL ID: {journalInfo.id}</Text>
                 <Text>
-                  {TherapistInfo.firstName}
-                  {TherapistInfo.lastName}
+                  {/* {TherapistInfo.firstName}
+                  {TherapistInfo.lastName} */}
                 </Text>
               </Group>
               <Text size="sm" color="dimmed">
-                GET DUE DATE
-                {journalId.due_by}
+                GET DUE DATE: <br />
+                {new Date(journalInfo.dueBy).toLocaleDateString()}
+                {/* {journalInfo.dueBy} */}
               </Text>
               <Text size="sm" color="dimmed">
-                CREATED AT OR UPDATED AT
-                {journalInfo.updatedAt}
+                CREATED AT OR UPDATED AT:
+                <br />
+                {/* {journalInfo.updatedAt} */}
+                {new Date(journalInfo.updatedAt).toLocaleDateString()}
               </Text>
             </Card>
           </Link>

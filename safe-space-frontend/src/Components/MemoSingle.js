@@ -56,12 +56,25 @@ export default function MemoSingle(props) {
       });
     }
     // getting client info is working.
+    //   if (clientId) {
+    //     axios.get(`${BACKEND_URL}/clients/key/${clientId}`).then((response) => {
+    //       setClientDetails(response.data);
+    //       console.log('client details:', response.data);
+    //       setClientFirstName(response.data.firstName);
+    //       setClientLastName(response.data.lastName);
+    //     });
+    //   }
+
+    //   console.log(memoDetails[0]);
+    // }, [clientId, memoId]);
     if (clientId) {
       axios.get(`${BACKEND_URL}/clients/key/${clientId}`).then((response) => {
         setClientDetails(response.data);
-        console.log(response.data);
+        console.log('client details:', response.data);
         setClientFirstName(response.data.firstName);
         setClientLastName(response.data.lastName);
+        setClientId(response.data.lastName);
+        setClientId(response.data.lastName);
       });
     }
 
