@@ -81,46 +81,40 @@ export default function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/services" element={<Services />} />
           <Route path="/support" element={<SupportResources />} />
+          <Route path="/client/journals" element={<JournalList />} />
+          {/* Route that renders all journal listings of client on client's portal */}
+          <Route
+            path="/client/journals/:journalId"
+            element={<JournalSingle />}
+          />
           {/* ===========================================================================CLIENT PORTAL============================================================================================ */}
           {/* SET PRIVATE ROUTES FOR CLIENT */}
           {/* SET OUTLETS FOR SCREENS. */}
-          <Route element={<PrivateRoutesClient />}>
-            <Route path="/evaluation" element={<EvaluationScreen />}>
-              {/* Route that renders evaluation form */}
-              <Route
-                path="/evaluation/1"
-                element={<EvaluationFormPreference />}
-              />
-              {/* Route that renders evaluation form */}
-              <Route
-                path="/evaluation/2"
-                element={<EvaluationFormSpecialty />}
-              />
-              {/* Route that renders evaluation results */}
-              <Route
-                path="/evaluation/results"
-                element={<EvaluationResults />}
-              />
-              {/* Route that renders evaluation results */}
-            </Route>
-            <Route path="/particulars" element={<PersonalParticularsForm />} />
-            {/* Route that renders clientdashboard screen */}
-
-            <Route path="/client/" element={<DashboardClientScreen />}>
-              {/* Route that renders all journal listings of client on client's portal */}
-              <Route path="/client/journals" element={<JournalList />} />
-              {/* Route that renders all journal listings of client on client's portal */}
-              <Route
-                path="/client/journals/:journalId"
-                element={<JournalSingle />}
-              />
-
-              {/* Route that renders full calendar of client on client's portal */}
-              <Route path="/client/calendar" element={<CalendarFull />} />
-              {/* Route that renders info of therapist on client's portal */}
-              <Route path="/client/therapist" element={<TherapistInfo />} />
-            </Route>
+          {/* <Route element={<PrivateRoutesClient />}> */}
+          <Route path="/evaluation" element={<EvaluationScreen />}>
+            {/* Route that renders evaluation form */}
+            <Route
+              path="/evaluation/1"
+              element={<EvaluationFormPreference />}
+            />
+            {/* Route that renders evaluation form */}
+            <Route path="/evaluation/2" element={<EvaluationFormSpecialty />} />
+            {/* Route that renders evaluation results */}
+            <Route path="/evaluation/results" element={<EvaluationResults />} />
+            {/* Route that renders evaluation results */}
           </Route>
+          <Route path="/particulars" element={<PersonalParticularsForm />} />
+          {/* Route that renders clientdashboard screen */}
+
+          <Route path="/client/" element={<DashboardClientScreen />}>
+            {/* Route that renders all journal listings of client on client's portal */}
+
+            {/* Route that renders full calendar of client on client's portal */}
+            <Route path="/client/calendar" element={<CalendarFull />} />
+            {/* Route that renders info of therapist on client's portal */}
+            <Route path="/client/therapist" element={<TherapistInfo />} />
+          </Route>
+          {/* </Route> */}
           {/* SET PRIVATE ROUTES FOR CLIENT */}
           {/* ===========================================================================THERAPIST PORTAL============================================================================================ */}
           {/* SET PRIVATE ROUTES FOR THERAPIST */}
