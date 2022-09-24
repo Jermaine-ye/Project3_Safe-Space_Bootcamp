@@ -176,8 +176,21 @@ export default function NavBar() {
       console.log(`running`);
       getAllInfo();
       // updateClient();
+      console.log('user:', user);
     }
   }, [user]);
+
+  const DashBoardNav = (event) => {
+    console.log(event);
+
+    if (user[`https://any-namespace/roles`].length !== 0) {
+      navigate('/therapist/');
+    } else if (user[`https://any-namespace/roles`].length === 0) {
+      navigate('/client/');
+    } else {
+      navigate('/');
+    }
+  };
 
   return (
     <div>
@@ -229,8 +242,17 @@ export default function NavBar() {
             <Link to="/client/sidebar">Client Side bar</Link>
           </Grid.Col>
           <Grid.Col span="auto">
-            <button onClick={handleLogin}>Login</button>
+            {isAuthenticated !== false ? (
+              <Button size="xs" onClick={() => DashBoardNav()}>
+                To DashBoard
+              </Button>
+            ) : (
+              <Button size="xs" onClick={handleLogin}>
+                Login
+              </Button>
+            )}
           </Grid.Col>
+
           {/* <Grid.Col>
             {toClient ? (
               <button onCick={() => navigate("/client/")}>

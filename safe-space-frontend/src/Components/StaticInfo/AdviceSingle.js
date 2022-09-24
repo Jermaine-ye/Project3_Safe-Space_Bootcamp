@@ -18,10 +18,8 @@ import {
   Image,
 } from '@mantine/core';
 import { parseWithOptions } from 'date-fns/esm/fp';
-import AdvicePreview from './AdvicePreview';
-import AdvicePreviewList from './AdvicePreviewList';
 
-export default function Advice() {
+export default function AdviceSingle() {
   const [allArticles, setAllArticles] = useState('');
   const [photo, setPhoto] = useState('');
 
@@ -51,7 +49,7 @@ export default function Advice() {
   return (
     <div className="Page-body">
       <NavBar />
-      {/* <div className="Content-container">
+      <div className="Content-container">
         <Container className="Content-body" size="md" px="xs">
           <Card withBorder shadow="sm" radius="md">
             {allArticles && allArticles.length
@@ -77,8 +75,7 @@ export default function Advice() {
           <br />
           <br />
         </Container>
-      </div> */}
-      <AdvicePreviewList />
+      </div>
       <Footer />
     </div>
   );

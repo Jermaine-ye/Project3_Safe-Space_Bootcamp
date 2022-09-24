@@ -11,6 +11,7 @@ import { BACKEND_URL } from '../constants';
 import PersonalParticularsForm from '../Components/PersonalParticularsForm';
 import CalendarDashboard from '../Components/CalendarDashboard';
 import CalendarFull from '../Components/CalendarFull';
+import QuoteDisplay from '../Components/QuoteDisplay';
 
 const DashboardClientScreen = () => {
   const [clientId, setClientId] = useState();
@@ -55,6 +56,7 @@ const DashboardClientScreen = () => {
 
   return (
     <div className="Page-body">
+      <QuoteDisplay />
       {/* <Container className="Content-body" size="md" px="xs"> */}
       <Grid grow>
         <Grid.Col span={1}>
@@ -62,7 +64,7 @@ const DashboardClientScreen = () => {
           <SidebarClient />
         </Grid.Col>
         <Grid.Col span={8}>
-          <CalendarFull />
+          <CalendarDashboard />
         </Grid.Col>
         <Outlet />
       </Grid>

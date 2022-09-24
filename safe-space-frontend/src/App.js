@@ -35,6 +35,8 @@ import ClientProfile from './Components/ClientProfile';
 import SidebarClient from './Components/SidebarClient';
 import Support from './Components/Support';
 import Unsplash from 'unsplash-js';
+import AdvicePreview from './Components/StaticInfo/AdvicePreview';
+import AdviceSingle from './Components/StaticInfo/AdviceSingle';
 
 // export const AuthContext = createContext();
 
@@ -82,6 +84,8 @@ export default function App() {
           {/* Route that renders about,advice,services,FAQ,Support page */}
           <Route path="/about" element={<About />} />
           <Route path="/advice" element={<Advice />} />
+          <Route path="/advice/single" element={<AdviceSingle />} />
+          <Route path="/advice/previewlist" element={<AdvicePreview />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/services" element={<Services />} />
           <Route path="/support" element={<SupportResources />} />
