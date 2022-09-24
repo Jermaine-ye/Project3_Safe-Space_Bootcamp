@@ -22,12 +22,6 @@ import { parseWithOptions } from 'date-fns/esm/fp';
 export default function Advice() {
   const [allArticles, setAllArticles] = useState('');
   const [photo, setPhoto] = useState('');
-  const [photo1, setPhoto1] = useState('');
-  const [photo2, setPhoto2] = useState('');
-  const [photo3, setPhoto3] = useState('');
-  const [photo4, setPhoto4] = useState('');
-  const [photo5, setPhoto5] = useState('');
-  const [photo6, setPhoto6] = useState('');
 
   const getAllArticles = async () => {
     let response = await axios.get(`${BACKEND_URL}/articles/`);
@@ -67,14 +61,19 @@ export default function Advice() {
                     <Title size={12}>
                       Written by: {article.author}
                     </Title> <br /> <Text> {article.content}</Text>
-                    <Card.Section mt="sm">
-                      <Image src={photo} height={160} alt="article photo" />
-                    </Card.Section>
                     <br />
                   </div>
                 ))
               : 'no articles listed'}
           </Card>
+          <br />
+          <Card withBorder shadow="sm" radius="md">
+            <Card.Section mt="sm">
+              <Image src={photo} height={400} alt="article photo" />
+            </Card.Section>
+          </Card>
+          <br />
+          <br />
         </Container>
       </div>
       <Footer />

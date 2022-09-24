@@ -1,30 +1,30 @@
-import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
-import { storage } from "../DB/firebase";
-import { BACKEND_URL } from "../constants";
+import React, { useEffect, useState, useContext } from 'react';
+import axios from 'axios';
+import { storage } from '../DB/firebase';
+import { BACKEND_URL } from '../constants';
 import {
   // getStorage,
   getDownloadURL,
   ref as storageRef,
   uploadBytes,
-} from "firebase/storage";
-import { useNavigate, Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+} from 'firebase/storage';
+import { useNavigate, Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 // import { useAuth } from "./AuthContext";
-import { AuthContext } from "../App";
+import { AuthContext } from '../App';
 
-const CLIENT_IMAGE_FOLDER_NAME = "client images";
+const CLIENT_IMAGE_FOLDER_NAME = 'client images';
 
 export default function PersonalParticularsForm() {
-  const [fileInputValue, setFileInputValue] = useState("");
+  const [fileInputValue, setFileInputValue] = useState('');
   const [fileInputFile, setFileInputFile] = useState(null);
   const [currImages, setCurrImages] = useState([]);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [gender, setGender] = useState("");
-  const [age, setAge] = useState("");
-  const [maritalStatus, setMaritalStatus] = useState("");
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [gender, setGender] = useState('');
+  const [age, setAge] = useState('');
+  const [maritalStatus, setMaritalStatus] = useState('');
   // const [description, setDiscription] = useState("");
   const { user } = useAuth0();
   const [currentUserr, setCurrentUserr] = useState(user);
@@ -40,7 +40,7 @@ export default function PersonalParticularsForm() {
     setUser();
   }, [user]);
 
-  const CLIENT_IMAGE_FOLDER_NAME = "client images";
+  const CLIENT_IMAGE_FOLDER_NAME = 'client images';
   const uploadImage = async (e, file, user) => {
     e.preventDefault();
     const storageRefInstance = storageRef(
@@ -105,7 +105,7 @@ export default function PersonalParticularsForm() {
       active: true,
       emailClient: user.email,
     });
-    navigate("/client/");
+    // navigate("/client/");
   };
 
   return (
@@ -142,9 +142,9 @@ export default function PersonalParticularsForm() {
           value={gender}
           onChange={(e) => setGender(e.target.value)}
         >
-          <option value={""}>State your gender</option>
-          <option value={"Male"}>Male</option>
-          <option value={"Female"}>Female</option>
+          <option value={''}>State your gender</option>
+          <option value={'Male'}>Male</option>
+          <option value={'Female'}>Female</option>
         </select>
 
         <label>Age:</label>
@@ -162,9 +162,9 @@ export default function PersonalParticularsForm() {
           value={maritalStatus}
           onChange={(e) => setMaritalStatus(e.target.value)}
         >
-          <option value={""}>State your relationship status</option>
-          <option value={"Single"}>Single</option>
-          <option value={"Married"}>Married</option>
+          <option value={''}>State your relationship status</option>
+          <option value={'Single'}>Single</option>
+          <option value={'Married'}>Married</option>
         </select>
         {/* <label>Description</label>
         <textarea

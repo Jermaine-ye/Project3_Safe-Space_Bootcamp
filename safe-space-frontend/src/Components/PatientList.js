@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { BACKEND_URL } from "../constants.js";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useAuth } from "./AuthContext.js";
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { BACKEND_URL } from '../constants.js';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth } from './AuthContext.js';
 import {
   Button,
   Card,
@@ -12,7 +12,7 @@ import {
   Grid,
   Container,
   Group,
-} from "@mantine/core";
+} from '@mantine/core';
 
 // similar to sighting exercises
 export default function PatientList() {
@@ -52,7 +52,7 @@ export default function PatientList() {
       console.log(clientInfo);
 
       return (
-        <div>
+        <div key={clientInfo.client.id}>
           <Link
             to={`/therapist/patients/${clientInfo.client.id}`}
             key={clientInfo.client.id}

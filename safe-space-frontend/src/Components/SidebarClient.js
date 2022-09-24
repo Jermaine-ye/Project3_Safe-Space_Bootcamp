@@ -27,12 +27,10 @@ export default function SidebarClient() {
     console.log(user);
 
     if (clientId) {
-      axios
-        .get(`${BACKEND_URL}/clients/key/${clientId}`)
-        .then((response) => {
-          setClientDetails(response.data);
-          console.log('client Details: ', response.data);
-        });
+      axios.get(`${BACKEND_URL}/clients/key/${clientId}`).then((response) => {
+        setClientDetails(response.data);
+        console.log('client Details: ', response.data);
+      });
     }
     console.log(clientDetails);
   }, [clientId]);
@@ -55,9 +53,10 @@ export default function SidebarClient() {
         <Link to="/client/journals">Journal List</Link>
         <br />
         <br />
+        <Link to="/client/newjournal">Curr Journal Entry</Link>
+        <br />
+        <br />
       </Container>
-      <CalendarFull/>
-
     </div>
   );
 }
