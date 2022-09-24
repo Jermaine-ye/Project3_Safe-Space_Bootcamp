@@ -1,115 +1,96 @@
 import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { BACKEND_URL } from "../constants";
 import { useAuth0 } from "@auth0/auth0-react";
-// import { auth, database } from "../Db/Firebase";
-// import {
-//   createUserWithEmailAndPassword,
-//   updateProfile,
-//   signInWithEmailAndPassword,
-// } from "firebase/auth";
-// import { setDoc, doc } from "firebase/firestore";
 
-const AuthContext = React.createContext();
+export const AuthContext = React.createContext();
 
 export function useAuth() {
   return useContext(AuthContext);
 }
-
+// USE THIS TO STORE STATES.
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState();
+  //set user data that you are going to pass down to different componenet.
+  const [currentUser, setCurrentUser] = useState([]);
+  const [clientInfo, setClientInfo] = useState([]);
+  const [therapistInfo, setTherapistInfo] = useState([]);
+  const [template, setTemplate] = useState(0);
+  //reset this to true when you finish editing the files
+  // const [loading, setLoading] = useState(false);
 
-  const [loading, setLoading] = useState(true);
+  // states for evaluation form. PUT request all at results page
+  const [speciality, setSpeciality] = useState(1);
+  const [agePreference, setAgePreference] = useState(1);
+  const [language, setLanguage] = useState(1);
+  const [gender, setGender] = useState("");
+  const [religion, setReligion] = useState(1);
 
-  async function signup(name, email, password) {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(async (cred) => {
-        console.log("Signed Up", cred.user.uid);
-
-        return cred;
-      })
-      .then(async (cred) => {
-        console.log("sent to db");
-        console.log(cred);
-        try {
-          console.log(cred.user.uid, email, name);
-          console.log(database);
-          console.log("try", "catch");
-
-          await updateProfile(auth.currentUser, { displayName: name });
-          await setDoc(
-            doc(
-              database,
-              `users`,
-              `${cred.user.uid}`,
-              "profile",
-              `${cred.user.uid}_profile`
-            ),
-            {
-              uid: cred.user.uid,
-              email: email,
-              name: name,
-              gender: "",
-              age: "",
-              smoker: "",
-              height: "",
-              religion: "",
-              location: "",
-              funfact: "",
-              bio: "",
-              promptfield: "",
-              image: [],
-            }
-          );
-
-          await setDoc(
-            doc(
-              database,
-              `users`,
-              `${cred.user.uid}`,
-              `hearts`,
-              `${cred.user.uid}_hearts`
-            ),
-            {
-              uid: [],
-            }
-          );
-        } catch (error) {
-          console.log(error);
-        }
-      })
-
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  async function login(email, password) {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log("Signed in! Welcome!", userCredential.user);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user);
-      setLoading(false);
-      console.log(user);
-    });
-    return unsubscribe;
-  }, []);
-
-  const value = {
-    user,
-    signup,
-    login,
+  // function required to setState in other components
+  const updateClientData = (data) => {
+    console.log(`updated client info for ID`, data);
+    setCurrentUser(data);
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {!loading && children}
-    </AuthContext.Provider>
-  );
+  const updateClientInfo = (data) => {
+    console.log(`updated client info for loggin`, data);
+    setClientInfo(data);
+  };
+
+  const updateTherapistInfo = (data) => {
+    console.log(`updated therapist info`, data);
+    setTherapistInfo(data);
+  };
+
+  const updateSpeciality = (info) => {
+    console.log(`updated client's speciality`, info);
+    setSpeciality(info);
+  };
+
+  const updateAgePreference = (info) => {
+    console.log(`updated client's age preference`, info);
+    setAgePreference(info);
+  };
+
+  const updateLanguage = (info) => {
+    console.log(`updated client's language preference`, info);
+    setLanguage(info);
+  };
+
+  const updateGender = (info) => {
+    console.log(`updated client's gender preference`, info);
+    setGender(info);
+  };
+
+  const updateReligion = (info) => {
+    console.log(`updated client's religion preference`, info);
+    setReligion(info);
+  };
+
+  const updateTemplate = (data) => {
+    console.log(`updated template id in Context`, data);
+    setTemplate(data);
+  };
+  // States and Functions that are passed down and USE by ALL components.
+  const value = {
+    updateClientData,
+    updateSpeciality,
+    updateAgePreference,
+    updateLanguage,
+    updateGender,
+    updateReligion,
+    updateClientInfo,
+    updateTherapistInfo,
+    updateTemplate,
+    currentUser,
+    speciality,
+    agePreference,
+    language,
+    gender,
+    religion,
+    clientInfo,
+    therapistInfo,
+    template,
+  };
+  // console.log(`values from authContext`, value);
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
