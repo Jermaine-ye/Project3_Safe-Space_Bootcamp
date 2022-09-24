@@ -35,7 +35,7 @@ export default function Advice() {
   const getPhotos = async () => {
     let photos = await axios.get(
       `https://api.unsplash.com/photos/random/?topics=mentalhealth&client_id=${process.env.REACT_APP_APP_ACCESS_KEY}`
-      // `https://api.unsplash.com/search/photos/?query=mentalhealth&client_id={APP_ACCESS_KEY}`
+      
     );
     // console.log('photos: ', photos.data.results);
     console.log('photos: ', photos.data);
@@ -51,7 +51,7 @@ export default function Advice() {
   return (
     <div className="Page-body">
       <NavBar />
-      {/* <div className="Content-container">
+      <div className="Content-container">
         <Container className="Content-body" size="md" px="xs">
           <Card withBorder shadow="sm" radius="md">
             {allArticles && allArticles.length
@@ -77,8 +77,8 @@ export default function Advice() {
           <br />
           <br />
         </Container>
-      </div> */}
-      <AdvicePreviewList />
+      </div>
+     
       <Footer />
     </div>
   );
