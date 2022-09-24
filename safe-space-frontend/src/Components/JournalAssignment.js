@@ -66,17 +66,17 @@ const JournalAssignment = () => {
   //   setClientId(response.data.id);
   // };
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      console.log("user info:", user);
-      console.log("email:", user.email);
-      console.log("therapistInfo: ", therapistInfo);
-      // setinput1();
-      console.log(user);
-      // callApi();
-      console.log(therapistInfo);
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     console.log("user info:", user);
+  //     console.log("email:", user.email);
+  //     console.log("therapistInfo: ", therapistInfo);
+  //     // setinput1();
+  //     console.log(user);
+  //     // callApi();
+  //     console.log(therapistInfo);
+  //   }
+  // }, [user]);
 
   const params = useParams();
   if (clientId !== params.clientId) {

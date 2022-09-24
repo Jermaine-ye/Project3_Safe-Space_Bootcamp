@@ -64,13 +64,13 @@ export default function App() {
         <button
           onClick={() => {
             logout();
-            navigate("/index");
+            navigate('/index');
           }}
         >
           LOG OUT
         </button>
         <button onClick={(e) => navigate(-1)}>back</button>
-        <button onClick={(e) => navigate("/")}>Home</button>
+        <button onClick={(e) => navigate('/')}>Home</button>
         <Routes>
           {/* check for admin boolean and render client and therapist pages according.  */}
           <Route path="/" element={<LandingPage />} />
@@ -167,10 +167,10 @@ export default function App() {
             element={<JournalTemplate />}
             /> */}
             {/* Route that renders indiv journal done by indiv patient on therapists's portal */}
-            <Route
+            {/* <Route
               path="/therapist/patients/:clientId/journal/:journalId"
               element={<JournalSingle />}
-            />
+            /> */}
             {/* Route that renders indiv memo by therapist(past & present) abt the indiv patient on therapists's portal */}
             <Route
               path="/therapist/patients/:clientId/memos/:memoId"
@@ -194,7 +194,7 @@ export default function App() {
           </Route>
           {/* SET PRIVATE ROUTES FOR THERAPIST */}
           {/* Route that matches all other paths */}
-          <Route path="*" element={"Nothing here!"} />
+          <Route path="*" element={'Nothing here!'} />
         </Routes>
       </div>
     </AuthProvider>
