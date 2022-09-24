@@ -9,6 +9,8 @@ import { useAuth } from './AuthContext.js';
 
 import PatientProfile from './PatientProfile.js';
 import TherapistInfo from './TherapistInfo';
+import CalendarFull from './CalendarFull.js';
+import CalendarDashboard from './CalendarDashboard';
 
 export default function SidebarClient() {
   const [clientId, setClientId] = useState();
@@ -54,6 +56,8 @@ export default function SidebarClient() {
         <br />
         <br />
       </Container>
+      <CalendarFull/>
+
     </div>
   );
 }
