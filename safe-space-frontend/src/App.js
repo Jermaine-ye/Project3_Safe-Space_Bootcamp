@@ -1,43 +1,43 @@
-import "./App.css";
-import React, { useState, useEffect, createContext } from "react";
-import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
-import LandingPage from "./Components/LandingPage";
-import EvaluationScreen from "./Screens/EvaluationScreen";
-import EvaluationFormPreference from "./Components/EvaluationFormPreference";
-import EvaluationFormSpecialty from "./Components/EvaluationFormSpecialty";
-import EvaluationResults from "./Components/EvaluationResults";
-import DashboardClientScreen from "./Screens/DashboardClientScreen";
-import DashboardTherapistScreen from "./Screens/DashboardTherapistScreen";
-import JournalList from "./Components/JournalList";
-import JournalSingle from "./Components/JournalSingle";
-import JournalForm from "./Components/JournalForm";
-import PersonalParticularsForm from "./Components/PersonalParticularsForm";
-import CalendarFull from "./Components/CalendarFull";
-import TherapistInfo from "./Components/TherapistInfo";
-import MemoForm from "./Components/MemoForm";
-import MemoSingle from "./Components/MemoSingle";
-import MemoList from "./Components/MemoList";
-import JournalAssignment from "./Components/JournalAssignment";
-import PrevApptHistory from "./Components/PrevApptHistory";
-import PatientProfile from "./Components/PatientProfile";
-import About from "./Components/StaticInfo/About";
-import Advice from "./Components/StaticInfo/Advice";
-import FAQ from "./Components/StaticInfo/FAQ";
-import Services from "./Components/StaticInfo/Services";
-import SupportResources from "./Components/StaticInfo/SupportResources";
-import PatientList from "./Components/PatientList";
-import PatientsUpcoming from "./Components/PatientsUpcoming";
-import { AuthProvider } from "./Components/AuthContext";
-import { useAuth0 } from "@auth0/auth0-react";
-import PrivateRoutes from "./PrivateRoutes";
-import PrivateRoutesClient from "./PrivateRoutesClient";
-import ClientProfile from "./Components/ClientProfile";
-import SidebarClient from "./Components/SidebarClient";
-import Support from "./Components/Support";
-import Unsplash from "unsplash-js";
-import AdvicePreview from "./Components/StaticInfo/AdvicePreview";
-import AdviceSingle from "./Components/StaticInfo/AdviceSingle";
-import AdvicePreviewList from "./Components/StaticInfo/AdvicePreviewList";
+import './App.css';
+import React, { useState, useEffect, createContext } from 'react';
+import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
+import LandingPage from './Components/LandingPage';
+import EvaluationScreen from './Screens/EvaluationScreen';
+import EvaluationFormPreference from './Components/EvaluationFormPreference';
+import EvaluationFormSpecialty from './Components/EvaluationFormSpecialty';
+import EvaluationResults from './Components/EvaluationResults';
+import DashboardClientScreen from './Screens/DashboardClientScreen';
+import DashboardTherapistScreen from './Screens/DashboardTherapistScreen';
+import JournalList from './Components/JournalList';
+import JournalSingle from './Components/JournalSingle';
+import JournalForm from './Components/JournalForm';
+import PersonalParticularsForm from './Components/PersonalParticularsForm';
+import CalendarFull from './Components/CalendarFull';
+import TherapistInfo from './Components/TherapistInfo';
+import MemoForm from './Components/MemoForm';
+import MemoSingle from './Components/MemoSingle';
+import MemoList from './Components/MemoList';
+import JournalAssignment from './Components/JournalAssignment';
+import PrevApptHistory from './Components/PrevApptHistory';
+import PatientProfile from './Components/PatientProfile';
+import About from './Components/StaticInfo/About';
+import Advice from './Components/StaticInfo/Advice';
+import FAQ from './Components/StaticInfo/FAQ';
+import Services from './Components/StaticInfo/Services';
+import SupportResources from './Components/StaticInfo/SupportResources';
+import PatientList from './Components/PatientList';
+import PatientsUpcoming from './Components/PatientsUpcoming';
+import { AuthProvider } from './Components/AuthContext';
+import { useAuth0 } from '@auth0/auth0-react';
+import PrivateRoutes from './PrivateRoutes';
+import PrivateRoutesClient from './PrivateRoutesClient';
+import ClientProfile from './Components/ClientProfile';
+import SidebarClient from './Components/SidebarClient';
+import Support from './Components/Support';
+import Unsplash from 'unsplash-js';
+import AdvicePreview from './Components/StaticInfo/AdvicePreview';
+import AdviceSingle from './Components/StaticInfo/AdviceSingle';
+import AdvicePreviewList from './Components/StaticInfo/AdvicePreviewList';
 
 // export const AuthContext = createContext();
 
@@ -69,13 +69,13 @@ export default function App() {
         <button
           onClick={() => {
             logout();
-            navigate("/index");
+            navigate('/index');
           }}
         >
           LOG OUT
         </button>
         <button onClick={(e) => navigate(-1)}>back</button>
-        <button onClick={(e) => navigate("/")}>Home</button>
+        <button onClick={(e) => navigate('/')}>Home</button>
         <Routes>
           {/* check for admin boolean and render client and therapist pages according.  */}
           <Route path="/" element={<LandingPage />} />
@@ -86,7 +86,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/advice" element={<Advice />} />
           <Route path="/advice/single" element={<AdviceSingle />} />
-          <Route path="/advice/previewlist" element={<AdvicePreviewList />} />
+          {/* <Route path="/advice/previewlist" element={<AdvicePreviewList />} /> */}
           <Route path="/advice/preview" element={<AdvicePreview />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/services" element={<Services />} />
@@ -201,7 +201,7 @@ export default function App() {
           </Route>
           {/* SET PRIVATE ROUTES FOR THERAPIST */}
           {/* Route that matches all other paths */}
-          <Route path="*" element={"Nothing here!"} />
+          <Route path="*" element={'Nothing here!'} />
         </Routes>
       </div>
     </AuthProvider>

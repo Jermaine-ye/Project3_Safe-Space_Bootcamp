@@ -27,6 +27,7 @@ export default function SidebarClient() {
   const [template, setTemplate] = useState();
   const [clientFirstName, setClientFirstName] = useState('');
   const [clientLastName, setClientLastName] = useState('');
+  const [clientPhoto, setClientPhoto] = useState('');
   const navigate = useNavigate();
 
   const { user, logout } = useAuth0();
@@ -38,6 +39,7 @@ export default function SidebarClient() {
     console.log('c cuser: ', currentUser);
     setClientFirstName(currentUser[0].firstName);
     setClientLastName(currentUser[0].lastName);
+    setClientPhoto(currentUser[0].photoLink);
 
     if (clientId) {
       axios.get(`${BACKEND_URL}/clients/key/${clientId}`).then((response) => {
@@ -63,7 +65,7 @@ export default function SidebarClient() {
           className="SideBar-profile-pic"
           // width={300}
           radius="xl"
-          src="https://images.unsplash.com/photo-1627552245715-77d79bbf6fe2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=640&q=80"
+          src={clientPhoto}
           alt="User Profile"
         />
         <br />
