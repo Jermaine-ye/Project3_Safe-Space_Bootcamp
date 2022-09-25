@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { BACKEND_URL } from '../constants.js';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useAuth } from './AuthContext.js';
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { BACKEND_URL } from "../constants.js";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "./AuthContext.js";
 import {
   Button,
   Card,
@@ -12,7 +12,7 @@ import {
   Grid,
   Container,
   Group,
-} from '@mantine/core';
+} from "@mantine/core";
 
 // similar to sighting exercises
 export default function PatientList() {
@@ -59,13 +59,13 @@ export default function PatientList() {
           >
             <Card shadow="sm" p="lg" radius="md" withBorder>
               {clientInfo.client.id}
-              <Group position="apart" mt="md" mb="xs">
-                <Text>
-                  {clientInfo.client.firstName}
 
-                  {clientInfo.client.lastName}
-                </Text>
-              </Group>
+              <Text>
+                {clientInfo.client.firstName}
+                {` `}
+                {clientInfo.client.lastName}
+              </Text>
+
               <Text size="sm" color="dimmed">
                 have the patient checked in today?
               </Text>
@@ -110,11 +110,13 @@ export default function PatientList() {
   }
   return (
     <div>
-      <h2>PatientList</h2>
+      <Container>
+        <h2>PatientList</h2>
 
-      {clientList && clientList.length !== 0 ? <ul>{finalList}</ul> : null}
+        {clientList && clientList.length !== 0 ? <ul>{finalList}</ul> : null}
 
-      <Link to="/">Home</Link>
+        <Link to="/">Home</Link>
+      </Container>
     </div>
   );
 }

@@ -13,6 +13,7 @@ import {
   Textarea,
 } from "@mantine/core";
 import { useAuth } from "./AuthContext.js";
+import "./EvaluationFormPref.css";
 
 import { BACKEND_URL } from "../constants.js";
 export default function EvaluationFormPreference() {
@@ -100,27 +101,35 @@ export default function EvaluationFormPreference() {
   };
 
   return (
-    <div>
-      <h2>EvaluationFormPreference</h2>
-      <div className="question-section">
-        <div className="question-count">
-          <span>Question {currentQuestion + 1}</span>/{questions.length}
+    <div className="align">
+      <Container>
+        <h2>EvaluationFormPreference</h2>
+        <div className="app">
+          <div className="question-section">
+            <div className="question-count">
+              <span>Question {currentQuestion + 1}</span>/{questions.length}
+            </div>
+            <div className="question-text">
+              {questions[currentQuestion].questionText}
+            </div>
+          </div>
+          <div className="answer-section">
+            {questions[currentQuestion].answerOptions.map(
+              (answerOption, index) => (
+                <button
+                  className="buttonForm"
+                  name={index}
+                  onClick={(e) =>
+                    handleAnswerOptionClick(answerOption.isClicked, e)
+                  }
+                >
+                  {answerOption.answerText}
+                </button>
+              )
+            )}
+          </div>
         </div>
-        <div className="question-text">
-          {questions[currentQuestion].questionText}
-        </div>
-      </div>
-      <div className="answer-section">
-        {questions[currentQuestion].answerOptions.map((answerOption, index) => (
-          <button
-            name={index}
-            onClick={(e) => handleAnswerOptionClick(answerOption.isClicked, e)}
-          >
-            {answerOption.answerText}
-          </button>
-        ))}
-      </div>
-      <Link to="/">Home</Link>
+      </Container>
     </div>
   );
 }
