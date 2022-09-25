@@ -84,9 +84,9 @@ export default function App() {
           {/* Route that renders about,advice,services,FAQ,Support page */}
           <Route path="/about" element={<About />} />
           <Route path="/advice" element={<Advice />} />
-          <Route path="/advice/single" element={<AdviceSingle />} />
+          {/* <Route path="/advice/single" element={<AdviceSingle />} /> */}
           {/* <Route path="/advice/previewlist" element={<AdvicePreviewList />} /> */}
-          <Route path="/advice/preview" element={<AdvicePreview />} />
+          {/* <Route path="/advice/preview" element={<AdvicePreview />} /> */}
           <Route path="/faq" element={<FAQ />} />
           <Route path="/services" element={<Services />} />
           <Route path="/support" element={<SupportResources />} />
