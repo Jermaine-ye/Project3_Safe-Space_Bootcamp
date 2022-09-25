@@ -49,13 +49,13 @@ export default function CalendarModal(props) {
       if (user && user[`https://any-namespace/roles`].length !== 0) {
         getOwnInfoForTherapist();
 
-        //TO FIX THIS ROUTE LATER
-        navigate("../therapist/calendardash");
+        //FIXED ROUTE
+        navigate("../../therapist");
       } else {
         getOwnInfoForClient();
 
-        //TO FIX THIS ROUTE LATER
-        navigate("../../therapist/calendardash");
+        //FIXED ROUTE
+        navigate("../../client");
       }
 
       props.setModalVisible(false);
@@ -69,8 +69,8 @@ export default function CalendarModal(props) {
 
       getOwnInfoForTherapist();
 
-      //TO FIX THIS ROUTE LATER
-      navigate("../therapist/calendardash");
+      //FIXED ROUTE
+      navigate("../../therapist");
 
       props.setModalVisible(false);
     }

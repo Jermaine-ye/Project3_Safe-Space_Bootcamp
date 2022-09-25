@@ -1,5 +1,5 @@
-import React, { createContext } from 'react';
-import axios from 'axios';
+import React, { createContext } from "react";
+import axios from "axios";
 import {
   Button,
   Card,
@@ -8,20 +8,20 @@ import {
   Image,
   Container,
   Grid,
-} from '@mantine/core';
+} from "@mantine/core";
 import {
   useNavigate,
   useParams,
   useLocation,
   Link,
   Outlet,
-} from 'react-router-dom';
-import { BACKEND_URL } from '../constants';
-import { useContext, useEffect, useState } from 'react';
-import { useAuth } from './AuthContext';
-import { useAuth0 } from '@auth0/auth0-react';
+} from "react-router-dom";
+import { BACKEND_URL } from "../constants";
+import { useContext, useEffect, useState } from "react";
+import { useAuth } from "./AuthContext";
+import { useAuth0 } from "@auth0/auth0-react";
 // import { AuthContext } from "../App";
-import sslogo from '../images/sslogo.png';
+import sslogo from "../images/sslogo.png";
 
 export default function NavBar() {
   // const hello = useContext(AuthContext);
@@ -43,7 +43,7 @@ export default function NavBar() {
   } = useAuth();
 
   const handleLogin = async () => {
-    console.log('Client logging in!');
+    console.log("Client logging in!");
     loginWithRedirect();
   };
 
@@ -176,7 +176,7 @@ export default function NavBar() {
       console.log(`running`);
       getAllInfo();
       // updateClient();
-      console.log('user:', user);
+      console.log("user:", user);
     }
   }, [user]);
 
@@ -184,11 +184,11 @@ export default function NavBar() {
     console.log(event);
 
     if (user[`https://any-namespace/roles`].length !== 0) {
-      navigate('/therapist/');
+      navigate("/therapist/");
     } else if (user[`https://any-namespace/roles`].length === 0) {
-      navigate('/client/');
+      navigate("/client/");
     } else {
-      navigate('/');
+      navigate("/");
     }
   };
 
