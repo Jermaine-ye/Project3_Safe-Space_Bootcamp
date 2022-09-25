@@ -204,7 +204,6 @@ export default function NavBar() {
               className="Footer-logo"
             />
           </Grid.Col> */}
-
           <Grid.Col span="auto">
             <Link to="/">Home</Link>
           </Grid.Col>

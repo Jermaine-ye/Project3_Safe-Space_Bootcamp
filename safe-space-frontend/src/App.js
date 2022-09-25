@@ -37,6 +37,7 @@ import Support from './Components/Support';
 import Unsplash from 'unsplash-js';
 import AdvicePreview from './Components/StaticInfo/AdvicePreview';
 import AdviceSingle from './Components/StaticInfo/AdviceSingle';
+import AdvicePreviewList from './Components/StaticInfo/AdvicePreviewList';
 
 // export const AuthContext = createContext();
 
@@ -65,7 +66,7 @@ export default function App() {
     <AuthProvider>
       <div className="App">
         {/* Placeholder for ease of use */}
-        <button
+        {/* <button
           onClick={() => {
             logout();
             navigate('/index');
@@ -74,7 +75,7 @@ export default function App() {
           LOG OUT
         </button>
         <button onClick={(e) => navigate(-1)}>back</button>
-        <button onClick={(e) => navigate('/')}>Home</button>
+        <button onClick={(e) => navigate('/')}>Home</button> */}
         <Routes>
           {/* check for admin boolean and render client and therapist pages according.  */}
           <Route path="/" element={<LandingPage />} />
@@ -85,7 +86,8 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/advice" element={<Advice />} />
           <Route path="/advice/single" element={<AdviceSingle />} />
-          <Route path="/advice/previewlist" element={<AdvicePreview />} />
+          <Route path="/advice/previewlist" element={<AdvicePreviewList />} />
+          <Route path="/advice/preview" element={<AdvicePreview />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/services" element={<Services />} />
           <Route path="/support" element={<SupportResources />} />

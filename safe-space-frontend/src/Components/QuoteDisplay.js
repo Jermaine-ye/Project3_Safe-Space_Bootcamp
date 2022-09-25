@@ -14,6 +14,7 @@ import {
   Group,
   Image,
 } from '@mantine/core';
+import MoodDisplay from './MoodDisplay.js';
 
 export default function QuoteDisplay() {
   const [quote, setQuote] = useState('');
@@ -72,36 +73,38 @@ export default function QuoteDisplay() {
   }, []);
 
   return (
-    <div>
-      <Container className="Content-body" size="xl" px="xs">
-        <Card shadow="sm" p="md">
-          <Grid grow>
-            <Grid.Col span={6}>
-              <Card shadow="sm" p="md">
-                <Card.Section mt="sm">
-                  <Image src={photo} height={250} alt="photo display" />
-                </Card.Section>
-              </Card>
-            </Grid.Col>
+    <div className="Quote-Header">
+      {/* <Container size="xl" px="xs"> */}
+      <Container fluid className="SideBar-Content-body" px="xs">
+        {/* <Card shadow="sm" p="md"> */}
+        <Grid grow>
+          <Grid.Col span={6}>
+            <Card shadow="sm" p="md">
+              <Card.Section mt="sm">
+                <Image src={photo} height={250} alt="photo display" />
+              </Card.Section>
+            </Card>
+          </Grid.Col>
+          <Grid.Col span={6}>
+            <Text size={15} weight={400} mt="md">
+              {quote}
+            </Text>
+            <Text size="sm" color="dimmed">
+              -{author}
+            </Text>
 
-            <Grid.Col span={6}>
-              <Text weight={400} size="lg" mt="md">
-                {quote}
-              </Text>
-              <Text size="sm" color="dimmed">
-                -{author}
-              </Text>
+            <Text weight={600} size={14} mt="md">
+              {date.toLocaleTimeString('en-GB')}
               <br />
-              <Text weight={400} size="lg" mt="md">
-                {date.toLocaleTimeString('en-GB')}
-                <br />
-                {date.toLocaleDateString('en-GB')}
-                <br />
-                {day}
-              </Text>{' '}
-            </Grid.Col>
-          </Grid>
-        </Card>
+              {date.toLocaleDateString('en-GB')}
+              <br />
+              {day}
+            </Text>
+            <br />
+            <MoodDisplay />
+          </Grid.Col>
+        </Grid>
+        {/* </Card> */}
       </Container>
     </div>
   );

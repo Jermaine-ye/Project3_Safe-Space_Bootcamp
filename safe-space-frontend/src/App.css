@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 .App {
   text-align: center;
+  font-family: 'Roboto', sans-serif;
 }
 
 .App-logo {
@@ -9,7 +12,7 @@
 
 html,
 body {
-  height: 90%;
+  height: fit;
 }
 
 a:visited {
@@ -63,6 +66,15 @@ a:active {
   color: #ffff;
   text-decoration: none;
 }
+
+.Nav-bar a:visited {
+  text-decoration: none;
+}
+
+.Nav-bar a:active {
+  text-decoration: none;
+}
+
 .Nav-bar-wrapper {
   height: 100px;
   padding-left: 50px;
@@ -117,3 +129,66 @@ a:active {
   align-items: center;
   flex-direction: column;
 }
+
+.Mood-Display {
+  align-items: center;
+  flex-direction: row;
+  display: flex;
+}
+
+/* To find the correct name for component styling */
+.mantine-pbfq37 {
+  /* padding-left: 130px; */
+
+  justify-content: center;
+}
+
+/* Side Bar information */
+
+.Side-bar {
+  background-color: #283c63;
+  align-content: center;
+  align-content: center;
+  padding-top: 40px;
+  height: 100%;
+  width: 400px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.Sidebar-logout-btn {
+  margin-top: 270px;
+  /* this is to control the bottom of the side bar */
+  margin-bottom: 35px;
+}
+
+.Sidebar-a {
+  padding-top: 40px;
+}
+
+.Side-bar a {
+  align-content: center;
+  color: #ffff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.SideBar-profile-pic img {
+  height: 300px;
+}
+
+/* Dashboard Styling */
+
+.Quote-Header {
+  height: 280px;
+}
+
+/* .mantine-Col-root.Dashboard-sidebar {
+  margin-bottom: 40px;
+} */
+
+/* Calendar Card */
+/* .mantine-1xc2888 {
+  background-color: ;
+} */
