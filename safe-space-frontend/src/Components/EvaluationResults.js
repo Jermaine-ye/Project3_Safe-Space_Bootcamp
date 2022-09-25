@@ -10,7 +10,16 @@ import {
   Link,
   Outlet,
 } from "react-router-dom";
-import { Card, Button } from "react-bootstrap";
+// import { Card, Button } from "react-bootstrap";
+import {
+  Card,
+  Image,
+  Text,
+  Badge,
+  Button,
+  Group,
+  Container,
+} from "@mantine/core";
 
 export default function EvaluationResults() {
   const {
@@ -123,9 +132,9 @@ export default function EvaluationResults() {
 
   //ON SUBMIT TO SET THERAPIST FOR CLIENT AND UPDATE NECESSARY INFO
   const ChoosenTherapist = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     console.log(e);
-    console.log(e.target.value);
+    // console.log(e.target.value);
     const accessToken = await getAccessTokenSilently({
       audience: process.env.REACT_APP_AUDIENCE,
       scope: process.env.REACT_APP_SCOPE,
@@ -166,42 +175,63 @@ export default function EvaluationResults() {
         feedback: null,
         //how do you deconstructure then based on user's choice?
 
-        therapistID: e.target.value,
+        therapistID: e,
         clientID: clientInfo.id,
       },
       {
         headers: { Authorization: `Bearer ${accessToken}` },
       }
     );
-    // navigate("/client/");
+    navigate("/client/");
   };
 
   const displayAllTherapists = assignedTherapists.map((elem) => {
+    console.log(elem.id);
     return (
-      <Card key={elem.id}>
-        <Card.Body>
-          <Card.Title>{`${elem.firstName} ${elem.lastName}`}</Card.Title>
-          {/* <img
-            src={`${elem.photoLink}`}
-            alt={`${elem.photoLink}`}
-            className="img-thumbnail"
-          /> */}
-          <Card.Text>{elem.gender}</Card.Text>
-          <Card.Text>{elem.educationQualification}</Card.Text>
-          <Button variant="primary" value={elem.id} onClick={ChoosenTherapist}>
-            Pick Me
-          </Button>
-        </Card.Body>
-      </Card>
+      <Container>
+        <Card key={elem.id}>
+          <Card.Section>
+            <Image
+              radius="md"
+              height={80}
+              src={`${elem.photoLink}`}
+              alt={`${elem.photoLink}`}
+              className="img-thumbnail"
+            />
+          </Card.Section>
+          <Card.Section>
+            <Text weight={500}>{`${elem.firstName} ${elem.lastName}`}</Text>
+            <Text>{elem.gender}</Text>
+            <Text size="sm" color="dimmed">
+              {elem.educationQualification}
+            </Text>
+          </Card.Section>
+          <Group>
+            <Button
+              variant="light"
+              fullWidth
+              mt="md"
+              radius="md"
+              value={elem.id}
+              onClick={(e) => ChoosenTherapist(elem.id)}
+            >
+              Pick Me
+            </Button>
+          </Group>
+        </Card>
+      </Container>
     );
   });
 
   return (
     <div>
-      Evaluation Results
-      {/* Display the results here! */}
-      {displayAllTherapists}
-      <Link to="/">Home</Link>
+      <Container>
+        <h2>Evaluation Results</h2>
+        <Text weight={600}>Specialists Chosen For You!</Text>
+        {/* Display the results here! */}
+        {displayAllTherapists}
+        <Link to="/">Home</Link>
+      </Container>
     </div>
   );
 }

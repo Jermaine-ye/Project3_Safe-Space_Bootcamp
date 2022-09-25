@@ -148,10 +148,12 @@ export default function NavBar() {
             console.log(currTher);
           }
         });
-        const therResponse = await axios.get(
-          `${BACKEND_URL}/therapists/${currTher.email}`
-        );
-        updateTherapistInfo(therResponse.data);
+        if (currTher) {
+          const therResponse = await axios.get(
+            `${BACKEND_URL}/therapists/${currTher.email}`
+          );
+          updateTherapistInfo(therResponse.data);
+        }
       }
     } else {
       const response = await axios.get(

@@ -18,6 +18,8 @@ import { useAuth0 } from '@auth0/auth0-react';
 import QuoteDisplay from './QuoteDisplay';
 
 export default function LandingPage() {
+  const { user } = useAuth0();
+  const navigate = useNavigate();
   // const { updateClientInfo, currentUser, updateTherapistInfo } = useAuth();
   // const [emailClient, setEmailClient] = useState();
   // const [emailTherapist, setEmailTherapist] = useState();
@@ -47,6 +49,17 @@ export default function LandingPage() {
   //     }
   //   }
   // }, [isAuthenticated]);
+  const DashBoardNav = (event) => {
+    console.log(event);
+    //TO CHANGE TO CORRECT ROUTE LATER.
+    if (user[`https://any-namespace/roles`].length !== 0) {
+      navigate("/therapist/");
+    } else if (user[`https://any-namespace/roles`].length === 0) {
+      navigate("/client/");
+    } else {
+      navigate("/");
+    }
+  };
 
   return (
     <div>
@@ -72,7 +85,10 @@ export default function LandingPage() {
       <Link to="/authclient"> test PrivateRoutesClient</Link>
       <br />
       <Link to="/therapist/patients/profile/"> To Therapist DashBoard</Link>
+      <br />
       <Footer />
+
+      <button onClick={() => DashBoardNav()}>To DashBoard</button>
     </div>
   );
 }

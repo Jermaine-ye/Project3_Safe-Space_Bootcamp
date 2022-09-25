@@ -109,8 +109,8 @@ export default function MemoSingle(props) {
 
             <label>
               {' '}
-              Patient Name: {clientDetails.firstName}
-              {clientDetails.lastName}
+              {/* Patient Name: {clientDetails.firstName} {clientDetails.lastName} */}
+              Patient Name: {clientDetails.firstName} {clientDetails.lastName}
             </label>
 
             <br />
@@ -151,7 +151,11 @@ export default function MemoSingle(props) {
             <br />
           </form>
         </Grid>
-        <button onClick={(e) => navigate(-1)}>back</button>
+        <button
+          onClick={(e) => navigate(`/therapist/patients/${clientId}/allmemo`)}
+        >
+          back
+        </button>
       </Container>
     </div>
   );

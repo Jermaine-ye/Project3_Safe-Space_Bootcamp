@@ -1,30 +1,44 @@
-import React, { useEffect, useState, useContext } from 'react';
-import axios from 'axios';
-import { storage } from '../DB/firebase';
-import { BACKEND_URL } from '../constants';
+import React, { useEffect, useState, useContext } from "react";
+import axios from "axios";
+import { storage } from "../DB/firebase";
+import { BACKEND_URL } from "../constants";
 import {
   // getStorage,
   getDownloadURL,
   ref as storageRef,
   uploadBytes,
-} from 'firebase/storage';
-import { useNavigate, Link } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
+} from "firebase/storage";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 // import { useAuth } from "./AuthContext";
-import { AuthContext } from '../App';
+import { AuthContext } from "../App";
+import {
+  Button,
+  Card,
+  Text,
+  Title,
+  Grid,
+  Container,
+  Group,
+  NativeSelect,
+  Image,
+  FileInput,
+  Textarea,
+  NumberInput,
+} from "@mantine/core";
 
-const CLIENT_IMAGE_FOLDER_NAME = 'client images';
+const CLIENT_IMAGE_FOLDER_NAME = "client images";
 
 export default function PersonalParticularsForm() {
-  const [fileInputValue, setFileInputValue] = useState('');
+  const [fileInputValue, setFileInputValue] = useState("");
   const [fileInputFile, setFileInputFile] = useState(null);
-  const [currImages, setCurrImages] = useState([]);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [gender, setGender] = useState('');
-  const [age, setAge] = useState('');
-  const [maritalStatus, setMaritalStatus] = useState('');
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [gender, setGender] = useState("");
+  const [age, setAge] = useState("");
+  const [maritalStatus, setMaritalStatus] = useState("");
   // const [description, setDiscription] = useState("");
   const { user } = useAuth0();
   const [currentUserr, setCurrentUserr] = useState(user);
@@ -40,7 +54,7 @@ export default function PersonalParticularsForm() {
     setUser();
   }, [user]);
 
-  const CLIENT_IMAGE_FOLDER_NAME = 'client images';
+  const CLIENT_IMAGE_FOLDER_NAME = "client images";
   const uploadImage = async (e, file, user) => {
     e.preventDefault();
     const storageRefInstance = storageRef(
@@ -105,90 +119,151 @@ export default function PersonalParticularsForm() {
       active: true,
       emailClient: user.email,
     });
-    // navigate("/client/");
+    navigate("/evaluation/1");
   };
 
   return (
     <div>
-      <h2>PersonalParticularsForm</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Name:</label>
-        <textarea
-          className="text-box"
-          name="firstName"
-          placeholder="First Name"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-        <textarea
-          className="text-box"
-          name="lastName"
-          placeholder="Last Name"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-        />
-        <label>Phone Number:</label>
-        <input
-          className="text-box"
-          name="phoneNumber"
-          type="number"
-          placeholder="Please enter your contact number."
-          value={phoneNumber}
-          onChange={(e) => setPhoneNumber(e.target.value)}
-        />
-        <label>Gender:</label>
-        <select
-          name="gender"
-          value={gender}
-          onChange={(e) => setGender(e.target.value)}
-        >
-          <option value={''}>State your gender</option>
-          <option value={'Male'}>Male</option>
-          <option value={'Female'}>Female</option>
-        </select>
-
-        <label>Age:</label>
-        <input
-          name="age"
-          value={age}
-          type="number"
-          placeholder="Please enter your age."
-          onChange={(e) => setAge(e.target.value)}
-        />
-
-        <label>Marital Status</label>
-        <select
-          name="MaritalStatus"
-          value={maritalStatus}
-          onChange={(e) => setMaritalStatus(e.target.value)}
-        >
-          <option value={''}>State your relationship status</option>
-          <option value={'Single'}>Single</option>
-          <option value={'Married'}>Married</option>
-        </select>
-        {/* <label>Description</label>
+      <h1>PersonalParticularsForm</h1>
+      <Container>
+        <form onSubmit={handleSubmit}>
+          {/* <label>Name:</label>
+          <textarea
+            className="text-box"
+            name="firstName"
+            placeholder="First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          /> */}
+          <Textarea
+            label="First Name"
+            placeholder="Please enter your first name"
+            withAsterisk
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          {/* <textarea
+            className="text-box"
+            name="lastName"
+            placeholder="Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          /> */}
+          <Textarea
+            label="Last Name"
+            placeholder="Please enter your last name"
+            withAsterisk
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+          {/* <label>Phone Number:</label>
+          <input
+            className="text-box"
+            name="phoneNumber"
+            type="number"
+            placeholder="Please enter your contact number."
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+          /> */}
+          <NumberInput
+            placeholder="Enter your phone number"
+            label="Phone Number"
+            withAsterisk
+            onChange={setPhoneNumber}
+          />
+          {/* <label>Gender:</label>
+          <select
+            name="gender"
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+          >
+            <option value={""}>State your gender</option>
+            <option value={"Male"}>Male</option>
+            <option value={"Female"}>Female</option>
+          </select> */}
+          <NativeSelect
+            data={[
+              { value: null, label: "Choose one" },
+              { value: "Male", label: "Male" },
+              { value: "Female", label: "Female" },
+            ]}
+            label="Gender"
+            placeholder="Pick your gender"
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+          />
+          {/* <label>Age:</label>
+          <input
+            name="age"
+            value={age}
+            type="number"
+            placeholder="Please enter your age."
+            onChange={(e) => setAge(e.target.value)}
+          /> */}
+          <NumberInput
+            placeholder="Enter your age"
+            label="Age"
+            withAsterisk
+            value={age}
+            onChange={setAge}
+          />
+          {/* <label>Marital Status</label>
+          <select
+            name="MaritalStatus"
+            value={maritalStatus}
+            onChange={(e) => setMaritalStatus(e.target.value)}
+          >
+            <option value={""}>State your relationship status</option>
+            <option value={"Single"}>Single</option>
+            <option value={"Married"}>Married</option>
+          </select> */}
+          <NativeSelect
+            data={[
+              { value: null, label: "State your relationship status" },
+              { value: "Single", label: "Single" },
+              { value: "Married", label: "Married" },
+            ]}
+            label="Marital Status"
+            placeholder="State your relationship status"
+            value={maritalStatus}
+            onChange={(e) => setMaritalStatus(e.target.value)}
+          />
+          {/* <label>Description</label>
         <textarea
           name="description"
           value={description}
           onChange={(e) => setDiscription(e.target.value)}
           placeholder="Tell us about you???"
         /> */}
-        <label>
-          Upload your profile images here!
-          <input
-            type="file"
-            onChange={(e) => {
-              console.log(e.target.files[0]);
-              setFileInputFile(e.target.files[0]);
-              setFileInputValue(e.target.files[0].name);
-            }}
+          {/* <label>
+            Upload your profile images here!
+            <input
+              type="file"
+              onChange={(e) => {
+                console.log(e.target.files[0]);
+                setFileInputFile(e.target.files[0]);
+                setFileInputValue(e.target.files[0].name);
+              }}
+            />
+            <Button
+              variant="light"
+              onClick={(e) => uploadImage(e)}
+              className="uploadbtn"
+            >
+              Upload!
+            </Button>
+          </label> */}
+          <FileInput
+            placeholder="pick file"
+            label="Upload your Profile Photo"
+            withAsterisk
+            value={fileInputFile}
+            onChange={setFileInputFile}
           />
-          {/* <button onClick={(e) => uploadImage(e)} className="uploadbtn">
-            Upload!
-          </button> */}
-        </label>
-        <button>Submit</button>
-      </form>
+
+          <button>Submit</button>
+        </form>
+      </Container>
       <Link to="/">Home</Link>
     </div>
   );
