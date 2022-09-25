@@ -66,7 +66,7 @@ class JournalsController {
     console.log('journalid:', journalId);
 
     try {
-      const data = await this.model.findByPk(journalId);
+      const data = await this.model.findByPk(journalId.journalId);
 
       await data.update({
         updatedAt: updatedAt,
