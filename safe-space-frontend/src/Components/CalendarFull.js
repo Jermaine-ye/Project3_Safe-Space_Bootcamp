@@ -113,17 +113,6 @@ export default function CalendarFull() {
     setSelected(event);
     console.log("this is running");
     const { id, type, user } = event;
-    console.log(event);
-    console.log(selected);
-    // if (type === "appt" && user === "client") {
-    // } else if (type === "appt" && user === "therapist") {
-    // } else if (type === "blocked date") {
-    // } else if (type === "journal") {
-    // }
-
-    // //event is an object with values of start, end, etc.
-    // //if i can get the id of this event, i can then useNavigate to navigate them to the relevant links
-    // console.info("[handleSelected - event]", event);
   };
 
   const getClientApptsJournals = async () => {
@@ -254,19 +243,10 @@ export default function CalendarFull() {
 
         if (index === -1) {
           setTherapistBlockedDate([...therapistBlockedDate, newObject]);
-          // setAllEvents([...allEvents, newObject]);
         }
-        // setTherapistBlockedDate([...therapistBlockedDate, newObject]);
       } else {
         setTherapistBlockedDate([newObject]);
-        // setAllEvents([newObject]);
       }
-
-      // if (allEvents.length !== 0) {
-      //   setAllEvents([...allEvents, newObject]);
-      // } else {
-      //   setAllEvents([newObject]);
-      // }
     });
 
     setAllEvents([
@@ -299,8 +279,6 @@ export default function CalendarFull() {
       console.log(newObject);
 
       if (therapistBlockedDate.length !== 0) {
-        // console.log(therapistBlockedDate.indexOf(newObject));
-
         const index = therapistBlockedDate.findIndex((element) => {
           if (element.id === newObject.id) {
             return true;
@@ -310,19 +288,10 @@ export default function CalendarFull() {
 
         if (index === -1) {
           setTherapistBlockedDate([...therapistBlockedDate, newObject]);
-          // setAllEvents([...allEvents, newObject]);
         }
-        // setTherapistBlockedDate([...therapistBlockedDate, newObject]);
       } else {
         setTherapistBlockedDate([newObject]);
-        // setAllEvents([newObject]);
       }
-
-      // if (allEvents.length !== 0) {
-      //   setAllEvents([...allEvents, newObject]);
-      // } else {
-      //   setAllEvents([newObject]);
-      // }
     });
 
     let apptDatesResponse = await axios.get(
@@ -349,10 +318,6 @@ export default function CalendarFull() {
         end: endTime,
       };
 
-      //if newObject is the same as what is in the therapistAppts, i dont want to push it. or if the appt id is the same.
-
-      //if newObject.id !==
-
       if (therapistAppts.length !== 0) {
         const index = therapistAppts.findIndex((element) => {
           if (element.id === newObject.id) {
@@ -363,95 +328,17 @@ export default function CalendarFull() {
 
         if (index === -1) {
           setTherapistAppts([...therapistAppts, newObject]);
-          // setAllEvents([...allEvents, newObject]);
         }
       } else {
         setTherapistAppts([newObject]);
-        // setAllEvents([newObject]);
       }
-
-      // if (allEvents.length !== 0) {
-      //   setAllEvents([...allEvents, newObject]);
-      // } else {
-      //   setAllEvents([newObject]);
-      // }
     });
 
     setAllEvents([...therapistAppts, ...therapistBlockedDate]);
     console.log(allEvents);
-    // setTherapistBlockedDate(therapistInfo.blockeddates);
   };
   console.log(therapistBlockedDate);
   console.log(therapistAppts);
-  // const getAllTherapistApptCalendar = async () => {
-  //   console.log(therapistInfo);
-  //   const { id } = therapistInfo;
-  //   let apptDatesResponse = await axios.get(
-  //     `${BACKEND_URL}/appointments/therapist/${id}`
-  //   );
-  //   let apptDates = await apptDatesResponse.data;
-
-  //   await apptDates.forEach((date) => {
-  //     console.log(date);
-  //     const startTime = new Date(date.startDatetime);
-  //     const endTime = new Date(date.endDatetime);
-  //     const clientID = date.clientId;
-  //     const { firstName, lastName } = date.client;
-  //     const apptID = date.id;
-
-  //     const newObject = {
-  //       id: apptID,
-  //       type: "appt",
-  //       user: "therapist",
-  //       title: `Appointment with patient ${firstName} ${lastName}`,
-  //       start: startTime,
-  //       end: endTime,
-  //     };
-
-  //     if (therapistAppts.length !== 0) {
-  //       setTherapistAppts([...therapistAppts, newObject]);
-  //     } else {
-  //       setTherapistAppts([newObject]);
-  //     }
-  //     // if (allEvents.length !== 0) {
-  //     //   setAllEvents([...allEvents, newObject]);
-  //     // } else {
-  //     //   setAllEvents([newObject]);
-  //     // }
-  //   });
-  //   setAllEvents([...allEvents, therapistAppts]);
-  //   console.log(allEvents);
-  // };
-
-  //allEvents are to be an array of objects.
-  // const allEvents = [
-  //   {
-  //     title: "Blocked Date",
-  //     user: "therapist",
-  //     start: "2022-09-20 10:56:13.488 +0900",
-  //     end: "2022-09-20 10:56:13.488 +0900",
-  //   },
-  //   {
-  //     title: "Blocked Date2",
-  //     user: "therapist",
-  //     start: "2022-09-20 10:56:13.488 +0900",
-  //     end: "2022-09-20 10:56:13.488 +0900",
-  //   },
-  // ];
-
-  // const MyCalendar = (props) => (
-  //   <div>
-  //     <Calendar
-  //       localizer={localizer}
-  //       events={allEvents}
-  //       startAccessor="start"
-  //       endAccessor="end"
-  //       selected={selected}
-  //       onSelectEvent={handleSelected}
-  //       style={{ height: 500 }}
-  //     />
-  //   </div>
-  // );
 
   let clientOptions = [];
 
@@ -487,12 +374,6 @@ export default function CalendarFull() {
 
   const handleSubmit = async () => {
     if (user && user[`https://any-namespace/roles`].length !== 0) {
-      // const patientName = selectedClient.label;
-      // const title = `Appointment with patient ${patientName}`;
-      // const newApptEvent = { ...newEvent, title };
-      // console.log(newApptEvent);
-      // setAllEvents([...allEvents, newApptEvent]);
-
       const { start, end } = newEvent;
 
       let newObj = {
@@ -550,20 +431,8 @@ export default function CalendarFull() {
 
       getOwnInfoForClient();
 
-      // setAllEvents([...allEvents, newApptEvent]);
-
       setNewMadeAppt(newApptEvent);
       setCreateNew(false);
-
-      //       const newApptEvent = {
-
-      //         title,
-      //         therapistId: currTher.id,
-      //         clientId: clientInfo.id,
-      //       };
-
-      // console.log(newApptEvent);
-      // setAllEvents([...allEvents, newApptEvent]);
     }
   };
 
@@ -615,67 +484,6 @@ export default function CalendarFull() {
     const response = await axios.get(`${BACKEND_URL}/therapists/${user.email}`);
     updateTherapistInfo(response.data);
   };
-
-  // const myClients = () => {
-  //   const { clients } = therapistInfo;
-
-  //   clients.map((client) => {
-  //     const { id, firstName, lastName } = client;
-
-  //     return <></>;
-  //   });
-  // };
-
-  // const getAllTherapistBlockedDates = async () => {
-  //   let emailTherapist = currTherapist.email;
-
-  //   let blockedDatesResponse = await axios.get(
-  //     `${BACKEND_URL}/therapists/${emailTherapist}`
-  //   );
-  //   //blockedDatesResponse will be an object of the therapist with key: blockeddates, value : array of objects.
-
-  //   let blockedDates = blockedDatesResponse.data.blockeddates;
-
-  //   blockedDates.forEach((blockDate) => {
-  //     const date = blockDate.date;
-  //     console.log(date);
-
-  //     const newObject = {
-  //       title: "Blocked Date",
-  //       start: date,
-  //       end: date,
-  //     };
-
-  //     if (therapistBlockedDate.length !== 0) {
-  //       setTherapistBlockedDate([...therapistBlockedDate, newObject]);
-  //     } else {
-  //       setTherapistBlockedDate([newObject]);
-  //     }
-  //   });
-  // };
-
-  //  let apptDatesResponse = await axios.get(
-  //   `${BACKEND_URL}/appointments/therapist/${currTherapistInfo.id}`
-  // );
-  // let apptDates = await apptDatesResponse.data;
-
-  // apptDates.forEach((date) => {
-  //   const startTime = date.startDatetime;
-  //   const endTime = date.endDatetime;
-  //   const { firstName, lastName } = currTherapistInfo;
-
-  //   const newObject = {
-  //     title: `Appointment with ${firstName} ${lastName}`,
-  //     start: startTime,
-  //     end: endTime,
-  //   };
-
-  //   if (therapistAppts.length !== 0) {
-  //     setTherapistAppts([...therapistAppts, newObject]);
-  //   } else {
-  //     setTherapistAppts([newObject]);
-  //   }
-  // });
 
   return (
     <div>

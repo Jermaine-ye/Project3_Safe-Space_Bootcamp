@@ -25,7 +25,7 @@ class MemosController {
 
   //get one memo of a particular client(for therapist)
   async getOne(req, res) {
-    const { clientId, memoId } = req.params;
+    const { memoId } = req.params;
     try {
       const output = await this.model.findByPk(memoId);
       return res.json(output);

@@ -36,7 +36,8 @@ class JournalsController {
 
   //create one journal assignment for individual client using journal template id (for therapist)
   async insertOne(req, res) {
-    const clientId = req.params;
+    const { clientId } = req.params;
+    console.log(clientId);
     const { dueBy, templateId, therapistId } = req.body;
     try {
       const newJournal = await this.model.create({
@@ -54,7 +55,7 @@ class JournalsController {
 
   //update one journal for client
   async updateOne(req, res) {
-    const journalId = req.params;
+    const { journalId } = req.params;
     const { input1, input2, input3 } = req.body;
     try {
       const data = await this.model.findByPk(journalId);
@@ -63,6 +64,7 @@ class JournalsController {
         input1: input1,
         input2: input2,
         input3: input3,
+        updatedAt: new Date(),
       });
 
       return res.json(data);

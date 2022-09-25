@@ -27,6 +27,7 @@ class TherapistsController {
         where: {
           therapistId: targetnum,
         },
+        include: this.clientModel,
       });
       return res.json(output);
     } catch (err) {
