@@ -19,9 +19,8 @@ import {
 } from '@mantine/core';
 import { parseWithOptions } from 'date-fns/esm/fp';
 import AdvicePreview from './AdvicePreview';
-import AdvicePreviewList from './AdvicePreviewList';
 
-export default function Advice() {
+export default function AdvicePreviewList() {
   const [allArticles, setAllArticles] = useState('');
   const [photo, setPhoto] = useState('');
 
@@ -35,7 +34,7 @@ export default function Advice() {
   const getPhotos = async () => {
     let photos = await axios.get(
       `https://api.unsplash.com/photos/random/?topics=mentalhealth&client_id=${process.env.REACT_APP_APP_ACCESS_KEY}`
-      
+      // `https://api.unsplash.com/search/photos/?query=mentalhealth&client_id={APP_ACCESS_KEY}`
     );
     // console.log('photos: ', photos.data.results);
     console.log('photos: ', photos.data);
@@ -48,37 +47,16 @@ export default function Advice() {
     getAllArticles();
   }, []);
 
+  const ArticlePreviews = allArticles.map((article, index) => (
+    <Link to={`/advice/preview/${article.id}`} key={article.id}>
+      <AdvicePreview data={article} />
+    </Link>
+  ));
+
   return (
     <div className="Page-body">
       <NavBar />
-      <div className="Content-container">
-        <Container className="Content-body" size="md" px="xs">
-          <Card withBorder shadow="sm" radius="md">
-            {allArticles && allArticles.length
-              ? allArticles.map((article, index) => (
-                  <div className="Articles-single" key={article.id}>
-                    {' '}
-                    Article #{article.id}{' '}
-                    <Title size={20}>{article.title}</Title>
-                    <Title size={12}>
-                      Written by: {article.author}
-                    </Title> <br /> <Text> {article.content}</Text>
-                    <br />
-                  </div>
-                ))
-              : 'no articles listed'}
-          </Card>
-          <br />
-          <Card withBorder shadow="sm" radius="md">
-            <Card.Section mt="sm">
-              <Image src={photo} height={400} alt="article photo" />
-            </Card.Section>
-          </Card>
-          <br />
-          <br />
-        </Container>
-      </div>
-     
+      {ArticlePreviews}
       <Footer />
     </div>
   );

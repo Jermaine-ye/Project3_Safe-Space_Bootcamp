@@ -12,8 +12,6 @@ import PersonalParticularsForm from '../Components/PersonalParticularsForm';
 import CalendarDashboard from '../Components/CalendarDashboard';
 import CalendarFull from '../Components/CalendarFull';
 import QuoteDisplay from '../Components/QuoteDisplay';
-import DashboardTherapistScreen from './DashboardTherapistScreen';
-import DashboardTest from './DashboardTest';
 
 const DashboardClientScreen = () => {
   const [clientId, setClientId] = useState();
@@ -58,8 +56,7 @@ const DashboardClientScreen = () => {
 
   return (
     <div className="Dashboard">
-      {/* <DashboardTest /> */}
-      <Outlet />
+      {/* <Outlet /> */}
       <Grid grow>
         <Grid.Col className="Dashboard-sidebar-co" span="auto">
           <SidebarClient />

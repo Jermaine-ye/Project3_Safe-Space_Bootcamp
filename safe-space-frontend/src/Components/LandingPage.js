@@ -1,30 +1,23 @@
-import React from "react";
-import axios from "axios";
-import { Button, Card, Text, Title } from "@mantine/core";
+import React from 'react';
+import axios from 'axios';
+import { Button, Card, Text, Title } from '@mantine/core';
 import {
   useNavigate,
   useParams,
   useLocation,
   Link,
   Outlet,
-} from "react-router-dom";
-import { BACKEND_URL } from "../constants";
-import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../App";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
-import { useAuth } from "./AuthContext";
-import { useAuth0 } from "@auth0/auth0-react";
+} from 'react-router-dom';
+import { BACKEND_URL } from '../constants';
+import { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../App';
+import NavBar from './NavBar';
+import Footer from './Footer';
+import { useAuth } from './AuthContext';
+import { useAuth0 } from '@auth0/auth0-react';
+import QuoteDisplay from './QuoteDisplay';
 
 export default function LandingPage() {
-  const {
-    isAuthenticated,
-    user,
-    loginWithRedirect,
-    logout,
-    getAccessTokenSilently,
-  } = useAuth0();
-
   // const { updateClientInfo, currentUser, updateTherapistInfo } = useAuth();
   // const [emailClient, setEmailClient] = useState();
   // const [emailTherapist, setEmailTherapist] = useState();
@@ -55,16 +48,30 @@ export default function LandingPage() {
   //   }
   // }, [isAuthenticated]);
 
-  const navigate = useNavigate();
   return (
     <div>
       <NavBar />
+
       <h1>LandingPage</h1>
-      {/* <button
-        onClick={() => logout({ returnTo: process.env.REACT_APP_REDIRECT })}
-      >
-        Logout
-      </button> */}
+      <Link to="/particulars">personal particulars form</Link>
+      <br />
+      <Link to="/evaluation/1">evaluation form preference</Link>
+      <br />
+      <Link to="/evaluation/2">evaluation form speciality</Link>
+      <br />
+      <Link to="/evaluation/results"> evaluation results</Link>
+      <br />
+      <Link to="/therapist/patients/profile/"> patientProfile</Link>
+      <br />
+      <Link to="/therapist/patients/"> patient list</Link>
+      <br />
+      <Link to="/therapist/upcoming"> patient upcoming</Link>
+      <br />
+      <Link to="/auth"> test PrivateRoutes</Link>
+      <br />
+      <Link to="/authclient"> test PrivateRoutesClient</Link>
+      <br />
+      <Link to="/therapist/patients/profile/"> To Therapist DashBoard</Link>
       <Footer />
     </div>
   );

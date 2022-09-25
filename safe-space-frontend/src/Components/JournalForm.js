@@ -1,7 +1,7 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
-import { user } from "@auth0/auth0-react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+// import { user } from '@auth0/auth0-react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
   Button,
   Card,
@@ -12,288 +12,219 @@ import {
   Form,
   Input,
   Textarea,
-} from "@mantine/core";
-import { DatePicker } from "@mantine/dates";
-import { BACKEND_URL } from "../constants.js";
-import { Auth0Client } from "@auth0/auth0-spa-js";
+} from '@mantine/core';
+import { DatePicker } from '@mantine/dates';
+import { BACKEND_URL } from '../constants.js';
+import { Auth0Client } from '@auth0/auth0-spa-js';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth } from './AuthContext';
 
 const JournalForm = () => {
-  return <div>Journal Form</div>;
-  //   const [date, setDate] = useState('');
-  //   const [input1, setInput1] = useState('');
-  //   const [input2, setInput2] = useState('');
-  //   const [input3, setInput3] = useState('');
+  const Navigate = useNavigate();
+  const [updatedAt, setUpdatedAt] = useState('');
+  const [input1, setInput1] = useState('');
+  const [input2, setInput2] = useState('');
+  const [input3, setInput3] = useState('');
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { clientInfo, therapistInfo, template } = useAuth();
 
-  //   const [dueDate, setDueDate] = useState('');
-  //   const [clientName, setClientName] = useState('');
-  //   const [therapistName, setTherapistName] = useState('');
-  //   // const [templateid, setTemplateId] = useState('');
-  //   const templateid = 1;
+  const [dueDate, setDueDate] = useState('');
 
-  //   const [title1, setTitle1] = useState('');
-  //   const [title2, setTitle2] = useState('');
-  //   const [title3, setTitle3] = useState('');
+  // get all to know there is an empty null=> new journal entry =>
+  const [clientId, setClientId] = useState('');
+  const [journalId, setJournalId] = useState('');
+  const [dueBy, setDueBy] = useState('');
+  const [templateId, setTemplateId] = useState('');
+  const [journalEntry, setJournalEntry] = useState('');
+  const [therapistFirstName, setTherapistFirstName] = useState('');
+  const [therapistLasttName, setTherapistLastName] = useState('');
 
-  //    let params = useParams();
-  //   const Navigate = useNavigate();
+  // in real app, pls do not hardcode JonSnow, instead extract the user from AuthProvider
+  const callApi = async () => {
+    // let response = await axios.get(`${BACKEND_URL}/clients/jon@snow.com`);
+    let response = await axios.get(`${BACKEND_URL}/clients/${user.email}`);
+    // it should be ${emailClient}
+    console.log('user detailed information: ', response.data);
 
-  //   const handleChange = (event) => {
-  //     switch (event.target.name) {
-  //       case 'date':
-  //         setDate(event.target.value);
-  //         break;
-  //       case 'input1':
-  //         setInput1(event.target.value);
-  //         break;
-  //       case 'input2':
-  //         setInput2(event.target.value);
-  //         break;
-  //       case 'input3':
-  //         setInput3(event.target.value);
-  //         break;
-  //       default:
-  //     }
-  //   };
+    console.log(therapistInfo);
 
-  //   //Need to get the set template and set the due date & Journal ID & Therapist ID & Template ID
-  //   const journalTemplate = () => {
-  //   const [templateIndex, setTemplateIndex] = useState();
-  //   const [template, setTemplate] = useState(null);
+    console.log('client Id: ', response.data.id);
+    console.log('Journal Id: ', response.data.journalentries[0].id);
+    console.log(
+      'Template Id: ',
+      response.data.journalentries[0].journaltemplateId
+    );
+    setTemplateId(response.data.journalentries[0].journaltemplateId);
+    setJournalEntry(response.data.journalentries.length);
+    setDueBy(response.data.journalentries[0].dueBy);
 
-  // // get all to know there is an empty null=> new journal entry =>
+    setJournalId(response.data.journalentries[0].id);
+    setTherapistLastName(response.data.journalentries[0].therapist.lastName);
+    setTherapistFirstName(response.data.journalentries[0].therapist.fastName);
+    setClientId(response.data.id);
+  };
 
-  //   useEffect(() => {
-  //     console.log({user})
-  //     // If there is a templateIndex, retrieve the sighting data
-  //     if (template== null) {
-  //       axios
-  //         .get(`${BACKEND_URL}/journal/${params.clientId}/${params.journalId}/`)
-  //         .then((response) => {
-  //           setTemplate(response.data);
-  // template1Qns(res);
+  // //in real app, pls do not hardcode JonSnow, instead extract the user from AuthProvider
+  // const callApi = async () => {
+  //   // let response = await axios.get(`${BACKEND_URL}/clients/jon@snow.com`);
+  //   let response = await axios.get(`${BACKEND_URL}/clients/${user.email}`);
+  //   // it should be ${emailClient}
+  //   console.log('user detailed information: ', response.data);
+  //   console.log(response.data.journalentries.length);
 
-  //         });
-  //     }
-  //     // Only run this effect on change to sightingIndex
-  //   }, [templateIndex]);
+  //   console.log(therapistInfo);
 
-  //   const template1Qns = (templateid) => {
-  //     if (templateid == 1) {
-  //       setTitle1('Topics  I want to discuss and goals for the session: ');
-  //       setTitle2(
-  //         `How do I feel about these things and how do they affect my life? ${(
-  //           <br />
-  //         )}Do I already see ways to help myself get over them?`
-  //       );
-  //       setTitle3(`Main insights and takeaways from session: ${(<br />)}
-  // (including possible actions and follow ups)`);
-  //     } else if (templateid == 2) {
-  //       setTitle1('Focus Topics and goals for the session:');
-  //       setTitle2(
-  //         `How did my partner react to this discussion? ${(
-  //           <br />
-  //         )}What feelings and insights did he/she express?`
-  //       );
-  //       setTitle3(`My main insights and takeaways from session: ${(<br />)}
-  // (including possible actions and follow ups)`);
-  //     }
-  //   };
+  //   setTherapistFirstName(response.data.therapists[0].firstName);
+  //   setTherapistLastName(response.data.therapists[0].lastName);
 
-  // const singleTemplate = (templateId) => {
-  //     return (
-  //       <Container ClassName="Form-body" size="sm" px="xs">
-  //         <Grid justify="center" align="center">
-  //           <form onSubmit={handleSubmit}>
-  //             <label>Journal Entry</label>
+  //   setJournalEntryNum(response.data.journalentries.length);
 
-  //             <label>Date Due:</label>
-  //             {/* <input
-  //         type="datetime-local"
-  //         name="date"
-  //         value={date}
-  //         onChange={handleChange}
-  //       /> */}
-  //             <br />
+  //   templateQns(response.data.journalentries[0].journaltemplateId);
 
-  //             <br />
-  //             <label>Date:</label>
-  //             <DatePicker
-  //               placeholder="Pick date"
-  //               value={date}
-  //               onChange={setDate}
-  //             />
-  //             <br />
+  //   setDueDate(response.data.journalentries[1].dueBy);
+  //   console.log('client Id: ', response.data.id);
+  //   // setJournalId()
+  //   setClientId(response.data.id);
+  // };
 
-  //             <label>Topics I want to discuss and goals for the session:</label>
-  //             <Textarea
-  //               value={input1}
-  //               onChange={handleChange}
-  //               placeholder="what has been bothering you?"
-  //             />
-  //             <br />
-  //             <label>
-  //               How do I feel about these things and how do they affect my life?
-  //             Do I already see ways to help myself get over them?
-  //             </label>
-  //             <Textarea
-  //               name="notes"
-  //               value={input2}
-  //               onChange={handleChange}
-  //               placeholder="what are your thoughts?"
-  //             />
-  //             <br />
-  //             <label>Main insights and takeaways from session:
-  //             (including possible actions and follow ups)</label>
-  //             <Textarea
-  //               name="notes"
-  //               value={input3}
-  //               onChange={handleChange}
-  //               placeholder="what are your thoughts?"
-  //             />
-  //             <br />
-  //             <Button variant="light" type="submit">
-  //               Submit
-  //             </Button>
-  //           </form>
-  //         </Grid>
-  //       </Container>
-  //     );
-  //   }
-  //   const coupleTemplate = (templateId) => {
-  //     return (
-  //       <Container ClassName="Form-body" size="sm" px="xs">
-  //         <Grid justify="center" align="center">
-  //           <form onSubmit={handleSubmit}>
-  //             <label>Journal Entry</label>
+  useEffect(() => {
+    if (isAuthenticated) {
+      console.log('user info:', user);
+      console.log('email:', user.email);
+      console.log('therapistInfo: ', therapistInfo);
+      // setinput1();
+      console.log(user);
+      callApi();
+    }
+  }, [user]);
 
-  //             <label>Date Due:</label>
-  //             {/* <input
-  //         type="datetime-local"
-  //         name="date"
-  //         value={date}
-  //         onChange={handleChange}
-  //       /> */}
-  //             <br />
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
 
-  //             <br />
-  //             <label>Date:</label>
-  //             <DatePicker
-  //               placeholder="Pick date"
-  //               value={date}
-  //               onChange={setDate}
-  //             />
-  //             <br />
+  //   console.log(updatedAt);
+  //   console.log(input1);
+  //   console.log(input2);
+  //   console.log(input3);
+  //   axios.post(`${BACKEND_URL}/journals/${clientInfo.id}`, {
+  //     updatedAt: new Date(),
+  //     input1: input1,
+  //     input2: input2,
+  //     input3: input3,
+  //   });
+  // };
 
-  //             <label>Focus Topics and goals for the session:</label>
-  //             <Textarea
-  //               value={input1}
-  //               onChange={handleChange}
-  //               placeholder="what has been bothering you?"
-  //             />
-  //             <br />
-  //             <label>
-  //        How did my partner react to this discussion?
-  //        What feelings and insights did he/she express?
-  //             </label>
-  //             <Textarea
-  //               name="notes"
-  //               value={input2}
-  //               onChange={handleChange}
-  //               placeholder="what are your thoughts?"
-  //             />
-  //             <br />
-  //             <label>My main insights and takeaways from session:
-  // (including possible actions and follow ups)</label>
-  //             <Textarea
-  //               name="notes"
-  //               value={input3}
-  //               onChange={handleChange}
-  //               placeholder="what are your thoughts?"
-  //             />
-  //             <br />
-  //             <Button variant="light" type="submit">
-  //               Submit
-  //             </Button>
-  //           </form>
-  //         </Grid>
-  //       </Container>
-  //     );
-  //   }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('test: ', journalId);
 
-  //   const handleSubmit = (e) => {
-  //     e.preventDefault();
-  //     axios
-  //       // .post(`${BACKEND_URL}/client/${clientId}/journal/new`, {
-  //       .post(`${BACKEND_URL}/client/${clientId}/journal/new`, {
-  //         date,
-  //         input1,
-  //         input2,
-  //         input3,
-  //       })
-  //       .then((res) => {
-  //         setDate('');
-  //         setInput1('');
-  //         setInput2('');
-  //         setInput3('');
+    axios
 
-  //         console.log('resdata:', res.data);
-  //         Navigate(`/journals/${res.data.id}`);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   };
+      .put(`${BACKEND_URL}/journals/${journalId}`, {
+        updatedAt,
+        input1,
+        input2,
+        input3,
+      })
+      .then((res) => {
+        setUpdatedAt('');
+        setInput1('');
+        setInput2('');
+        setInput3('');
 
-  //   return (
-  //     <Container ClassName="Form-body" size="sm" px="xs">
-  //       <Grid justify="center" align="center">
-  //         <form onSubmit={handleSubmit}>
-  //           <label>Journal Entry</label>
+        console.log('resdata:', res.data);
+        console.log('Journal Submit Success!!');
+        Navigate(
+          // `/therapist/patients/${res.data.clientId}/journal/${res.data.id}`
+          `/client/journals/${res.data.id}`
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  //           <label>Date Due:</label>
-  //           {/* <input
-  //         type="datetime-local"
-  //         name="date"
-  //         value={date}
-  //         onChange={handleChange}
-  //       /> */}
-  //           <br />
+  return (
+    <Container className="Form-body" size="sm" px="xs">
+      <Grid justify="center" align="center">
+        <form onSubmit={handleSubmit}>
+          <label>Journal Entry</label>
+          <br />
+          <br />
+          <label>
+            Therapist:{therapistFirstName} {therapistLasttName}
+          </label>
+          <br />
+          <br />
 
-  //           <br />
-  //           <label>Date:</label>
-  //           <DatePicker placeholder="Pick date" value={date} onChange={setDate} />
-  //           <br />
+          <br />
+          <br />
+          <label>Journal Entry: {journalEntry}</label>
 
-  //           <label>{title1}</label>
-  //           <Textarea
-  //             value={input1}
-  //             onChange={handleChange}
-  //             placeholder="what has been bothering you?"
-  //           />
-  //           <br />
-  //           <label>{title2}</label>
-  //           <Textarea
-  //             name="notes"
-  //             value={input2}
-  //             onChange={handleChange}
-  //             placeholder="what are your thoughts?"
-  //           />
-  //           <br />
-  //           <label>{title3}</label>
-  //           <Textarea
-  //             name="notes"
-  //             value={input3}
-  //             onChange={handleChange}
-  //             placeholder="what are your thoughts?"
-  //           />
-  //           <br />
-  //           <Button variant="light" type="submit">
-  //             Submit
-  //           </Button>
-  //         </form>
-  //       </Grid>
-  //     </Container>
-  //   );
+          <br />
+
+          <br />
+          <label>
+            {user[`https://any-namespace/roles`].length === 1 ? (
+              <div>
+                Date:
+                <DatePicker
+                  placeholder="Pick date"
+                  value={dueBy}
+                  onChange={(e) => setDueBy(e.target.value)}
+                />
+              </div>
+            ) : (
+              <div>Date Due: {new Date(dueBy).toLocaleDateString()}</div>
+            )}
+          </label>
+
+          <br />
+
+          <label>
+            {templateId === 1
+              ? 'Topics  I want to discuss and goals for the session: '
+              : 'Focus Topics and goals for the session:'}
+          </label>
+          <Textarea
+            name="input1"
+            value={input1}
+            onChange={(event) => setInput1(event.currentTarget.value)}
+            placeholder="what has been bothering you?"
+          />
+          <br />
+          <label>
+            {templateId === 1
+              ? `How do I feel about these things and how do they affect my life? Do I already see ways to help myself get over them?`
+              : `How did my partner react to this discussion? What feelings and insights did he/she express?`}
+          </label>
+          <Textarea
+            name="input2"
+            value={input2}
+            onChange={(event) => setInput2(event.currentTarget.value)}
+            placeholder="what are your thoughts?"
+          />
+          <br />
+          <label>
+            {templateId === 1
+              ? `Main insights and takeaways from session: 
+  (including possible actions and follow ups)`
+              : `My main insights and takeaways from session:
+  (including possible actions and follow ups)`}
+          </label>
+          <Textarea
+            name="input3"
+            value={input3}
+            onChange={(event) => setInput3(event.currentTarget.value)}
+            placeholder="what are your thoughts?"
+          />
+          <br />
+          <Button variant="light" type="submit">
+            Submit
+          </Button>
+        </form>
+      </Grid>
+    </Container>
+  );
 };
 
 export default JournalForm;

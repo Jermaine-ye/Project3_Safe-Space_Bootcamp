@@ -23,6 +23,14 @@ class ClientsRouter {
       this.controller.getOne.bind(this.controller)
     );
 
+    router.get(
+      "/key/:clientId",
+      this.controller.getOnePk.bind(this.controller)
+    );
+
+    //get all clients
+    router.get(`/`, this.controller.getAll.bind(this.controller));
+
     //update one client (for both client and therapist)
     router.put("/", this.controller.updateOneClient.bind(this.controller));
 

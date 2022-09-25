@@ -9,7 +9,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useAuth } from './AuthContext.js';
 import { Container } from '@mantine/core';
 
-export default function PatientProfile() {
+export default function ClientProfile() {
   const [clientId, setClientId] = useState();
   const [clientDetails, setClientDetails] = useState({});
 
@@ -22,15 +22,12 @@ export default function PatientProfile() {
     console.log(`in effect`);
     console.log(user);
 
-    if (clientId) {
-      axios
-        .get(`${BACKEND_URL}/clients/key/${params.clientId}`)
-        .then((response) => {
-          setClientDetails(response.data);
-        });
-    }
+    axios.get(`${BACKEND_URL}/clients/${user.email}`).then((response) => {
+      setClientDetails(response.data);
+    });
+
     console.log(clientDetails);
-  }, [clientId]);
+  }, [user]);
 
   const params = useParams();
   if (clientId !== params.clientId) {
@@ -84,18 +81,6 @@ export default function PatientProfile() {
         {clientDetails.lastName}
       </h4>
 
-      <button
-        onClick={() => navigate(`/therapist/patients/${clientId}/newjournal`)}
-      >
-        Set Journal Template
-      </button>
-      <select name="template" onChange={(e) => updateTemplate(e.target.value)}>
-        {/*set value once you know and setstate in select. axios.put after. */}
-        <option value={0}>Select a Template</option>
-        <option value={1}>Template one</option>
-        <option value={2}>Template two</option>
-      </select>
-
       <Container>
         <p>Age:{clientDetails.ageClient}</p>
         <p>Gender:{clientDetails.gender}</p>
@@ -106,22 +91,6 @@ export default function PatientProfile() {
         {/*Information from memo?*/}
       </Container>
 
-      {/* <button>Deactivate</button> */}
-      <button
-        onClick={() => navigate(`/therapist/patients/${clientId}/history`)}
-      >
-        Patient Apppointment Log
-      </button>
-      <button
-        onClick={() => navigate(`/therapist/patients/${clientId}/newmemo`)}
-      >
-        Memo Form Creation
-      </button>
-      <button
-        onClick={() => navigate(`/therapist/patients/${clientId}/allmemo`)}
-      >
-        Memo List for this patient
-      </button>
       <button onClick={(e) => navigate(-1)}>back</button>
     </div>
   );

@@ -9,14 +9,15 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useAuth } from './AuthContext.js';
 import { Container } from '@mantine/core';
 
-export default function PatientProfile() {
+export default function PatientDashboard() {
   const [clientId, setClientId] = useState();
   const [clientDetails, setClientDetails] = useState({});
+  const [template, setTemplate] = useState();
 
   const navigate = useNavigate();
 
   const { user } = useAuth0();
-  const { clientInfo, currentUser, updateTemplate } = useAuth();
+  const { clientInfo, currentUser } = useAuth();
 
   useEffect(() => {
     console.log(`in effect`);
@@ -84,16 +85,12 @@ export default function PatientProfile() {
         {clientDetails.lastName}
       </h4>
 
-      <button
-        onClick={() => navigate(`/therapist/patients/${clientId}/newjournal`)}
-      >
-        Set Journal Template
-      </button>
-      <select name="template" onChange={(e) => updateTemplate(e.target.value)}>
+      <button value={template}>Set Journal Template</button>
+      <select>
         {/*set value once you know and setstate in select. axios.put after. */}
-        <option value={0}>Select a Template</option>
-        <option value={1}>Template one</option>
-        <option value={2}>Template two</option>
+        <option>Select a Template</option>
+        <option>Template one</option>
+        <option>Template two</option>
       </select>
 
       <Container>
@@ -106,19 +103,15 @@ export default function PatientProfile() {
         {/*Information from memo?*/}
       </Container>
 
-      {/* <button>Deactivate</button> */}
-      <button
-        onClick={() => navigate(`/therapist/patients/${clientId}/history`)}
-      >
-        Patient Apppointment Log
-      </button>
+      <button>Deactivate</button>
+      <button>Patient Apppointment Log</button>
       <button
         onClick={() => navigate(`/therapist/patients/${clientId}/newmemo`)}
       >
         Memo Form Creation
       </button>
       <button
-        onClick={() => navigate(`/therapist/patients/${clientId}/allmemo`)}
+        onClick={() => navigate(`/therapist/patients/${clientId}/newjournal`)}
       >
         Memo List for this patient
       </button>

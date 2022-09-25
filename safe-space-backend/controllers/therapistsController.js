@@ -50,6 +50,21 @@ class TherapistsController {
     }
   }
 
+  //for consultation sample
+  //   async postOne(req, res) {
+  //     const { emailTherapist } = req.params;
+  //     try {
+  //       // const output = await this.model.findOne({
+  //       //   where: { email: emailTherapist },
+  //       //   include: this.blockedDateModel,
+  //       // });
+  // console.log('posted!')
+  //       return res.json(emailTherapist);
+  //     } catch (err) {
+  //       return res.status(400).json({ error: true, msg: err });
+  //     }
+  //   }
+
   //create one blocked date for therapist
   async insertOne(req, res) {
     const { date, therapistId } = req.body;

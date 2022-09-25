@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "react-datepicker/dist/react-datepicker.css";
-import axios from "axios";
-import { Button, Card, Text, Title } from "@mantine/core";
-import { Calendar, momentLocalizer } from "react-big-calendar";
-import Select from "react-select";
-import moment from "moment";
-import { useAuth0 } from "@auth0/auth0-react";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import 'react-datepicker/dist/react-datepicker.css';
+import axios from 'axios';
+import { Button, Card, Text, Title } from '@mantine/core';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
+import Select from 'react-select';
+import moment from 'moment';
+import { useAuth0 } from '@auth0/auth0-react';
 // import { DatePicker } from "@mantine/dates";
 // import DatePicker from "react-datepicker";
-import DateTimePicker from "react-datetime-picker";
-import "react-big-calendar/lib/css/react-big-calendar.css";
-import { BACKEND_URL } from "../constants.js";
-import { useAuth } from "./AuthContext";
-import CalendarModalDashboard from "./CalendarModalDashboard";
+import DateTimePicker from 'react-datetime-picker';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import { BACKEND_URL } from '../constants.js';
+import { useAuth } from './AuthContext';
+import CalendarModalDashboard from './CalendarModalDashboard';
 
 export default function CalendarDashboard() {
   const localizer = momentLocalizer(moment);
@@ -40,8 +40,8 @@ export default function CalendarDashboard() {
   const [newEvent, setNewEvent] = useState({
     start: new Date(),
     end: new Date(),
-    title: "",
-    type: "appt",
+    title: '',
+    type: 'appt',
     therapistId: 0,
     clientId: 0,
   });
@@ -49,8 +49,8 @@ export default function CalendarDashboard() {
   const [newBlocked, setNewBlocked] = useState({
     start: new Date(),
     end: new Date(),
-    title: "Blocked Date",
-    type: "blocked date",
+    title: 'Blocked Date',
+    type: 'blocked date',
     therapistId: 0,
   });
 
@@ -118,7 +118,7 @@ export default function CalendarDashboard() {
   const handleSelected = (event) => {
     setModalVisible(true);
     setSelected(event);
-    console.log("this is running");
+    console.log('this is running');
     const { id, type, user } = event;
   };
 
@@ -126,9 +126,9 @@ export default function CalendarDashboard() {
     console.log(event);
     //TO CHANGE TO CORRECT ROUTE LATER.
     if (user[`https://any-namespace/roles`].length !== 0) {
-      navigate("../therapist/calendar");
+      navigate('../therapist/calendar');
     } else {
-      navigate("../client/calendar");
+      navigate('../client/calendar');
     }
   };
 
@@ -157,8 +157,8 @@ export default function CalendarDashboard() {
 
       const newObject = {
         id: apptID,
-        type: "appt",
-        user: "client",
+        type: 'appt',
+        user: 'client',
         title: `Appointment with therapist ${firstName} ${lastName}`,
         start: new Date(startTime),
         end: new Date(endTime),
@@ -196,8 +196,8 @@ export default function CalendarDashboard() {
 
       const newObject = {
         id: journalID,
-        type: "journal",
-        user: "client",
+        type: 'journal',
+        user: 'client',
         title: `Journal under therapist ${firstName} ${lastName}`,
         start: startDate,
         end: endDate,
@@ -232,9 +232,9 @@ export default function CalendarDashboard() {
 
       const newObject = {
         id: ID,
-        type: "blocked date",
+        type: 'blocked date',
         title: `THERAPIST UNAVALIABLE - ${therapistInfo.firstName} ${therapistInfo.lastName}`,
-        user: "client",
+        user: 'client',
         start: startDate,
         end: endDate,
       };
@@ -279,9 +279,9 @@ export default function CalendarDashboard() {
 
       const newObject = {
         id: ID,
-        type: "blocked date",
-        title: "Blocked Date",
-        user: "therapist",
+        type: 'blocked date',
+        title: 'Blocked Date',
+        user: 'therapist',
         start: startDate,
         end: endDate,
       };
@@ -322,8 +322,8 @@ export default function CalendarDashboard() {
 
       const newObject = {
         id: apptID,
-        type: "appt",
-        user: "therapist",
+        type: 'appt',
+        user: 'therapist',
         title: `Appointment with patient ${firstName} ${lastName}`,
         start: startTime,
         end: endTime,
@@ -373,14 +373,14 @@ export default function CalendarDashboard() {
   }
 
   const handleSelectChange = (e, i) => {
-    if (i.action === "select-option") {
+    if (i.action === 'select-option') {
       setSelectedClient(e);
       setNewEvent({
         ...newEvent,
         clientId: e.value,
         therapistId: therapistInfo.id,
       });
-    } else if (i.action === "clear") {
+    } else if (i.action === 'clear') {
       setSelectedClient([]);
       setNewEvent({ ...newEvent, clientId: 0 });
     }
@@ -407,8 +407,8 @@ export default function CalendarDashboard() {
 
       const newApptEvent = {
         id: id,
-        type: "appt",
-        user: "therapist",
+        type: 'appt',
+        user: 'therapist',
         title: `Appointment with patient ${selectedClient.label}`,
         start: new Date(startDatetime),
         end: new Date(endDatetime),
@@ -436,8 +436,8 @@ export default function CalendarDashboard() {
 
       const newApptEvent = {
         id: id,
-        type: "appt",
-        user: "client",
+        type: 'appt',
+        user: 'client',
         title: `Appointment with therapist ${currTher.name}`,
         start: new Date(startDatetime),
         end: new Date(endDatetime),
@@ -484,8 +484,8 @@ export default function CalendarDashboard() {
 
     const newBlockedEvent = {
       id: id,
-      type: "blocked date",
-      user: "therapist",
+      type: 'blocked date',
+      user: 'therapist',
       title: `Blocked Date`,
       start: startDate,
       end: endDate,
@@ -511,7 +511,6 @@ export default function CalendarDashboard() {
 
   return (
     <div>
-      CalendarDashboard
       {user && user[`https://any-namespace/roles`].length !== 0 ? (
         <>
           <div>THERAPIST CALENDAR</div>
@@ -553,12 +552,12 @@ export default function CalendarDashboard() {
       <br />
       <button onClick={() => handleNavigateFull()}>See Full Calendar </button>
       <button onClick={() => setCreateNew(!createNew)}>
-        + Create Appointment{" "}
+        + Create Appointment{' '}
       </button>
       {user && user[`https://any-namespace/roles`].length !== 0 ? (
         <>
           <button onClick={() => setCreateBlocked(!createBlocked)}>
-            + Create Blocked Date{" "}
+            + Create Blocked Date{' '}
           </button>
 
           {createBlocked ? (

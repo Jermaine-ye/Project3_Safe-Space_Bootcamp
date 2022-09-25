@@ -3,7 +3,7 @@ import axios from "axios";
 import { BACKEND_URL } from "../constants";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const AuthContext = React.createContext();
+export const AuthContext = React.createContext();
 
 export function useAuth() {
   return useContext(AuthContext);
@@ -13,15 +13,16 @@ export function AuthProvider({ children }) {
   //set user data that you are going to pass down to different componenet.
   const [currentUser, setCurrentUser] = useState([]);
   const [clientInfo, setClientInfo] = useState([]);
-  const [therapistInfo, setTherapistInfo] = useState();
+  const [therapistInfo, setTherapistInfo] = useState([]);
+  const [template, setTemplate] = useState(0);
   //reset this to true when you finish editing the files
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   // states for evaluation form. PUT request all at results page
   const [speciality, setSpeciality] = useState(1);
-  const [age, setAge] = useState("");
+  const [agePreference, setAgePreference] = useState(1);
   const [language, setLanguage] = useState(1);
-  const [gender, setGender] = useState(1);
+  const [gender, setGender] = useState("");
   const [religion, setReligion] = useState(1);
 
   // function required to setState in other components
@@ -31,7 +32,7 @@ export function AuthProvider({ children }) {
   };
 
   const updateClientInfo = (data) => {
-    console.log(`updated client info`, data);
+    console.log(`updated client info for loggin`, data);
     setClientInfo(data);
   };
 
@@ -45,9 +46,9 @@ export function AuthProvider({ children }) {
     setSpeciality(info);
   };
 
-  const updateAge = (info) => {
+  const updateAgePreference = (info) => {
     console.log(`updated client's age preference`, info);
-    setAge(info);
+    setAgePreference(info);
   };
 
   const updateLanguage = (info) => {
@@ -65,29 +66,31 @@ export function AuthProvider({ children }) {
     setReligion(info);
   };
 
+  const updateTemplate = (data) => {
+    console.log(`updated template id in Context`, data);
+    setTemplate(data);
+  };
   // States and Functions that are passed down and USE by ALL components.
   const value = {
     updateClientData,
     updateSpeciality,
-    updateAge,
+    updateAgePreference,
     updateLanguage,
     updateGender,
     updateReligion,
     updateClientInfo,
     updateTherapistInfo,
+    updateTemplate,
     currentUser,
     speciality,
-    age,
+    agePreference,
     language,
     gender,
     religion,
     clientInfo,
     therapistInfo,
+    template,
   };
-
-  return (
-    <AuthContext.Provider value={value}>
-      {!loading && children}
-    </AuthContext.Provider>
-  );
+  // console.log(`values from authContext`, value);
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

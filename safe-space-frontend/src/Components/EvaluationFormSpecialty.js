@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAuth } from "./AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function EvaluationFormSpecialty() {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ export default function EvaluationFormSpecialty() {
     {
       questionText: "Are you facing drug addiction problems?",
       answerOptions: [
-        { answerText: "Yes", isCorrect: true, specialization: "1" },
+        { answerText: "Yes", isCorrect: true, specialization: 1 },
         { answerText: "No", isCorrect: false },
       ],
     },
@@ -19,7 +19,7 @@ export default function EvaluationFormSpecialty() {
       questionText:
         "Are you facing issues with your marriage life or relationship with your loved ones?",
       answerOptions: [
-        { answerText: "Yes", isCorrect: true, specialization: "2" },
+        { answerText: "Yes", isCorrect: true, specialization: 2 },
         { answerText: "No", isCorrect: false },
       ],
     },
@@ -30,7 +30,7 @@ export default function EvaluationFormSpecialty() {
         {
           answerText: "Yes",
           isCorrect: true,
-          specialization: "3",
+          specialization: 3,
         },
         { answerText: "No", isCorrect: false },
       ],
@@ -41,7 +41,7 @@ export default function EvaluationFormSpecialty() {
         {
           answerText: "Yes",
           isCorrect: true,
-          specialization: "4",
+          specialization: 4,
         },
         { answerText: "No", isCorrect: false },
       ],
@@ -53,7 +53,7 @@ export default function EvaluationFormSpecialty() {
         {
           answerText: "Yes",
           isCorrect: true,
-          specialization: "5",
+          specialization: 5,
         },
         { answerText: "No", isCorrect: false },
       ],
@@ -78,16 +78,17 @@ export default function EvaluationFormSpecialty() {
     updateSpeciality(specialization);
   };
 
-  const handleAnswerOptionClick = async (isCorrect) => {
+  const handleAnswerOptionClick = async (isCorrect, e) => {
     if (isCorrect) {
       // setState here
       console.log(questions);
       console.log(questions.answerOptions);
       console.log(
-        questions[currentQuestion].answerOptions[currentQuestion].specialization
+        questions[currentQuestion].answerOptions[e.target.name].specialization
       );
+      console.log(e);
       makeSpeciality(
-        questions[currentQuestion].answerOptions[currentQuestion].specialization
+        questions[currentQuestion].answerOptions[e.target.name].specialization
       );
       // nav to results page
       navigate("/evaluation/results");
@@ -112,14 +113,16 @@ export default function EvaluationFormSpecialty() {
         </div>
       </div>
       <div className="answer-section">
-        {questions[currentQuestion].answerOptions.map((answerOption) => (
+        {questions[currentQuestion].answerOptions.map((answerOption, index) => (
           <button
-            onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}
+            name={index}
+            onClick={(e) => handleAnswerOptionClick(answerOption.isCorrect, e)}
           >
             {answerOption.answerText}
           </button>
         ))}
       </div>
+      <Link to="/">Home</Link>
     </div>
   );
 }

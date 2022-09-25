@@ -1,4 +1,4 @@
-const cors = require("cors");
+const cors = require('cors');
 // const BaseController = require("./baseController");
 
 class AppointmentsController {
@@ -11,7 +11,7 @@ class AppointmentsController {
   // get all appointments for therapist
   async getAll(req, res) {
     try {
-      console.log("get all appointments!");
+      console.log('get all appointments!');
       const { therapistId } = req.params;
       const output = await this.model.findAll({
         where: {
@@ -27,8 +27,8 @@ class AppointmentsController {
 
   //get one appointment for therapist and client
   async getOne(req, res) {
-    console.log("getone running");
-    const { apptId } = req.params;
+    console.log('getone running');
+    const apptId = req.params;
     try {
       const output = await this.model.findByPk(apptId);
       return res.json(output);
