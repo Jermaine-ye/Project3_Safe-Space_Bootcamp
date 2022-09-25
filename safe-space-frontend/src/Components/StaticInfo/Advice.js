@@ -5,7 +5,8 @@ import React, { useState, useEffect } from 'react';
 import { BACKEND_URL } from '../../constants.js';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import pic1 from '../../images/illustration/DrawKit Vector Illustration Mental Health 10.png';
+import pic1 from '../../images/illustration/DrawKit Vector Illustration Mental Health 2.png';
+import pic2 from '../../images/illustration/DrawKit Vector Illustration Mental Health 9.png';
 import {
   Button,
   Card,
@@ -56,6 +57,32 @@ export default function Advice() {
     <div className="Page-body">
       <NavBar />
       <div className="Content-container">
+        <br />
+        <Title color="blue" order={2} weight={500} align="center">
+          Advice Articles
+        </Title>
+        <div
+          style={{
+            width: 400,
+            marginTop: 20,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            marginBottom: 20,
+          }}
+        >
+          <Image src={pic2} alt="forumtipsicon" className="consultation" />
+        </div>
+        <Container>
+          <Text align="justify" size="md">
+            This article provides a brief overview to mental health. The first
+            section explains what mental health is, common signs and symptoms of
+            mental health issues, and what constitutes an individual’s mental
+            health. The second section introduces mental health services and
+            treatment options, as well as mental health tips everyone can
+            benefit from.
+          </Text>
+        </Container>
+        <br />
         <Container className="Content-body" size="sm" px="xs">
           <Card withBorder shadow="sm" radius="md">
             {allArticles && allArticles.length
@@ -90,20 +117,17 @@ export default function Advice() {
               : 'no articles listed'}
           </Card>
           <br />
-
           <div
             style={{
-              width: 400,
-              marginTop: 50,
+              width: 500,
+              marginTop: 10,
               marginLeft: 'auto',
-              marginRight: 30,
-              marginBottom: 30,
+              marginRight: 10,
+              marginBottom: 10,
             }}
           >
             <Image src={pic1} alt="forumtipsicon" className="consultation" />
           </div>
-
-          <br />
           <br />
         </Container>
       </div>

@@ -66,7 +66,7 @@ export default function App() {
     <AuthProvider>
       <div className="App">
         {/* Placeholder for ease of use */}
-        <button
+        {/* <button
           onClick={() => {
             logout();
           }}
@@ -74,7 +74,7 @@ export default function App() {
           LOG OUT
         </button>
         <button onClick={(e) => navigate(-1)}>back</button>
-        <button onClick={(e) => navigate('/')}>Home</button>
+        <button onClick={(e) => navigate('/')}>Home</button> */}
         <Routes>
           {/* check for admin boolean and render client and therapist pages according.  */}
           <Route path="/" element={<LandingPage />} />

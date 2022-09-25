@@ -1,17 +1,17 @@
-import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
-import { storage } from "../DB/firebase";
-import { BACKEND_URL } from "../constants";
+import React, { useEffect, useState, useContext } from 'react';
+import axios from 'axios';
+import { storage } from '../DB/firebase';
+import { BACKEND_URL } from '../constants';
 import {
   // getStorage,
   getDownloadURL,
   ref as storageRef,
   uploadBytes,
-} from "firebase/storage";
-import { useNavigate, Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+} from 'firebase/storage';
+import { useNavigate, Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 // import { useAuth } from "./AuthContext";
-import { AuthContext } from "../App";
+import { AuthContext } from '../App';
 import {
   Button,
   Card,
@@ -25,20 +25,21 @@ import {
   FileInput,
   Textarea,
   NumberInput,
-} from "@mantine/core";
+  TextInput,
+} from '@mantine/core';
 
-const CLIENT_IMAGE_FOLDER_NAME = "client images";
+const CLIENT_IMAGE_FOLDER_NAME = 'client images';
 
 export default function PersonalParticularsForm() {
-  const [fileInputValue, setFileInputValue] = useState("");
+  const [fileInputValue, setFileInputValue] = useState('');
   const [fileInputFile, setFileInputFile] = useState(null);
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [gender, setGender] = useState("");
-  const [age, setAge] = useState("");
-  const [maritalStatus, setMaritalStatus] = useState("");
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [gender, setGender] = useState('');
+  const [age, setAge] = useState('');
+  const [maritalStatus, setMaritalStatus] = useState('');
   // const [description, setDiscription] = useState("");
   const { user } = useAuth0();
   const [currentUserr, setCurrentUserr] = useState(user);
@@ -54,7 +55,7 @@ export default function PersonalParticularsForm() {
     setUser();
   }, [user]);
 
-  const CLIENT_IMAGE_FOLDER_NAME = "client images";
+  const CLIENT_IMAGE_FOLDER_NAME = 'client images';
   const uploadImage = async (e, file, user) => {
     e.preventDefault();
     const storageRefInstance = storageRef(
@@ -119,15 +120,26 @@ export default function PersonalParticularsForm() {
       active: true,
       emailClient: user.email,
     });
-    navigate("/evaluation/1");
+    navigate('/evaluation/1');
   };
 
   return (
     <div>
-      <h1>PersonalParticularsForm</h1>
-      <Container>
-        <form onSubmit={handleSubmit}>
-          {/* <label>Name:</label>
+      <Container size="xs" px="xs">
+        <Card radius="md" shadow="sm" p="md">
+          <Title color="blue" order={3} weight={500} align="center">
+            Personal Particulars Form
+          </Title>
+          <br />
+          <Text align="justify" color="dimmed" size="xs">
+            We take your privacy and confidentiality seriously. We have built
+            state-of-the-art technology, operations, and infrastructure with the
+            goal of protecting your privacy and safeguarding the information you
+            provide.
+          </Text>
+          <br />
+          <form onSubmit={handleSubmit}>
+            {/* <label>Name:</label>
           <textarea
             className="text-box"
             name="firstName"
@@ -135,28 +147,32 @@ export default function PersonalParticularsForm() {
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           /> */}
-          <Textarea
-            label="First Name"
-            placeholder="Please enter your first name"
-            withAsterisk
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-          {/* <textarea
+            <TextInput
+              label="First Name"
+              placeholder="Please enter your first name"
+              withAsterisk
+              value={firstName}
+              variant="filled"
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            <br />
+            {/* <textarea
             className="text-box"
             name="lastName"
             placeholder="Last Name"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           /> */}
-          <Textarea
-            label="Last Name"
-            placeholder="Please enter your last name"
-            withAsterisk
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-          {/* <label>Phone Number:</label>
+            <TextInput
+              label="Last Name"
+              placeholder="Please enter your last name"
+              withAsterisk
+              value={lastName}
+              variant="filled"
+              onChange={(e) => setLastName(e.target.value)}
+            />
+            <br />
+            {/* <label>Phone Number:</label>
           <input
             className="text-box"
             name="phoneNumber"
@@ -165,13 +181,15 @@ export default function PersonalParticularsForm() {
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
           /> */}
-          <NumberInput
-            placeholder="Enter your phone number"
-            label="Phone Number"
-            withAsterisk
-            onChange={setPhoneNumber}
-          />
-          {/* <label>Gender:</label>
+            <TextInput
+              placeholder="Enter your phone number"
+              label="Phone Number"
+              variant="filled"
+              withAsterisk
+              onChange={setPhoneNumber}
+            />
+            <br />
+            {/* <label>Gender:</label>
           <select
             name="gender"
             value={gender}
@@ -181,18 +199,20 @@ export default function PersonalParticularsForm() {
             <option value={"Male"}>Male</option>
             <option value={"Female"}>Female</option>
           </select> */}
-          <NativeSelect
-            data={[
-              { value: null, label: "Choose one" },
-              { value: "Male", label: "Male" },
-              { value: "Female", label: "Female" },
-            ]}
-            label="Gender"
-            placeholder="Pick your gender"
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
-          />
-          {/* <label>Age:</label>
+            <NativeSelect
+              data={[
+                { value: null, label: 'Choose one' },
+                { value: 'Male', label: 'Male' },
+                { value: 'Female', label: 'Female' },
+              ]}
+              label="Gender"
+              variant="filled"
+              placeholder="Pick your gender"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+            />{' '}
+            <br />
+            {/* <label>Age:</label>
           <input
             name="age"
             value={age}
@@ -200,14 +220,17 @@ export default function PersonalParticularsForm() {
             placeholder="Please enter your age."
             onChange={(e) => setAge(e.target.value)}
           /> */}
-          <NumberInput
-            placeholder="Enter your age"
-            label="Age"
-            withAsterisk
-            value={age}
-            onChange={setAge}
-          />
-          {/* <label>Marital Status</label>
+            <NumberInput
+              variant="filled"
+              placeholder="Enter your age"
+              label="Age"
+              withAsterisk
+              defaultValue={18}
+              value={age}
+              onChange={setAge}
+            />{' '}
+            <br />
+            {/* <label>Marital Status</label>
           <select
             name="MaritalStatus"
             value={maritalStatus}
@@ -217,25 +240,27 @@ export default function PersonalParticularsForm() {
             <option value={"Single"}>Single</option>
             <option value={"Married"}>Married</option>
           </select> */}
-          <NativeSelect
-            data={[
-              { value: null, label: "State your relationship status" },
-              { value: "Single", label: "Single" },
-              { value: "Married", label: "Married" },
-            ]}
-            label="Marital Status"
-            placeholder="State your relationship status"
-            value={maritalStatus}
-            onChange={(e) => setMaritalStatus(e.target.value)}
-          />
-          {/* <label>Description</label>
+            <NativeSelect
+              data={[
+                { value: null, label: 'State your relationship status' },
+                { value: 'Single', label: 'Single' },
+                { value: 'Married', label: 'Married' },
+              ]}
+              label="Marital Status"
+              variant="filled"
+              placeholder="State your relationship status"
+              value={maritalStatus}
+              onChange={(e) => setMaritalStatus(e.target.value)}
+            />{' '}
+            <br />
+            {/* <label>Description</label>
         <textarea
           name="description"
           value={description}
           onChange={(e) => setDiscription(e.target.value)}
           placeholder="Tell us about you???"
         /> */}
-          {/* <label>
+            {/* <label>
             Upload your profile images here!
             <input
               type="file"
@@ -253,18 +278,38 @@ export default function PersonalParticularsForm() {
               Upload!
             </Button>
           </label> */}
-          <FileInput
-            placeholder="pick file"
-            label="Upload your Profile Photo"
-            withAsterisk
-            value={fileInputFile}
-            onChange={setFileInputFile}
-          />
-
-          <button>Submit</button>
-        </form>
+            <FileInput
+              placeholder="pick file"
+              variant="filled"
+              label="Upload your Profile Photo"
+              withAsterisk
+              value={fileInputFile}
+              onChange={setFileInputFile}
+            />{' '}
+            <br /> <br />
+            <Button variant="light" color="pink">
+              Submit
+            </Button>
+          </form>
+          <br />
+        </Card>
+        <br />
+        <br />
       </Container>
-      <Link to="/">Home</Link>
+
+      {/* <Link to="/">Home</Link> */}
+
+      <Button
+        variant="light"
+        size="md"
+        mt="md"
+        radius="md"
+        onClick={() => {
+          navigate('/');
+        }}
+      >
+        Back to Home
+      </Button>
     </div>
   );
 }

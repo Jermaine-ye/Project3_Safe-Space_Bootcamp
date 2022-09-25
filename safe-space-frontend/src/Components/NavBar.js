@@ -1,5 +1,5 @@
-import React, { createContext } from "react";
-import axios from "axios";
+import React, { createContext } from 'react';
+import axios from 'axios';
 import {
   Button,
   Card,
@@ -8,20 +8,20 @@ import {
   Image,
   Container,
   Grid,
-} from "@mantine/core";
+} from '@mantine/core';
 import {
   useNavigate,
   useParams,
   useLocation,
   Link,
   Outlet,
-} from "react-router-dom";
-import { BACKEND_URL } from "../constants";
-import { useContext, useEffect, useState } from "react";
-import { useAuth } from "./AuthContext";
-import { useAuth0 } from "@auth0/auth0-react";
+} from 'react-router-dom';
+import { BACKEND_URL } from '../constants';
+import { useContext, useEffect, useState } from 'react';
+import { useAuth } from './AuthContext';
+import { useAuth0 } from '@auth0/auth0-react';
 // import { AuthContext } from "../App";
-import sslogo from "../images/sslogo.png";
+import sslogo from '../images/sslogo.png';
 
 export default function NavBar() {
   // const hello = useContext(AuthContext);
@@ -43,7 +43,7 @@ export default function NavBar() {
   } = useAuth();
 
   const handleLogin = async () => {
-    console.log("Client logging in!");
+    console.log('Client logging in!');
     loginWithRedirect();
   };
 
@@ -178,7 +178,7 @@ export default function NavBar() {
       console.log(`running`);
       getAllInfo();
       // updateClient();
-      console.log("user:", user);
+      console.log('user:', user);
     }
   }, [user]);
 
@@ -186,11 +186,11 @@ export default function NavBar() {
     console.log(event);
 
     if (user[`https://any-namespace/roles`].length !== 0) {
-      navigate("/therapist/");
+      navigate('/therapist/');
     } else if (user[`https://any-namespace/roles`].length === 0) {
-      navigate("/client/");
+      navigate('/client/');
     } else {
-      navigate("/");
+      navigate('/');
     }
   };
 
@@ -198,17 +198,29 @@ export default function NavBar() {
     <div>
       <Container align="center" className="Nav-bar" fluid="true">
         <Grid className="Nav-bar-wrapper" align="center">
-          {/* <Grid.Col span={'auto'}>
-            <Image
-              width={200}
-              src={sslogo}
-              alt="safe space logo"
-              className="Footer-logo"
-            />
-          </Grid.Col> */}
-          <Grid.Col span="auto">
-            <Link to="/">Home</Link>
+          <Grid.Col span={'auto'}>
+            <Link to="/">
+              <div
+                style={{
+                  width: 200,
+                  marginTop: 'auto',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                  marginBottom: 'auto',
+                }}
+              >
+                <Image
+                  src={sslogo}
+                  alt="forumtipsicon"
+                  className="consultation"
+                />
+              </div>
+            </Link>
           </Grid.Col>
+          <Link to="/particulars">personal particulars form</Link>
+          {/* <Grid.Col span="auto">
+            <Link to="/">Home</Link>
+          </Grid.Col> */}
           <Grid.Col span="auto">
             <Link to="/about">About Us</Link>
           </Grid.Col>
@@ -224,7 +236,7 @@ export default function NavBar() {
           <Grid.Col span="auto">
             <Link to="/support">Support Resources</Link>
           </Grid.Col>
-          <Grid.Col span="auto">
+          {/* <Grid.Col span="auto">
             <Link to="/therapist/calendardash">Calendar Dashboard</Link>
           </Grid.Col>
           <Grid.Col span="auto">
@@ -241,7 +253,7 @@ export default function NavBar() {
           </Grid.Col>
           <Grid.Col span="auto">
             <Link to="/client/sidebar">Client Side bar</Link>
-          </Grid.Col>
+          </Grid.Col>  */}
           <Grid.Col span="auto">
             {isAuthenticated !== false ? (
               <Button size="xs" onClick={() => DashBoardNav()}>
@@ -267,7 +279,7 @@ export default function NavBar() {
           </Grid.Col> */}
         </Grid>
 
-        <Link to="/client/journal/:journalId/new">Journal</Link>
+        {/* <Link to="/client/journal/:journalId/new">Journal</Link>
         <br />
         <Link to="/client/journals/:journalId">Journal Single</Link>
         <br />
@@ -280,7 +292,7 @@ export default function NavBar() {
         </Link>
         <br />
         <Link to="/client/">client Dashboard</Link>
-        <br />
+        <br /> */}
       </Container>
     </div>
   );

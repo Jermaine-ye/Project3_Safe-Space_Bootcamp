@@ -53,11 +53,11 @@ export default function LandingPage() {
     console.log(event);
     //TO CHANGE TO CORRECT ROUTE LATER.
     if (user[`https://any-namespace/roles`].length !== 0) {
-      navigate("/therapist/");
+      navigate('/therapist/');
     } else if (user[`https://any-namespace/roles`].length === 0) {
-      navigate("/client/");
+      navigate('/client/');
     } else {
-      navigate("/");
+      navigate('/');
     }
   };
 
@@ -65,7 +65,14 @@ export default function LandingPage() {
     <div>
       <NavBar />
 
-      <h1>LandingPage</h1>
+      <Footer />
+
+      <br />
+    </div>
+  );
+}
+
+/* <h1>LandingPage</h1>
       <Link to="/particulars">personal particulars form</Link>
       <br />
       <Link to="/evaluation/1">evaluation form preference</Link>
@@ -85,10 +92,4 @@ export default function LandingPage() {
       <Link to="/authclient"> test PrivateRoutesClient</Link>
       <br />
       <Link to="/therapist/patients/profile/"> To Therapist DashBoard</Link>
-      <br />
-      <Footer />
-
-      <button onClick={() => DashBoardNav()}>To DashBoard</button>
-    </div>
-  );
-}
+      <br /> */
