@@ -164,8 +164,9 @@ export default function CalendarFull() {
     });
 
     await journalentries.forEach((data) => {
+      console.log(data);
       let endDate;
-      if (data.input1.length !== 0) {
+      if (data.input1 !== null) {
         endDate = new Date(data.updatedAt);
       } else {
         endDate = new Date(data.dueBy);

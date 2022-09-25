@@ -58,7 +58,7 @@ class JournalsController {
 
   //update one journal for client
   async updateOne(req, res) {
-    const journalId = req.params;
+    const { journalId } = req.params;
     console.log(req.body);
     const { updatedAt, input1, input2, input3 } = req.body;
 
