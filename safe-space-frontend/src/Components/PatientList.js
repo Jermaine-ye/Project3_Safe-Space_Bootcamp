@@ -60,18 +60,16 @@ export default function PatientList() {
             <Card shadow="sm" p="lg" radius="md" withBorder>
               {clientInfo.client.id}
 
-              <Text>
+              <Text weight={500}>
                 {clientInfo.client.firstName}
                 {` `}
                 {clientInfo.client.lastName}
               </Text>
 
               <Text size="sm" color="dimmed">
-                have the patient checked in today?
+                Patient Infomation
               </Text>
-              <Text size="sm" color="dimmed">
-                Journal Submitted?
-              </Text>
+
               <Text size="sm" color="dimmed">
                 Journal Log
               </Text>

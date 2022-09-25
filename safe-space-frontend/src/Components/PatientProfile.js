@@ -89,7 +89,7 @@ export default function PatientProfile() {
   return (
     <div>
       <Container>
-        <Text size="xl">Patient Profile</Text>
+        {/* <Text size="xl">Patient Profile</Text> */}
         <Text>
           Patient Name: {clientDetails.firstName}
           {clientDetails.lastName}
@@ -97,7 +97,7 @@ export default function PatientProfile() {
 
         <Image
           radius="md"
-          height={80}
+          height={300}
           src={`${clientDetails.photoLink}`}
           alt={`${clientDetails.photoLink}`}
         />
