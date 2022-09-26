@@ -79,7 +79,7 @@ export default function QuoteDisplay() {
         {/* <Card shadow="sm" p="md"> */}
         <Grid grow>
           <Grid.Col span={6}>
-            <Card shadow="sm" p="md">
+            <Card withBorder shadow="sm" radius="md">
               <Card.Section mt="sm">
                 <Image src={photo} height={250} alt="photo display" />
               </Card.Section>

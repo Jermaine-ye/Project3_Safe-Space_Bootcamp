@@ -217,7 +217,7 @@ export default function NavBar() {
               </div>
             </Link>
           </Grid.Col>
-          <Link to="/particulars">personal particulars form</Link>
+
           {/* <Grid.Col span="auto">
             <Link to="/">Home</Link>
           </Grid.Col> */}
