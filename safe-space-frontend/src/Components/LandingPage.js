@@ -73,6 +73,15 @@ export default function LandingPage() {
       <NavBar />
 
       <Link to="/evaluation/1">Eva</Link>
+
+      <button
+        onClick={() => {
+          navigate('/particulars');
+        }}
+      >
+        Click Here to Sign Up!
+      </button>
+
       <br />
       <br />
       <button

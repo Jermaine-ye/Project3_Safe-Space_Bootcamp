@@ -20,6 +20,7 @@ import {
   Group,
   Container,
 } from '@mantine/core';
+import NavBar from './NavBar';
 
 export default function EvaluationResults() {
   const {
@@ -241,18 +242,23 @@ export default function EvaluationResults() {
   });
 
   return (
-    <div className="Personal-Particulars-div">
-      <Container size="md" px="xs">
-        <h2>Evaluation Results</h2>
-        <Text color="blue" weight={600}>
-          Specialists Chosen For You!
-        </Text>
-        {/* Display the results here! */}
-        {displayAllTherapists}
-        <br />
+    <div>
+      <div>
+        <NavBar />
+      </div>
+      <div className="Personal-Particulars-div">
+        <Container size="md" px="xs">
+          <h2>Evaluation Results</h2>
+          <Text color="blue" weight={600}>
+            Specialists Chosen For You!
+          </Text>
+          {/* Display the results here! */}
+          {displayAllTherapists}
+          <br />
 
-        <Link to="/">Home</Link>
-      </Container>
+          <Link to="/">Home</Link>
+        </Container>
+      </div>
     </div>
   );
 }

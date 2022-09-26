@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from './AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import './EvaluationFormPref.css';
+import NavBar from './NavBar';
 import {
   Button,
   Card,
@@ -115,47 +116,53 @@ export default function EvaluationFormSpecialty() {
   };
 
   return (
-    <div className="align">
-      <Container size="md" px="xs">
-        <Card className="Eval-form" shadow="sm" p="lg" radius="md" withBorder>
-          <br />
-          <br />
-          <Title order={2} weight={500} align="center">
-            Evaluation Form Specialty
-          </Title>
-          <br />
-          <br />
-          <div className="app">
-            <div className="question-section">
-              <div className="question-count">
+    <div>
+      <div>
+        <NavBar />
+      </div>
+      <div className="align">
+        <Container size="md" px="xs">
+          <Card className="Eval-form" shadow="sm" p="lg" radius="md" withBorder>
+            <br />
+            <br />
+            <Title order={2} weight={500} align="center">
+              Evaluation Form Specialty
+            </Title>
+            <br />
+            <br />
+            <div className="app">
+              <div className="question-section">
+                <div className="question-count">
+                  <Text align="center" size="md">
+                    <span>Question {currentQuestion + 1}</span>/
+                    {questions.length}
+                  </Text>
+                </div>
                 <Text align="center" size="md">
-                  <span>Question {currentQuestion + 1}</span>/{questions.length}
+                  <div className="question-text">
+                    {questions[currentQuestion].questionText}
+                  </div>
                 </Text>
               </div>
-              <Text align="center" size="md">
-                <div className="question-text">
-                  {questions[currentQuestion].questionText}
-                </div>
-              </Text>
+              <div className="answer-section">
+                {questions[currentQuestion].answerOptions.map(
+                  (answerOption, index) => (
+                    <button
+                      className="buttonForm"
+                      name={index}
+                      onClick={(e) =>
+                        handleAnswerOptionClick(answerOption.isCorrect, e)
+                      }
+                    >
+                      {answerOption.answerText}
+                    </button>
+                  )
+                )}
+              </div>
             </div>
-            <div className="answer-section">
-              {questions[currentQuestion].answerOptions.map(
-                (answerOption, index) => (
-                  <button
-                    className="buttonForm"
-                    name={index}
-                    onClick={(e) =>
-                      handleAnswerOptionClick(answerOption.isCorrect, e)
-                    }
-                  >
-                    {answerOption.answerText}
-                  </button>
-                )
-              )}
-            </div>
-          </div>
-        </Card>
-      </Container>
+          </Card>
+        </Container>
+      </div>
     </div>
   );
 }
