@@ -188,16 +188,31 @@ export default function EvaluationResults() {
   const displayAllTherapists = assignedTherapists.map((elem) => {
     console.log(elem.id);
     return (
-      <Container>
-        <Card key={elem.id}>
+      <Container size="xs" px="xs">
+        <Card shadow="sm" p="lg" radius="md" withBorder key={elem.id}>
           <Card.Section>
-            <Image
+            <div
+              style={{
+                width: 300,
+                marginLeft: 'auto',
+                marginRight: 'auto',
+              }}
+            >
+              <Image
+                radius="md"
+                src={`${elem.photoLink}`}
+                alt={`${elem.photoLink}`}
+                className="consultation"
+              />
+            </div>
+
+            {/* <Image
               radius="md"
               height={80}
               src={`${elem.photoLink}`}
               alt={`${elem.photoLink}`}
               className="img-thumbnail"
-            />
+            /> */}
           </Card.Section>
           <Card.Section>
             <Text weight={500}>{`${elem.firstName} ${elem.lastName}`}</Text>
@@ -209,7 +224,6 @@ export default function EvaluationResults() {
           <Group>
             <Button
               variant="light"
-              fullWidth
               mt="md"
               radius="md"
               value={elem.id}
@@ -219,17 +233,22 @@ export default function EvaluationResults() {
             </Button>
           </Group>
         </Card>
+        <br />
       </Container>
     );
   });
 
   return (
-    <div>
-      <Container>
+    <div className="Personal-Particulars-div">
+      <Container size="md" px="xs">
         <h2>Evaluation Results</h2>
-        <Text weight={600}>Specialists Chosen For You!</Text>
+        <Text color="teal" weight={600}>
+          Specialists Chosen For You!
+        </Text>
         {/* Display the results here! */}
         {displayAllTherapists}
+        <br />
+        <br />
         <Link to="/">Home</Link>
       </Container>
     </div>

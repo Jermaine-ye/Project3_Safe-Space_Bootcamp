@@ -18,7 +18,14 @@ import { useAuth0 } from '@auth0/auth0-react';
 import QuoteDisplay from './QuoteDisplay';
 
 export default function LandingPage() {
-  const { user } = useAuth0();
+  const {
+    isAuthenticated,
+    user,
+    loginWithRedirect,
+    logout,
+    getAccessTokenSilently,
+  } = useAuth0();
+
   const navigate = useNavigate();
   // const { updateClientInfo, currentUser, updateTherapistInfo } = useAuth();
   // const [emailClient, setEmailClient] = useState();
@@ -66,6 +73,15 @@ export default function LandingPage() {
       <NavBar />
 
       <Link to="/evaluation/1">Eva</Link>
+      <br />
+      <br />
+      <button
+        onClick={() => {
+          logout();
+        }}
+      >
+        LOG OUT
+      </button>
 
       <Footer />
 

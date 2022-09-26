@@ -67,13 +67,13 @@ export default function App() {
     <AuthProvider>
       <div className="App">
         {/* Placeholder for ease of use */}
-        <button
+        {/* <button
           onClick={() => {
             logout();
           }}
         >
           LOG OUT
-        </button>
+        </button> */}
         {/* <button onClick={(e) => navigate(-1)}>back</button>
         <button onClick={(e) => navigate('/')}>Home</button>  */}
         <Routes>

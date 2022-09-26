@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useAuth } from "./AuthContext";
-import { useNavigate, Link } from "react-router-dom";
-import "./EvaluationFormPref.css";
+import React, { useState } from 'react';
+import { useAuth } from './AuthContext';
+import { useNavigate, Link } from 'react-router-dom';
+import './EvaluationFormPref.css';
 import {
   Button,
   Card,
@@ -12,7 +12,7 @@ import {
   Form,
   Input,
   Textarea,
-} from "@mantine/core";
+} from '@mantine/core';
 
 export default function EvaluationFormSpecialty() {
   const navigate = useNavigate();
@@ -21,65 +21,65 @@ export default function EvaluationFormSpecialty() {
 
   const questions = [
     {
-      questionText: "Are you facing drug addiction problems?",
+      questionText: 'Are you facing drug addiction problems?',
       answerOptions: [
-        { answerText: "Yes", isCorrect: true, specialization: 1 },
-        { answerText: "No", isCorrect: false },
+        { answerText: 'Yes', isCorrect: true, specialization: 1 },
+        { answerText: 'No', isCorrect: false },
       ],
     },
     {
       questionText:
-        "Are you facing issues with your marriage life or relationship with your loved ones?",
+        'Are you facing issues with your marriage life or relationship with your loved ones?',
       answerOptions: [
-        { answerText: "Yes", isCorrect: true, specialization: 2 },
-        { answerText: "No", isCorrect: false },
+        { answerText: 'Yes', isCorrect: true, specialization: 2 },
+        { answerText: 'No', isCorrect: false },
       ],
     },
     {
       questionText:
-        "Do you find yourself being often anxious that you are unable to perform normal daily tasks?",
+        'Do you find yourself being often anxious that you are unable to perform normal daily tasks?',
       answerOptions: [
         {
-          answerText: "Yes",
+          answerText: 'Yes',
           isCorrect: true,
           specialization: 3,
         },
-        { answerText: "No", isCorrect: false },
+        { answerText: 'No', isCorrect: false },
       ],
     },
     {
-      questionText: "Do you often feel worthless or hopeless?",
+      questionText: 'Do you often feel worthless or hopeless?',
       answerOptions: [
         {
-          answerText: "Yes",
+          answerText: 'Yes',
           isCorrect: true,
           specialization: 4,
         },
-        { answerText: "No", isCorrect: false },
+        { answerText: 'No', isCorrect: false },
       ],
     },
     {
       questionText:
-        "Are you eating irregularly that you are experiencing rapid weight loss?",
+        'Are you eating irregularly that you are experiencing rapid weight loss?',
       answerOptions: [
         {
-          answerText: "Yes",
+          answerText: 'Yes',
           isCorrect: true,
           specialization: 5,
         },
-        { answerText: "No", isCorrect: false },
+        { answerText: 'No', isCorrect: false },
       ],
     },
     {
       questionText:
-        "Do you have obsessive thoughts of self harm or hurting others close to you and struggle to control these thoughts?",
+        'Do you have obsessive thoughts of self harm or hurting others close to you and struggle to control these thoughts?',
       answerOptions: [
         {
-          answerText: "Yes",
+          answerText: 'Yes',
           isCorrect: true,
-          specialization: "6",
+          specialization: '6',
         },
-        { answerText: "No", isCorrect: false },
+        { answerText: 'No', isCorrect: false },
       ],
     },
   ];
@@ -103,7 +103,7 @@ export default function EvaluationFormSpecialty() {
         questions[currentQuestion].answerOptions[e.target.name].specialization
       );
       // nav to results page
-      navigate("/evaluation/results");
+      navigate('/evaluation/results');
     }
 
     const nextQuestion = currentQuestion + 1;
@@ -116,33 +116,45 @@ export default function EvaluationFormSpecialty() {
 
   return (
     <div className="align">
-      <Container>
-        <h2>EvaluationFormSpecialty</h2>
-        <div className="app">
-          <div className="question-section">
-            <div className="question-count">
-              <span>Question {currentQuestion + 1}</span>/{questions.length}
+      <Container size="md" px="xs">
+        <Card className="Eval-form" shadow="sm" p="lg" radius="md" withBorder>
+          <br />
+          <br />
+          <Title order={2} weight={500} align="center">
+            Evaluation Form Specialty
+          </Title>
+          <br />
+          <br />
+          <div className="app">
+            <div className="question-section">
+              <div className="question-count">
+                <Text align="center" size="md">
+                  <span>Question {currentQuestion + 1}</span>/{questions.length}
+                </Text>
+              </div>
+              <Text align="center" size="md">
+                <div className="question-text">
+                  {questions[currentQuestion].questionText}
+                </div>
+              </Text>
             </div>
-            <div className="question-text">
-              {questions[currentQuestion].questionText}
+            <div className="answer-section">
+              {questions[currentQuestion].answerOptions.map(
+                (answerOption, index) => (
+                  <button
+                    className="buttonForm"
+                    name={index}
+                    onClick={(e) =>
+                      handleAnswerOptionClick(answerOption.isCorrect, e)
+                    }
+                  >
+                    {answerOption.answerText}
+                  </button>
+                )
+              )}
             </div>
           </div>
-          <div className="answer-section">
-            {questions[currentQuestion].answerOptions.map(
-              (answerOption, index) => (
-                <button
-                  className="buttonForm"
-                  name={index}
-                  onClick={(e) =>
-                    handleAnswerOptionClick(answerOption.isCorrect, e)
-                  }
-                >
-                  {answerOption.answerText}
-                </button>
-              )
-            )}
-          </div>
-        </div>
+        </Card>
       </Container>
     </div>
   );

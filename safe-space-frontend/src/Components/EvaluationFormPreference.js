@@ -250,33 +250,45 @@ export default function EvaluationFormPreference() {
 
   return (
     <div className="align">
-      <Container>
-        <h2>EvaluationFormPreference</h2>
-        <div className="app">
-          <div className="question-section">
-            <div className="question-count">
-              <span>Question {currentQuestion + 1}</span>/{questions.length}
+      <Container size="md" px="xs">
+        <Card className="Eval-form" shadow="sm" p="lg" radius="md" withBorder>
+          <br />
+          <br />
+          <Title order={2} weight={500} align="center">
+            Evaluation Form Preference{' '}
+          </Title>
+          <br />
+          <br />
+          <div className="app">
+            <div className="question-section">
+              <div className="question-count">
+                <Text align="center" size="md">
+                  <span>Question {currentQuestion + 1}</span>/{questions.length}
+                </Text>
+              </div>
+              <Text align="center" size="md">
+                <div className="question-text">
+                  {questions[currentQuestion].questionText}
+                </div>
+              </Text>
             </div>
-            <div className="question-text">
-              {questions[currentQuestion].questionText}
+            <div className="answer-section">
+              {questions[currentQuestion].answerOptions.map(
+                (answerOption, index) => (
+                  <button
+                    className="buttonForm"
+                    name={index}
+                    onClick={(e) =>
+                      handleAnswerOptionClick(answerOption.isClicked, e)
+                    }
+                  >
+                    {answerOption.answerText}
+                  </button>
+                )
+              )}
             </div>
           </div>
-          <div className="answer-section">
-            {questions[currentQuestion].answerOptions.map(
-              (answerOption, index) => (
-                <button
-                  className="buttonForm"
-                  name={index}
-                  onClick={(e) =>
-                    handleAnswerOptionClick(answerOption.isClicked, e)
-                  }
-                >
-                  {answerOption.answerText}
-                </button>
-              )
-            )}
-          </div>
-        </div>
+        </Card>
       </Container>
     </div>
   );

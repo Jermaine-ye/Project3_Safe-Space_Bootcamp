@@ -4,6 +4,7 @@
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
+  background-color: #176486;
 }
 
 .app {
@@ -26,8 +27,9 @@
 
 .question-section {
   width: 100%;
-  position: relative;
-  padding: 50px;
+  justify-content: center;
+  align-items: center;
+  /* position: relative; */
 }
 
 .question-count {
@@ -48,7 +50,7 @@
   padding: 10px;
   margin: 50px;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .buttonForm {
@@ -77,3 +79,7 @@
 .buttonForm svg {
   margin-right: 5px;
 }
+
+/* .mantine-1t82uby {
+  width: 800px;
+} */

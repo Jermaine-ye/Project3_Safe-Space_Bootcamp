@@ -192,6 +192,49 @@ a:active {
   padding-top: 70px;
 }
 
+.Personal-Particulars {
+  background-color: #cce4f7;
+}
+
+.Personal-Particulars-div a {
+  color: #1b1b9589;
+}
+
+.Personal-Particulars-div a {
+  color: #1b1b9589;
+}
+
+button {
+  background-color: #66b9b9;
+  align-content: center;
+  height: 40px;
+  margin: 10px;
+  padding: 10px;
+  width: max-content;
+  border-style: none;
+  color: #ffff;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  justify-content: center;
+}
+
+button:hover,
+button:focus {
+  background-color: #008b8b;
+}
+
+.mantine-6y1794 {
+  align-content: center;
+  justify-content: center;
+  flex-wrap: center;
+}
+
+.mantine-15pjuqq {
+  margin-bottom: 45px;
+}
+
 /* .mantine-Col-root.Dashboard-sidebar {
   margin-bottom: 40px;
 } */
@@ -199,4 +242,42 @@ a:active {
 /* Calendar Card */
 /* .mantine-1xc2888 {
   background-color: ;
+} */
+
+/* CSS */
+/* .button-9 {
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #405cf5;
+  border-radius: 6px;
+  border-width: 0;
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
+  font-size: 100%;
+  height: 44px;
+  line-height: 1.15;
+  margin: 12px 0 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all .2s,box-shadow .08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+}
+
+.button-9:disabled {
+  cursor: default;
+}
+
+.button-9:focus {
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
 } */
