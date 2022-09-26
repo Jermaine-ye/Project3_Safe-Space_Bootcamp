@@ -1,6 +1,6 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import {
   Button,
   Card,
@@ -10,11 +10,11 @@ import {
   Container,
   Group,
   Image,
-} from '@mantine/core';
+} from "@mantine/core";
 
-import { BACKEND_URL } from '../constants.js';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useAuth } from './AuthContext.js';
+import { BACKEND_URL } from "../constants.js";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "./AuthContext.js";
 
 export default function ClientProfile() {
   const [clientId, setClientId] = useState();
@@ -91,8 +91,8 @@ export default function ClientProfile() {
             style={{
               width: 300,
               marginTop: 20,
-              marginLeft: 'auto',
-              marginRight: 'auto',
+              marginLeft: "auto",
+              marginRight: "auto",
               marginBottom: 20,
             }}
           >
@@ -118,7 +118,9 @@ export default function ClientProfile() {
             {/*Information from memo?*/}
           </Container>
         </Card>
-        <Button onClick={(e) => navigate(-1)}>back</Button>
+        <Button variant="light" onClick={(e) => navigate(`/client/dashboard`)}>
+          Back
+        </Button>
       </Container>
     </div>
   );

@@ -73,7 +73,7 @@ export default function JournalList() {
   return (
     <div>
       {journalList && journalList.length !== 0 ? <ul>{finalList}</ul> : null}
-      <Button variant="light" onClick={(e) => navigate(-1)}>
+      <Button variant="light" onClick={(e) => navigate(`/client/dashboard`)}>
         Back
       </Button>
     </div>

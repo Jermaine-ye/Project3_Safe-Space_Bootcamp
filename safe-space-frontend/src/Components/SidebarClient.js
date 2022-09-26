@@ -88,7 +88,7 @@ export default function SidebarClient() {
           <Link to="/client/therapist">Therapist Info</Link>
           <br />
           <br />
-          <Link to={`/${idJournal}/journals`}>Journal List</Link>
+          <Link to={`/client/${idJournal}/journals`}>Journal List</Link>
           <br />
           <br />
           <Link to="/client/newjournal">Curr Journal Entry</Link>

@@ -113,7 +113,12 @@ export default function PatientList() {
 
         {clientList && clientList.length !== 0 ? <ul>{finalList}</ul> : null}
 
-        <Link to="/">Home</Link>
+        <Button
+          variant="light"
+          onClick={(e) => navigate(`/therapist/dashboard`)}
+        >
+          Back
+        </Button>
       </Container>
     </div>
   );

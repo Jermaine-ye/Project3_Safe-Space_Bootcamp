@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
-import { BACKEND_URL } from '../constants.js';
-import { useAuth } from './AuthContext';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { BACKEND_URL } from "../constants.js";
+import { useAuth } from "./AuthContext";
 import {
   Button,
   Card,
@@ -12,7 +12,7 @@ import {
   Container,
   Image,
   Avatar,
-} from '@mantine/core';
+} from "@mantine/core";
 
 export default function TherapistInfo() {
   //This component is only for the client's portal.
@@ -35,32 +35,36 @@ export default function TherapistInfo() {
     yearsOfPractice,
   } = therapistInfo;
 
+  useEffect(() => {
+    console.log(therapistInfo);
+  });
+
   let language;
   if (languageId === 1) {
-    language = 'English and Chinese';
+    language = "English and Chinese";
   } else if (languageId === 2) {
-    language = 'English and Tamil';
+    language = "English and Tamil";
   } else if (languageId === 3) {
-    language = 'English and Malay';
+    language = "English and Malay";
   }
   let religion;
   if (religionId === 1) {
-    religion = 'No Preference';
+    religion = "No Preference";
   } else if (religionId === 2) {
-    religion = 'Christianity';
+    religion = "Christianity";
   } else if (religionId === 3) {
-    religion = 'Buddhism';
+    religion = "Buddhism";
   } else if (religionId === 4) {
-    religion = 'Islam';
+    religion = "Islam";
   } else if (religionId === 5) {
-    religion = 'Hinduism';
+    religion = "Hinduism";
   }
 
   console.log(therapistInfo);
 
   const handleClick = () => {
     alert(
-      'We are sorry to hear that you would like to change your current therapist. We have received your request and will respond to you in 3 working days. Thank you for your patience.'
+      "We are sorry to hear that you would like to change your current therapist. We have received your request and will respond to you in 3 working days. Thank you for your patience."
     );
   };
 
@@ -71,8 +75,8 @@ export default function TherapistInfo() {
           style={{
             width: 400,
 
-            marginLeft: 'auto',
-            marginRight: 'auto',
+            marginLeft: "auto",
+            marginRight: "auto",
           }}
         >
           <Image

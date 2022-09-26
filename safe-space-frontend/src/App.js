@@ -34,6 +34,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import PrivateRoutesClient from "./PrivateRoutesClient";
 import ClientProfile from "./Components/ClientProfile";
 import SidebarClient from "./Components/SidebarClient";
+import SidebarTherapist from "./Components/SidebarTherapist";
 import Support from "./Components/Support";
 import Unsplash from "unsplash-js";
 import CalendarDashboard from "./Components/CalendarDashboard";
@@ -92,17 +93,10 @@ export default function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/services" element={<Services />} />
           <Route path="/support" element={<SupportResources />} />
-          <Route path="/:client/journals" element={<JournalList />} />
           <Route
             path="/client/journals/:journalId"
             element={<JournalSingle />}
           />
-          {/* Therapist's patient's journal list */}
-          <Route
-            path="/therapist/:clientId/journals/"
-            element={<JournalListTherapist />}
-          />
-          <Route path="/client/newjournal" element={<JournalForm />} />
 
           {/* ===========================================================================CLIENT
           PORTAL============================================================================================ */}
@@ -124,7 +118,7 @@ export default function App() {
           </Route>
           <Route path="/particulars" element={<PersonalParticularsForm />} />
           {/* Route that renders clientdashboard screen */}
-
+          {/*====================================================REFER HERE===============================================================*/}
           <Route path="/client/" element={<DashboardClientScreen />}>
             {/* Route that renders link to sidebar */}
             <Route path="/client/sidebar" element={<SidebarClient />} />
@@ -141,6 +135,8 @@ export default function App() {
             <Route path="/client/dashboard" element={<CalendarDashboard />} />
             {/* Route that renders info of therapist on client's portal */}
             <Route path="/client/therapist" element={<TherapistInfo />} />
+            <Route path="/client/:client/journals" element={<JournalList />} />
+            <Route path="/client/newjournal" element={<JournalForm />} />
           </Route>
           {/* Route that renders new journal form of client on client's portal */}
           {/* </Route> */}
@@ -152,6 +148,7 @@ export default function App() {
           {/* Route that renders therapist dashboard */}
           <Route path="/therapist/" element={<DashboardTherapistScreen />}>
             <Route path="/therapist/support" element={<Support />} />
+            <Route path="/therapist/sidebar" element={<SidebarTherapist />} />
             {/* Route that renders full calendar of therapist on therapists's portal */}
             <Route path="/therapist/calendar" element={<CalendarFull />} />
             {/* Route that renders indiv profile of patient on therapists's portal */}
@@ -171,6 +168,11 @@ export default function App() {
             <Route
               path="/therapist/patients/:clientId/newjournal"
               element={<JournalAssignment />}
+            />
+            {/* Therapist's patient's journal list */}
+            <Route
+              path="/therapist/:clientId/journals/"
+              element={<JournalListTherapist />}
             />
             {/* Route that renders new Journal template form of client on therapist portal ?? but if there's already a therapist assignment component?? */}
             {/* <Route

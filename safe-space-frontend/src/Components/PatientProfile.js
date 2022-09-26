@@ -138,12 +138,12 @@ export default function PatientProfile() {
         </Container>
         <Group position="center" spacing="lg">
           {/* <button>Deactivate</button> */}
-          <Button
+          {/* <Button
             variant="light"
             onClick={() => navigate(`/therapist/patients/${clientId}/history`)}
           >
             Patient Apppointment Log
-          </Button>
+          </Button> */}
           <Button
             variant="light"
             onClick={() => navigate(`/therapist/patients/${clientId}/newmemo`)}
@@ -163,10 +163,7 @@ export default function PatientProfile() {
           >
             Journal List for this patient
           </Button>
-          <Button
-            variant="light"
-            onClick={(e) => navigate(`/therapist/patients/`)}
-          >
+          <Button variant="light" onClick={(e) => navigate(-1)}>
             Back
           </Button>
         </Group>

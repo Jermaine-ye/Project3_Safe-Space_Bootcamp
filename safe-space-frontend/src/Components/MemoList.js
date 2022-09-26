@@ -125,7 +125,9 @@ export default function PatientList() {
 
       {memoList && memoList.length !== 0 ? <ul>{finalList}</ul> : null}
 
-      <Link to={`/therapist/patients/${clientId}`}>Back to Profile</Link>
+      <Button variant="light" onClick={(e) => navigate(-1)}>
+        Back
+      </Button>
     </div>
   );
 }

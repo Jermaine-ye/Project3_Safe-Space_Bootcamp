@@ -36,7 +36,7 @@ const MemoForm = () => {
   const [clientFirstName, setClientFirstName] = useState("");
   const [clientLastName, setClientLastName] = useState("");
   const [clientMood, setClientMood] = useState("");
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
   const { therapistInfo } = useAuth();
 
   // const callApi = async () => {
@@ -135,7 +135,7 @@ const MemoForm = () => {
 
         console.log("resdata:", res.data);
         console.log("Memo Submit Success!!");
-        Navigate(
+        navigate(
           `/therapist/patients/${res.data.clientId}/memos/${res.data.id}`
         );
         // see if can grab the client ID and memo ID from the back end in res.data.id
@@ -228,6 +228,9 @@ const MemoForm = () => {
             Submit
           </Button>
         </form>
+        <Button variant="light" onClick={(e) => navigate(-1)}>
+          Back
+        </Button>
       </Grid>
     </Container>
   );

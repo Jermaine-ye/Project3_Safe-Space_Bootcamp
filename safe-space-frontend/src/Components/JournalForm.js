@@ -1,7 +1,7 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 // import { user } from '@auth0/auth0-react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   Button,
   Card,
@@ -12,46 +12,46 @@ import {
   Form,
   Input,
   Textarea,
-} from '@mantine/core';
-import { DatePicker } from '@mantine/dates';
-import { BACKEND_URL } from '../constants.js';
-import { Auth0Client } from '@auth0/auth0-spa-js';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useAuth } from './AuthContext';
+} from "@mantine/core";
+import { DatePicker } from "@mantine/dates";
+import { BACKEND_URL } from "../constants.js";
+import { Auth0Client } from "@auth0/auth0-spa-js";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "./AuthContext";
 
 const JournalForm = () => {
-  const Navigate = useNavigate();
-  const [updatedAt, setUpdatedAt] = useState('');
-  const [input1, setInput1] = useState('');
-  const [input2, setInput2] = useState('');
-  const [input3, setInput3] = useState('');
+  const navigate = useNavigate();
+  const [updatedAt, setUpdatedAt] = useState("");
+  const [input1, setInput1] = useState("");
+  const [input2, setInput2] = useState("");
+  const [input3, setInput3] = useState("");
   const { user, isAuthenticated, isLoading } = useAuth0();
   const { clientInfo, therapistInfo, template } = useAuth();
 
-  const [dueDate, setDueDate] = useState('');
+  const [dueDate, setDueDate] = useState("");
 
   // get all to know there is an empty null=> new journal entry =>
-  const [clientId, setClientId] = useState('');
-  const [journalId, setJournalId] = useState('');
-  const [dueBy, setDueBy] = useState('');
-  const [templateId, setTemplateId] = useState('');
-  const [journalEntry, setJournalEntry] = useState('');
-  const [therapistFirstName, setTherapistFirstName] = useState('');
-  const [therapistLasttName, setTherapistLastName] = useState('');
+  const [clientId, setClientId] = useState("");
+  const [journalId, setJournalId] = useState("");
+  const [dueBy, setDueBy] = useState("");
+  const [templateId, setTemplateId] = useState("");
+  const [journalEntry, setJournalEntry] = useState("");
+  const [therapistFirstName, setTherapistFirstName] = useState("");
+  const [therapistLasttName, setTherapistLastName] = useState("");
 
   // in real app, pls do not hardcode JonSnow, instead extract the user from AuthProvider
   const callApi = async () => {
     // let response = await axios.get(`${BACKEND_URL}/clients/jon@snow.com`);
     let response = await axios.get(`${BACKEND_URL}/clients/${user.email}`);
     // it should be ${emailClient}
-    console.log('user detailed information: ', response.data);
+    console.log("user detailed information: ", response.data);
 
     console.log(therapistInfo);
 
-    console.log('client Id: ', response.data.id);
-    console.log('Journal Id: ', response.data.journalentries[0].id);
+    console.log("client Id: ", response.data.id);
+    console.log("Journal Id: ", response.data.journalentries[0].id);
     console.log(
-      'Template Id: ',
+      "Template Id: ",
       response.data.journalentries[0].journaltemplateId
     );
     setTemplateId(response.data.journalentries[0].journaltemplateId);
@@ -89,9 +89,9 @@ const JournalForm = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      console.log('user info:', user);
-      console.log('email:', user.email);
-      console.log('therapistInfo: ', therapistInfo);
+      console.log("user info:", user);
+      console.log("email:", user.email);
+      console.log("therapistInfo: ", therapistInfo);
       // setinput1();
       console.log(user);
       callApi();
@@ -115,7 +115,7 @@ const JournalForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('test: ', journalId);
+    console.log("test: ", journalId);
 
     axios
 
@@ -126,14 +126,14 @@ const JournalForm = () => {
         input3,
       })
       .then((res) => {
-        setUpdatedAt('');
-        setInput1('');
-        setInput2('');
-        setInput3('');
+        setUpdatedAt("");
+        setInput1("");
+        setInput2("");
+        setInput3("");
 
-        console.log('resdata:', res.data);
-        console.log('Journal Submit Success!!');
-        Navigate(
+        console.log("resdata:", res.data);
+        console.log("Journal Submit Success!!");
+        navigate(
           // `/therapist/patients/${res.data.clientId}/journal/${res.data.id}`
           `/client/journals/${res.data.id}`
         );
@@ -182,8 +182,8 @@ const JournalForm = () => {
 
           <label>
             {templateId === 1
-              ? 'Topics  I want to discuss and goals for the session: '
-              : 'Focus Topics and goals for the session:'}
+              ? "Topics  I want to discuss and goals for the session: "
+              : "Focus Topics and goals for the session:"}
           </label>
           <Textarea
             name="input1"
@@ -223,6 +223,9 @@ const JournalForm = () => {
           </Button>
         </form>
       </Grid>
+      <Button variant="light" onClick={(e) => navigate(`/client/dashboard`)}>
+        Back
+      </Button>
     </Container>
   );
 };
