@@ -9,7 +9,8 @@ module.exports = {
         last_name: "Choudhury",
         email: "tarin@choudhury.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://tyho.s3.ap-southeast-1.amazonaws.com/images/1661754257image1.png",
         age_id: 2,
         religion_id: 1,
         gender: "Female",
@@ -31,7 +32,8 @@ module.exports = {
         last_name: "Ong",
         email: "lilian@ong.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://tyho.s3.ap-southeast-1.amazonaws.com/images/1661358685Lilian%20Profile%20Image.png",
         age_id: 3,
         religion_id: 1,
         gender: "Female",
@@ -53,7 +55,8 @@ module.exports = {
         last_name: "Kaur",
         email: "maltrish@kaur.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://talkyourheartout.com/wp-content/uploads/2022/08/Maltrish-platform.webp",
         age_id: 1,
         religion_id: 1,
         gender: "Female",
@@ -72,10 +75,11 @@ module.exports = {
       {
         // id: 4,
         first_name: "Caroline",
-        last_name: "Fernandez",
+        last_name: "Ho",
         email: "caroline@ho.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://tyho.s3.ap-southeast-1.amazonaws.com/images/1660190043Caroline%20-%20Platform%20pic.png",
         age_id: 3,
         religion_id: 1,
         gender: "Female",
@@ -97,7 +101,8 @@ module.exports = {
         last_name: "Meenachi",
         email: "glennamarie@meenachi.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://talkyourheartout.com/wp-content/uploads/2022/08/glennamarie.webp",
         age_id: 2,
         religion_id: 4,
         gender: "Female",
@@ -119,7 +124,8 @@ module.exports = {
         last_name: "Yang",
         email: "abigail@yang.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://talkyourheartout.com/wp-content/uploads/2022/08/Abigail-Final-platform-pic-1.webp",
         age_id: 3,
         religion_id: 2,
         gender: "Female",
@@ -141,7 +147,8 @@ module.exports = {
         last_name: "Yew",
         email: "lenca@yew.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://talkyourheartout.com/wp-content/uploads/2022/08/lencayew.webp",
         age_id: 3,
         religion_id: 2,
         gender: "Female",
@@ -163,7 +170,8 @@ module.exports = {
         last_name: " Low",
         email: "joyce@low.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://talkyourheartout.com/wp-content/uploads/2022/08/Joyce_new_photo.webp",
         age_id: 4,
         religion_id: 1,
         gender: "Female",
@@ -185,7 +193,8 @@ module.exports = {
         last_name: "Ong",
         email: "ian@ong.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://talkyourheartout.com/wp-content/uploads/2022/08/ian-ong.webp",
         age_id: 3,
         religion_id: 1,
         gender: "Male",
@@ -207,7 +216,8 @@ module.exports = {
         last_name: "Tok",
         email: "shengchua@tok.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://talkyourheartout.com/wp-content/uploads/2022/08/chua-tok-sheng.webp",
         age_id: 1,
         religion_id: 1,
         gender: "Male",
@@ -229,7 +239,8 @@ module.exports = {
         last_name: "Lim",
         email: "mounyee@lim.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://talkyourheartout.com/wp-content/uploads/2022/08/mau-nyee.webp",
         age_id: 4,
         religion_id: 1,
         gender: "Male",
@@ -251,7 +262,8 @@ module.exports = {
         last_name: "Chung",
         email: "ada@chung.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://talkyourheartout.com/wp-content/uploads/2022/08/adachung.webp",
         age_id: 4,
         religion_id: 1,
         gender: "Female",
@@ -273,7 +285,8 @@ module.exports = {
         last_name: "Lieberum",
         email: "rathi@lieberum.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://talkyourheartout.com/wp-content/uploads/2022/08/rathi.webp",
         age_id: 1,
         religion_id: 4,
         gender: "Female",
@@ -295,7 +308,8 @@ module.exports = {
         last_name: "Loh",
         email: "linah@loh.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://talkyourheartout.com/wp-content/uploads/2022/08/loh_li_nah.webp",
         age_id: 4,
         religion_id: 3,
         gender: "Female",
@@ -317,7 +331,8 @@ module.exports = {
         last_name: "Loh",
         email: "liam@loh.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://talkyourheartout.com/wp-content/uploads/2022/08/loh_li_nah.webp",
         age_id: 3,
         religion_id: 3,
         gender: "Female",
@@ -337,7 +352,8 @@ module.exports = {
         last_name: "Perera",
         email: "kayden@perera.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://talkyourheartout.com/wp-content/uploads/2022/08/kayden.webp",
         age_id: 1,
         religion_id: 1,
         gender: "Female",
@@ -357,7 +373,8 @@ module.exports = {
         last_name: "Houmayune",
         email: "jeanette@houmayune.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://talkyourheartout.com/wp-content/uploads/2022/08/jeanette.webp",
         age_id: 2,
         religion_id: 4,
         gender: "Female",
@@ -377,7 +394,8 @@ module.exports = {
         last_name: "N",
         email: "priyahnisha@n.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://talkyourheartout.com/wp-content/uploads/2022/08/nisha.webp",
         age_id: 4,
         religion_id: 5,
         gender: "Female",
@@ -397,7 +415,8 @@ module.exports = {
         last_name: "Quek",
         email: "jospeh@quek.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://talkyourheartout.com/wp-content/uploads/2022/08/joseph.webp",
         age_id: 1,
         religion_id: 2,
         gender: "Male",
@@ -417,7 +436,8 @@ module.exports = {
         last_name: "Gunasegaran",
         email: "punitha@gunasegaran.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://talkyourheartout.com/wp-content/uploads/2022/08/punitha.webp",
         age_id: 4,
         religion_id: 5,
         gender: "Female",
@@ -437,7 +457,8 @@ module.exports = {
         last_name: "Fee",
         email: "ser@fee.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://talkyourheartout.com/wp-content/uploads/2022/08/ser-fee.webp",
         age_id: 1,
         religion_id: 5,
         gender: "Female",
@@ -457,7 +478,8 @@ module.exports = {
         last_name: "Oh",
         email: "alexandra@oh.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://talkyourheartout.com/wp-content/uploads/2022/08/new-2.webp",
         age_id: 3,
         religion_id: 1,
         gender: "Female",
@@ -477,7 +499,8 @@ module.exports = {
         last_name: "Makalew",
         email: "elisabeth@makalew.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://tyho.s3.ap-southeast-1.amazonaws.com/images/1646727816desieree-makalew.png",
         age_id: 2,
         religion_id: 2,
         gender: "Female",
@@ -497,7 +520,8 @@ module.exports = {
         last_name: "binti Hafiz",
         email: "aisha@aisha.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://tyho.s3.ap-southeast-1.amazonaws.com/images/1646728180alicia-prescott.png",
         age_id: 1,
         religion_id: 4,
         gender: "Female",
@@ -517,7 +541,8 @@ module.exports = {
         last_name: "Kunzru",
         email: "rashmi@kunzru.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://talkyourheartout.com/wp-content/uploads/2022/08/rashmi.webp",
         age_id: 2,
         religion_id: 5,
         gender: "Female",
@@ -537,7 +562,8 @@ module.exports = {
         last_name: "Chok",
         email: "karen@chok.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://tyho.s3.ap-southeast-1.amazonaws.com/images/1646729539karen-chok.jpeg",
         age_id: 4,
         religion_id: 2,
         gender: "Female",
@@ -557,7 +583,8 @@ module.exports = {
         last_name: "Chong",
         email: "edmund@chong.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://talkyourheartout.com/wp-content/uploads/2022/08/Edmund-reized.webp",
         age_id: 4,
         religion_id: 3,
         gender: "Male",
@@ -577,7 +604,8 @@ module.exports = {
         last_name: "Fernandez",
         email: "alyssa@fernandez.com",
         password: "Password123",
-        photo_link: "abc",
+        photo_link:
+          "https://talkyourheartout.com/wp-content/uploads/2022/08/coach-2new.webp",
         age_id: 2,
         religion_id: 1,
         gender: "Female",

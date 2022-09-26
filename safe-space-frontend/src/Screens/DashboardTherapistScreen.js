@@ -9,7 +9,6 @@ import CalendarFull from "../Components/CalendarFull";
 import QuoteDisplay from "../Components/QuoteDisplay";
 
 const DashboardTherapistScreen = () => {
-  const { user, logout } = useAuth0();
   return (
     <div>
       <Link to="/">Home</Link>
