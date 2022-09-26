@@ -23,6 +23,7 @@ export default function PatientList() {
   const { user } = useAuth0();
   const [memoList, setMemoList] = useState([]);
   const [memoDetails, setMemoDetails] = useState({});
+  const [clientDetails, setClientDetails] = useState("");
 
   let finalList;
 
@@ -36,6 +37,13 @@ export default function PatientList() {
     if (clientId) {
       axios.get(`${BACKEND_URL}/memos/${clientId}`).then((response) => {
         setMemoList(response.data);
+      });
+    }
+
+    if (clientId) {
+      axios.get(`${BACKEND_URL}/clients/key/${clientId}`).then((response) => {
+        setClientDetails(response.data);
+        console.log(response.data);
       });
     }
   }, []);
@@ -60,28 +68,29 @@ export default function PatientList() {
 
       return (
         <div>
-          <Link
-            to={`/therapist/patients/${clientId}/memos/${memoInfo.id}`}
-            key={memoInfo.id}
-          >
-            <Card shadow="sm" p="lg" radius="md" withBorder>
-              <Group position="apart" mt="md" mb="xs">
-                <Text>
-                  {memoInfo.firstName}
-
-                  {memoInfo.lastName}
+          <Container>
+            <Link
+              to={`/therapist/patients/${clientId}/memos/${memoInfo.id}`}
+              key={memoInfo.id}
+            >
+              <Card shadow="sm" p="lg" radius="md" withBorder>
+                <Text size="sm">
+                  ID:
+                  {memoInfo.id}
                 </Text>
-              </Group>
-              <Text size="sm" color="dimmed">
-                memo date
-                {memoInfo.updatedAt}
-              </Text>
-              <Text size="sm" color="dimmed">
-                memo id:
-                {memoInfo.id}
-              </Text>
-            </Card>
-          </Link>
+                <Text>
+                  {clientDetails.firstName}
+
+                  {clientDetails.lastName}
+                </Text>
+                <Text>details:{memoInfo.generalInput}</Text>
+                <Text size="sm" color="dimmed">
+                  memo date:
+                  {memoInfo.updatedAt}
+                </Text>
+              </Card>
+            </Link>
+          </Container>
         </div>
         //   <li>
         //     <Link
@@ -116,7 +125,7 @@ export default function PatientList() {
 
       {memoList && memoList.length !== 0 ? <ul>{finalList}</ul> : null}
 
-      <Link to="/">Home</Link>
+      <Link to={`/therapist/patients/${clientId}`}>Back to Profile</Link>
     </div>
   );
 }

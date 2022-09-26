@@ -1,13 +1,21 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import {
+  Button,
+  Card,
+  Text,
+  Title,
+  Grid,
+  Container,
+  Group,
+  NativeSelect,
+  Image,
+} from "@mantine/core";
 
-import { BACKEND_URL } from '../constants.js';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useAuth } from './AuthContext.js';
-import { Container } from '@mantine/core';
+import { BACKEND_URL } from "../constants.js";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "./AuthContext.js";
 
 export default function PatientProfile() {
   const [clientId, setClientId] = useState();
@@ -72,57 +80,88 @@ export default function PatientProfile() {
   //   }
   // }
 
+  const data = [
+    { value: 0, label: "Choose one" },
+    { value: 1, label: "Template One" },
+    { value: 2, label: "Template Two" },
+  ];
+
   return (
     <div>
-      <h2>Hello World</h2>
-      <img
-        src={`${clientDetails.photoLink}`}
-        alt={`${clientDetails.photoLink}`}
-      />
-      <h4>
-        Patient Name: {clientDetails.firstName}
-        {clientDetails.lastName}
-      </h4>
-
-      <button
-        onClick={() => navigate(`/therapist/patients/${clientId}/newjournal`)}
-      >
-        Set Journal Template
-      </button>
-      <select name="template" onChange={(e) => updateTemplate(e.target.value)}>
-        {/*set value once you know and setstate in select. axios.put after. */}
-        <option value={0}>Select a Template</option>
-        <option value={1}>Template one</option>
-        <option value={2}>Template two</option>
-      </select>
-
       <Container>
-        <p>Age:{clientDetails.ageClient}</p>
-        <p>Gender:{clientDetails.gender}</p>
-        <p>Phone Number:{clientDetails.phoneNumber}</p>
-        <p>Email:{clientDetails.email}</p>
-        <p>Marital Status:{clientDetails.maritalStatus}</p>
-        <br />
-        {/*Information from memo?*/}
-      </Container>
+        {/* <Text size="xl">Patient Profile</Text> */}
+        <Text>
+          Patient Name: {clientDetails.firstName}
+          {clientDetails.lastName}
+        </Text>
 
-      {/* <button>Deactivate</button> */}
-      <button
-        onClick={() => navigate(`/therapist/patients/${clientId}/history`)}
-      >
-        Patient Apppointment Log
-      </button>
-      <button
-        onClick={() => navigate(`/therapist/patients/${clientId}/newmemo`)}
-      >
-        Memo Form Creation
-      </button>
-      <button
-        onClick={() => navigate(`/therapist/patients/${clientId}/allmemo`)}
-      >
-        Memo List for this patient
-      </button>
-      <button onClick={(e) => navigate(-1)}>back</button>
+        <Image
+          radius="md"
+          height={300}
+          src={`${clientDetails.photoLink}`}
+          alt={`${clientDetails.photoLink}`}
+        />
+
+        <Button
+          variant="light"
+          onClick={() => navigate(`/therapist/patients/${clientId}/newjournal`)}
+        >
+          Journal Form Creation
+        </Button>
+        {/* <select
+          name="template"
+          onChange={(e) => updateTemplate(e.target.value)}
+        >
+          {/*set value once you know and setstate in select. axios.put after. */}
+        {/* <option value={0}>Select a Template</option>
+          <option value={1}>Template one</option>
+          <option value={2}>Template two</option> */}
+        {/* </select> */}
+
+        <NativeSelect
+          data={data}
+          label="Select a Template"
+          placeholder="Pick one or two"
+          onChange={(e) => updateTemplate(e.target.value)}
+        />
+
+        <Container size="xs" px="xs">
+          <Text>Age:{clientDetails.ageClient}</Text>
+          <Text>Gender:{clientDetails.gender}</Text>
+          <Text>Phone Number:{clientDetails.phoneNumber}</Text>
+          <Text>Email:{clientDetails.email}</Text>
+          <Text>Marital Status:{clientDetails.maritalStatus}</Text>
+          <br />
+          {/*Information from memo?*/}
+        </Container>
+        <Group position="center" spacing="lg">
+          {/* <button>Deactivate</button> */}
+          <Button
+            variant="light"
+            onClick={() => navigate(`/therapist/patients/${clientId}/history`)}
+          >
+            Patient Apppointment Log
+          </Button>
+          <Button
+            variant="light"
+            onClick={() => navigate(`/therapist/patients/${clientId}/newmemo`)}
+          >
+            Memo Form Creation
+          </Button>
+          <Button
+            variant="light"
+            onClick={() => navigate(`/therapist/patients/${clientId}/allmemo`)}
+          >
+            Memo List for this patient
+          </Button>
+          <Button
+            variant="light"
+            onClick={(e) => navigate(`/therapist/patients/`)}
+          >
+            back
+          </Button>
+        </Group>
+      </Container>
     </div>
   );
 }

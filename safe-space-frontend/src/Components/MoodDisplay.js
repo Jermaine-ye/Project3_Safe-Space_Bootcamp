@@ -39,7 +39,7 @@ export default function MoodDisplay() {
       .put(`${BACKEND_URL}/clients/`, newObj)
       .then((res) => {
         // setDailymood('');
-        setValue("");
+        // setValue('');
 
         console.log("resdata:", res.data);
         console.log("Mood Updated");

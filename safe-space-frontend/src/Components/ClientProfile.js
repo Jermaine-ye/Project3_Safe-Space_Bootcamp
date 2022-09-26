@@ -1,13 +1,20 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import {
+  Button,
+  Card,
+  Text,
+  Title,
+  Grid,
+  Container,
+  Group,
+  Image,
+} from "@mantine/core";
 
-import { BACKEND_URL } from '../constants.js';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useAuth } from './AuthContext.js';
-import { Container } from '@mantine/core';
+import { BACKEND_URL } from "../constants.js";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "./AuthContext.js";
 
 export default function ClientProfile() {
   const [clientId, setClientId] = useState();
@@ -71,27 +78,31 @@ export default function ClientProfile() {
 
   return (
     <div>
-      <h2>Hello World</h2>
-      <img
-        src={`${clientDetails.photoLink}`}
-        alt={`${clientDetails.photoLink}`}
-      />
-      <h4>
-        Patient Name: {clientDetails.firstName}
-        {clientDetails.lastName}
-      </h4>
-
       <Container>
-        <p>Age:{clientDetails.ageClient}</p>
-        <p>Gender:{clientDetails.gender}</p>
-        <p>Phone Number:{clientDetails.phoneNumber}</p>
-        <p>Email:{clientDetails.email}</p>
-        <p>Marital Status:{clientDetails.maritalStatus}</p>
-        <br />
-        {/*Information from memo?*/}
-      </Container>
+        <Text size="xl">Profile</Text>
+        <Image
+          radius="md"
+          height={80}
+          src={`${clientDetails.photoLink}`}
+          alt={`${clientDetails.photoLink}`}
+        />
+        <Text>
+          Patient Name: {clientDetails.firstName}
+          {clientDetails.lastName}
+        </Text>
 
-      <button onClick={(e) => navigate(-1)}>back</button>
+        <Container size="xs" px="xs">
+          <Text>Age:{clientDetails.ageClient}</Text>
+          <Text>Gender:{clientDetails.gender}</Text>
+          <Text>Phone Number:{clientDetails.phoneNumber}</Text>
+          <Text>Email:{clientDetails.email}</Text>
+          <Text>Marital Status:{clientDetails.maritalStatus}</Text>
+          <br />
+          {/*Information from memo?*/}
+        </Container>
+
+        <Button onClick={(e) => navigate(-1)}>back</Button>
+      </Container>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import ReactDOM from 'react-dom/client';
 import SidebarClient from '../Components/SidebarClient';
-import { Outlet, useNavigate, Link, useParams } from 'react-router-dom';
+import { Route, Outlet, useNavigate, Link, useParams } from 'react-router-dom';
 import { Button, Card, Text, Title, Grid, Container } from '@mantine/core';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useAuth } from '../Components/AuthContext';
@@ -12,7 +12,6 @@ import PersonalParticularsForm from '../Components/PersonalParticularsForm';
 import CalendarDashboard from '../Components/CalendarDashboard';
 import CalendarFull from '../Components/CalendarFull';
 import QuoteDisplay from '../Components/QuoteDisplay';
-import DashboardTherapistScreen from './DashboardTherapistScreen';
 import DashboardTest from './DashboardTest';
 
 const DashboardClientScreen = () => {
@@ -68,6 +67,9 @@ const DashboardClientScreen = () => {
         <Grid.Col span={8}>
           <QuoteDisplay />
           <Card shadow="sm" p="md">
+            {/* <Route path="/client/dashboard" element={<CalendarDashboard />}>
+              <Route path="/client/calendar" element={<CalendarFull />} />
+            </Route> */}
             <CalendarDashboard />
             <br />
           </Card>
