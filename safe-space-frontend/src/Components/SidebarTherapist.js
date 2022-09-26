@@ -1,25 +1,26 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import { Button, Card, Text, Title, Grid, Container } from '@mantine/core';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { Button, Card, Text, Title, Grid, Container } from "@mantine/core";
 
-import { BACKEND_URL } from '../constants.js';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useAuth } from './AuthContext.js';
+import { BACKEND_URL } from "../constants.js";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "./AuthContext.js";
 
-import PatientProfile from './PatientProfile.js';
-import TherapistInfo from './TherapistInfo';
-import CalendarFull from './CalendarFull.js';
-import CalendarDashboard from './CalendarDashboard';
+import PatientProfile from "./PatientProfile.js";
+import TherapistInfo from "./TherapistInfo";
+import CalendarFull from "./CalendarFull.js";
+import CalendarDashboard from "./CalendarDashboard";
 
 export default function SidebarTherapist() {
   const [clientId, setClientId] = useState();
   const [clientDetails, setClientDetails] = useState({});
   const [template, setTemplate] = useState();
 
+  const { user, logout } = useAuth0();
+
   const navigate = useNavigate();
 
-  const { user } = useAuth0();
   const { clientInfo, currentUser } = useAuth();
 
   useEffect(() => {
@@ -29,7 +30,7 @@ export default function SidebarTherapist() {
     if (clientId) {
       axios.get(`${BACKEND_URL}/clients/key/${clientId}`).then((response) => {
         setClientDetails(response.data);
-        console.log('client Details: ', response.data);
+        console.log("client Details: ", response.data);
       });
     }
     console.log(clientDetails);
@@ -50,6 +51,16 @@ export default function SidebarTherapist() {
         <Link to="/therapist/support">Support</Link>
         <br />
         <br />
+        <Button
+          className="Sidebar-logout-btn"
+          variant="light"
+          onClick={() => {
+            logout();
+            navigate("/index");
+          }}
+        >
+          LOG OUT
+        </Button>
       </Container>
     </div>
   );
