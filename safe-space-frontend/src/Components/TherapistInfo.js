@@ -77,7 +77,7 @@ export default function TherapistInfo() {
         >
           <Image
             src={photoLink}
-            alt="forumtipsicon"
+            alt={photoLink}
             className="Current Therapist"
           />
         </div>

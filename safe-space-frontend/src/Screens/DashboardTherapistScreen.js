@@ -10,12 +10,35 @@ import QuoteDisplay from '../Components/QuoteDisplay';
 
 const DashboardTherapistScreen = () => {
   return (
-    <div>
-      <Link to="/">Home</Link>
-      <QuoteDisplay />
-      <SidebarTherapist />
-      <Outlet />
+    // <div>
+    //   <Link to="/">Home</Link>
+    //   <QuoteDisplay />
+
+    //   <Outlet />
+
+    <div className="Dashboard">
+      {/* <DashboardTest /> */}
+
+      <Grid grow>
+        <Grid.Col className="Dashboard-sidebar-co" span="auto">
+          <SidebarTherapist />
+        </Grid.Col>
+
+        <Grid.Col span={8}>
+          <QuoteDisplay />
+          <Card shadow="sm" p="md">
+            {/* <Route path="/client/dashboard" element={<CalendarDashboard />}>
+              <Route path="/client/calendar" element={<CalendarFull />} />
+            </Route> */}
+            {/* <CalendarDashboard /> */}
+
+            <Outlet />
+            <br />
+          </Card>
+        </Grid.Col>
+      </Grid>
     </div>
+    // </div>
   );
 };
 
