@@ -87,10 +87,13 @@ export default function QuoteDisplay() {
           </Grid.Col>
           <Grid.Col span={6}>
             <Text size={15} weight={400} mt="md">
-              {quote}
+              {/* {quote} */}
+              "As you breathe in, cherish yourself. As you breathe out, cherish
+              all beings."
             </Text>
             <Text size="sm" color="dimmed">
-              -{author}
+              {/* -{author} */}
+              -Dalai Lama
             </Text>
 
             <Text weight={600} size={14} mt="md">

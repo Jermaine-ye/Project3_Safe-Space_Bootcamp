@@ -10,7 +10,15 @@ import QuoteDisplay from "../Components/QuoteDisplay";
 
 const DashboardTherapistScreen = () => {
   return (
+    // <div>
+    //   <Link to="/">Home</Link>
+    //   <QuoteDisplay />
+
+    //   <Outlet />
+
     <div className="Dashboard">
+      {/* <DashboardTest /> */}
+
       <Grid grow>
         <Grid.Col className="Dashboard-sidebar-co" span="auto">
           <SidebarTherapist />
@@ -30,6 +38,7 @@ const DashboardTherapistScreen = () => {
         </Grid.Col>
       </Grid>
     </div>
+    // </div>
   );
 };
 
