@@ -58,7 +58,7 @@ const DashboardClientScreen = () => {
   return (
     <div className="Dashboard">
       {/* <DashboardTest /> */}
-      <Outlet />
+
       <Grid grow>
         <Grid.Col className="Dashboard-sidebar-co" span="auto">
           <SidebarClient />
@@ -70,7 +70,9 @@ const DashboardClientScreen = () => {
             {/* <Route path="/client/dashboard" element={<CalendarDashboard />}>
               <Route path="/client/calendar" element={<CalendarFull />} />
             </Route> */}
-            <CalendarDashboard />
+            {/* <CalendarDashboard /> */}
+
+            <Outlet />
             <br />
           </Card>
         </Grid.Col>

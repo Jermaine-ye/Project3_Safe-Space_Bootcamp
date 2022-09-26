@@ -65,6 +65,8 @@ export default function LandingPage() {
     <div>
       <NavBar />
 
+      <Link to="/evaluation/1">Eva</Link>
+
       <Footer />
 
       <br />

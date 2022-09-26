@@ -77,6 +77,7 @@ export default function SidebarClient() {
           <Link to="/">Home</Link>
           <br />
           <br />
+
           <Link to="/client/:clientId">Profile</Link>
           <br />
           <br />

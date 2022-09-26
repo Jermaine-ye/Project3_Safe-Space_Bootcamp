@@ -126,9 +126,9 @@ export default function CalendarDashboard() {
     console.log(event);
     //TO CHANGE TO CORRECT ROUTE LATER.
     if (user[`https://any-namespace/roles`].length !== 0) {
-      navigate("../therapist/calendar");
+      navigate("../calendar");
     } else {
-      navigate("../client/calendar");
+      navigate("../calendar");
     }
   };
 

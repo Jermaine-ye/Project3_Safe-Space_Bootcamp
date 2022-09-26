@@ -128,7 +128,7 @@ export default function NavBar() {
       const response = await axios.get(`${BACKEND_URL}/clients/${user.email}`);
 
       updateClientInfo(response.data);
-
+      console.log(response.data);
       let allTher;
       let currTher;
 
@@ -186,9 +186,9 @@ export default function NavBar() {
     console.log(event);
 
     if (user[`https://any-namespace/roles`].length !== 0) {
-      navigate('/therapist/');
+      navigate('/therapist/dashboard');
     } else if (user[`https://any-namespace/roles`].length === 0) {
-      navigate('/client/');
+      navigate('/client/dashboard');
     } else {
       navigate('/');
     }
@@ -236,6 +236,7 @@ export default function NavBar() {
           <Grid.Col span="auto">
             <Link to="/support">Support Resources</Link>
           </Grid.Col>
+
           {/* <Grid.Col span="auto">
             <Link to="/therapist/calendardash">Calendar Dashboard</Link>
           </Grid.Col>

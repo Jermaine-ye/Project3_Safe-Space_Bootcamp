@@ -35,6 +35,7 @@ import ClientProfile from './Components/ClientProfile';
 import SidebarClient from './Components/SidebarClient';
 import Support from './Components/Support';
 import Unsplash from 'unsplash-js';
+import CalendarDashboard from './Components/CalendarDashboard';
 // import AdvicePreview from './Components/StaticInfo/AdvicePreview';
 // import AdviceSingle from './Components/StaticInfo/AdviceSingle';
 // import AdvicePreviewList from './Components/StaticInfo/AdvicePreviewList';
@@ -66,15 +67,15 @@ export default function App() {
     <AuthProvider>
       <div className="App">
         {/* Placeholder for ease of use */}
-        {/* <button
+        <button
           onClick={() => {
             logout();
           }}
         >
           LOG OUT
         </button>
-        <button onClick={(e) => navigate(-1)}>back</button>
-        <button onClick={(e) => navigate('/')}>Home</button> */}
+        {/* <button onClick={(e) => navigate(-1)}>back</button>
+        <button onClick={(e) => navigate('/')}>Home</button>  */}
         <Routes>
           {/* check for admin boolean and render client and therapist pages according.  */}
           <Route path="/" element={<LandingPage />} />
@@ -132,6 +133,7 @@ export default function App() {
 
             {/* Route that renders full calendar of client on client's portal */}
             <Route path="/client/calendar" element={<CalendarFull />} />
+            <Route path="/client/dashboard" element={<CalendarDashboard />} />
             {/* Route that renders info of therapist on client's portal */}
             <Route path="/client/therapist" element={<TherapistInfo />} />
           </Route>
@@ -143,54 +145,55 @@ export default function App() {
           {/* SET OUTLETS FOR SCREENS. */}
           {/* <Route element={<PrivateRoutes />}> */}
           {/* Route that renders therapist dashboard */}
-          <Route path="/therapist/" element={<DashboardTherapistScreen />} />
-          <Route path="/therapist/support" element={<Support />} />
-          {/* Route that renders full calendar of therapist on therapists's portal */}
-          <Route path="/therapist/calendar" element={<CalendarFull />} />
-          {/* Route that renders indiv profile of patient on therapists's portal */}
-          <Route
-            path="/therapist/patients/:clientId"
-            element={<PatientProfile />}
-          />
-          {/* List of patients that are assigned to the current therapist */}
-          <Route path="/therapist/patients/" element={<PatientList />} />
-          {/*may just be a component to the dashboard  */}
-          <Route path="/therapist/upcoming" element={<PatientsUpcoming />} />
-          {/* Route that renders appt history for the indiv patient on therapists's portal */}
-          <Route
-            path="/therapist/patients/:clientId/history"
-            element={<PrevApptHistory />}
-          />
-          {/* Route that renders assigning of journal template to indiv patient on therapists's portal */}
-          <Route
-            path="/therapist/patients/:clientId/newjournal"
-            element={<JournalAssignment />}
-          />
-          {/* Route that renders new Journal template form of client on therapist portal ?? but if there's already a therapist assignment component?? */}
-          {/* <Route
+          <Route path="/therapist/" element={<DashboardTherapistScreen />}>
+            <Route path="/therapist/support" element={<Support />} />
+            {/* Route that renders full calendar of therapist on therapists's portal */}
+            <Route path="/therapist/calendar" element={<CalendarFull />} />
+            {/* Route that renders indiv profile of patient on therapists's portal */}
+            <Route
+              path="/therapist/dashboard"
+              element={<CalendarDashboard />}
+            />
+            <Route
+              path="/therapist/patients/:clientId"
+              element={<PatientProfile />}
+            />
+            {/* List of patients that are assigned to the current therapist */}
+            <Route path="/therapist/patients/" element={<PatientList />} />
+            {/*may just be a component to the dashboard  */}
+
+            {/* Route that renders assigning of journal template to indiv patient on therapists's portal */}
+            <Route
+              path="/therapist/patients/:clientId/newjournal"
+              element={<JournalAssignment />}
+            />
+            {/* Route that renders new Journal template form of client on therapist portal ?? but if there's already a therapist assignment component?? */}
+            {/* <Route
             path="/therapist/:clientId/journal/new"
             element={<JournalTemplate />}
             /> */}
-          {/* Route that renders indiv journal done by indiv patient on therapists's portal */}
-          {/* <Route
+            {/* Route that renders indiv journal done by indiv patient on therapists's portal */}
+            {/* <Route
               path="/therapist/patients/:clientId/journal/:journalId"
               element={<JournalSingle />}
             /> */}
-          {/* Route that renders indiv memo by therapist(past & present) abt the indiv patient on therapists's portal */}
-          <Route
-            path="/therapist/patients/:clientId/memos/:memoId"
-            element={<MemoSingle />}
-          />
-          {/* Route that renders blank new memo for the indiv patient on therapists's portal */}
-          <Route
-            path="/therapist/patients/:clientId/newmemo"
-            element={<MemoForm />}
-          />
-          {/* Route that renders the list of memo belonging to the client */}
-          <Route
-            path="/therapist/patients/:clientId/allmemo"
-            element={<MemoList />}
-          />
+            {/* Route that renders indiv memo by therapist(past & present) abt the indiv patient on therapists's portal */}
+            <Route
+              path="/therapist/patients/:clientId/memos/:memoId"
+              element={<MemoSingle />}
+            />
+            {/* Route that renders blank new memo for the indiv patient on therapists's portal */}
+            <Route
+              path="/therapist/patients/:clientId/newmemo"
+              element={<MemoForm />}
+            />
+            {/* Route that renders the list of memo belonging to the client */}
+            <Route
+              path="/therapist/patients/:clientId/allmemo"
+              element={<MemoList />}
+            />
+          </Route>
+
           {/* </Route> */}
           {/* SET PRIVATE ROUTES FOR THERAPIST */}
           {/* Route that matches all other paths */}
