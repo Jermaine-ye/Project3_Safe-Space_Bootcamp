@@ -34,7 +34,6 @@ export default function SidebarTherapist() {
 
   const navigate = useNavigate();
 
-  const { user, logout } = useAuth0();
   const { clientInfo, currentUser, therapistInfo } = useAuth();
 
   useEffect(() => {
@@ -93,7 +92,6 @@ export default function SidebarTherapist() {
             variant="light"
             onClick={() => {
               logout();
-              navigate("/index");
             }}
           >
             LOG OUT
