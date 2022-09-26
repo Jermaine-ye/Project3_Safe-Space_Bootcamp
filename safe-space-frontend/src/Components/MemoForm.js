@@ -1,6 +1,6 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
   Button,
   Card,
@@ -11,31 +11,31 @@ import {
   Form,
   Input,
   Textarea,
-} from "@mantine/core";
-import { DatePicker } from "@mantine/dates";
-import { BACKEND_URL } from "../constants.js";
-import { useAuth0 } from "@auth0/auth0-react";
-import angry from "../images/angry.png";
-import crying from "../images/sad.png";
-import happy from "../images/smiling-face.png";
-import sad from "../images/frown.png";
-import { useAuth } from "./AuthContext";
+} from '@mantine/core';
+import { DatePicker } from '@mantine/dates';
+import { BACKEND_URL } from '../constants.js';
+import { useAuth0 } from '@auth0/auth0-react';
+import angry from '../images/angry.png';
+import crying from '../images/sad.png';
+import happy from '../images/smiling-face.png';
+import sad from '../images/frown.png';
+import { useAuth } from './AuthContext';
 
 const MemoForm = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
 
-  const [clientId, setClientId] = useState("");
-  const [generalInput, setGeneralInput] = useState("");
-  const [behaviorInput, setBehaviorInput] = useState("");
-  const [contenttherapyInput, setContenttherapyInput] = useState("");
-  const [therapeuticintInput, setTherapeuticintInput] = useState("");
-  const [diagnosesInput, setDiagnosesInput] = useState("");
-  const [instructionsInput, setInstructionsInput] = useState("");
-  const [riskfactorsInput, setRiskfactorsInput] = useState("");
-  const [clientDetails, setClientDetails] = useState("");
-  const [clientFirstName, setClientFirstName] = useState("");
-  const [clientLastName, setClientLastName] = useState("");
-  const [clientMood, setClientMood] = useState("");
+  const [clientId, setClientId] = useState('');
+  const [generalInput, setGeneralInput] = useState('');
+  const [behaviorInput, setBehaviorInput] = useState('');
+  const [contenttherapyInput, setContenttherapyInput] = useState('');
+  const [therapeuticintInput, setTherapeuticintInput] = useState('');
+  const [diagnosesInput, setDiagnosesInput] = useState('');
+  const [instructionsInput, setInstructionsInput] = useState('');
+  const [riskfactorsInput, setRiskfactorsInput] = useState('');
+  const [clientDetails, setClientDetails] = useState('');
+  const [clientFirstName, setClientFirstName] = useState('');
+  const [clientLastName, setClientLastName] = useState('');
+  const [clientMood, setClientMood] = useState('');
   const navigate = useNavigate();
   const { therapistInfo } = useAuth();
 
@@ -71,8 +71,8 @@ const MemoForm = () => {
 
     if (clientId) {
       axios.get(`${BACKEND_URL}/clients/key/${clientId}`).then((response) => {
-        setClientDetails("clientres.data: ", response.data);
-        console.log("clientdetails: ", response.data.dailymood);
+        setClientDetails('clientres.data: ', response.data);
+        console.log('clientdetails: ', response.data.dailymood);
         setClientMood(response.data.dailymood);
         setClientFirstName(response.data.firstName);
         setClientLastName(response.data.lastName);
@@ -81,7 +81,7 @@ const MemoForm = () => {
   }, [clientId]);
 
   const moodIcon = (input) => {
-    console.log("checkmood: ", clientDetails.patientMood);
+    console.log('checkmood: ', clientDetails.patientMood);
     switch (input) {
       case 1:
         return <img src={happy} alt="" width="50" height="50" />;
@@ -125,16 +125,16 @@ const MemoForm = () => {
         riskfactorsInput,
       })
       .then((res) => {
-        setGeneralInput("");
-        setBehaviorInput("");
-        setContenttherapyInput("");
-        setTherapeuticintInput("");
-        setDiagnosesInput("");
-        setInstructionsInput("");
-        setRiskfactorsInput("");
+        setGeneralInput('');
+        setBehaviorInput('');
+        setContenttherapyInput('');
+        setTherapeuticintInput('');
+        setDiagnosesInput('');
+        setInstructionsInput('');
+        setRiskfactorsInput('');
 
-        console.log("resdata:", res.data);
-        console.log("Memo Submit Success!!");
+        console.log('resdata:', res.data);
+        console.log('Memo Submit Success!!');
         navigate(
           `/therapist/patients/${res.data.clientId}/memos/${res.data.id}`
         );
@@ -146,27 +146,27 @@ const MemoForm = () => {
       });
   };
   return (
-    <Container className="Form-body" size="sm" px="xs">
-      <Grid justify="center" align="center">
+    <Container size="md" px="xs">
+      <Card withBorder shadow="sm" radius="md">
         <form onSubmit={handleSubmit}>
           <br />
-          <label>Memo Entry</label>
+          <Text weight={700}>Memo Entry</Text>
           <br />
           <br />
-          <label>Date: {new Date().toLocaleDateString()}</label>
+          <Text weight={700}>Date: {new Date().toLocaleDateString()}</Text>
 
           <br />
           <br />
 
-          <label>
-            {" "}
+          <Text weight={700}>
+            {' '}
             Patient Name: {clientFirstName} {clientLastName}
-          </label>
+          </Text>
 
           <br />
           <br />
 
-          <label>General Notes:</label>
+          <Text weight={700}>General Notes:</Text>
           <Textarea
             name="general"
             placeholder="brief details of patient."
@@ -174,14 +174,14 @@ const MemoForm = () => {
             onChange={(event) => setGeneralInput(event.currentTarget.value)}
           />
           <br />
-          <label>Behaviour Observations:</label>
+          <Text weight={700}>Behaviour Observations:</Text>
           <Textarea
             name="behavior"
             value={behaviorInput}
             onChange={(event) => setBehaviorInput(event.currentTarget.value)}
           />
           <br />
-          <label>Content of Today's Therapy:</label>
+          <Text weight={700}>Content of Today's Therapy:</Text>
           <Textarea
             name="content"
             value={contenttherapyInput}
@@ -190,7 +190,7 @@ const MemoForm = () => {
             }
           />
           <br />
-          <label>Any Therapeutic Intervention Needed?</label>
+          <Text weight={700}>Any Therapeutic Intervention Needed?</Text>
           <Textarea
             name="therapeutic"
             value={therapeuticintInput}
@@ -199,7 +199,7 @@ const MemoForm = () => {
             }
           />
           <br />
-          <label>Diagnoses:</label>
+          <Text weight={700}>Diagnoses:</Text>
           <Textarea
             name="diagnoses"
             value={diagnosesInput}
@@ -207,7 +207,7 @@ const MemoForm = () => {
           />
           <br />
 
-          <label>Instructions/Recommendations/Plans</label>
+          <Text weight={700}>Instructions/Recommendations/Plans</Text>
           <Textarea
             name="instructions"
             value={instructionsInput}
@@ -216,7 +216,7 @@ const MemoForm = () => {
             }
           />
           <br />
-          <label>Notes and Risk Factors:</label>
+          <Text weight={700}>Notes and Risk Factors:</Text>
           <Textarea
             name="risk"
             value={riskfactorsInput}
@@ -228,10 +228,10 @@ const MemoForm = () => {
             Submit
           </Button>
         </form>
-        <Button variant="light" onClick={(e) => navigate(-1)}>
-          Back
-        </Button>
-      </Grid>
+      </Card>
+      <Button variant="light" onClick={(e) => navigate(-1)}>
+        Back to Patient Profile
+      </Button>
     </Container>
   );
 };

@@ -81,17 +81,18 @@ export default function QuoteDisplay() {
           <Grid.Col span={6}>
             <Card withBorder shadow="sm" radius="md">
               <Card.Section mt="sm">
-                <Image src={photo} height={250} alt="photo display" />
+                <Image src={photo} height={230} alt="photo display" />
               </Card.Section>
             </Card>
           </Grid.Col>
           <Grid.Col span={6}>
-            <Text size={15} weight={400} mt="md">
+            <br />
+            <Text size={13} weight={400} mt="md">
               {/* {quote} */}
               "As you breathe in, cherish yourself. As you breathe out, cherish
               all beings."
             </Text>
-            <Text size="sm" color="dimmed">
+            <Text size="xs" color="dimmed">
               {/* -{author} */}
               -Dalai Lama
             </Text>

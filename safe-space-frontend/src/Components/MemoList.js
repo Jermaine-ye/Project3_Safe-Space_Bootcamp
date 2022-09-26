@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
-import { BACKEND_URL } from "../constants.js";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useAuth } from "./AuthContext.js";
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+import { BACKEND_URL } from '../constants.js';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth } from './AuthContext.js';
 import {
   Button,
   Card,
@@ -12,7 +12,7 @@ import {
   Grid,
   Container,
   Group,
-} from "@mantine/core";
+} from '@mantine/core';
 
 // similar to sighting exercises
 export default function PatientList() {
@@ -23,7 +23,7 @@ export default function PatientList() {
   const { user } = useAuth0();
   const [memoList, setMemoList] = useState([]);
   const [memoDetails, setMemoDetails] = useState({});
-  const [clientDetails, setClientDetails] = useState("");
+  const [clientDetails, setClientDetails] = useState('');
 
   let finalList;
 
@@ -68,7 +68,7 @@ export default function PatientList() {
 
       return (
         <div>
-          <Container>
+          <Container size="xs" px="xs">
             <Link
               to={`/therapist/patients/${clientId}/memos/${memoInfo.id}`}
               key={memoInfo.id}
@@ -85,8 +85,8 @@ export default function PatientList() {
                 </Text>
                 <Text>details:{memoInfo.generalInput}</Text>
                 <Text size="sm" color="dimmed">
-                  memo date:
-                  {memoInfo.updatedAt}
+                  memo created:
+                  {new Date(memoInfo.updatedAt).toLocaleDateString()}
                 </Text>
               </Card>
             </Link>
@@ -124,9 +124,10 @@ export default function PatientList() {
       <h2>Memo List</h2>
 
       {memoList && memoList.length !== 0 ? <ul>{finalList}</ul> : null}
-
+      <br />
+      <br />
       <Button variant="light" onClick={(e) => navigate(-1)}>
-        Back
+        Back to Patient Profile
       </Button>
     </div>
   );

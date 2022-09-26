@@ -83,7 +83,7 @@ export default function CalendarModal(props) {
 
   return (
     <>
-      <div>CalendarModal</div>
+      {/* <div>CalendarModal</div> */}
       <div key={id}>
         <button onClick={handleClose}>Go back to Full Calendar</button>
         <h4> {title}</h4>

@@ -1,7 +1,7 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 // import { user } from '@auth0/auth0-react';
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
   Button,
   Card,
@@ -12,37 +12,37 @@ import {
   Form,
   Input,
   Textarea,
-} from "@mantine/core";
-import { DatePicker } from "@mantine/dates";
-import { BACKEND_URL } from "../constants.js";
-import { Auth0Client } from "@auth0/auth0-spa-js";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useAuth } from "./AuthContext";
+} from '@mantine/core';
+import { DatePicker } from '@mantine/dates';
+import { BACKEND_URL } from '../constants.js';
+import { Auth0Client } from '@auth0/auth0-spa-js';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth } from './AuthContext';
 
 const JournalAssignment = () => {
   const navigate = useNavigate();
-  const [updatedAt, setUpdatedAt] = useState("");
+  const [updatedAt, setUpdatedAt] = useState('');
   const [input1, setInput1] = useState(null);
   const [input2, setInput2] = useState(null);
   const [input3, setInput3] = useState(null);
   const { user, isAuthenticated, isLoading } = useAuth0();
   const { clientInfo, therapistInfo, template } = useAuth();
 
-  const [dueDate, setDueDate] = useState("");
+  const [dueDate, setDueDate] = useState('');
 
-  const [clientDetails, setClientDetails] = useState("");
-  const [clientFirstName, setClientFirstName] = useState("");
-  const [clientLastName, setClientLastName] = useState("");
-  const [clientMood, setClientMood] = useState("");
+  const [clientDetails, setClientDetails] = useState('');
+  const [clientFirstName, setClientFirstName] = useState('');
+  const [clientLastName, setClientLastName] = useState('');
+  const [clientMood, setClientMood] = useState('');
 
   // get all to know there is an empty null=> new journal entry =>
-  const [clientId, setClientId] = useState("");
-  const [journalId, setJournalId] = useState("");
+  const [clientId, setClientId] = useState('');
+  const [journalId, setJournalId] = useState('');
 
   // const [journalEntryNum, setJournalEntryNum] = useState("");
 
-  const [therapistFirstName, setTherapistFirstName] = useState("");
-  const [therapistLastName, setTherapistLastName] = useState("");
+  const [therapistFirstName, setTherapistFirstName] = useState('');
+  const [therapistLastName, setTherapistLastName] = useState('');
 
   // //in real app, pls do not hardcode JonSnow, instead extract the user from AuthProvider
   // const callApi = async () => {
@@ -149,81 +149,86 @@ const JournalAssignment = () => {
 
   return (
     <Container className="Form-body" size="sm" px="xs">
-      <Grid justify="center" align="center">
-        {/* <Grid.Col span={1}> */}
-        <Container>
-          <label>Journal Assignment</label>
+      <Card withBorder shadow="sm" radius="md">
+        <Grid justify="center" align="center">
+          {/* <Grid.Col span={1}> */}
+          <Container>
+            <Text size={20} weight={700}>
+              Journal Assignment
+            </Text>
 
-          <br />
-          <label>
-            Therapist: {therapistInfo.firstName} {therapistInfo.lastName}
-          </label>
-          <br />
-        </Container>
-        <Container>
-          <form onSubmit={handleSubmit}>
-            <label>
-              Date Due:{" "}
-              {
-                <DatePicker
-                  placeholder="Pick date"
-                  value={updatedAt}
-                  onChange={setUpdatedAt}
-                  // allowFreeInput
-                  // dateParser={(updatedAt) => new Date(Date.parse(updatedAt))}
-                />
-              }
-            </label>
             <br />
+            <Text weight={700}>
+              Therapist: {therapistInfo.firstName} {therapistInfo.lastName}
+            </Text>
+          </Container>
+          <Container>
+            <form onSubmit={handleSubmit}>
+              <Text weight={700}>
+                Date Due:{' '}
+                {
+                  <DatePicker
+                    placeholder="Pick date"
+                    value={updatedAt}
+                    onChange={setUpdatedAt}
+                    // allowFreeInput
+                    // dateParser={(updatedAt) => new Date(Date.parse(updatedAt))}
+                  />
+                }
+              </Text>
+              <br />
+              <Text weight={700}>
+                {template === 1
+                  ? 'Q1: Topics  I want to discuss and goals for the session: '
+                  : 'Q1: Focus Topics and goals for the session:'}
+              </Text>
 
-            <label>
-              {template === 1
-                ? "Topics  I want to discuss and goals for the session: "
-                : "Focus Topics and goals for the session:"}
-            </label>
-            <h1>Q1</h1>
-            <Textarea
-              name="input1"
-              value={input1}
-              onChange={(event) => setInput1(event.currentTarget.value)}
-              placeholder="what has been bothering you?"
-            />
-            <br />
-            <label>
-              {template === 1
-                ? `How do I feel about these things and how do they affect my life? Do I already see ways to help myself get over them?`
-                : `How did my partner react to this discussion? What feelings and insights did he/she express?`}
-            </label>
-            <h1>Q2</h1>
-            <Textarea
-              name="input2"
-              value={input2}
-              onChange={(event) => setInput2(event.currentTarget.value)}
-              placeholder="what are your thoughts?"
-            />
-            <br />
-            <label>
-              {template === 1
-                ? `Main insights and takeaways from session: 
+              <Textarea
+                name="input1"
+                value={input1}
+                onChange={(event) => setInput1(event.currentTarget.value)}
+                placeholder="what has been bothering you?"
+              />
+              <br />
+              <Text weight={700}>
+                {template === 1
+                  ? `Q2: How do I feel about these things and how do they affect my life? Do I already see ways to help myself get over them?`
+                  : `Q2: How did my partner react to this discussion? What feelings and insights did he/she express?`}
+              </Text>
+
+              <Textarea
+                name="input2"
+                value={input2}
+                onChange={(event) => setInput2(event.currentTarget.value)}
+                placeholder="what are your thoughts?"
+              />
+              <br />
+              <Text weight={700}>
+                {template === 1
+                  ? `Q3: Main insights and takeaways from session: 
   (including possible actions and follow ups)`
-                : `My main insights and takeaways from session:
+                  : `Q3: My main insights and takeaways from session:
   (including possible actions and follow ups)`}
-            </label>
-            <h1>Q3</h1>
-            <Textarea
-              name="input3"
-              value={input3}
-              onChange={(event) => setInput3(event.currentTarget.value)}
-              placeholder="what are your thoughts?"
-            />
-            <br />
-            <Button variant="light" type="submit">
-              Submit
-            </Button>
-          </form>
-        </Container>
-        {/* </Grid.Col> */}
-      </Grid>
+              </Text>
+
+              <Textarea
+                name="input3"
+                value={input3}
+                onChange={(event) => setInput3(event.currentTarget.value)}
+                placeholder="what are your thoughts?"
+              />
+              <br />
+              <Button variant="light" type="submit">
+                Submit
+              </Button>
+            </form>
+          </Container>
+          <Button variant="light" onClick={(e) => navigate(-1)}>
+            Back to Patient Profile
+          </Button>
+          {/* </Grid.Col> */}
+        </Grid>
+      </Card>
     </Container>
   );
 };

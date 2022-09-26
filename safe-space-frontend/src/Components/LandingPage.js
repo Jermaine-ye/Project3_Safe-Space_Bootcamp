@@ -1,6 +1,14 @@
 import React from 'react';
 import axios from 'axios';
-import { Button, Card, Text, Title } from '@mantine/core';
+import {
+  Button,
+  Card,
+  Text,
+  Title,
+  Image,
+  Container,
+  Grid,
+} from '@mantine/core';
 import {
   useNavigate,
   useParams,
@@ -16,6 +24,7 @@ import Footer from './Footer';
 import { useAuth } from './AuthContext';
 import { useAuth0 } from '@auth0/auth0-react';
 import QuoteDisplay from './QuoteDisplay';
+import pic1 from '../images/illustration/DrawKit Vector Illustration Mental Health 1.png';
 
 export default function LandingPage() {
   const {
@@ -71,26 +80,55 @@ export default function LandingPage() {
   return (
     <div>
       <NavBar />
+      <Container>
+        <Card>
+          <Grid>
+            <Grid.Col span={4}>
+              <Container className="Landing-text" size="md" px="xs">
+                <Text weight={600} align="justify" size="md">
+                  {' '}
+                  <Title color="blue" order={2} weight={600} align="Right">
+                    Let Us Give You A
+                  </Title>
+                  <i>Safe Space</i> is a Singapore-based online counselling
+                  platform. We bring together empathetic and passionate mental
+                  health professionals into a single space.
+                </Text>
+              </Container>
+            </Grid.Col>
+            <Grid.Col span={6}>
+              <div
+                style={{
+                  width: 650,
 
-      <Link to="/evaluation/1">Eva</Link>
+                  marginLeft: 'auto',
+                  marginRight: 50,
+                }}
+              >
+                <Image src={pic1} alt="landing page" className="consultation" />
+              </div>
 
-      <button
-        onClick={() => {
-          navigate('/particulars');
-        }}
-      >
-        Click Here to Sign Up!
-      </button>
+              {/* <Link to="/evaluation/1">Eva</Link> */}
 
-      <br />
-      <br />
-      <button
+              <button
+                onClick={() => {
+                  navigate('/particulars');
+                }}
+              >
+                Take Our Evaluation Form!
+              </button>
+            </Grid.Col>
+
+            {/* <button
         onClick={() => {
           logout();
         }}
       >
         LOG OUT
-      </button>
+      </button> */}
+          </Grid>
+        </Card>
+      </Container>
 
       <Footer />
 

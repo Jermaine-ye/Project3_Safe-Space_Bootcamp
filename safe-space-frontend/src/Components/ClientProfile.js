@@ -1,6 +1,6 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import {
   Button,
   Card,
@@ -10,11 +10,11 @@ import {
   Container,
   Group,
   Image,
-} from "@mantine/core";
+} from '@mantine/core';
 
-import { BACKEND_URL } from "../constants.js";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useAuth } from "./AuthContext.js";
+import { BACKEND_URL } from '../constants.js';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth } from './AuthContext.js';
 
 export default function ClientProfile() {
   const [clientId, setClientId] = useState();
@@ -89,10 +89,10 @@ export default function ClientProfile() {
         /> */}
           <div
             style={{
-              width: 300,
+              width: 250,
               marginTop: 20,
-              marginLeft: "auto",
-              marginRight: "auto",
+              marginLeft: 'auto',
+              marginRight: 'auto',
               marginBottom: 20,
             }}
           >
@@ -103,24 +103,30 @@ export default function ClientProfile() {
             />
           </div>
 
+          <Text weight={700}>Patient Name:</Text>
           <Text>
-            Patient Name: {clientDetails.firstName}
+            {clientDetails.firstName}
             {clientDetails.lastName}
           </Text>
 
           <Container size="xs" px="xs">
-            <Text>Age:{clientDetails.ageClient}</Text>
-            <Text>Gender:{clientDetails.gender}</Text>
-            <Text>Phone Number:{clientDetails.phoneNumber}</Text>
-            <Text>Email:{clientDetails.email}</Text>
-            <Text>Marital Status:{clientDetails.maritalStatus}</Text>
+            <Text weight={700}>Age:</Text>
+            <Text>{clientDetails.ageClient}</Text>
+            <Text weight={700}>Gender:</Text>
+            <Text>{clientDetails.gender}</Text>
+            <Text weight={700}>Phone Number:</Text>
+            <Text>{clientDetails.phoneNumber}</Text>
+            <Text weight={700}>Email:</Text>
+            <Text>{clientDetails.email}</Text>
+            <Text weight={700}>Marital Status:</Text>
+            <Text>{clientDetails.maritalStatus}</Text>
             <br />
             {/*Information from memo?*/}
           </Container>
         </Card>
-        <Button variant="light" onClick={(e) => navigate(`/client/dashboard`)}>
+        {/* <Button variant="light" onClick={(e) => navigate(`/client/dashboard`)}>
           Back
-        </Button>
+        </Button> */}
       </Container>
     </div>
   );

@@ -1,7 +1,7 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 // import { user } from '@auth0/auth0-react';
-import { Link, useNavigate, useParams, useNavigation } from "react-router-dom";
+import { Link, useNavigate, useParams, useNavigation } from 'react-router-dom';
 import {
   Button,
   Card,
@@ -12,19 +12,22 @@ import {
   Form,
   Input,
   Textarea,
-} from "@mantine/core";
+  Image,
+} from '@mantine/core';
 
-import { BACKEND_URL } from "../constants.js";
-import { Auth0Client } from "@auth0/auth0-spa-js";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useAuth } from "./AuthContext";
+import { BACKEND_URL } from '../constants.js';
+import { Auth0Client } from '@auth0/auth0-spa-js';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth } from './AuthContext';
+
+import pic1 from '../images/illustration/Journal single-01-01.png';
 
 export default function JournalSingle(props) {
   const navigate = useNavigate();
   const { user, isAuthenticated, isLoading } = useAuth0();
 
   // get all to know there is an empty null=> new journal entry =>
-  const [journalId, setJournalId] = useState("");
+  const [journalId, setJournalId] = useState('');
   // const [journalDetails, setJournalDetails] = useState();
   const [indiJournalID, setIndiJournalId] = useState();
   const [indiJournalDueBy, setIndiJournalDueBy] = useState();
@@ -37,7 +40,7 @@ export default function JournalSingle(props) {
     if (journalId) {
       axios.get(`${BACKEND_URL}/journals/single/${journalId}`).then((res) => {
         // setJournalDetails(res.data);
-        console.log("single journal list: ", res.data);
+        console.log('single journal list: ', res.data);
         setIndiJournalId(res.data.id);
         setIndiJournalDueBy(res.data.dueBy);
         setIndiJournalTemplate(res.data.journaltemplateId);
@@ -58,15 +61,23 @@ export default function JournalSingle(props) {
   }
 
   return (
-    <Container className="Form-body" size="sm" px="xs">
-      <Grid justify="center" align="center">
+    <Container align="center" className="Form-body" size="sm" px="xs">
+      <Card withBorder shadow="sm" radius="md">
+        <Title order={3} weight={500} align="center">
+          Journal Entry Record
+        </Title>
+        <br />
+        {/* <Grid align="center"> */}
         <Text weight={700}>Journal ID:</Text>
         <Text>{indiJournalID}</Text>
         {/* <Text>Journal {journalDetails.id}</Text> */}
         <br />
         {/* cant get the line to move down... */}
+        <Text weight={700}>Due by:</Text>{' '}
+        <Text weight={400}>
+          {new Date(indiJournalDueBy).toLocaleDateString()}
+        </Text>
         <br />
-        <Text weight={700}>Due by: {indiJournalDueBy}</Text>
         <Text weight={700}>
           {indiJournalTemplate === 1 ? (
             <Text>Topics I want to discuss and goals for the session: </Text>
@@ -110,10 +121,22 @@ export default function JournalSingle(props) {
         </Text>
         <br />
         <Text>{indiJournalInput3}</Text>
-      </Grid>
-      <Button variant="light" onClick={(e) => navigate(-1)}>
-        Back
-      </Button>
+        <br />
+        <div
+          style={{
+            width: 700,
+            marginTop: 20,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+          }}
+        >
+          <Image src={pic1} alt="journal" className="consultation" />
+        </div>
+        {/* </Grid> */}
+        <Button variant="light" onClick={(e) => navigate(-1)}>
+          Back to Dashboard
+        </Button>
+      </Card>
     </Container>
   );
 }

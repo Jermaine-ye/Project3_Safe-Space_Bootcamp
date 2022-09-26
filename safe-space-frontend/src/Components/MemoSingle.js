@@ -94,63 +94,75 @@ export default function MemoSingle(props) {
   return (
     <div>
       <Container className="Form-body" size="sm" px="xs">
-        <Grid justify="center" align="center">
+        <Card withBorder shadow="sm" radius="md">
           <form>
             <br />
-            <label>Memo Entry</label>
-            <br />
-            <br />
-            <label>
-              Date:{memoDetails.updatedAt} {/* grab date from db */}
-            </label>
-
-            <br />
+            <Text size={20} weight={700}>
+              Memo Entry
+            </Text>
             <br />
 
-            <label>
+            <Text weight={700}>Date:</Text>
+            <Text>
+              {new Date(memoDetails.updatedAt).toLocaleDateString()}{' '}
+              {/* grab date from db */}
+            </Text>
+
+            <br />
+
+            <Text weight={700}>
               {' '}
               {/* Patient Name: {clientDetails.firstName} {clientDetails.lastName} */}
-              Patient Name: {clientDetails.firstName} {clientDetails.lastName}
-            </label>
+              Patient Name:
+            </Text>
+            <Text>
+              {' '}
+              {clientDetails.firstName} {clientDetails.lastName}
+            </Text>
 
             <br />
-            <br />
 
-            <label>General Notes:</label>
+            <Text weight={700}>General Notes:</Text>
             {memoDetails.generalInput}
             {/* insert memo info */}
             {/* {memoDetails} */}
             <br />
-            <label>Behaviour Observations:</label>
+            <br />
+            <Text weight={700}>Behaviour Observations:</Text>
             {memoDetails.behaviorInput}
             {/* {memoDetails.behaviorInput} */}
             <br />
-            <label>Content of Today's Therapy:</label>
+            <br />
+            <Text weight={700}>Content of Today's Therapy:</Text>
             {memoDetails.contenttherapyInput}
             {/* insert memo info */}
             {/* {memoDetails.contenttherapyInput} */}
             <br />
-            <label>Any Therapeutic Intervention Needed?</label>
+            <br />
+            <Text weight={700}>Any Therapeutic Intervention Needed?</Text>
             {memoDetails.therapeuticintInput}
             {/* insert memo info */}
             {/* {memoDetails.therapeuticintInput} */}
             <br />
-            <label>Diagnoses:</label>
+            <br />
+            <Text weight={700}>Diagnoses:</Text>
             {memoDetails.diagnosesInput}
             {/* insert memo info */}
             {/* {memoDetails.diagnosesInput} */}
-            <label>Instructions/Recommendations/Plans</label>
+            <Text weight={700}>Instructions/Recommendations/Plans</Text>
             {memoDetails.instructionsInput}
             {/* insert memo info */}
             {/* {memoDetails.instructionsInput} */}
             <br />
-            <label>Notes and Risk Factors:</label>
+            <br />
+            <Text weight={700}>Notes and Risk Factors:</Text>
             {memoDetails.riskfactorsInput}
             {/* insert memo info */}
             {/* {memoDetails.riskfactorsInput} */}
             <br />
+            <br />
           </form>
-        </Grid>
+        </Card>
         <button
           onClick={(e) => navigate(`/therapist/patients/${clientId}/allmemo`)}
         >

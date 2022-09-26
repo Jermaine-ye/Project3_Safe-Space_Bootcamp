@@ -493,7 +493,7 @@ export default function CalendarFull() {
 
   return (
     <div>
-      CalendarFull
+      {/* CalendarFull */}
       {user && user[`https://any-namespace/roles`].length !== 0 ? (
         <>
           <div>THERAPIST CALENDAR</div>
@@ -509,7 +509,7 @@ export default function CalendarFull() {
         </>
       ) : (
         <>
-          <div>CLIENT CALENDAR</div>
+          {/* <div>CLIENT CALENDAR</div> */}
           <Calendar
             localizer={localizer}
             events={allEvents}

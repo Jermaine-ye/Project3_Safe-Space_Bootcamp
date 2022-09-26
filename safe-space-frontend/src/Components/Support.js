@@ -1,6 +1,6 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link, useParams, useNavigate, Outlet } from "react-router-dom";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams, useNavigate, Outlet } from 'react-router-dom';
 import {
   Button,
   Card,
@@ -12,13 +12,13 @@ import {
   Avatar,
   Modal,
   Group,
-} from "@mantine/core";
+} from '@mantine/core';
 import {
   IconSettings,
   IconSpy,
   IconAlertTriangle,
   IconInbox,
-} from "@tabler/icons";
+} from '@tabler/icons';
 
 export default function Support() {
   const navigate = useNavigate();
@@ -43,6 +43,8 @@ export default function Support() {
         <Button fullWidth size="md" leftIcon={<IconInbox />}>
           Support Inbox
         </Button>
+        <br />
+        <br />
         <Button
           variant="light"
           onClick={(e) => navigate(`/therapist/dashboard`)}

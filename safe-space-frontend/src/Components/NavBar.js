@@ -257,13 +257,9 @@ export default function NavBar() {
           </Grid.Col>  */}
           <Grid.Col span="auto">
             {isAuthenticated !== false ? (
-              <Button size="xs" onClick={() => DashBoardNav()}>
-                To DashBoard
-              </Button>
+              <Button onClick={() => DashBoardNav()}>To DashBoard</Button>
             ) : (
-              <Button size="xs" onClick={handleLogin}>
-                Login
-              </Button>
+              <Button onClick={handleLogin}>Login</Button>
             )}
           </Grid.Col>
 

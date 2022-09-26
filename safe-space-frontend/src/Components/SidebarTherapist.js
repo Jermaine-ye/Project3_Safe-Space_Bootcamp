@@ -1,6 +1,6 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link, useParams, useNavigate, Outlet } from "react-router-dom";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams, useNavigate, Outlet } from 'react-router-dom';
 import {
   Button,
   Card,
@@ -10,24 +10,24 @@ import {
   Container,
   Image,
   Avatar,
-} from "@mantine/core";
+} from '@mantine/core';
 
-import { BACKEND_URL } from "../constants.js";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useAuth } from "./AuthContext.js";
+import { BACKEND_URL } from '../constants.js';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth } from './AuthContext.js';
 
-import PatientProfile from "./PatientProfile.js";
-import TherapistInfo from "./TherapistInfo";
-import CalendarFull from "./CalendarFull.js";
-import CalendarDashboard from "./CalendarDashboard";
+import PatientProfile from './PatientProfile.js';
+import TherapistInfo from './TherapistInfo';
+import CalendarFull from './CalendarFull.js';
+import CalendarDashboard from './CalendarDashboard';
 
 export default function SidebarTherapist() {
   const [therapistId, setTherapistId] = useState();
   const [clientId, setClientId] = useState();
   const [therapistDetails, setTherapistDetails] = useState({});
-  const [therapisttFirstName, setTherapistFirstName] = useState("");
-  const [therapistLastName, setTherapistLastName] = useState("");
-  const [therapistPhoto, setTherapistPhoto] = useState("");
+  const [therapisttFirstName, setTherapistFirstName] = useState('');
+  const [therapistLastName, setTherapistLastName] = useState('');
+  const [therapistPhoto, setTherapistPhoto] = useState('');
   const [template, setTemplate] = useState();
 
   const { user, logout } = useAuth0();
@@ -39,14 +39,14 @@ export default function SidebarTherapist() {
   useEffect(() => {
     console.log(`in effect`);
     console.log(user);
-    console.log("Therapist Info:", therapistInfo);
+    console.log('Therapist Info:', therapistInfo);
     setTherapistPhoto(therapistInfo.photoLink);
     setTherapistFirstName(therapistInfo.firstName);
 
     if (therapistId) {
       axios.get(`${BACKEND_URL}/clients/key/${clientId}`).then((response) => {
         setTherapistDetails(response.data);
-        console.log("client Details: ", response.data);
+        console.log('client Details: ', response.data);
       });
     }
     console.log(therapistDetails);
@@ -76,7 +76,7 @@ export default function SidebarTherapist() {
           </Title>
 
           <div className="Sidebar-a">
-            <Link to="/">Home</Link>
+            <Link to="/therapist/dashboard">Home</Link>
             <br />
             <br />
 
@@ -100,7 +100,6 @@ export default function SidebarTherapist() {
         {/* </Container> */}
         {/* <Outlet /> */}
       </Grid>
-      ;
     </div>
   );
 }
