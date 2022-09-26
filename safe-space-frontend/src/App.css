@@ -64,7 +64,14 @@ a:active {
 .Nav-bar a {
   align-content: center;
   color: #ffff;
+  font-weight: 500;
   text-decoration: none;
+}
+
+.Nav-bar a:hover {
+  color: #ffff;
+
+  text-decoration: underline;
 }
 
 .Nav-bar a:visited {
@@ -120,6 +127,10 @@ a:active {
   align-content: center;
   color: #ffff;
   text-decoration: none;
+}
+
+.Footer-container a:hover {
+  text-decoration: underline;
 }
 
 /* Client Dashboard */
@@ -215,7 +226,7 @@ button {
   color: #ffff;
   border-radius: 8px;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   text-align: center;
   justify-content: center;
 }
@@ -234,6 +245,10 @@ button:focus {
 .mantine-15pjuqq {
   margin-bottom: 45px;
 }
+
+/* .Personal-photo-form {
+
+} */
 
 /* .mantine-Col-root.Dashboard-sidebar {
   margin-bottom: 40px;

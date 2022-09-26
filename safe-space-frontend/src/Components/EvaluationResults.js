@@ -188,12 +188,12 @@ export default function EvaluationResults() {
   const displayAllTherapists = assignedTherapists.map((elem) => {
     console.log(elem.id);
     return (
-      <Container size="xs" px="xs">
+      <Container size={350} px="xs">
         <Card shadow="sm" p="lg" radius="md" withBorder key={elem.id}>
           <Card.Section>
             <div
               style={{
-                width: 300,
+                width: 350,
                 marginLeft: 'auto',
                 marginRight: 'auto',
               }}
@@ -223,7 +223,9 @@ export default function EvaluationResults() {
           </Card.Section>
           <Group>
             <Button
+              className="Select-Therapist"
               variant="light"
+              color="orange"
               mt="md"
               radius="md"
               value={elem.id}
@@ -242,13 +244,13 @@ export default function EvaluationResults() {
     <div className="Personal-Particulars-div">
       <Container size="md" px="xs">
         <h2>Evaluation Results</h2>
-        <Text color="teal" weight={600}>
+        <Text color="blue" weight={600}>
           Specialists Chosen For You!
         </Text>
         {/* Display the results here! */}
         {displayAllTherapists}
         <br />
-        <br />
+
         <Link to="/">Home</Link>
       </Container>
     </div>

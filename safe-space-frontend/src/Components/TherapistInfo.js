@@ -66,38 +66,39 @@ export default function TherapistInfo() {
 
   return (
     <div>
-      Current Therapist Info
-      <br />
-      <div
-        style={{
-          width: 400,
-          marginTop: 50,
-          marginLeft: 'auto',
-          marginRight: 30,
-          marginBottom: 30,
-        }}
-      >
-        <Image
-          src={photoLink}
-          alt="forumtipsicon"
-          className="Current Therapist"
-        />
-      </div>
-      {/* <img src={photoLink} alt="Current Therapist" width="500" height="600" /> */}
-      <br />
-      <h4>
-        {firstName} {lastName}
-      </h4>
-      <h4>{gender}</h4>
-      <h4>Proficient in: {language}</h4>
-      <h4>Religion: {religion}</h4>
-      <h4>Years of practice: {yearsOfPractice} years</h4>
-      <h4>Educational Qualification: {educationQualification}</h4>
-      <h4>Email: {email}</h4>
-      <br />
-      <br />
-      <p>{description}</p>
-      <button onClick={() => handleClick()}>Request to change therapist</button>
+      <Card withBorder shadow="sm" radius="md">
+        <div
+          style={{
+            width: 400,
+
+            marginLeft: 'auto',
+            marginRight: 'auto',
+          }}
+        >
+          <Image
+            src={photoLink}
+            alt="forumtipsicon"
+            className="Current Therapist"
+          />
+        </div>
+        {/* <img src={photoLink} alt="Current Therapist" width="500" height="600" /> */}
+        <br />
+        <h4>
+          {firstName} {lastName}
+        </h4>
+        <h4>{gender}</h4>
+        <h4>Proficient in: {language}</h4>
+        <h4>Religion: {religion}</h4>
+        <h4>Years of practice: {yearsOfPractice} years</h4>
+        <h4>Educational Qualification: {educationQualification}</h4>
+        <h4>Email: {email}</h4>
+        <br />
+
+        <p>{description}</p>
+        <button onClick={() => handleClick()}>
+          Request to change therapist
+        </button>
+      </Card>
     </div>
   );
 }

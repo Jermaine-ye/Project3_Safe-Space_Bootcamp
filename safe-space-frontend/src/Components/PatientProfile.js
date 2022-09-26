@@ -136,7 +136,12 @@ export default function PatientProfile() {
         </Container>
         <Group position="center" spacing="lg">
           {/* <button>Deactivate</button> */}
-
+          <Button
+            variant="light"
+            onClick={() => navigate(`/therapist/patients/${clientId}/history`)}
+          >
+            Patient Apppointment Log
+          </Button>
           <Button
             variant="light"
             onClick={() => navigate(`/therapist/patients/${clientId}/newmemo`)}

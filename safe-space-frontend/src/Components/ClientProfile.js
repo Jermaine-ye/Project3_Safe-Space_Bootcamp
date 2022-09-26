@@ -1,6 +1,6 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import {
   Button,
   Card,
@@ -10,11 +10,11 @@ import {
   Container,
   Group,
   Image,
-} from "@mantine/core";
+} from '@mantine/core';
 
-import { BACKEND_URL } from "../constants.js";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useAuth } from "./AuthContext.js";
+import { BACKEND_URL } from '../constants.js';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth } from './AuthContext.js';
 
 export default function ClientProfile() {
   const [clientId, setClientId] = useState();
@@ -79,28 +79,45 @@ export default function ClientProfile() {
   return (
     <div>
       <Container>
-        <Text size="xl">Profile</Text>
-        <Image
+        <Card withBorder shadow="sm" radius="md">
+          <Title size={20}>Profile</Title>
+          {/* <Image
           radius="md"
-          height={80}
+          width={300}
           src={`${clientDetails.photoLink}`}
           alt={`${clientDetails.photoLink}`}
-        />
-        <Text>
-          Patient Name: {clientDetails.firstName}
-          {clientDetails.lastName}
-        </Text>
+        /> */}
+          <div
+            style={{
+              width: 300,
+              marginTop: 20,
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              marginBottom: 20,
+            }}
+          >
+            <Image
+              src={clientDetails.photoLink}
+              alt={clientDetails.photoLink}
+              className="consultation"
+            />
+          </div>
 
-        <Container size="xs" px="xs">
-          <Text>Age:{clientDetails.ageClient}</Text>
-          <Text>Gender:{clientDetails.gender}</Text>
-          <Text>Phone Number:{clientDetails.phoneNumber}</Text>
-          <Text>Email:{clientDetails.email}</Text>
-          <Text>Marital Status:{clientDetails.maritalStatus}</Text>
-          <br />
-          {/*Information from memo?*/}
-        </Container>
+          <Text>
+            Patient Name: {clientDetails.firstName}
+            {clientDetails.lastName}
+          </Text>
 
+          <Container size="xs" px="xs">
+            <Text>Age:{clientDetails.ageClient}</Text>
+            <Text>Gender:{clientDetails.gender}</Text>
+            <Text>Phone Number:{clientDetails.phoneNumber}</Text>
+            <Text>Email:{clientDetails.email}</Text>
+            <Text>Marital Status:{clientDetails.maritalStatus}</Text>
+            <br />
+            {/*Information from memo?*/}
+          </Container>
+        </Card>
         <Button onClick={(e) => navigate(-1)}>back</Button>
       </Container>
     </div>
