@@ -14,21 +14,24 @@ import {
   Group,
 } from "@mantine/core";
 
-export default function JournalList() {
+export default function JournalListTherapist() {
   const [journalList, setJournalList] = useState([]);
   const [journalId, setJournalId] = useState();
   const navigate = useNavigate();
+
+  // grab the client email from context.
   const { user } = useAuth0();
-  const { clientInfo, TherapistInfo } = useAuth();
+  const { currentUserEmail, clientInfo, TherapistInfo } = useAuth();
 
   useEffect(() => {
-    axios.get(`${BACKEND_URL}/clients/${user.email}`).then((response) => {
+    axios.get(`${BACKEND_URL}/clients/${currentUserEmail}`).then((response) => {
       setJournalList(response.data.journalentries);
       console.log(response.data);
       // console.log("res.data: ", response.data.journalentries);
     });
-    console.log(clientInfo);
-    console.log(journalList);
+    console.log(`HELLO WHY`, clientInfo);
+    console.log(`list of journals`, journalList);
+    console.log(`email to grab all journals`, currentUserEmail);
   }, []);
 
   // const params = useParams();

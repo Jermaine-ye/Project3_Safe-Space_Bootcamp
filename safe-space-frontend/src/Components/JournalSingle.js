@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 // import { user } from '@auth0/auth0-react';
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams, useNavigation } from "react-router-dom";
 import {
   Button,
   Card,
@@ -20,7 +20,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useAuth } from "./AuthContext";
 
 export default function JournalSingle(props) {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
   const { user, isAuthenticated, isLoading } = useAuth0();
 
   // get all to know there is an empty null=> new journal entry =>
@@ -111,6 +111,9 @@ export default function JournalSingle(props) {
         <br />
         <Text>{indiJournalInput3}</Text>
       </Grid>
+      <Button variant="light" onClick={(e) => navigate(-1)}>
+        Back
+      </Button>
     </Container>
   );
 }

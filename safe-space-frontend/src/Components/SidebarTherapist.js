@@ -56,7 +56,6 @@ export default function SidebarTherapist() {
           variant="light"
           onClick={() => {
             logout();
-            navigate("/index");
           }}
         >
           LOG OUT

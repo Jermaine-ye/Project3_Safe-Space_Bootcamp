@@ -1,6 +1,6 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import {
   Button,
   Card,
@@ -11,11 +11,11 @@ import {
   Group,
   NativeSelect,
   Image,
-} from '@mantine/core';
+} from "@mantine/core";
 
-import { BACKEND_URL } from '../constants.js';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useAuth } from './AuthContext.js';
+import { BACKEND_URL } from "../constants.js";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "./AuthContext.js";
 
 export default function PatientProfile() {
   const [clientId, setClientId] = useState();
@@ -24,7 +24,8 @@ export default function PatientProfile() {
   const navigate = useNavigate();
 
   const { user } = useAuth0();
-  const { clientInfo, currentUser, updateTemplate } = useAuth();
+  const { clientInfo, currentUser, updateTemplate, updateClientEmail } =
+    useAuth();
 
   useEffect(() => {
     console.log(`in effect`);
@@ -35,6 +36,7 @@ export default function PatientProfile() {
         .get(`${BACKEND_URL}/clients/key/${params.clientId}`)
         .then((response) => {
           setClientDetails(response.data);
+          updateClientEmail(response.data.email);
         });
     }
     console.log(clientDetails);
@@ -81,9 +83,9 @@ export default function PatientProfile() {
   // }
 
   const data = [
-    { value: 0, label: 'Choose one' },
-    { value: 1, label: 'Template One' },
-    { value: 2, label: 'Template Two' },
+    { value: 0, label: "Choose one" },
+    { value: 1, label: "Template One" },
+    { value: 2, label: "Template Two" },
   ];
 
   return (
@@ -149,11 +151,18 @@ export default function PatientProfile() {
           >
             Memo List for this patient
           </Button>
+          {/*Create new route in app.js and update the route path here!!!!*/}
+          <Button
+            variant="light"
+            onClick={() => navigate(`/therapist/${clientId}/journals/`)}
+          >
+            Journal List for this patient
+          </Button>
           <Button
             variant="light"
             onClick={(e) => navigate(`/therapist/patients/`)}
           >
-            back
+            Back
           </Button>
         </Group>
       </Container>

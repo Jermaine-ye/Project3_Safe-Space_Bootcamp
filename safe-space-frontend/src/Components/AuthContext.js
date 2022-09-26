@@ -15,6 +15,7 @@ export function AuthProvider({ children }) {
   const [clientInfo, setClientInfo] = useState([]);
   const [therapistInfo, setTherapistInfo] = useState([]);
   const [template, setTemplate] = useState(0);
+  const [currentUserEmail, setCurrentUserEmail] = useState([]);
   //reset this to true when you finish editing the files
   // const [loading, setLoading] = useState(false);
 
@@ -70,6 +71,11 @@ export function AuthProvider({ children }) {
     console.log(`updated template id in Context`, data);
     setTemplate(data);
   };
+
+  const updateClientEmail = (data) => {
+    console.log(`updated client info for ID`, data);
+    setCurrentUserEmail(data);
+  };
   // States and Functions that are passed down and USE by ALL components.
   const value = {
     updateClientData,
@@ -81,6 +87,7 @@ export function AuthProvider({ children }) {
     updateClientInfo,
     updateTherapistInfo,
     updateTemplate,
+    updateClientEmail,
     currentUser,
     speciality,
     agePreference,
@@ -90,7 +97,9 @@ export function AuthProvider({ children }) {
     clientInfo,
     therapistInfo,
     template,
+    currentUserEmail,
   };
+
   // console.log(`values from authContext`, value);
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
