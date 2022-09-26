@@ -1,6 +1,6 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import {
   Button,
   Card,
@@ -11,11 +11,11 @@ import {
   Group,
   NativeSelect,
   Image,
-} from "@mantine/core";
+} from '@mantine/core';
 
-import { BACKEND_URL } from "../constants.js";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useAuth } from "./AuthContext.js";
+import { BACKEND_URL } from '../constants.js';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth } from './AuthContext.js';
 
 export default function PatientProfile() {
   const [clientId, setClientId] = useState();
@@ -81,9 +81,9 @@ export default function PatientProfile() {
   // }
 
   const data = [
-    { value: 0, label: "Choose one" },
-    { value: 1, label: "Template One" },
-    { value: 2, label: "Template Two" },
+    { value: 0, label: 'Choose one' },
+    { value: 1, label: 'Template One' },
+    { value: 2, label: 'Template Two' },
   ];
 
   return (
@@ -136,12 +136,7 @@ export default function PatientProfile() {
         </Container>
         <Group position="center" spacing="lg">
           {/* <button>Deactivate</button> */}
-          <Button
-            variant="light"
-            onClick={() => navigate(`/therapist/patients/${clientId}/history`)}
-          >
-            Patient Apppointment Log
-          </Button>
+
           <Button
             variant="light"
             onClick={() => navigate(`/therapist/patients/${clientId}/newmemo`)}

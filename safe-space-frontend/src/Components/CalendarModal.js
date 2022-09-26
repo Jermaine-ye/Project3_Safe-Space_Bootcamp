@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button, Card, Text, Title } from "@mantine/core";
-import { BACKEND_URL } from "../constants.js";
-import { useAuth } from "./AuthContext";
-import { useAuth0 } from "@auth0/auth0-react";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Button, Card, Text, Title } from '@mantine/core';
+import { BACKEND_URL } from '../constants.js';
+import { useAuth } from './AuthContext';
+import { useAuth0 } from '@auth0/auth0-react';
+import axios from 'axios';
 
 export default function CalendarModal(props) {
   console.log(props.item);
@@ -41,7 +41,7 @@ export default function CalendarModal(props) {
   };
 
   const handleCancel = async () => {
-    if (type === "appt") {
+    if (type === 'appt') {
       const response = await axios.delete(`${BACKEND_URL}/appointments/${id}`);
 
       console.log(response.data);
@@ -50,12 +50,12 @@ export default function CalendarModal(props) {
         getOwnInfoForTherapist();
 
         //FIXED ROUTE
-        navigate("../../therapist");
+        navigate('../../therapist/dashboard');
       } else {
         getOwnInfoForClient();
 
         //FIXED ROUTE
-        navigate("../../client");
+        navigate('../../client/dashboard');
       }
 
       props.setModalVisible(false);
@@ -70,7 +70,7 @@ export default function CalendarModal(props) {
       getOwnInfoForTherapist();
 
       //FIXED ROUTE
-      navigate("../../therapist");
+      navigate('../../therapist/dashboard');
 
       props.setModalVisible(false);
     }
@@ -89,27 +89,27 @@ export default function CalendarModal(props) {
         <h4> {title}</h4>
         <h5>Start: {startTime}</h5>
         <h5>End: {endTime}</h5>
-        {type === "journal" ? (
+        {type === 'journal' ? (
           <>
             <button
               onClick={() => handleViewJournal()}
               // onClick={() => setCreateNew(!createNew)}
             >
-              See Your Journal{" "}
+              See Your Journal{' '}
             </button>
           </>
         ) : null}
-        {type === "appt" ? (
+        {type === 'appt' ? (
           <>
             <button onClick={() => handleCancel()}>
-              Cancel this appointment{" "}
+              Cancel this appointment{' '}
             </button>
           </>
         ) : null}
-        {type === "blocked date" && userOfEvent === "therapist" ? (
+        {type === 'blocked date' && userOfEvent === 'therapist' ? (
           <>
             <button onClick={() => handleCancel()}>
-              Cancel this blocked date{" "}
+              Cancel this blocked date{' '}
             </button>
           </>
         ) : null}

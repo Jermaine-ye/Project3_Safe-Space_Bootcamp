@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useAuth } from "./AuthContext";
-import { BACKEND_URL } from "../constants";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth } from './AuthContext';
+import { BACKEND_URL } from '../constants';
 import {
   useNavigate,
   useParams,
   useLocation,
   Link,
   Outlet,
-} from "react-router-dom";
+} from 'react-router-dom';
 // import { Card, Button } from "react-bootstrap";
 import {
   Card,
@@ -19,7 +19,7 @@ import {
   Button,
   Group,
   Container,
-} from "@mantine/core";
+} from '@mantine/core';
 
 export default function EvaluationResults() {
   const {
@@ -112,7 +112,7 @@ export default function EvaluationResults() {
       // matchTherapist();
       // updateYourTherapist(assignedTherapists);
       //
-      console.log("not logged in");
+      console.log('not logged in');
     }
     matchTherapist();
 
@@ -182,7 +182,7 @@ export default function EvaluationResults() {
         headers: { Authorization: `Bearer ${accessToken}` },
       }
     );
-    navigate("/client/");
+    navigate('/client/dashboard');
   };
 
   const displayAllTherapists = assignedTherapists.map((elem) => {

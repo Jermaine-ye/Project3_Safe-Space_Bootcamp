@@ -25,7 +25,6 @@ import {
   FileInput,
   Textarea,
   NumberInput,
-  TextInput,
 } from '@mantine/core';
 
 const CLIENT_IMAGE_FOLDER_NAME = 'client images';
@@ -125,21 +124,10 @@ export default function PersonalParticularsForm() {
 
   return (
     <div>
-      <Container size="xs" px="xs">
-        <Card radius="md" shadow="sm" p="md">
-          <Title color="blue" order={3} weight={500} align="center">
-            Personal Particulars Form
-          </Title>
-          <br />
-          <Text align="justify" color="dimmed" size="xs">
-            We take your privacy and confidentiality seriously. We have built
-            state-of-the-art technology, operations, and infrastructure with the
-            goal of protecting your privacy and safeguarding the information you
-            provide.
-          </Text>
-          <br />
-          <form onSubmit={handleSubmit}>
-            {/* <label>Name:</label>
+      <h1>PersonalParticularsForm</h1>
+      <Container>
+        <form onSubmit={handleSubmit}>
+          {/* <label>Name:</label>
           <textarea
             className="text-box"
             name="firstName"
@@ -147,32 +135,28 @@ export default function PersonalParticularsForm() {
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           /> */}
-            <TextInput
-              label="First Name"
-              placeholder="Please enter your first name"
-              withAsterisk
-              value={firstName}
-              variant="filled"
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-            <br />
-            {/* <textarea
+          <Textarea
+            label="First Name"
+            placeholder="Please enter your first name"
+            withAsterisk
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          {/* <textarea
             className="text-box"
             name="lastName"
             placeholder="Last Name"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           /> */}
-            <TextInput
-              label="Last Name"
-              placeholder="Please enter your last name"
-              withAsterisk
-              value={lastName}
-              variant="filled"
-              onChange={(e) => setLastName(e.target.value)}
-            />
-            <br />
-            {/* <label>Phone Number:</label>
+          <Textarea
+            label="Last Name"
+            placeholder="Please enter your last name"
+            withAsterisk
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+          {/* <label>Phone Number:</label>
           <input
             className="text-box"
             name="phoneNumber"
@@ -181,15 +165,13 @@ export default function PersonalParticularsForm() {
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
           /> */}
-            <TextInput
-              placeholder="Enter your phone number"
-              label="Phone Number"
-              variant="filled"
-              withAsterisk
-              onChange={setPhoneNumber}
-            />
-            <br />
-            {/* <label>Gender:</label>
+          <NumberInput
+            placeholder="Enter your phone number"
+            label="Phone Number"
+            withAsterisk
+            onChange={setPhoneNumber}
+          />
+          {/* <label>Gender:</label>
           <select
             name="gender"
             value={gender}
@@ -199,20 +181,18 @@ export default function PersonalParticularsForm() {
             <option value={"Male"}>Male</option>
             <option value={"Female"}>Female</option>
           </select> */}
-            <NativeSelect
-              data={[
-                { value: null, label: 'Choose one' },
-                { value: 'Male', label: 'Male' },
-                { value: 'Female', label: 'Female' },
-              ]}
-              label="Gender"
-              variant="filled"
-              placeholder="Pick your gender"
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-            />{' '}
-            <br />
-            {/* <label>Age:</label>
+          <NativeSelect
+            data={[
+              { value: null, label: 'Choose one' },
+              { value: 'Male', label: 'Male' },
+              { value: 'Female', label: 'Female' },
+            ]}
+            label="Gender"
+            placeholder="Pick your gender"
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+          />
+          {/* <label>Age:</label>
           <input
             name="age"
             value={age}
@@ -220,17 +200,14 @@ export default function PersonalParticularsForm() {
             placeholder="Please enter your age."
             onChange={(e) => setAge(e.target.value)}
           /> */}
-            <NumberInput
-              variant="filled"
-              placeholder="Enter your age"
-              label="Age"
-              withAsterisk
-              defaultValue={18}
-              value={age}
-              onChange={setAge}
-            />{' '}
-            <br />
-            {/* <label>Marital Status</label>
+          <NumberInput
+            placeholder="Enter your age"
+            label="Age"
+            withAsterisk
+            value={age}
+            onChange={setAge}
+          />
+          {/* <label>Marital Status</label>
           <select
             name="MaritalStatus"
             value={maritalStatus}
@@ -240,27 +217,25 @@ export default function PersonalParticularsForm() {
             <option value={"Single"}>Single</option>
             <option value={"Married"}>Married</option>
           </select> */}
-            <NativeSelect
-              data={[
-                { value: null, label: 'State your relationship status' },
-                { value: 'Single', label: 'Single' },
-                { value: 'Married', label: 'Married' },
-              ]}
-              label="Marital Status"
-              variant="filled"
-              placeholder="State your relationship status"
-              value={maritalStatus}
-              onChange={(e) => setMaritalStatus(e.target.value)}
-            />{' '}
-            <br />
-            {/* <label>Description</label>
+          <NativeSelect
+            data={[
+              { value: null, label: 'State your relationship status' },
+              { value: 'Single', label: 'Single' },
+              { value: 'Married', label: 'Married' },
+            ]}
+            label="Marital Status"
+            placeholder="State your relationship status"
+            value={maritalStatus}
+            onChange={(e) => setMaritalStatus(e.target.value)}
+          />
+          {/* <label>Description</label>
         <textarea
           name="description"
           value={description}
           onChange={(e) => setDiscription(e.target.value)}
           placeholder="Tell us about you???"
         /> */}
-            {/* <label>
+          {/* <label>
             Upload your profile images here!
             <input
               type="file"
@@ -278,38 +253,18 @@ export default function PersonalParticularsForm() {
               Upload!
             </Button>
           </label> */}
-            <FileInput
-              placeholder="pick file"
-              variant="filled"
-              label="Upload your Profile Photo"
-              withAsterisk
-              value={fileInputFile}
-              onChange={setFileInputFile}
-            />{' '}
-            <br /> <br />
-            <Button variant="light" color="pink">
-              Submit
-            </Button>
-          </form>
-          <br />
-        </Card>
-        <br />
-        <br />
+          <FileInput
+            placeholder="pick file"
+            label="Upload your Profile Photo"
+            withAsterisk
+            value={fileInputFile}
+            onChange={setFileInputFile}
+          />
+
+          <button>Submit</button>
+        </form>
       </Container>
-
-      {/* <Link to="/">Home</Link> */}
-
-      <Button
-        variant="light"
-        size="md"
-        mt="md"
-        radius="md"
-        onClick={() => {
-          navigate('/');
-        }}
-      >
-        Back to Home
-      </Button>
+      <Link to="/">Home</Link>
     </div>
   );
 }
