@@ -99,6 +99,9 @@ class ClientsController extends BaseController {
       active,
     } = req.body;
 
+    console.log(dailymood);
+    console.log(emailClient);
+
     // const { emailClient } = req.params;
     try {
       const data = await this.model.findOne({
