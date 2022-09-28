@@ -18,7 +18,7 @@ import MemoForm from "./Components/MemoForm";
 import MemoSingle from "./Components/MemoSingle";
 import MemoList from "./Components/MemoList";
 import JournalAssignment from "./Components/JournalAssignment";
-import PrevApptHistory from "./Components/PrevApptHistory";
+
 import PatientProfile from "./Components/PatientProfile";
 import About from "./Components/StaticInfo/About";
 import Advice from "./Components/StaticInfo/Advice";
@@ -27,7 +27,7 @@ import Services from "./Components/StaticInfo/Services";
 import SupportResources from "./Components/StaticInfo/SupportResources";
 import PatientList from "./Components/PatientList";
 import JournalListTherapist from "./Components/JournalListTherapist";
-import PatientsUpcoming from "./Components/PatientsUpcoming";
+
 import { AuthProvider } from "./Components/AuthContext";
 import { useAuth0 } from "@auth0/auth0-react";
 import PrivateRoutes from "./PrivateRoutes";
@@ -38,11 +38,6 @@ import SidebarTherapist from "./Components/SidebarTherapist";
 import Support from "./Components/Support";
 import Unsplash from "unsplash-js";
 import CalendarDashboard from "./Components/CalendarDashboard";
-// import AdvicePreview from './Components/StaticInfo/AdvicePreview';
-// import AdviceSingle from './Components/StaticInfo/AdviceSingle';
-// import AdvicePreviewList from './Components/StaticInfo/AdvicePreviewList';
-
-// export const AuthContext = createContext();
 
 export default function App() {
   const [isAdmin, setIsAdmin] = useState([]);

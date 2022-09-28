@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
-import { BACKEND_URL } from '../constants.js';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useAuth } from './AuthContext.js';
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import { BACKEND_URL } from "../constants.js";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "./AuthContext.js";
 import {
   Button,
   Card,
@@ -12,7 +12,7 @@ import {
   Grid,
   Container,
   Group,
-} from '@mantine/core';
+} from "@mantine/core";
 
 // similar to sighting exercises
 export default function PatientList() {
@@ -23,7 +23,7 @@ export default function PatientList() {
   const { user } = useAuth0();
   const [memoList, setMemoList] = useState([]);
   const [memoDetails, setMemoDetails] = useState({});
-  const [clientDetails, setClientDetails] = useState('');
+  const [clientDetails, setClientDetails] = useState("");
 
   let finalList;
 
@@ -126,7 +126,10 @@ export default function PatientList() {
       {memoList && memoList.length !== 0 ? <ul>{finalList}</ul> : null}
       <br />
       <br />
-      <Button variant="light" onClick={(e) => navigate(-1)}>
+      <Button
+        variant="light"
+        onClick={(e) => navigate(`/therapist/patients/${clientId}`)}
+      >
         Back to Patient Profile
       </Button>
     </div>

@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useAuth } from './AuthContext';
-import { BACKEND_URL } from '../constants';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "./AuthContext";
+import { BACKEND_URL } from "../constants";
 import {
   useNavigate,
   useParams,
   useLocation,
   Link,
   Outlet,
-} from 'react-router-dom';
-// import { Card, Button } from "react-bootstrap";
+} from "react-router-dom";
+
 import {
   Card,
   Image,
@@ -19,9 +19,9 @@ import {
   Button,
   Group,
   Container,
-} from '@mantine/core';
-import NavBar from './NavBar';
-import Footer from './Footer';
+} from "@mantine/core";
+import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 export default function EvaluationResults() {
   const {
@@ -33,7 +33,7 @@ export default function EvaluationResults() {
   } = useAuth0();
   const {
     updateClientData,
-    updateYourTherapist,
+
     speciality,
     agePreference,
     language,
@@ -41,14 +41,8 @@ export default function EvaluationResults() {
     gender,
     clientInfo,
   } = useAuth();
-  //put state here and render out the results...
-  // const [clientSpeciality, setClientSpeciality] = useState();
-  // const [clientAgePreference, setClientAgePreference] = useState("");
-  // const [clientLanguage, setClientLanguage] = useState();
-  // const [clientReligion, setClientReligion] = useState();
-  // const [clientGenderPreference, setClientGenderPreference] = useState();
+
   const [assignedTherapists, setAssignedTherapists] = useState([]);
-  const [allTherapists, setAllTherapists] = useState([]);
 
   const navigate = useNavigate();
 
@@ -101,21 +95,9 @@ export default function EvaluationResults() {
     );
     console.log(therapistRes.data.therapists);
     setAssignedTherapists(therapistRes.data.therapists);
-
-    // setState from Context for user who have no signed in
-    // updateYourTherapist(assignedTherapists);
   };
 
   useEffect(() => {
-    if (isAuthenticated) {
-      // updateClient(user);
-    } else {
-      // loginWithRedirect();
-      // matchTherapist();
-      // updateYourTherapist(assignedTherapists);
-      //
-      console.log('not logged in');
-    }
     matchTherapist();
 
     console.log(
@@ -175,7 +157,6 @@ export default function EvaluationResults() {
         chosenTherapist: true,
         endedAt: null,
         feedback: null,
-        //how do you deconstructure then based on user's choice?
 
         therapistID: e,
         clientID: clientInfo.id,
@@ -184,7 +165,7 @@ export default function EvaluationResults() {
         headers: { Authorization: `Bearer ${accessToken}` },
       }
     );
-    navigate('/client/dashboard');
+    navigate("/client/dashboard");
   };
 
   const displayAllTherapists = assignedTherapists.map((elem) => {
@@ -196,8 +177,8 @@ export default function EvaluationResults() {
             <div
               style={{
                 width: 350,
-                marginLeft: 'auto',
-                marginRight: 'auto',
+                marginLeft: "auto",
+                marginRight: "auto",
               }}
             >
               <Image
@@ -207,14 +188,6 @@ export default function EvaluationResults() {
                 className="consultation"
               />
             </div>
-
-            {/* <Image
-              radius="md"
-              height={80}
-              src={`${elem.photoLink}`}
-              alt={`${elem.photoLink}`}
-              className="img-thumbnail"
-            /> */}
           </Card.Section>
           <Card.Section>
             <Text weight={500}>{`${elem.firstName} ${elem.lastName}`}</Text>
@@ -262,7 +235,7 @@ export default function EvaluationResults() {
           </Container>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

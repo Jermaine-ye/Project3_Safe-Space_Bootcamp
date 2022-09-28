@@ -1,5 +1,5 @@
-import React from 'react';
-import axios from 'axios';
+import React from "react";
+import axios from "axios";
 import {
   Button,
   Card,
@@ -8,23 +8,23 @@ import {
   Image,
   Container,
   Grid,
-} from '@mantine/core';
+} from "@mantine/core";
 import {
   useNavigate,
   useParams,
   useLocation,
   Link,
   Outlet,
-} from 'react-router-dom';
-import { BACKEND_URL } from '../constants';
-import { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../App';
-import NavBar from './NavBar';
-import Footer from './Footer';
-import { useAuth } from './AuthContext';
-import { useAuth0 } from '@auth0/auth0-react';
-import QuoteDisplay from './QuoteDisplay';
-import pic1 from '../images/illustration/DrawKit Vector Illustration Mental Health 1.png';
+} from "react-router-dom";
+import { BACKEND_URL } from "../constants";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../App";
+import NavBar from "./NavBar";
+import Footer from "./Footer";
+import { useAuth } from "./AuthContext";
+import { useAuth0 } from "@auth0/auth0-react";
+import QuoteDisplay from "./QuoteDisplay";
+import pic1 from "../images/illustration/DrawKit Vector Illustration Mental Health 1.png";
 
 export default function LandingPage() {
   const {
@@ -69,11 +69,11 @@ export default function LandingPage() {
     console.log(event);
     //TO CHANGE TO CORRECT ROUTE LATER.
     if (user[`https://any-namespace/roles`].length !== 0) {
-      navigate('/therapist/');
+      navigate("/therapist/");
     } else if (user[`https://any-namespace/roles`].length === 0) {
-      navigate('/client/');
+      navigate("/client/");
     } else {
-      navigate('/');
+      navigate("/");
     }
   };
 
@@ -86,7 +86,7 @@ export default function LandingPage() {
             <Grid.Col span={4}>
               <Container className="Landing-text" size="md" px="xs">
                 <Text weight={600} align="justify" size="md">
-                  {' '}
+                  {" "}
                   <Title color="blue" order={2} weight={600} align="Right">
                     Let Us Give You A
                   </Title>
@@ -101,7 +101,7 @@ export default function LandingPage() {
                 style={{
                   width: 650,
 
-                  marginLeft: 'auto',
+                  marginLeft: "auto",
                   marginRight: 50,
                 }}
               >
@@ -112,21 +112,20 @@ export default function LandingPage() {
 
               <button
                 onClick={() => {
-                  navigate('/particulars');
+                  navigate("/particulars");
                 }}
               >
                 Take Our Evaluation Form!
               </button>
             </Grid.Col>
-
-            {/* <button
-        onClick={() => {
-          logout();
-        }}
-      >
-        LOG OUT
-      </button> */}
           </Grid>
+          <button
+            onClick={() => {
+              logout();
+            }}
+          >
+            LOG OUT
+          </button>
         </Card>
       </Container>
 
