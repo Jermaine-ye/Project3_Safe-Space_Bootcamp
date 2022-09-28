@@ -20,16 +20,11 @@ export default function PatientList() {
   const [clientId, setClientId] = useState();
   const navigate = useNavigate();
 
-  const { user } = useAuth0();
   const [memoList, setMemoList] = useState([]);
-  const [memoDetails, setMemoDetails] = useState({});
+
   const [clientDetails, setClientDetails] = useState("");
 
   let finalList;
-
-  // const ClientListPreview = () => {
-
-  // };
 
   useEffect(() => {
     console.log(`running`);
@@ -52,15 +47,6 @@ export default function PatientList() {
   if (clientId !== params.clientId) {
     setClientId(params.clientId);
   }
-  // useEffect(() => {
-  //   console.log(clientList);
-
-  //   if (clientList && clientList.length !== 0) {
-  //     ClientListPreview();
-  //   }
-
-  //   // Only run this effect on component mount
-  // }, [clientList]);
 
   if (memoList && memoList.length !== 0) {
     finalList = memoList.map((memoInfo) => {
@@ -92,30 +78,6 @@ export default function PatientList() {
             </Link>
           </Container>
         </div>
-        //   <li>
-        //     <Link
-        //       to={`/therapists/clients/${clientInfo.client.id}`}
-        //       key={clientInfo.client.id}
-        //     >
-        //       {/*set the body of the link */}
-        //       <Card style={{ width: "18rem" }} key={clientInfo.client.id}>
-        //         <Card.Body>
-        //           {/*replace all placeholders with imported data */}
-        //           <Card.Title>
-        //             {clientInfo.client.firstName} and {clientInfo.client.lastName}
-        //           </Card.Title>
-        //           <Card.Text>Has the patient checked today?</Card.Text>
-        //           <input type="checkbox" name="checkedin" />
-        //           <Card.Text>Journal Submitted?</Card.Text>
-        //           <input type="checkbox" name="submitted" />
-        //           <Card.Text>Log ID</Card.Text>
-        //           {/*axios.get client ID and params */}
-        //           <Card.Link>Journal Log</Card.Link>
-        //           <Card.Link>Appointment Memo</Card.Link>
-        //         </Card.Body>
-        //       </Card>
-        //     </Link>
-        //   </li>
       );
     });
   }

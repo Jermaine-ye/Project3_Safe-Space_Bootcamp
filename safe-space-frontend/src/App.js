@@ -50,16 +50,6 @@ export default function App() {
     getAccessTokenSilently,
   } = useAuth0();
 
-  // useEffect(() => {
-  //   console.log(user);
-  //   setIsAdmin(user[`https://any-namespace/roles`]);
-  // }, []);
-
-  // const unsplash = new Unsplash({
-  //   applicationId: `${process.env.REACT_APP_APP_ACCESS_KEY}`,
-  //   secret: `${process.env.REACT_APP_APP_SECRET}`,
-  // });
-
   return (
     <AuthProvider>
       <div className="App">
