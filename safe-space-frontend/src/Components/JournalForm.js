@@ -1,21 +1,10 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-// import { user } from '@auth0/auth0-react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import {
-  Button,
-  Card,
-  Text,
-  Title,
-  Grid,
-  Container,
-  Form,
-  Input,
-  Textarea,
-} from '@mantine/core';
+
+import { useNavigate } from 'react-router-dom';
+import { Button, Card, Text, Grid, Container, Textarea } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
 import { BACKEND_URL } from '../constants.js';
-import { Auth0Client } from '@auth0/auth0-spa-js';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useAuth } from './AuthContext';
 
@@ -25,10 +14,8 @@ const JournalForm = () => {
   const [input1, setInput1] = useState('');
   const [input2, setInput2] = useState('');
   const [input3, setInput3] = useState('');
-  const { user, isAuthenticated, isLoading } = useAuth0();
-  const { clientInfo, therapistInfo, template } = useAuth();
-
-  const [dueDate, setDueDate] = useState('');
+  const { user, isAuthenticated } = useAuth0();
+  const { therapistInfo } = useAuth();
 
   // get all to know there is an empty null=> new journal entry =>
   const [clientId, setClientId] = useState('');
@@ -39,11 +26,9 @@ const JournalForm = () => {
   const [therapistFirstName, setTherapistFirstName] = useState('');
   const [therapistLasttName, setTherapistLastName] = useState('');
 
-  // in real app, pls do not hardcode JonSnow, instead extract the user from AuthProvider
   const callApi = async () => {
-    // let response = await axios.get(`${BACKEND_URL}/clients/jon@snow.com`);
     let response = await axios.get(`${BACKEND_URL}/clients/${user.email}`);
-    // it should be ${emailClient}
+
     console.log('user detailed information: ', response.data);
 
     console.log(therapistInfo);
@@ -64,29 +49,6 @@ const JournalForm = () => {
     setClientId(response.data.id);
   };
 
-  // //in real app, pls do not hardcode JonSnow, instead extract the user from AuthProvider
-  // const callApi = async () => {
-  //   // let response = await axios.get(`${BACKEND_URL}/clients/jon@snow.com`);
-  //   let response = await axios.get(`${BACKEND_URL}/clients/${user.email}`);
-  //   // it should be ${emailClient}
-  //   console.log('user detailed information: ', response.data);
-  //   console.log(response.data.journalentries.length);
-
-  //   console.log(therapistInfo);
-
-  //   setTherapistFirstName(response.data.therapists[0].firstName);
-  //   setTherapistLastName(response.data.therapists[0].lastName);
-
-  //   setJournalEntryNum(response.data.journalentries.length);
-
-  //   templateQns(response.data.journalentries[0].journaltemplateId);
-
-  //   setDueDate(response.data.journalentries[1].dueBy);
-  //   console.log('client Id: ', response.data.id);
-  //   // setJournalId()
-  //   setClientId(response.data.id);
-  // };
-
   useEffect(() => {
     if (isAuthenticated) {
       console.log('user info:', user);
@@ -97,21 +59,6 @@ const JournalForm = () => {
       callApi();
     }
   }, [user]);
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   console.log(updatedAt);
-  //   console.log(input1);
-  //   console.log(input2);
-  //   console.log(input3);
-  //   axios.post(`${BACKEND_URL}/journals/${clientInfo.id}`, {
-  //     updatedAt: new Date(),
-  //     input1: input1,
-  //     input2: input2,
-  //     input3: input3,
-  //   });
-  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -133,10 +80,7 @@ const JournalForm = () => {
 
         console.log('resdata:', res.data);
         console.log('Journal Submit Success!!');
-        navigate(
-          // `/therapist/patients/${res.data.clientId}/journal/${res.data.id}`
-          `/client/journals/${res.data.id}`
-        );
+        navigate(`/client/journals/${res.data.id}`);
       })
       .catch((err) => {
         console.log(err);
@@ -217,9 +161,6 @@ const JournalForm = () => {
           </form>
         </Card>
       </Grid>
-      {/* <Button variant="light" onClick={(e) => navigate(`/client/dashboard`)}>
-        Back
-      </Button> */}
     </Container>
   );
 };

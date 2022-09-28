@@ -1,8 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+import { Text, Title, Container, Image } from '@mantine/core';
 
-import { Button, Card, Text, Title, Container, Image } from '@mantine/core';
-// import { useNavigate, useParams, useLocation } from 'react-router-dom';
-// import { useContext, useEffect, useState } from 'react';
 import NavBar from '../NavBar';
 import Footer from '../Footer';
 

@@ -1,27 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { BACKEND_URL } from '../constants.js';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useAuth } from './AuthContext.js';
-import {
-  Button,
-  Card,
-  Text,
-  Title,
-  Grid,
-  Container,
-  Group,
-  Image,
-} from '@mantine/core';
+import { Card, Text, Grid, Container, Image } from '@mantine/core';
 import MoodDisplay from './MoodDisplay.js';
 
 export default function QuoteDisplay() {
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
   const [photo, setPhoto] = useState('');
-  // const [date, setDate] = useState(new Date());
-
   const [date, setDate] = useState(new Date());
 
   const weekday = [
@@ -67,16 +52,14 @@ export default function QuoteDisplay() {
       .then((photo) => {
         console.log('res', photo);
         console.log('photos: ', photo.data);
-        // setPhoto(photos.data.results[0].urls.regular);
+
         setPhoto(photo.data.urls.regular);
       });
   }, []);
 
   return (
     <div className="Quote-Header">
-      {/* <Container size="xl" px="xs"> */}
       <Container fluid className="SideBar-Content-body" px="xs">
-        {/* <Card shadow="sm" p="md"> */}
         <Grid grow>
           <Grid.Col span={6}>
             <Card withBorder shadow="sm" radius="md">
@@ -88,15 +71,11 @@ export default function QuoteDisplay() {
           <Grid.Col span={6}>
             <br />
             <Text size={13} weight={400} mt="md">
-              {/* {quote} */}
-              "As you breathe in, cherish yourself. As you breathe out, cherish
-              all beings."
+              {quote}
             </Text>
             <Text size="xs" color="dimmed">
-              {/* -{author} */}
-              -Dalai Lama
+              -{author}
             </Text>
-
             <Text weight={600} size={14} mt="md">
               {date.toLocaleTimeString('en-GB')}
               <br />
@@ -108,7 +87,6 @@ export default function QuoteDisplay() {
             <MoodDisplay />
           </Grid.Col>
         </Grid>
-        {/* </Card> */}
       </Container>
     </div>
   );

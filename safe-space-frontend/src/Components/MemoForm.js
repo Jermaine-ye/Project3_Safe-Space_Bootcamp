@@ -1,18 +1,8 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import {
-  Button,
-  Card,
-  Text,
-  Title,
-  Grid,
-  Container,
-  Form,
-  Input,
-  Textarea,
-} from '@mantine/core';
-import { DatePicker } from '@mantine/dates';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Button, Card, Text, Container, Textarea } from '@mantine/core';
+
 import { BACKEND_URL } from '../constants.js';
 import { useAuth0 } from '@auth0/auth0-react';
 import angry from '../images/angry.png';
@@ -22,7 +12,7 @@ import sad from '../images/frown.png';
 import { useAuth } from './AuthContext';
 
 const MemoForm = () => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { user } = useAuth0();
 
   const [clientId, setClientId] = useState('');
   const [generalInput, setGeneralInput] = useState('');
@@ -32,38 +22,12 @@ const MemoForm = () => {
   const [diagnosesInput, setDiagnosesInput] = useState('');
   const [instructionsInput, setInstructionsInput] = useState('');
   const [riskfactorsInput, setRiskfactorsInput] = useState('');
-  const [clientDetails, setClientDetails] = useState('');
+
   const [clientFirstName, setClientFirstName] = useState('');
   const [clientLastName, setClientLastName] = useState('');
-  const [clientMood, setClientMood] = useState('');
+
   const navigate = useNavigate();
   const { therapistInfo } = useAuth();
-
-  // const callApi = async () => {
-  //   // let response = await axios.get(`${BACKEND_URL}/clients/jon@snow.com`);
-
-  //   // should be getting info from the therapist side instead of the client??
-  //   let response = await axios.get(`${BACKEND_URL}/${c.email}`);
-  //   // let response = await axios.get(`${BACKEND_URL}/clients/${user.email}`);
-  //   // it should be ${emailClient}
-  //   console.log('user detailed information: ', response.data);
-  //   console.log('clientId: ', response.data.id);
-  //   setclientId(response.data.id);
-  //   setClientFirstName(response.data.firstName);
-  //   setClientLastName(response.data.lastName);
-  //   setPatientMood(response.data.dailymood);
-  //   setTherapistId(response.data.therapists[0].id);
-  //   console.log(response.data.therapists[0].id);
-  // };
-
-  const allClients = therapistInfo.clients;
-
-  // const currentClient = allClients.forEach((elem) => {
-  //   const elemClientID = elem.id;
-  //   if (elemClientID === params.id) {
-  //     setCurrClient(elem);
-  //   }
-  // });
 
   useEffect(() => {
     console.log(`in effect`);
@@ -71,34 +35,13 @@ const MemoForm = () => {
 
     if (clientId) {
       axios.get(`${BACKEND_URL}/clients/key/${clientId}`).then((response) => {
-        setClientDetails('clientres.data: ', response.data);
         console.log('clientdetails: ', response.data.dailymood);
-        setClientMood(response.data.dailymood);
         setClientFirstName(response.data.firstName);
         setClientLastName(response.data.lastName);
       });
     }
   }, [clientId]);
 
-  const moodIcon = (input) => {
-    console.log('checkmood: ', clientDetails.patientMood);
-    switch (input) {
-      case 1:
-        return <img src={happy} alt="" width="50" height="50" />;
-
-      case 2:
-        return <img src={sad} alt="" width="50" height="50" />;
-
-      case 3:
-        return <img src={crying} alt="" width="50" height="50" />;
-
-      case 4:
-        return <img src={angry} alt="" width="50" height="50" />;
-
-      default:
-        return null;
-    }
-  };
   const params = useParams();
   if (clientId !== params.clientId) {
     setClientId(params.clientId);
@@ -106,12 +49,6 @@ const MemoForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    //back end route is different from BE route.
-    //check what type of data you want get access first then check index.js app.use (all the way below to see the relatvent router to grab the get/put etc)
-
-    // memo/${:clientId}/${:memoId}
-    // not front end route like what u have done below!!!
-    // should be getting info from the therapist side instead of the client??
     console.log(clientId);
     axios
       .post(`${BACKEND_URL}/memos/${clientId}`, {
@@ -138,8 +75,6 @@ const MemoForm = () => {
         navigate(
           `/therapist/patients/${res.data.clientId}/memos/${res.data.id}`
         );
-        // see if can grab the client ID and memo ID from the back end in res.data.id
-        // /therapist/patients/:clientId/memos/:memoId
       })
       .catch((err) => {
         console.log(err);

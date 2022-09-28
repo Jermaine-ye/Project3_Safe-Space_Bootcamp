@@ -1,34 +1,18 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-// import { user } from '@auth0/auth0-react';
-import { Link, useNavigate, useParams, useNavigation } from 'react-router-dom';
-import {
-  Button,
-  Card,
-  Text,
-  Title,
-  Grid,
-  Container,
-  Form,
-  Input,
-  Textarea,
-  Image,
-} from '@mantine/core';
+
+import { useNavigate, useParams } from 'react-router-dom';
+import { Button, Card, Text, Title, Container, Image } from '@mantine/core';
 
 import { BACKEND_URL } from '../constants.js';
-import { Auth0Client } from '@auth0/auth0-spa-js';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useAuth } from './AuthContext';
 
 import pic1 from '../images/illustration/Journal single-01-01.png';
 
 export default function JournalSingle(props) {
   const navigate = useNavigate();
-  const { user, isAuthenticated, isLoading } = useAuth0();
 
-  // get all to know there is an empty null=> new journal entry =>
   const [journalId, setJournalId] = useState('');
-  // const [journalDetails, setJournalDetails] = useState();
+
   const [indiJournalID, setIndiJournalId] = useState();
   const [indiJournalDueBy, setIndiJournalDueBy] = useState();
   const [indiJournalTemplate, setIndiJournalTemplate] = useState();
@@ -39,7 +23,6 @@ export default function JournalSingle(props) {
   const getSingleJournal = async () => {
     if (journalId) {
       axios.get(`${BACKEND_URL}/journals/single/${journalId}`).then((res) => {
-        // setJournalDetails(res.data);
         console.log('single journal list: ', res.data);
         setIndiJournalId(res.data.id);
         setIndiJournalDueBy(res.data.dueBy);
@@ -67,12 +50,9 @@ export default function JournalSingle(props) {
           Journal Entry Record
         </Title>
         <br />
-        {/* <Grid align="center"> */}
         <Text weight={700}>Journal ID:</Text>
         <Text>{indiJournalID}</Text>
-        {/* <Text>Journal {journalDetails.id}</Text> */}
         <br />
-        {/* cant get the line to move down... */}
         <Text weight={700}>Due by:</Text>{' '}
         <Text weight={400}>
           {new Date(indiJournalDueBy).toLocaleDateString()}
@@ -132,7 +112,6 @@ export default function JournalSingle(props) {
         >
           <Image src={pic1} alt="journal" className="consultation" />
         </div>
-        {/* </Grid> */}
         <Button variant="light" onClick={(e) => navigate(-1)}>
           Back to Dashboard
         </Button>
