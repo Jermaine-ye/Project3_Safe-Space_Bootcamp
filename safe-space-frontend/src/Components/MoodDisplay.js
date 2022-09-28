@@ -1,34 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
-import { BACKEND_URL } from "../constants.js";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useAuth } from "./AuthContext.js";
-import angry from "../images/angry.png";
-import crying from "../images/sad.png";
-import happy from "../images/smiling-face.png";
-import sad from "../images/frown.png";
-import {
-  Button,
-  Card,
-  Text,
-  Title,
-  Grid,
-  Container,
-  Group,
-  Image,
-  Radio,
-} from "@mantine/core";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { BACKEND_URL } from '../constants.js';
+import { useAuth } from './AuthContext.js';
+import angry from '../images/angry.png';
+import crying from '../images/sad.png';
+import happy from '../images/smiling-face.png';
+import sad from '../images/frown.png';
+import { Radio } from '@mantine/core';
 
 export default function MoodDisplay() {
   const { clientInfo } = useAuth();
   const [value, setValue] = useState(1);
-  // const [dailymood, setDailymood] = useState('1');
-  //put request to change the daily mood icon everytime
 
-  //unable to do put request, need to check the router/controller for it.
   const handleSubmit = (e) => {
-    // e.preventDefault();
     setValue(e.target.value);
     console.log(e.target.value);
     const id = e.target.value;
@@ -38,11 +22,8 @@ export default function MoodDisplay() {
     axios
       .put(`${BACKEND_URL}/clients/`, newObj)
       .then((res) => {
-        // setDailymood('');
-        // setValue('');
-
-        console.log("resdata:", res.data);
-        console.log("Mood Updated");
+        console.log('resdata:', res.data);
+        console.log('Mood Updated');
       })
       .catch((err) => {
         console.log(err);
@@ -52,7 +33,6 @@ export default function MoodDisplay() {
   return (
     <form className="Mood-display" onChange={handleSubmit}>
       <Radio.Group
-        // className="Mood-radio"
         value={value}
         onChange={(e) => handleSubmit(e)}
         name="DailyMood"

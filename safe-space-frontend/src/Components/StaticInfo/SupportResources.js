@@ -1,15 +1,7 @@
 import React from 'react';
 import pic1 from '../../images/illustration/11098.jpg';
 
-import {
-  Button,
-  Card,
-  Text,
-  Title,
-  Grid,
-  Container,
-  Image,
-} from '@mantine/core';
+import { Card, Text, Title, Grid, Container, Image } from '@mantine/core';
 import { IconHeartHandshake } from '@tabler/icons';
 
 import NavBar from '../NavBar';
