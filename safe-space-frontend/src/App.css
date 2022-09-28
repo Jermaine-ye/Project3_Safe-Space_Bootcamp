@@ -1,10 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
 .App {
   text-align: center;
+  font-family: "Roboto", sans-serif;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+html,
+body {
+  height: fit;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -35,4 +51,249 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.Nav-bar {
+  padding-left: 30px;
+  padding-right: 30px;
+  width: 100%;
+  padding-bottom: 20px;
+  background-color: #283c63;
+}
+
+.Nav-bar a {
+  align-content: center;
+  color: #ffff;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.Nav-bar a:hover {
+  color: #ffff;
+
+  text-decoration: underline;
+}
+
+.Nav-bar a:visited {
+  text-decoration: none;
+}
+
+.Nav-bar a:active {
+  text-decoration: none;
+}
+
+.Nav-bar-wrapper {
+  height: 100px;
+  padding-left: 50px;
+  padding-right: 50px;
+
+  background-color: #283c63;
+}
+
+/* Content for landing page */
+.Page-body {
+  /* min-height: 100%; */
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.Content-container {
+  height: 100%;
+  position: relative;
+}
+
+.Content-body {
+  padding: 10px;
+  /* to buffer footer height */
+  padding-bottom: 280px;
+}
+
+/* Footer elements */
+.Footer-container {
+  position: absolute;
+  max-height: fit-content;
+  padding-top: 40px;
+  width: 100%;
+  bottom: 0;
+  color: #ffff;
+  background-color: #283c63;
+}
+.Footer-container a {
+  align-content: center;
+  color: #ffff;
+  text-decoration: none;
+}
+
+.Footer-container a:hover {
+  text-decoration: underline;
+}
+
+/* Client Dashboard */
+.Form-body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.Mood-Display {
+  align-items: center;
+  flex-direction: row;
+  display: flex;
+}
+
+/* To find the correct name for component styling */
+.mantine-pbfq37 {
+  justify-content: center;
+}
+
+/* Side Bar information */
+.Side-bar {
+  background-color: #283c63;
+  align-content: center;
+  padding-top: 40px;
+  /* height: 150%; */
+  height: 144vh;
+  /* height: 120vh; */
+  width: 400px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.Sidebar-logout-btn {
+  margin-top: 180px;
+
+  /* this is to control the bottom of the side bar */
+  margin-bottom: 35px;
+}
+
+.Sidebar-a {
+  padding-top: 40px;
+}
+
+.Side-bar a {
+  align-content: center;
+  color: #ffff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.SideBar-profile-pic img {
+  height: 300px;
+}
+
+/* Dashboard Styling */
+.Quote-Header {
+  height: 280px;
+}
+
+/* FAQ header */
+.mantine-1dcoo6i {
+  flex-direction: column;
+
+  padding-top: 70px;
+}
+
+.Personal-Particulars {
+  background-color: #cce4f7;
+}
+
+.Personal-Particulars-div a {
+  color: #1b1b9589;
+}
+
+.Personal-Particulars-div a {
+  color: #1b1b9589;
+}
+
+button {
+  background-color: #66b9b9;
+  align-content: center;
+  height: 40px;
+  margin: 10px;
+  padding: 10px;
+  width: max-content;
+  border-style: none;
+  color: #ffff;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  justify-content: center;
+}
+
+.mantine-6y1794 {
+  align-content: center;
+  justify-content: center;
+  flex-wrap: center;
+}
+
+.mantine-15pjuqq {
+  margin-bottom: 45px;
+}
+
+.react-calendar button {
+  color: #51555e;
+}
+
+.react-datetime-picker__wrapper {
+  display: flex;
+  flex-grow: 1;
+  background: #e9ecf4;
+  flex-shrink: 0;
+  border-radius: 5px;
+  font-family: "Roboto";
+  font-weight: 400;
+  border: none;
+}
+
+.react-calendar {
+  width: 350px;
+  max-width: 100%;
+  border-radius: 15px;
+  background: white;
+  border: 1px solid #a0a096;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.125em;
+}
+
+/* Journal Single */
+.mantine-17yq1a2 {
+  margin-top: 30px;
+}
+
+/* Landing Page Text  */
+
+.mantine-1kx75lf {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica,
+    Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+  color: inherit;
+  font-size: 16px;
+  line-height: 1.55;
+  text-decoration: none;
+  margin-top: 200px;
+  font-weight: 600;
+  text-align: justify;
+}
+
+.Landing-Text {
+  margin-top: 200px;
+
+  text-align: justify;
+}
+
+.Landing-Header {
+  font-weight: 600;
+  color: #1baed6;
+  /* align-content: right; */
+  text-align: right;
+}
+
+.Landing-page {
+  margin-bottom: auto;
+}
+
+.Support-page {
+  margin-top: 120px;
 }
