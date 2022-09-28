@@ -1,19 +1,19 @@
-import axios from 'axios';
-import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Card, Text, Grid, Container, Textarea } from '@mantine/core';
-import { DatePicker } from '@mantine/dates';
-import { BACKEND_URL } from '../constants.js';
-import { useAuth } from './AuthContext';
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Button, Card, Text, Grid, Container, Textarea } from "@mantine/core";
+import { DatePicker } from "@mantine/dates";
+import { BACKEND_URL } from "../constants.js";
+import { useAuth } from "./AuthContext";
 
 const JournalAssignment = () => {
   const navigate = useNavigate();
-  const [updatedAt, setUpdatedAt] = useState('');
+  const [updatedAt, setUpdatedAt] = useState("");
   const [input1, setInput1] = useState(null);
   const [input2, setInput2] = useState(null);
   const [input3, setInput3] = useState(null);
   const { therapistInfo, template } = useAuth();
-  const [clientId, setClientId] = useState('');
+  const [clientId, setClientId] = useState("");
 
   const params = useParams();
   if (clientId !== params.clientId) {
@@ -55,7 +55,7 @@ const JournalAssignment = () => {
           <Container>
             <form onSubmit={handleSubmit}>
               <Text weight={700}>
-                Date Due:{' '}
+                Date Due:{" "}
                 {
                   <DatePicker
                     placeholder="Pick date"
@@ -69,8 +69,8 @@ const JournalAssignment = () => {
               <br />
               <Text weight={700}>
                 {template === 1
-                  ? 'Q1: Topics  I want to discuss and goals for the session: '
-                  : 'Q1: Focus Topics and goals for the session:'}
+                  ? "Q1: Topics  I want to discuss and goals for the session: "
+                  : "Q1: Focus Topics and goals for the session:"}
               </Text>
 
               <Textarea

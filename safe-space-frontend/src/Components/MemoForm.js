@@ -1,30 +1,30 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Card, Text, Container, Textarea } from '@mantine/core';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Button, Card, Text, Container, Textarea } from "@mantine/core";
 
-import { BACKEND_URL } from '../constants.js';
-import { useAuth0 } from '@auth0/auth0-react';
-import angry from '../images/angry.png';
-import crying from '../images/sad.png';
-import happy from '../images/smiling-face.png';
-import sad from '../images/frown.png';
-import { useAuth } from './AuthContext';
+import { BACKEND_URL } from "../constants.js";
+import { useAuth0 } from "@auth0/auth0-react";
+import angry from "../images/angry.png";
+import crying from "../images/sad.png";
+import happy from "../images/smiling-face.png";
+import sad from "../images/frown.png";
+import { useAuth } from "./AuthContext";
 
 const MemoForm = () => {
   const { user } = useAuth0();
 
-  const [clientId, setClientId] = useState('');
-  const [generalInput, setGeneralInput] = useState('');
-  const [behaviorInput, setBehaviorInput] = useState('');
-  const [contenttherapyInput, setContenttherapyInput] = useState('');
-  const [therapeuticintInput, setTherapeuticintInput] = useState('');
-  const [diagnosesInput, setDiagnosesInput] = useState('');
-  const [instructionsInput, setInstructionsInput] = useState('');
-  const [riskfactorsInput, setRiskfactorsInput] = useState('');
+  const [clientId, setClientId] = useState("");
+  const [generalInput, setGeneralInput] = useState("");
+  const [behaviorInput, setBehaviorInput] = useState("");
+  const [contenttherapyInput, setContenttherapyInput] = useState("");
+  const [therapeuticintInput, setTherapeuticintInput] = useState("");
+  const [diagnosesInput, setDiagnosesInput] = useState("");
+  const [instructionsInput, setInstructionsInput] = useState("");
+  const [riskfactorsInput, setRiskfactorsInput] = useState("");
 
-  const [clientFirstName, setClientFirstName] = useState('');
-  const [clientLastName, setClientLastName] = useState('');
+  const [clientFirstName, setClientFirstName] = useState("");
+  const [clientLastName, setClientLastName] = useState("");
 
   const navigate = useNavigate();
   const { therapistInfo } = useAuth();
@@ -35,7 +35,7 @@ const MemoForm = () => {
 
     if (clientId) {
       axios.get(`${BACKEND_URL}/clients/key/${clientId}`).then((response) => {
-        console.log('clientdetails: ', response.data.dailymood);
+        console.log("clientdetails: ", response.data.dailymood);
         setClientFirstName(response.data.firstName);
         setClientLastName(response.data.lastName);
       });
@@ -62,16 +62,16 @@ const MemoForm = () => {
         riskfactorsInput,
       })
       .then((res) => {
-        setGeneralInput('');
-        setBehaviorInput('');
-        setContenttherapyInput('');
-        setTherapeuticintInput('');
-        setDiagnosesInput('');
-        setInstructionsInput('');
-        setRiskfactorsInput('');
+        setGeneralInput("");
+        setBehaviorInput("");
+        setContenttherapyInput("");
+        setTherapeuticintInput("");
+        setDiagnosesInput("");
+        setInstructionsInput("");
+        setRiskfactorsInput("");
 
-        console.log('resdata:', res.data);
-        console.log('Memo Submit Success!!');
+        console.log("resdata:", res.data);
+        console.log("Memo Submit Success!!");
         navigate(
           `/therapist/patients/${res.data.clientId}/memos/${res.data.id}`
         );
@@ -94,7 +94,7 @@ const MemoForm = () => {
           <br />
 
           <Text weight={700}>
-            {' '}
+            {" "}
             Patient Name: {clientFirstName} {clientLastName}
           </Text>
 

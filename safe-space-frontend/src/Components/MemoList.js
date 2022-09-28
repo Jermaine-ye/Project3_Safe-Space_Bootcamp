@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
-import { BACKEND_URL } from '../constants.js';
-import { Button, Card, Text, Container } from '@mantine/core';
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import { BACKEND_URL } from "../constants.js";
+import { Button, Card, Text, Container } from "@mantine/core";
 
 export default function PatientList() {
   const [clientId, setClientId] = useState();
   const navigate = useNavigate();
   const [memoList, setMemoList] = useState([]);
-  const [clientDetails, setClientDetails] = useState('');
+  const [clientDetails, setClientDetails] = useState("");
 
   let finalList;
 
@@ -74,7 +74,10 @@ export default function PatientList() {
       {memoList && memoList.length !== 0 ? <ul>{finalList}</ul> : null}
       <br />
       <br />
-      <Button variant="light" onClick={(e) => navigate(-1)}>
+      <Button
+        variant="light"
+        onClick={(e) => navigate(`/therapist/patients/${clientId}`)}
+      >
         Back to Patient Profile
       </Button>
     </div>

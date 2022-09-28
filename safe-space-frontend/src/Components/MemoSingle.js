@@ -1,18 +1,18 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 
-import { useNavigate, useParams } from 'react-router-dom';
-import { Card, Text, Container } from '@mantine/core';
+import { useNavigate, useParams } from "react-router-dom";
+import { Card, Text, Container } from "@mantine/core";
 
-import { BACKEND_URL } from '../constants.js';
+import { BACKEND_URL } from "../constants.js";
 
 export default function MemoSingle(props) {
   const navigate = useNavigate();
 
-  const [clientId, setClientId] = useState('');
-  const [memoId, setMemoId] = useState('');
-  const [memoDetails, setMemoDetails] = useState('');
-  const [clientDetails, setClientDetails] = useState('');
+  const [clientId, setClientId] = useState("");
+  const [memoId, setMemoId] = useState("");
+  const [memoDetails, setMemoDetails] = useState("");
+  const [clientDetails, setClientDetails] = useState("");
 
   useEffect(() => {
     if (memoId) {
@@ -25,7 +25,7 @@ export default function MemoSingle(props) {
     if (clientId) {
       axios.get(`${BACKEND_URL}/clients/key/${clientId}`).then((response) => {
         setClientDetails(response.data);
-        console.log('client details:', response.data);
+        console.log("client details:", response.data);
       });
     }
 

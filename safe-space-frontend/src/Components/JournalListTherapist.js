@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { BACKEND_URL } from '../constants.js';
-import { useAuth } from './AuthContext.js';
-import { Button, Card, Text } from '@mantine/core';
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { BACKEND_URL } from "../constants.js";
+import { useAuth } from "./AuthContext.js";
+import { Button, Card, Text } from "@mantine/core";
 
 export default function JournalListTherapist() {
   const [journalList, setJournalList] = useState([]);
@@ -24,7 +24,7 @@ export default function JournalListTherapist() {
   let finalList;
   if (journalList && journalList.length !== 0) {
     finalList = journalList.map((journalInfo) => {
-      console.log('journalinfo: ', journalInfo);
+      console.log("journalinfo: ", journalInfo);
       console.log(journalInfo.id);
 
       return (
@@ -32,7 +32,6 @@ export default function JournalListTherapist() {
           <Link to={`/client/journals/${journalInfo.id}`} key={journalInfo.id}>
             <Card shadow="sm" p="lg" radius="md" withBorder>
               <Text>Journal ID: {journalInfo.id}</Text>
-              <Text></Text>
 
               <Text size="sm" color="dimmed">
                 DUE DATE: <br />

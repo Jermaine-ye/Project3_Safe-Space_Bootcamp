@@ -1,12 +1,12 @@
-import React, { createContext } from 'react';
-import axios from 'axios';
-import { Button, Image, Container, Grid } from '@mantine/core';
-import { useNavigate, Link } from 'react-router-dom';
-import { BACKEND_URL } from '../constants';
-import { useEffect } from 'react';
-import { useAuth } from './AuthContext';
-import { useAuth0 } from '@auth0/auth0-react';
-import sslogo from '../images/sslogo.png';
+import React, { createContext } from "react";
+import axios from "axios";
+import { Button, Image, Container, Grid } from "@mantine/core";
+import { useNavigate, Link } from "react-router-dom";
+import { BACKEND_URL } from "../constants";
+import { useEffect } from "react";
+import { useAuth } from "./AuthContext";
+import { useAuth0 } from "@auth0/auth0-react";
+import sslogo from "../images/sslogo.png";
 
 export default function NavBar() {
   const { isAuthenticated, user, loginWithRedirect, getAccessTokenSilently } =
@@ -16,7 +16,7 @@ export default function NavBar() {
   const { updateClientData, updateClientInfo, updateTherapistInfo } = useAuth();
 
   const handleLogin = async () => {
-    console.log('Client logging in!');
+    console.log("Client logging in!");
     loginWithRedirect();
   };
 
@@ -95,7 +95,7 @@ export default function NavBar() {
       console.log(`running`);
       getAllInfo();
 
-      console.log('user:', user);
+      console.log("user:", user);
     }
   }, [user]);
 
@@ -103,11 +103,11 @@ export default function NavBar() {
     console.log(event);
 
     if (user[`https://any-namespace/roles`].length !== 0) {
-      navigate('/therapist/dashboard');
+      navigate("/therapist/dashboard");
     } else if (user[`https://any-namespace/roles`].length === 0) {
-      navigate('/client/dashboard');
+      navigate("/client/dashboard");
     } else {
-      navigate('/');
+      navigate("/");
     }
   };
 
@@ -115,15 +115,15 @@ export default function NavBar() {
     <div>
       <Container align="center" className="Nav-bar" fluid="true">
         <Grid className="Nav-bar-wrapper" align="center">
-          <Grid.Col span={'auto'}>
+          <Grid.Col span={"auto"}>
             <Link to="/">
               <div
                 style={{
                   width: 200,
-                  marginTop: 'auto',
-                  marginLeft: 'auto',
-                  marginRight: 'auto',
-                  marginBottom: 'auto',
+                  marginTop: "auto",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  marginBottom: "auto",
                 }}
               >
                 <Image

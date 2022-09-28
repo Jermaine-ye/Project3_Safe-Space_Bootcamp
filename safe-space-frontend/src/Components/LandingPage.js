@@ -1,11 +1,11 @@
-import React from 'react';
-import { Card, Text, Title, Image, Container, Grid } from '@mantine/core';
-import { useNavigate } from 'react-router-dom';
-import NavBar from './NavBar';
-import Footer from './Footer';
-import { useAuth0 } from '@auth0/auth0-react';
+import React from "react";
+import { Card, Text, Title, Image, Container, Grid } from "@mantine/core";
+import { useNavigate } from "react-router-dom";
+import NavBar from "./NavBar";
+import Footer from "./Footer";
+import { useAuth0 } from "@auth0/auth0-react";
 
-import pic1 from '../images/illustration/DrawKit Vector Illustration Mental Health 1.png';
+import pic1 from "../images/illustration/DrawKit Vector Illustration Mental Health 1.png";
 
 export default function LandingPage() {
   const { user } = useAuth0();
@@ -15,11 +15,11 @@ export default function LandingPage() {
     console.log(event);
 
     if (user[`https://any-namespace/roles`].length !== 0) {
-      navigate('/therapist/');
+      navigate("/therapist/");
     } else if (user[`https://any-namespace/roles`].length === 0) {
-      navigate('/client/');
+      navigate("/client/");
     } else {
-      navigate('/');
+      navigate("/");
     }
   };
 
@@ -46,7 +46,7 @@ export default function LandingPage() {
                 style={{
                   width: 650,
 
-                  marginLeft: 'auto',
+                  marginLeft: "auto",
                   marginRight: 50,
                 }}
               >
@@ -55,7 +55,7 @@ export default function LandingPage() {
 
               <button
                 onClick={() => {
-                  navigate('/particulars');
+                  navigate("/particulars");
                 }}
               >
                 Take Our Evaluation Form!
