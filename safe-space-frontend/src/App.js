@@ -18,7 +18,6 @@ import MemoForm from "./Components/MemoForm";
 import MemoSingle from "./Components/MemoSingle";
 import MemoList from "./Components/MemoList";
 import JournalAssignment from "./Components/JournalAssignment";
-import PrevApptHistory from "./Components/PrevApptHistory";
 import PatientProfile from "./Components/PatientProfile";
 import About from "./Components/StaticInfo/About";
 import Advice from "./Components/StaticInfo/Advice";

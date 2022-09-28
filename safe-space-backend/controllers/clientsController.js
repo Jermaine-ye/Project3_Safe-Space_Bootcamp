@@ -23,35 +23,15 @@ class ClientsController extends BaseController {
     this.memoentryModel = memoentryModel;
   }
 
-  // // get all appointments for client
-  // async getAll(req, res) {
-  //   try {
-  //     console.log("get all appointments!");
-  //     const { clientID } = req.body;
-  //     const output = await this.appointmentModel.findAll({
-  //       where: {
-  //         clientId: clientID,
-  //       },
-  //     });
-  //     return res.json(output);
-  //   } catch (err) {
-  //     return res.status(400).json({ error: true, msg: err });
-  //   }
-  // }
-
   //get one client for therapist and client(for own profile). And get all journalentries and all appointments of the client. And get therapist info of current therapist for indiv client. And get all the clients_therapists info for indiv client.
   async getOne(req, res) {
     const { email } = req.params;
-    console.log(email);
-    console.log(req.params);
     try {
       const user = await this.model.findOne({
         where: { email: email },
         include: [
           { model: this.appointmentModel, include: [this.therapistModel] },
           { model: this.journalentryModel, include: [this.therapistModel] },
-          // this.appointmentModel,
-          // this.journalentryModel,
           this.therapistModel,
           this.memoentryModel,
         ],
@@ -87,7 +67,6 @@ class ClientsController extends BaseController {
       age,
       gender,
       maritalStatus,
-      // eval
       therapistConfirmed,
       specializationId,
       genderPreference,
@@ -99,15 +78,10 @@ class ClientsController extends BaseController {
       active,
     } = req.body;
 
-    console.log(dailymood);
-    console.log(emailClient);
-
-    // const { emailClient } = req.params;
     try {
       const data = await this.model.findOne({
         where: { email: emailClient },
       });
-      console.log(data);
       const response = await data.update({
         firstName: firstName,
         lastName: lastName,
@@ -135,14 +109,12 @@ class ClientsController extends BaseController {
   //update the junction table clients_therapists. Sometimes need to pair this with updateOneClient. Run this after evaluationform etc.
 
   async updateOneTherapistClient(req, res) {
-    console.log("hi");
     const { chosenTherapist, endedAt, feedback, therapistID, clientID } =
       req.body;
     try {
       const data = await this.clientTherapistsModel.findOne({
         where: { clientId: clientID, therapistId: therapistID },
       });
-      console.log(data);
 
       const response = await data.update({
         chosenTherapist: chosenTherapist,
@@ -189,18 +161,14 @@ class ClientsController extends BaseController {
     console.log(req.body);
     try {
       //allTherapists is an array of objects
-      console.log("hi");
       const nextTherapists = await this.specializationTherapistsModel.findAll({
         where: {
           specializationId: specializationID,
-          // "$specialize.specializationId$": specializationID,
         },
       });
       const secondSelectedTherapists = nextTherapists.map((elem) => {
         return elem.therapistId;
       });
-
-      console.log(secondSelectedTherapists);
 
       const allTherapists = await this.therapistModel.findAll({
         where: {
@@ -208,57 +176,25 @@ class ClientsController extends BaseController {
           religionId: religionId,
           gender: gender,
           languageId: languageId,
-          // specializationId: specializationID,
-          // "$specialize.specializationId$": specializationID,
         },
-        // include: [
-        //   {
-        //     // model: this.specializationTherapistsModel,
-        //     through: {
-        //       // model: this.specializationTherapistsModel,
-        //       where: { specializationId: specializationID },
-        //       attributes: ["specializationId"],
-        //     },
-        //   },
-        // ],
-
-        // include: "specialize",
-        // include: [
-        //   {
-        //     model: this.specializationTherapistsModel,
-        //     // required: true,
-        //     as: "specialize",
-        //     // where: {
-        //     //   specializationId: specializationId,
-        //     // },
-        //   },
-        // ],
       });
 
       const firstSelectedTherapists = allTherapists.map((elem) => {
         return elem.id;
       });
 
-      console.log(firstSelectedTherapists);
-
       let finalTherapists = [];
       firstSelectedTherapists.forEach((therapist) => {
         if (secondSelectedTherapists.indexOf(therapist) !== -1) {
-          console.log("yay");
           finalTherapists.push(therapist);
         }
       });
 
-      console.log(finalTherapists);
-
       finalTherapists.map(async (therapist) => {
-        // await console.log("indiv object", therapist);
         const newRelation = await this.clientTherapistsModel.create({
           clientId: clientId,
           therapistId: therapist,
           chosenTherapist: false,
-          // endedAt: new Date(),
-          //To remove endedAt non null from migration table.
         });
         return newRelation;
       });

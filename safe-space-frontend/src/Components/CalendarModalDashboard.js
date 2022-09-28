@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Card, Text, Title } from "@mantine/core";
-import { BACKEND_URL } from "../constants.js";
-import { useAuth } from "./AuthContext";
+
 import { useAuth0 } from "@auth0/auth0-react";
-import axios from "axios";
 
 export default function CalendarModalDashboard(props) {
-  console.log(props.item);
-  const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth0();
   useEffect(() => {
     if (isAuthenticated) {
@@ -16,7 +11,7 @@ export default function CalendarModalDashboard(props) {
     }
   }, [user]);
 
-  const { id, end, start, title, type } = props.item;
+  const { id, end, start, title } = props.item;
 
   const endTime = end.toString();
   const startTime = start.toString();

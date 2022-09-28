@@ -2,13 +2,7 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Client extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
       this.belongsTo(models.specialization);
       this.belongsTo(models.age);
       this.belongsTo(models.language);
@@ -23,20 +17,10 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.appointment);
       this.hasMany(models.memoentry);
       this.hasMany(models.journalentry);
-      // this.belongsToMany(models.therapist, {
-      //   through: "appointments",
-      // });
-      // this.belongsToMany(models.therapist, {
-      //   through: "memo_entries",
-      // });
-      // this.belongsToMany(models.therapist, {
-      //   through: "journal_entries",
-      // });
     }
   }
   Client.init(
     {
-      // id: DataTypes.INTEGER,
       firstName: DataTypes.STRING,
       lastName: DataTypes.STRING,
       phoneNumber: DataTypes.INTEGER,
@@ -51,7 +35,6 @@ module.exports = (sequelize, DataTypes) => {
       description: DataTypes.STRING,
       active: DataTypes.BOOLEAN,
       admin: DataTypes.BOOLEAN,
-      // set specialization_id
       specializationId: {
         type: DataTypes.INTEGER,
         references: {
@@ -59,7 +42,6 @@ module.exports = (sequelize, DataTypes) => {
           key: "id",
         },
       },
-      // set agepreference_id
       ageId: {
         type: DataTypes.INTEGER,
         references: {
@@ -67,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
           key: "id",
         },
       },
-      // set language_id
+
       languageId: {
         type: DataTypes.INTEGER,
         references: {
@@ -75,7 +57,6 @@ module.exports = (sequelize, DataTypes) => {
           key: "id",
         },
       },
-      // set religion_id
       religionId: {
         type: DataTypes.INTEGER,
         references: {

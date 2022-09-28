@@ -7,15 +7,6 @@ class ClientsRouter {
     this.auth = auth;
   }
   routes() {
-    // //get all appointments (for client)
-    // router.get(
-    //   "/appts",
-    //   this.auth,
-    //   this.controller.getAll.bind(this.controller)
-    // );
-
-    //get all clients_therapists (for client to rechoose) <<< just do getOne client and do junction table include. Dont do getallclients_therapist
-
     //get one client (for both client own profile and therapist)
     router.get(
       "/:email",

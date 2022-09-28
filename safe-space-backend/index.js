@@ -4,7 +4,6 @@ const { auth } = require("express-oauth2-jwt-bearer");
 require("dotenv").config();
 
 // importing Routers
-// const ListingsRouter = require("./routers/listingsRouter");
 const AppointmentsRouter = require("./routers/appointmentsRouter");
 const ClientsRouter = require("./routers/clientsRouter");
 const JournalsRouter = require("./routers/journalsRouter");
@@ -13,7 +12,6 @@ const TherapistsRouter = require("./routers/therapistsRouter");
 const ArticlesRouter = require("./routers/articlesRouter");
 
 // importing Controllers
-// const ListingsController = require("./controllers/listingsController");
 const AppointmentsController = require("./controllers/appointmentsController");
 const ClientsController = require("./controllers/clientsController");
 const JournalsController = require("./controllers/journalsController");
@@ -23,7 +21,6 @@ const ArticlesController = require("./controllers/articlesController");
 
 // importing DB
 const db = require("./db/models/index");
-// const { listing, user } = db;
 const {
   client,
   memoentry,
@@ -47,7 +44,6 @@ const checkJwt = auth({
 });
 
 // initializing Controllers -> note the lowercase for the first word
-// const listingsController = new ListingsController(listing, user);
 
 //FOR CLIENT get one appt, update one appt, delete one appt, create one appt. FOR THERAPISTS get all appt, get one appt, create one appt.
 const appointmentsController = new AppointmentsController(
@@ -67,10 +63,7 @@ const clientsController = new ClientsController(
   journalentry,
   specialization,
   specialization_therapists,
-  memoentry,
-  religion,
-  age,
-  language
+  memoentry
 );
 
 //FOR CLIENT, get all and get one recommendation articles
@@ -99,11 +92,6 @@ const therapistsController = new TherapistsController(
 
 // initializing Routers
 
-// const listingsRouter = new ListingsRouter(
-//   listingsController,
-//   checkJwt
-// ).routes();
-
 const appointmentsRouter = new AppointmentsRouter(
   appointmentsController
 ).routes();
@@ -124,9 +112,6 @@ const articlesRouter = new ArticlesRouter(articlesController).routes();
 const PORT = process.env.PORT;
 const app = express();
 
-// Enable Auth0 middleware
-// app.use(auth());
-
 // Enable CORS access to this server
 app.use(cors());
 
@@ -134,7 +119,6 @@ app.use(cors());
 app.use(express.json());
 
 // enable and use router
-// app.use("/listings", listingsRouter);
 
 app.use("/appointments", appointmentsRouter);
 app.use("/clients", clientsRouter);

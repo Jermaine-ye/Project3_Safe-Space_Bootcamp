@@ -1,5 +1,4 @@
 const cors = require("cors");
-// const BaseController = require("./baseController");
 
 class MemosController {
   constructor(model, clientModel, therapistModel) {
@@ -12,13 +11,10 @@ class MemosController {
   async getAll(req, res) {
     try {
       const clientId = req.params;
-      console.log(`Client ID`, clientId);
       const output = await this.model.findAll({
         where: {
           clientId: Number(clientId.clientId),
         },
-        // error
-        // order: ["updatedAt", "DESC"],
       });
 
       return res.json(output);
@@ -30,10 +26,8 @@ class MemosController {
   //get one memo of a particular client(for therapist)
   async getOne(req, res) {
     const { memoId } = req.params;
-    console.log(`getOne params`, req.params);
     try {
       const output = await this.model.findByPk(memoId);
-      console.log(output);
       return res.json(output);
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });
@@ -42,11 +36,7 @@ class MemosController {
 
   //create one memo for individual client (for therapist)
   async insertOne(req, res) {
-    console.log("req.params: ", req.params);
-    console.log("req.body: ", req.body);
-
     const clientId = req.params;
-    console.log("clientId: ", clientId.clientId);
     const {
       therapistId,
       generalInput,

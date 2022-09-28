@@ -1,23 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import 'react-datepicker/dist/react-datepicker.css';
-import axios from 'axios';
-import { Button, Card, Text, Title } from '@mantine/core';
-import { Calendar, momentLocalizer } from 'react-big-calendar';
-import Select from 'react-select';
-import moment from 'moment';
-import { useAuth0 } from '@auth0/auth0-react';
-import DateTimePicker from 'react-datetime-picker';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { BACKEND_URL } from '../constants.js';
-import { useAuth } from './AuthContext';
-import CalendarModal from './CalendarModal';
+import React, { useEffect, useState } from "react";
+import "react-datepicker/dist/react-datepicker.css";
+import axios from "axios";
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import Select from "react-select";
+import moment from "moment";
+import { useAuth0 } from "@auth0/auth0-react";
+import DateTimePicker from "react-datetime-picker";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import { BACKEND_URL } from "../constants.js";
+import { useAuth } from "./AuthContext";
+import CalendarModal from "./CalendarModal";
 
 export default function CalendarFull() {
   const localizer = momentLocalizer(moment);
   const [selected, setSelected] = useState();
   const [modalVisible, setModalVisible] = useState(false);
-  const navigate = useNavigate();
 
   const [currTherapist, setCurrTherapist] = useState({});
 
@@ -38,8 +35,8 @@ export default function CalendarFull() {
   const [newEvent, setNewEvent] = useState({
     start: new Date(),
     end: new Date(),
-    title: '',
-    type: 'appt',
+    title: "",
+    type: "appt",
     therapistId: 0,
     clientId: 0,
   });
@@ -47,40 +44,24 @@ export default function CalendarFull() {
   const [newBlocked, setNewBlocked] = useState({
     start: new Date(),
     end: new Date(),
-    title: 'Blocked Date',
-    type: 'blocked date',
+    title: "Blocked Date",
+    type: "blocked date",
     therapistId: 0,
   });
 
   let currTher;
 
-  console.log(newEvent);
-  const { loginWithRedirect, user, isAuthenticated } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
 
   const { clientInfo, therapistInfo } = useAuth();
 
   useEffect(() => {
     if (isAuthenticated) {
-      console.log(user);
       if (user && user[`https://any-namespace/roles`].length !== 0) {
-        console.log(therapistInfo);
-        //this is therapist acct
-        //so get all blocked dates and appts
-        //blocked dates can be gotten from therapistinfo usecontext
         getOwnBlockedDateAppts();
-        //get all appts from appointments controller
-        // getAllTherapistApptCalendar();
-        console.log(therapistBlockedDate);
-
-        console.log(allEvents);
       }
 
       if (user && user[`https://any-namespace/roles`].length === 0) {
-        //this is the client acct
-        console.log(clientInfo);
-        console.log(therapistInfo);
-
-        //get all appts and prev journal entries of the client. Can get from clientInfo!
         getClientApptsJournals();
       }
     }
@@ -103,7 +84,6 @@ export default function CalendarFull() {
 
       if (chosenTherapist && endedAt === null) {
         currTher = { id: id, name: `${firstName} ${lastName}`, email: email };
-        console.log(currTher);
       }
     });
   }
@@ -111,12 +91,9 @@ export default function CalendarFull() {
   const handleSelected = (event) => {
     setModalVisible(true);
     setSelected(event);
-    console.log('this is running');
-    const { id, type, user } = event;
   };
 
   const getClientApptsJournals = async () => {
-    console.log(clientInfo);
     const { appointments, journalentries, therapists } = clientInfo;
 
     let currTherapistInfo = await therapists.forEach((therapist) => {
@@ -129,8 +106,6 @@ export default function CalendarFull() {
       }
     });
 
-    console.log(currTherapistInfo);
-
     await appointments.forEach((data) => {
       const startTime = data.startDatetime;
       const endTime = data.endDatetime;
@@ -140,8 +115,8 @@ export default function CalendarFull() {
 
       const newObject = {
         id: apptID,
-        type: 'appt',
-        user: 'client',
+        type: "appt",
+        user: "client",
         title: `Appointment with therapist ${firstName} ${lastName}`,
         start: new Date(startTime),
         end: new Date(endTime),
@@ -164,7 +139,6 @@ export default function CalendarFull() {
     });
 
     await journalentries.forEach((data) => {
-      console.log(data);
       let endDate;
       if (data.input1 !== null) {
         endDate = new Date(data.updatedAt);
@@ -172,9 +146,7 @@ export default function CalendarFull() {
         endDate = new Date(data.dueBy);
       }
 
-      // const endDate = new Date(data.dueBy);
       const startDate = new Date(endDate.getTime() - 3600000);
-      // const startDate = new Date(endDate.getTime() - 86400000);
       const therapistID = data.therapistId;
       const { firstName, lastName } = data.therapist;
       const journalID = data.id;
@@ -184,8 +156,8 @@ export default function CalendarFull() {
 
       const newObject = {
         id: journalID,
-        type: 'journal',
-        user: 'client',
+        type: "journal",
+        user: "client",
         title: `Journal under therapist ${firstName} ${lastName}`,
         start: startDate,
         end: endDate,
@@ -216,25 +188,20 @@ export default function CalendarFull() {
 
     await blockeddates.forEach((blockDate) => {
       const startDate = new Date(blockDate.date);
-      // const endDate = new Date(blockDate.date);
+
       const endDate = new Date(startDate.getTime() + 86400000);
       const ID = blockDate.id;
-      console.log(startDate);
 
       const newObject = {
         id: ID,
-        type: 'blocked date',
+        type: "blocked date",
         title: `THERAPIST UNAVALIABLE - ${therapistInfo.firstName} ${therapistInfo.lastName}`,
-        user: 'client',
+        user: "client",
         start: startDate,
         end: endDate,
       };
 
-      console.log(newObject);
-
       if (therapistBlockedDate.length !== 0) {
-        // console.log(therapistBlockedDate.indexOf(newObject));
-
         const index = therapistBlockedDate.findIndex((element) => {
           if (element.id === newObject.id) {
             return true;
@@ -259,25 +226,21 @@ export default function CalendarFull() {
 
   const getOwnBlockedDateAppts = async () => {
     const { blockeddates, id } = therapistInfo;
-    console.log(therapistInfo);
 
     await blockeddates.forEach((blockDate) => {
       const startDate = new Date(blockDate.date);
-      // const endDate = new Date(blockDate.date);
+
       const endDate = new Date(startDate.getTime() + 86400000);
       const ID = blockDate.id;
-      console.log(startDate);
 
       const newObject = {
         id: ID,
-        type: 'blocked date',
-        title: 'Blocked Date',
-        user: 'therapist',
+        type: "blocked date",
+        title: "Blocked Date",
+        user: "therapist",
         start: startDate,
         end: endDate,
       };
-
-      console.log(newObject);
 
       if (therapistBlockedDate.length !== 0) {
         const index = therapistBlockedDate.findIndex((element) => {
@@ -312,8 +275,8 @@ export default function CalendarFull() {
 
       const newObject = {
         id: apptID,
-        type: 'appt',
-        user: 'therapist',
+        type: "appt",
+        user: "therapist",
         title: `Appointment with patient ${firstName} ${lastName}`,
         start: startTime,
         end: endTime,
@@ -336,10 +299,7 @@ export default function CalendarFull() {
     });
 
     setAllEvents([...therapistAppts, ...therapistBlockedDate]);
-    console.log(allEvents);
   };
-  console.log(therapistBlockedDate);
-  console.log(therapistAppts);
 
   let clientOptions = [];
 
@@ -365,14 +325,14 @@ export default function CalendarFull() {
   }
 
   const handleSelectChange = (e, i) => {
-    if (i.action === 'select-option') {
+    if (i.action === "select-option") {
       setSelectedClient(e);
       setNewEvent({
         ...newEvent,
         clientId: e.value,
         therapistId: therapistInfo.id,
       });
-    } else if (i.action === 'clear') {
+    } else if (i.action === "clear") {
       setSelectedClient([]);
       setNewEvent({ ...newEvent, clientId: 0 });
     }
@@ -389,18 +349,14 @@ export default function CalendarFull() {
         clientId: selectedClient.value,
       };
 
-      console.log(newObj);
-
       let response = await axios.post(`${BACKEND_URL}/appointments`, newObj);
-
-      console.log(response);
 
       const { id, startDatetime, endDatetime } = response.data;
 
       const newApptEvent = {
         id: id,
-        type: 'appt',
-        user: 'therapist',
+        type: "appt",
+        user: "therapist",
         title: `Appointment with patient ${selectedClient.label}`,
         start: new Date(startDatetime),
         end: new Date(endDatetime),
@@ -419,17 +375,14 @@ export default function CalendarFull() {
         clientId: clientInfo.id,
       };
 
-      console.log(newObj);
       let response = await axios.post(`${BACKEND_URL}/appointments`, newObj);
-
-      console.log(response);
 
       const { id, startDatetime, endDatetime } = response.data;
 
       const newApptEvent = {
         id: id,
-        type: 'appt',
-        user: 'client',
+        type: "appt",
+        user: "client",
         title: `Appointment with therapist ${currTher.name}`,
         start: new Date(startDatetime),
         end: new Date(endDatetime),
@@ -450,14 +403,10 @@ export default function CalendarFull() {
       therapistId: therapistInfo.id,
     };
 
-    console.log(newObj);
-
     let response = await axios.post(
       `${BACKEND_URL}/therapists/blockeddate`,
       newObj
     );
-
-    console.log(response);
 
     const { id, date } = response.data;
     const blockDate = date;
@@ -466,8 +415,8 @@ export default function CalendarFull() {
 
     const newBlockedEvent = {
       id: id,
-      type: 'blocked date',
-      user: 'therapist',
+      type: "blocked date",
+      user: "therapist",
       title: `Blocked Date`,
       start: startDate,
       end: endDate,
@@ -479,7 +428,6 @@ export default function CalendarFull() {
   };
 
   const { updateClientInfo, updateTherapistInfo } = useAuth();
-  // getting the specific user/therapist and their IDs respectively.
   const getOwnInfoForClient = async () => {
     const response = await axios.get(`${BACKEND_URL}/clients/${user.email}`);
 
@@ -493,7 +441,6 @@ export default function CalendarFull() {
 
   return (
     <div>
-      {/* CalendarFull */}
       {user && user[`https://any-namespace/roles`].length !== 0 ? (
         <>
           <div>THERAPIST CALENDAR</div>
@@ -509,7 +456,6 @@ export default function CalendarFull() {
         </>
       ) : (
         <>
-          {/* <div>CLIENT CALENDAR</div> */}
           <Calendar
             localizer={localizer}
             events={allEvents}
@@ -532,12 +478,12 @@ export default function CalendarFull() {
       <br />
       <br />
       <button onClick={() => setCreateNew(!createNew)}>
-        + Create Appointment{' '}
+        + Create Appointment{" "}
       </button>
       {user && user[`https://any-namespace/roles`].length !== 0 ? (
         <>
           <button onClick={() => setCreateBlocked(!createBlocked)}>
-            + Create Blocked Date{' '}
+            + Create Blocked Date{" "}
           </button>
 
           {createBlocked ? (
@@ -546,13 +492,11 @@ export default function CalendarFull() {
               <DateTimePicker
                 placeholderText="Start Date and Time"
                 value={newBlocked.start}
-                // selected={newBlocked.start}
                 onChange={(start) => setNewBlocked({ ...newBlocked, start })}
               />
               <DateTimePicker
                 placeholderText="End Date and Time"
                 value={newBlocked.end}
-                // selected={newBlocked.end}
                 onChange={(end) => setNewBlocked({ ...newBlocked, end })}
               />
               <button onClick={() => handleBlockedSubmit()}>
@@ -579,13 +523,11 @@ export default function CalendarFull() {
           <DateTimePicker
             placeholderText="Start Date and Time"
             value={newEvent.start}
-            // selected={newEvent.start}
             onChange={(start) => setNewEvent({ ...newEvent, start })}
           />
           <DateTimePicker
             placeholderText="End Date and Time"
             value={newEvent.end}
-            // selected={newEvent.end}
             onChange={(end) => setNewEvent({ ...newEvent, end })}
           />
           <button onClick={() => handleSubmit()}>Submit Appointment</button>

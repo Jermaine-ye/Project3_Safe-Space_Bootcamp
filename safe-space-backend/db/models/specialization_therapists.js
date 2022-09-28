@@ -2,34 +2,13 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Specialization_Therapists extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
-      this.belongsTo(
-        models.therapist
-        //   , {
-        //   foreignKey: "therapistId",
-        //   as: "specialize",
-        //   onDelete: "CASCADE",
-        // }
-      );
-      this.belongsTo(
-        models.specialization
-        //   , {
-        //   foreignKey: "specializationId",
-        //   as: "specialization",
-        //   onDelete: "CASCADE",
-        // }
-      );
+      this.belongsTo(models.therapist);
+      this.belongsTo(models.specialization);
     }
   }
   Specialization_Therapists.init(
     {
-      // id: DataTypes.INTEGER,
       therapistId: {
         type: DataTypes.INTEGER,
         references: {

@@ -1,5 +1,4 @@
 const cors = require("cors");
-// const BaseController = require("./baseController");
 
 class TherapistsController {
   constructor(model, clientModel, blockedDateModel, clientTherapistsModel) {
@@ -17,12 +16,9 @@ class TherapistsController {
       const user = await this.model.findOne({
         where: { email: email },
       });
-      console.log(user.dataValues.id);
       //getting id of therapist
       const targetnum = user.dataValues.id;
-      console.log(targetnum);
 
-      // const { therapistID } = req.body;
       const output = await this.clientTherapistsModel.findAll({
         where: {
           therapistId: targetnum,
@@ -50,21 +46,6 @@ class TherapistsController {
     }
   }
 
-  //for consultation sample
-  //   async postOne(req, res) {
-  //     const { emailTherapist } = req.params;
-  //     try {
-  //       // const output = await this.model.findOne({
-  //       //   where: { email: emailTherapist },
-  //       //   include: this.blockedDateModel,
-  //       // });
-  // console.log('posted!')
-  //       return res.json(emailTherapist);
-  //     } catch (err) {
-  //       return res.status(400).json({ error: true, msg: err });
-  //     }
-  //   }
-
   //create one blocked date for therapist
   async insertOne(req, res) {
     const { date, therapistId } = req.body;
@@ -82,7 +63,6 @@ class TherapistsController {
   //delete one blocked date for therapist
   async deleteOne(req, res) {
     const { blockeddateId } = req.params;
-    console.log(blockeddateId);
     try {
       const data = await this.blockedDateModel.findByPk(blockeddateId);
 
