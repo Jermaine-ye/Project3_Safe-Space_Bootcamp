@@ -4,7 +4,6 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert("journalentries", [
       {
-        // id: 1,
         due_by: "2022-08-20 00:00:00.000 +0900",
         input1: "Winter",
         input2: "I love winter and it lets me go on a meme streak.",

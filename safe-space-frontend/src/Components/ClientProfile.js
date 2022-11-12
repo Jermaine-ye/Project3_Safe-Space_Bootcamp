@@ -1,38 +1,21 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import {
-  Button,
-  Card,
-  Text,
-  Title,
-  Grid,
-  Container,
-  Group,
-  Image,
-} from "@mantine/core";
+import { useParams } from "react-router-dom";
+import { Card, Text, Title, Container, Image } from "@mantine/core";
 
 import { BACKEND_URL } from "../constants.js";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useAuth } from "./AuthContext.js";
 
 export default function ClientProfile() {
   const [clientId, setClientId] = useState();
   const [clientDetails, setClientDetails] = useState({});
 
-  const navigate = useNavigate();
-
   const { user } = useAuth0();
 
   useEffect(() => {
-    console.log(`in effect`);
-    console.log(user);
-
     axios.get(`${BACKEND_URL}/clients/${user.email}`).then((response) => {
       setClientDetails(response.data);
     });
-
-    console.log(clientDetails);
   }, [user]);
 
   const params = useParams();
@@ -45,12 +28,6 @@ export default function ClientProfile() {
       <Container>
         <Card withBorder shadow="sm" radius="md">
           <Title size={20}>Profile</Title>
-          {/* <Image
-          radius="md"
-          width={300}
-          src={`${clientDetails.photoLink}`}
-          alt={`${clientDetails.photoLink}`}
-        /> */}
           <div
             style={{
               width: 250,

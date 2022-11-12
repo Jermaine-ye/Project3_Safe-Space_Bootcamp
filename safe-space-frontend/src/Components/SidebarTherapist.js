@@ -1,16 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams, useNavigate, Outlet } from "react-router-dom";
-import {
-  Button,
-  Card,
-  Text,
-  Title,
-  Grid,
-  Container,
-  Image,
-  Avatar,
-} from "@mantine/core";
+import { Link, useParams } from "react-router-dom";
+import { Button, Card, Title, Grid, Image } from "@mantine/core";
 
 import { BACKEND_URL } from "../constants.js";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -26,14 +17,9 @@ export default function SidebarTherapist() {
 
   const { user, logout } = useAuth0();
 
-  const navigate = useNavigate();
-
   const { clientInfo, currentUser, therapistInfo } = useAuth();
 
   useEffect(() => {
-    console.log(`in effect`);
-    console.log(user);
-    console.log("Therapist Info:", therapistInfo);
     setTherapistPhoto(therapistInfo.photoLink);
     setTherapistFirstName(therapistInfo.firstName);
 
@@ -57,7 +43,6 @@ export default function SidebarTherapist() {
         <Card className="Side-bar" radius="md" shadow="sm" p="md">
           <Image
             className="SideBar-profile-pic"
-            // width={300}
             radius="xl"
             src={therapistPhoto}
             alt="User Profile"

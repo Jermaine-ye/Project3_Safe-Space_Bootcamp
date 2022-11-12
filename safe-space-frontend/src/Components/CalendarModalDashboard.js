@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -22,7 +21,6 @@ export default function CalendarModalDashboard(props) {
 
   return (
     <>
-      <div>CalendarModal</div>
       <div key={id}>
         <button onClick={handleClose}>Go back to Dashboard</button>
         <h4> {title}</h4>

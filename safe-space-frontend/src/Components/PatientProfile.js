@@ -1,12 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   Button,
   Card,
   Text,
-  Title,
-  Grid,
   Container,
   Group,
   NativeSelect,
@@ -14,7 +12,6 @@ import {
 } from "@mantine/core";
 
 import { BACKEND_URL } from "../constants.js";
-import { useAuth0 } from "@auth0/auth0-react";
 import { useAuth } from "./AuthContext.js";
 
 export default function PatientProfile() {
@@ -23,14 +20,9 @@ export default function PatientProfile() {
 
   const navigate = useNavigate();
 
-  const { user } = useAuth0();
-  const { clientInfo, currentUser, updateTemplate, updateClientEmail } =
-    useAuth();
+  const { updateTemplate, updateClientEmail } = useAuth();
 
   useEffect(() => {
-    console.log(`in effect`);
-    console.log(user);
-
     if (clientId) {
       axios
         .get(`${BACKEND_URL}/clients/key/${params.clientId}`)
@@ -39,7 +31,6 @@ export default function PatientProfile() {
           updateClientEmail(response.data.email);
         });
     }
-    console.log(clientDetails);
   }, [clientId]);
 
   const params = useParams();
@@ -57,8 +48,6 @@ export default function PatientProfile() {
     <div>
       <Container>
         <Card withBorder shadow="sm" radius="md">
-          {/* <Text size="xl">Patient Profile</Text> */}
-
           <div
             style={{
               width: 300,

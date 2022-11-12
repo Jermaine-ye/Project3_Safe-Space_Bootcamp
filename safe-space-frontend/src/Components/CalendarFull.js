@@ -16,8 +16,6 @@ export default function CalendarFull() {
   const [selected, setSelected] = useState();
   const [modalVisible, setModalVisible] = useState(false);
 
-  const [currTherapist, setCurrTherapist] = useState({});
-
   const [therapistBlockedDate, setTherapistBlockedDate] = useState([]);
   const [therapistAppts, setTherapistAppts] = useState([]);
   const [clientJournals, setClientJournals] = useState([]);
@@ -94,22 +92,11 @@ export default function CalendarFull() {
   };
 
   const getClientApptsJournals = async () => {
-    const { appointments, journalentries, therapists } = clientInfo;
-
-    let currTherapistInfo = await therapists.forEach((therapist) => {
-      if (
-        therapist.client_therapists.chosenTherapist &&
-        therapist.client_therapists.endedAt === null
-      ) {
-        setCurrTherapist(therapist.email);
-        return therapist;
-      }
-    });
+    const { appointments, journalentries } = clientInfo;
 
     await appointments.forEach((data) => {
       const startTime = data.startDatetime;
       const endTime = data.endDatetime;
-      const therapistID = data.therapistId;
       const { firstName, lastName } = data.therapist;
       const apptID = data.id;
 
@@ -147,7 +134,6 @@ export default function CalendarFull() {
       }
 
       const startDate = new Date(endDate.getTime() - 3600000);
-      const therapistID = data.therapistId;
       const { firstName, lastName } = data.therapist;
       const journalID = data.id;
       const input1 = data.input1;
@@ -183,8 +169,7 @@ export default function CalendarFull() {
       }
     });
 
-    const { blockeddates, id } = therapistInfo;
-    console.log(therapistInfo);
+    const { blockeddates } = therapistInfo;
 
     await blockeddates.forEach((blockDate) => {
       const startDate = new Date(blockDate.date);
@@ -266,10 +251,8 @@ export default function CalendarFull() {
     setApptDates(apptDates);
 
     await apptDates.forEach((date) => {
-      console.log(date);
       const startTime = new Date(date.startDatetime);
       const endTime = new Date(date.endDatetime);
-      const clientID = date.clientId;
       const { firstName, lastName } = date.client;
       const apptID = date.id;
 
@@ -443,7 +426,6 @@ export default function CalendarFull() {
     <div>
       {user && user[`https://any-namespace/roles`].length !== 0 ? (
         <>
-          <div>THERAPIST CALENDAR</div>
           <Calendar
             localizer={localizer}
             events={allEvents}

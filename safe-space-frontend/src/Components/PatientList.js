@@ -3,18 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BACKEND_URL } from "../constants.js";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useAuth } from "./AuthContext.js";
-import {
-  Button,
-  Card,
-  Text,
-  Title,
-  Grid,
-  Container,
-  Group,
-} from "@mantine/core";
+import { Button, Card, Text, Container } from "@mantine/core";
 
-// similar to sighting exercises
 export default function PatientList() {
   const navigate = useNavigate();
 
@@ -33,8 +23,6 @@ export default function PatientList() {
 
   if (clientList && clientList.length !== 0) {
     finalList = clientList.map((clientInfo) => {
-      console.log(clientInfo);
-
       return (
         <div key={clientInfo.client.id}>
           <Link

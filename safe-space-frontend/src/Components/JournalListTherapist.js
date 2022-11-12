@@ -9,24 +9,17 @@ export default function JournalListTherapist() {
   const [journalList, setJournalList] = useState([]);
   const navigate = useNavigate();
 
-  const { currentUserEmail, clientInfo } = useAuth();
+  const { currentUserEmail } = useAuth();
 
   useEffect(() => {
     axios.get(`${BACKEND_URL}/clients/${currentUserEmail}`).then((response) => {
       setJournalList(response.data.journalentries);
-      console.log(response.data);
     });
-    console.log(`HELLO WHY`, clientInfo);
-    console.log(`list of journals`, journalList);
-    console.log(`email to grab all journals`, currentUserEmail);
   }, []);
 
   let finalList;
   if (journalList && journalList.length !== 0) {
     finalList = journalList.map((journalInfo) => {
-      console.log("journalinfo: ", journalInfo);
-      console.log(journalInfo.id);
-
       return (
         <div>
           <Link to={`/client/journals/${journalInfo.id}`} key={journalInfo.id}>

@@ -13,8 +13,6 @@ export default function PatientList() {
   let finalList;
 
   useEffect(() => {
-    console.log(`running`);
-    console.log(clientId);
     if (clientId) {
       axios.get(`${BACKEND_URL}/memos/${clientId}`).then((response) => {
         setMemoList(response.data);
@@ -24,7 +22,6 @@ export default function PatientList() {
     if (clientId) {
       axios.get(`${BACKEND_URL}/clients/key/${clientId}`).then((response) => {
         setClientDetails(response.data);
-        console.log(response.data);
       });
     }
   }, []);
@@ -36,8 +33,6 @@ export default function PatientList() {
 
   if (memoList && memoList.length !== 0) {
     finalList = memoList.map((memoInfo) => {
-      console.log(memoInfo);
-
       return (
         <div>
           <Container size="xs" px="xs">

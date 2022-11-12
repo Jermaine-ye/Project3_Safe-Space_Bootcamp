@@ -39,7 +39,7 @@ export default function CalendarModal(props) {
 
   const handleCancel = async () => {
     if (type === "appt") {
-      const response = await axios.delete(`${BACKEND_URL}/appointments/${id}`);
+      await axios.delete(`${BACKEND_URL}/appointments/${id}`);
       if (user && user[`https://any-namespace/roles`].length !== 0) {
         getOwnInfoForTherapist();
         navigate("../../therapist/dashboard");
@@ -50,7 +50,7 @@ export default function CalendarModal(props) {
 
       props.setModalVisible(false);
     } else {
-      const response = await axios.delete(`${BACKEND_URL}/therapists/${id}`);
+      await axios.delete(`${BACKEND_URL}/therapists/${id}`);
 
       getOwnInfoForTherapist();
 

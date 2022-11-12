@@ -18,18 +18,14 @@ export default function MemoSingle(props) {
     if (memoId) {
       axios.get(`${BACKEND_URL}/memos/single/${memoId}`).then((res) => {
         setMemoDetails(res.data);
-        console.log(res.data);
       });
     }
 
     if (clientId) {
       axios.get(`${BACKEND_URL}/clients/key/${clientId}`).then((response) => {
         setClientDetails(response.data);
-        console.log("client details:", response.data);
       });
     }
-
-    console.log(memoDetails[0]);
   }, [clientId, memoId]);
 
   const params = useParams();

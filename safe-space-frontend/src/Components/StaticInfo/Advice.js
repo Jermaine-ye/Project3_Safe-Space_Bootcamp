@@ -1,10 +1,10 @@
-import NavBar from '../NavBar';
-import Footer from '../Footer';
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { BACKEND_URL } from '../../constants.js';
-import pic1 from '../../images/illustration/DrawKit Vector Illustration Mental Health 2.png';
-import pic2 from '../../images/illustration/DrawKit Vector Illustration Mental Health 9.png';
+import NavBar from "../NavBar";
+import Footer from "../Footer";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { BACKEND_URL } from "../../constants.js";
+import pic1 from "../../images/illustration/DrawKit Vector Illustration Mental Health 2.png";
+import pic2 from "../../images/illustration/DrawKit Vector Illustration Mental Health 9.png";
 import {
   Button,
   Card,
@@ -14,16 +14,14 @@ import {
   Image,
   Group,
   Modal,
-} from '@mantine/core';
+} from "@mantine/core";
 
 export default function Advice() {
-  const [allArticles, setAllArticles] = useState('');
+  const [allArticles, setAllArticles] = useState("");
   const [opened, setOpened] = useState(false);
 
   const getAllArticles = async () => {
     let response = await axios.get(`${BACKEND_URL}/articles/`);
-    console.log('articles: ', response);
-    console.log('articles.data: ', response.data);
     setAllArticles(response.data);
   };
 
@@ -43,8 +41,8 @@ export default function Advice() {
           style={{
             width: 400,
             marginTop: 20,
-            marginLeft: 'auto',
-            marginRight: 'auto',
+            marginLeft: "auto",
+            marginRight: "auto",
             marginBottom: 20,
           }}
         >
@@ -66,9 +64,9 @@ export default function Advice() {
             {allArticles && allArticles.length
               ? allArticles.map((article, index) => (
                   <div className="Articles-single" key={article.id}>
-                    {' '}
+                    {" "}
                     <Text color="dimmed" align="center">
-                      Article #{article.id}{' '}
+                      Article #{article.id}{" "}
                     </Text>
                     <Title size={20}>{article.title}</Title>
                     <Title size={12}>Written by: {article.author}</Title> <br />
@@ -92,14 +90,14 @@ export default function Advice() {
                     <br />
                   </div>
                 ))
-              : 'no articles listed'}
+              : "no articles listed"}
           </Card>
           <br />
           <div
             style={{
               width: 500,
               marginTop: 10,
-              marginLeft: 'auto',
+              marginLeft: "auto",
               marginRight: 10,
               marginBottom: 10,
             }}

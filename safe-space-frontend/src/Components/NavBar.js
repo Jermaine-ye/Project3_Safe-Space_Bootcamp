@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React from "react";
 import axios from "axios";
 import { Button, Image, Container, Grid } from "@mantine/core";
 import { useNavigate, Link } from "react-router-dom";
@@ -16,7 +16,6 @@ export default function NavBar() {
   const { updateClientData, updateClientInfo, updateTherapistInfo } = useAuth();
 
   const handleLogin = async () => {
-    console.log("Client logging in!");
     loginWithRedirect();
   };
 
@@ -44,21 +43,15 @@ export default function NavBar() {
   const getAllInfo = async () => {
     await updateClient(user);
 
-    console.log(user);
-
-    console.log(user[`https://any-namespace/roles`].length === 0);
-
     if (user[`https://any-namespace/roles`].length === 0) {
       const response = await axios.get(`${BACKEND_URL}/clients/${user.email}`);
 
       updateClientInfo(response.data);
-      console.log(response.data);
       let allTher;
       let currTher;
 
       if (response.data.therapists.length !== 0) {
         allTher = response.data.therapists;
-        console.log(allTher);
         allTher.forEach((ther) => {
           const { id, client_therapists, firstName, lastName, email } = ther;
           const { chosenTherapist, endedAt } = client_therapists;
@@ -69,7 +62,6 @@ export default function NavBar() {
               name: `${firstName} ${lastName}`,
               email: email,
             };
-            console.log(currTher);
           }
         });
         if (currTher) {
@@ -88,20 +80,12 @@ export default function NavBar() {
   };
 
   useEffect(() => {
-    console.log(`in effect`);
-    console.log(isAuthenticated);
-
     if (isAuthenticated) {
-      console.log(`running`);
       getAllInfo();
-
-      console.log("user:", user);
     }
   }, [user]);
 
   const DashBoardNav = (event) => {
-    console.log(event);
-
     if (user[`https://any-namespace/roles`].length !== 0) {
       navigate("/therapist/dashboard");
     } else if (user[`https://any-namespace/roles`].length === 0) {

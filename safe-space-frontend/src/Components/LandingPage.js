@@ -3,25 +3,11 @@ import { Card, Text, Title, Image, Container, Grid } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
-import { useAuth0 } from "@auth0/auth0-react";
 
 import pic1 from "../images/illustration/DrawKit Vector Illustration Mental Health 1.png";
 
 export default function LandingPage() {
-  const { user } = useAuth0();
-
   const navigate = useNavigate();
-  const DashBoardNav = (event) => {
-    console.log(event);
-
-    if (user[`https://any-namespace/roles`].length !== 0) {
-      navigate("/therapist/");
-    } else if (user[`https://any-namespace/roles`].length === 0) {
-      navigate("/client/");
-    } else {
-      navigate("/");
-    }
-  };
 
   return (
     <div className="Landing-page">

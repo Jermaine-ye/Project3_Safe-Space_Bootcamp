@@ -1,5 +1,4 @@
 const cors = require("cors");
-// const BaseController = require("./baseController");
 
 class JournalsController {
   constructor(model, journaltemplateModel, clientModel, therapistModel) {

@@ -1,33 +1,25 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { storage } from "../DB/firebase";
 import { BACKEND_URL } from "../constants";
-import Footer from "./Footer";
 import NavBar from "./NavBar";
 import {
   getDownloadURL,
   ref as storageRef,
   uploadBytes,
 } from "firebase/storage";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import { AuthContext } from "../App";
 import {
-  Button,
   Card,
-  Text,
   Title,
-  Grid,
   Container,
-  Group,
   NativeSelect,
-  Image,
   FileInput,
   Textarea,
   NumberInput,
 } from "@mantine/core";
-import pic1 from "../images/illustration/5795527-01.png";
 
 export default function PersonalParticularsForm() {
   const [fileInputValue, setFileInputValue] = useState("");
@@ -48,8 +40,6 @@ export default function PersonalParticularsForm() {
   useEffect(() => {
     if (!isAuthenticated) {
       loginWithRedirect();
-    } else {
-      console.log(user);
     }
   }, [user]);
 
@@ -65,7 +55,6 @@ export default function PersonalParticularsForm() {
         return getDownloadURL(snapshot.ref);
       })
       .then((url) => {
-        console.log(url);
         setFileInputValue(url);
         return url;
       });
@@ -75,7 +64,6 @@ export default function PersonalParticularsForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let imageUrl = await uploadImage(e);
-    console.log(imageUrl);
 
     await axios.put(`${BACKEND_URL}/clients`, {
       firstName: firstName,
