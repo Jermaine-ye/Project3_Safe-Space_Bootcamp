@@ -1,20 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import {
-  Button,
-  Card,
-  Text,
-  Title,
-  Grid,
-  Container,
-  Form,
-  Input,
-  Textarea,
-} from "@mantine/core";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Card, Text, Title, Container } from "@mantine/core";
 import { useAuth } from "./AuthContext.js";
 import "./EvaluationFormPref.css";
 
-import { BACKEND_URL } from "../constants.js";
 import NavBar from "./NavBar.js";
 import Footer from "./Footer.js";
 export default function EvaluationFormPreference() {
@@ -65,15 +54,7 @@ export default function EvaluationFormPreference() {
 
   const handleAnswerOptionClick = async (isClicked, e) => {
     if (isClicked) {
-      console.log(isClicked);
-      console.log(`running`);
-      console.log(questions);
-      console.log(currentQuestion);
-      console.log(e);
-      console.log(e.target.name);
-
       if (currentQuestion === 0) {
-        console.log(questions);
         updateLanguage(
           questions[currentQuestion].answerOptions[e.target.name].value
         );

@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Card, Text, Grid, Container, Image } from '@mantine/core';
-import MoodDisplay from './MoodDisplay.js';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Card, Text, Grid, Container, Image } from "@mantine/core";
+import MoodDisplay from "./MoodDisplay.js";
 
 export default function QuoteDisplay() {
-  const [quote, setQuote] = useState('');
-  const [author, setAuthor] = useState('');
-  const [photo, setPhoto] = useState('');
+  const [quote, setQuote] = useState("");
+  const [author, setAuthor] = useState("");
+  const [photo, setPhoto] = useState("");
   const [date, setDate] = useState(new Date());
 
   const weekday = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
   ];
 
   const d = new Date();
@@ -39,7 +39,6 @@ export default function QuoteDisplay() {
       .get(`https://api.quotable.io/random`)
 
       .then((response) => {
-        console.log('res', response);
         setQuote(response.data.content);
         setAuthor(response.data.author);
       });
@@ -50,9 +49,6 @@ export default function QuoteDisplay() {
       )
 
       .then((photo) => {
-        console.log('res', photo);
-        console.log('photos: ', photo.data);
-
         setPhoto(photo.data.urls.regular);
       });
   }, []);
@@ -77,9 +73,9 @@ export default function QuoteDisplay() {
               -{author}
             </Text>
             <Text weight={600} size={14} mt="md">
-              {date.toLocaleTimeString('en-GB')}
+              {date.toLocaleTimeString("en-GB")}
               <br />
-              {date.toLocaleDateString('en-GB')}
+              {date.toLocaleDateString("en-GB")}
               <br />
               {day}
             </Text>

@@ -4,16 +4,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button, Card, Text, Container, Textarea } from "@mantine/core";
 
 import { BACKEND_URL } from "../constants.js";
-import { useAuth0 } from "@auth0/auth0-react";
-import angry from "../images/angry.png";
-import crying from "../images/sad.png";
-import happy from "../images/smiling-face.png";
-import sad from "../images/frown.png";
 import { useAuth } from "./AuthContext";
 
 const MemoForm = () => {
-  const { user } = useAuth0();
-
   const [clientId, setClientId] = useState("");
   const [generalInput, setGeneralInput] = useState("");
   const [behaviorInput, setBehaviorInput] = useState("");
@@ -30,12 +23,8 @@ const MemoForm = () => {
   const { therapistInfo } = useAuth();
 
   useEffect(() => {
-    console.log(`in effect`);
-    console.log(user);
-
     if (clientId) {
       axios.get(`${BACKEND_URL}/clients/key/${clientId}`).then((response) => {
-        console.log("clientdetails: ", response.data.dailymood);
         setClientFirstName(response.data.firstName);
         setClientLastName(response.data.lastName);
       });
@@ -49,7 +38,6 @@ const MemoForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(clientId);
     axios
       .post(`${BACKEND_URL}/memos/${clientId}`, {
         therapistId: therapistInfo.id,
@@ -70,8 +58,6 @@ const MemoForm = () => {
         setInstructionsInput("");
         setRiskfactorsInput("");
 
-        console.log("resdata:", res.data);
-        console.log("Memo Submit Success!!");
         navigate(
           `/therapist/patients/${res.data.clientId}/memos/${res.data.id}`
         );

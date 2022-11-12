@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Button, Card, Title, Grid, Image } from "@mantine/core";
 
 import { BACKEND_URL } from "../constants.js";
@@ -15,13 +15,10 @@ export default function SidebarClient() {
   const [clientPhoto, setClientPhoto] = useState("");
   const [idJournal, setIdJournal] = useState();
 
-  const { user, logout } = useAuth0();
+  const { logout } = useAuth0();
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    console.log(`in effect`);
-    console.log(user);
-    console.log("c cuser: ", currentUser);
     setClientFirstName(currentUser[0].firstName);
     setClientPhoto(currentUser[0].photoLink);
     setIdJournal(currentUser[0].id);
@@ -29,12 +26,8 @@ export default function SidebarClient() {
     if (clientId) {
       axios.get(`${BACKEND_URL}/clients/key/${clientId}`).then((response) => {
         setClientDetails(response.data);
-        console.log("client Details: ", response.data);
       });
     }
-    console.log(clientDetails);
-
-    console.log(currentUser[0].id);
   }, [clientId]);
 
   const params = useParams();

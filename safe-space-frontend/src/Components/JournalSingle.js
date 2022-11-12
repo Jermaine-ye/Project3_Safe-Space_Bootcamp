@@ -1,17 +1,17 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 
-import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Card, Text, Title, Container, Image } from '@mantine/core';
+import { useNavigate, useParams } from "react-router-dom";
+import { Button, Card, Text, Title, Container, Image } from "@mantine/core";
 
-import { BACKEND_URL } from '../constants.js';
+import { BACKEND_URL } from "../constants.js";
 
-import pic1 from '../images/illustration/Journal single-01-01.png';
+import pic1 from "../images/illustration/Journal single-01-01.png";
 
 export default function JournalSingle(props) {
   const navigate = useNavigate();
 
-  const [journalId, setJournalId] = useState('');
+  const [journalId, setJournalId] = useState("");
 
   const [indiJournalID, setIndiJournalId] = useState();
   const [indiJournalDueBy, setIndiJournalDueBy] = useState();
@@ -23,7 +23,6 @@ export default function JournalSingle(props) {
   const getSingleJournal = async () => {
     if (journalId) {
       axios.get(`${BACKEND_URL}/journals/single/${journalId}`).then((res) => {
-        console.log('single journal list: ', res.data);
         setIndiJournalId(res.data.id);
         setIndiJournalDueBy(res.data.dueBy);
         setIndiJournalTemplate(res.data.journaltemplateId);
@@ -53,7 +52,7 @@ export default function JournalSingle(props) {
         <Text weight={700}>Journal ID:</Text>
         <Text>{indiJournalID}</Text>
         <br />
-        <Text weight={700}>Due by:</Text>{' '}
+        <Text weight={700}>Due by:</Text>{" "}
         <Text weight={400}>
           {new Date(indiJournalDueBy).toLocaleDateString()}
         </Text>
@@ -106,8 +105,8 @@ export default function JournalSingle(props) {
           style={{
             width: 700,
             marginTop: 20,
-            marginLeft: 'auto',
-            marginRight: 'auto',
+            marginLeft: "auto",
+            marginRight: "auto",
           }}
         >
           <Image src={pic1} alt="journal" className="consultation" />

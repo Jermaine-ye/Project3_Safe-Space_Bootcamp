@@ -23,10 +23,6 @@ const JournalAssignment = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(updatedAt);
-    console.log(input1);
-    console.log(input2);
-    console.log(input3);
     axios.post(`${BACKEND_URL}/journals/${clientId}`, {
       dueBy: updatedAt,
       templateId: Number(template),
@@ -41,7 +37,6 @@ const JournalAssignment = () => {
     <Container className="Form-body" size="sm" px="xs">
       <Card withBorder shadow="sm" radius="md">
         <Grid justify="center" align="center">
-          {/* <Grid.Col span={1}> */}
           <Container>
             <Text size={20} weight={700}>
               Journal Assignment
@@ -61,8 +56,6 @@ const JournalAssignment = () => {
                     placeholder="Pick date"
                     value={updatedAt}
                     onChange={setUpdatedAt}
-                    // allowFreeInput
-                    // dateParser={(updatedAt) => new Date(Date.parse(updatedAt))}
                   />
                 }
               </Text>
@@ -116,7 +109,6 @@ const JournalAssignment = () => {
           <Button variant="light" onClick={(e) => navigate(-1)}>
             Back to Patient Profile
           </Button>
-          {/* </Grid.Col> */}
         </Grid>
       </Card>
     </Container>

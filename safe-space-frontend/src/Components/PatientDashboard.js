@@ -1,12 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { BACKEND_URL } from "../constants.js";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useAuth } from "./AuthContext.js";
 import { Container } from "@mantine/core";
 
 export default function PatientDashboard() {
@@ -16,12 +13,7 @@ export default function PatientDashboard() {
 
   const navigate = useNavigate();
 
-  const { user } = useAuth0();
-
   useEffect(() => {
-    console.log(`in effect`);
-    console.log(user);
-
     if (clientId) {
       axios
         .get(`${BACKEND_URL}/clients/key/${params.clientId}`)
@@ -29,7 +21,6 @@ export default function PatientDashboard() {
           setClientDetails(response.data);
         });
     }
-    console.log(clientDetails);
   }, [clientId]);
 
   const params = useParams();
@@ -51,7 +42,6 @@ export default function PatientDashboard() {
 
       <button value={template}>Set Journal Template</button>
       <select>
-        {/*set value once you know and setstate in select. axios.put after. */}
         <option>Select a Template</option>
         <option>Template one</option>
         <option>Template two</option>
@@ -64,7 +54,6 @@ export default function PatientDashboard() {
         <p>Email:{clientDetails.email}</p>
         <p>Marital Status:{clientDetails.maritalStatus}</p>
         <br />
-        {/*Information from memo?*/}
       </Container>
 
       <button>Deactivate</button>

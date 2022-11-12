@@ -1,24 +1,12 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Link, useParams, useNavigate, Outlet } from 'react-router-dom';
-import {
-  Button,
-  Card,
-  Text,
-  Title,
-  Grid,
-  Container,
-  Image,
-  Avatar,
-  Modal,
-  Group,
-} from '@mantine/core';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Button, Container } from "@mantine/core";
 import {
   IconSettings,
   IconSpy,
   IconAlertTriangle,
   IconInbox,
-} from '@tabler/icons';
+} from "@tabler/icons";
 
 export default function Support() {
   const navigate = useNavigate();

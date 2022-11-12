@@ -1,19 +1,9 @@
 import React, { useState } from "react";
 import { useAuth } from "./AuthContext";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./EvaluationFormPref.css";
 import NavBar from "./NavBar";
-import {
-  Button,
-  Card,
-  Text,
-  Title,
-  Grid,
-  Container,
-  Form,
-  Input,
-  Textarea,
-} from "@mantine/core";
+import { Card, Text, Title, Container } from "@mantine/core";
 import Footer from "./Footer";
 
 export default function EvaluationFormSpecialty() {
@@ -95,12 +85,6 @@ export default function EvaluationFormSpecialty() {
   const handleAnswerOptionClick = async (isCorrect, e) => {
     if (isCorrect) {
       // setState here
-      console.log(questions);
-      console.log(questions.answerOptions);
-      console.log(
-        questions[currentQuestion].answerOptions[e.target.name].specialization
-      );
-      console.log(e);
       makeSpeciality(
         questions[currentQuestion].answerOptions[e.target.name].specialization
       );
@@ -111,8 +95,6 @@ export default function EvaluationFormSpecialty() {
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < questions.length) {
       setCurrentQuestion(nextQuestion);
-    } else {
-      // alert(`You have reach the end of the evaluation. We see that you have not made a choice. Please contact us if you need future assistance!`)
     }
   };
 

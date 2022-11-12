@@ -1,7 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
-import { BACKEND_URL } from "../constants";
-import { useAuth0 } from "@auth0/auth0-react";
+import React, { useContext, useState } from "react";
 
 export const AuthContext = React.createContext();
 
@@ -17,7 +14,6 @@ export function AuthProvider({ children }) {
   const [template, setTemplate] = useState(0);
   const [currentUserEmail, setCurrentUserEmail] = useState([]);
   //reset this to true when you finish editing the files
-  // const [loading, setLoading] = useState(false);
 
   // states for evaluation form. PUT request all at results page
   const [speciality, setSpeciality] = useState(1);
@@ -28,52 +24,42 @@ export function AuthProvider({ children }) {
 
   // function required to setState in other components
   const updateClientData = (data) => {
-    console.log(`updated client info for ID`, data);
     setCurrentUser(data);
   };
 
   const updateClientInfo = (data) => {
-    console.log(`updated client info for loggin`, data);
     setClientInfo(data);
   };
 
   const updateTherapistInfo = (data) => {
-    console.log(`updated therapist info`, data);
     setTherapistInfo(data);
   };
 
   const updateSpeciality = (info) => {
-    console.log(`updated client's speciality`, info);
     setSpeciality(info);
   };
 
   const updateAgePreference = (info) => {
-    console.log(`updated client's age preference`, info);
     setAgePreference(info);
   };
 
   const updateLanguage = (info) => {
-    console.log(`updated client's language preference`, info);
     setLanguage(info);
   };
 
   const updateGender = (info) => {
-    console.log(`updated client's gender preference`, info);
     setGender(info);
   };
 
   const updateReligion = (info) => {
-    console.log(`updated client's religion preference`, info);
     setReligion(info);
   };
 
   const updateTemplate = (data) => {
-    console.log(`updated template id in Context`, data);
     setTemplate(data);
   };
 
   const updateClientEmail = (data) => {
-    console.log(`updated client info for ID`, data);
     setCurrentUserEmail(data);
   };
   // States and Functions that are passed down and USE by ALL components.
@@ -100,6 +86,5 @@ export function AuthProvider({ children }) {
     currentUserEmail,
   };
 
-  // console.log(`values from authContext`, value);
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

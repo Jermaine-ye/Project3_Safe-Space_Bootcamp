@@ -6,7 +6,6 @@ import { Button, Card, Text, Grid, Container, Textarea } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import { BACKEND_URL } from "../constants.js";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useAuth } from "./AuthContext";
 
 const JournalForm = () => {
   const navigate = useNavigate();
@@ -15,9 +14,7 @@ const JournalForm = () => {
   const [input2, setInput2] = useState("");
   const [input3, setInput3] = useState("");
   const { user, isAuthenticated } = useAuth0();
-  const { therapistInfo } = useAuth();
 
-  // get all to know there is an empty null=> new journal entry =>
   const [clientId, setClientId] = useState("");
   const [journalId, setJournalId] = useState("");
   const [dueBy, setDueBy] = useState("");
@@ -29,16 +26,6 @@ const JournalForm = () => {
   const callApi = async () => {
     let response = await axios.get(`${BACKEND_URL}/clients/${user.email}`);
 
-    console.log("user detailed information: ", response.data);
-
-    console.log(therapistInfo);
-
-    console.log("client Id: ", response.data.id);
-    console.log("Journal Id: ", response.data.journalentries[0].id);
-    console.log(
-      "Template Id: ",
-      response.data.journalentries[0].journaltemplateId
-    );
     setTemplateId(response.data.journalentries[0].journaltemplateId);
     setJournalEntry(response.data.journalentries.length);
     setDueBy(response.data.journalentries[0].dueBy);
@@ -51,18 +38,12 @@ const JournalForm = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      console.log("user info:", user);
-      console.log("email:", user.email);
-      console.log("therapistInfo: ", therapistInfo);
-      // setinput1();
-      console.log(user);
       callApi();
     }
   }, [user]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("test: ", journalId);
 
     axios
 
@@ -78,8 +59,6 @@ const JournalForm = () => {
         setInput2("");
         setInput3("");
 
-        console.log("resdata:", res.data);
-        console.log("Journal Submit Success!!");
         navigate(`/client/journals/${res.data.id}`);
       })
       .catch((err) => {

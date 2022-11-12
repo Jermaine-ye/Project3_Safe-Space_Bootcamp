@@ -3,71 +3,19 @@ import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useAuth } from "./AuthContext";
 import { BACKEND_URL } from "../constants";
-import {
-  useNavigate,
-  useParams,
-  useLocation,
-  Link,
-  Outlet,
-} from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
-import {
-  Card,
-  Image,
-  Text,
-  Badge,
-  Button,
-  Group,
-  Container,
-} from "@mantine/core";
+import { Card, Image, Text, Button, Group, Container } from "@mantine/core";
 import NavBar from "./NavBar";
-import Footer from "./Footer";
 
 export default function EvaluationResults() {
-  const {
-    isAuthenticated,
-    user,
-    loginWithRedirect,
-    logout,
-    getAccessTokenSilently,
-  } = useAuth0();
-  const {
-    updateClientData,
-
-    speciality,
-    agePreference,
-    language,
-    religion,
-    gender,
-    clientInfo,
-  } = useAuth();
+  const { user, getAccessTokenSilently } = useAuth0();
+  const { speciality, agePreference, language, religion, gender, clientInfo } =
+    useAuth();
 
   const [assignedTherapists, setAssignedTherapists] = useState([]);
 
   const navigate = useNavigate();
-
-  const updateClient = async (user) => {
-    const accessToken = await getAccessTokenSilently({
-      audience: process.env.REACT_APP_AUDIENCE,
-      scope: process.env.REACT_APP_SCOPE,
-    });
-
-    if (user[`https://any-namespace/roles`].length === 0) {
-      const response = await axios.post(
-        `${BACKEND_URL}/clients/newClient`,
-        {
-          //refer BE controller
-          email: user.email,
-          password: user.password,
-        },
-        {
-          headers: { Authorization: `Bearer ${accessToken}` },
-        }
-      );
-      await updateClientData(response.data);
-    }
-    // navigate("/index");
-  };
 
   const matchTherapist = async () => {
     const accessToken = await getAccessTokenSilently({
@@ -75,7 +23,7 @@ export default function EvaluationResults() {
       scope: process.env.REACT_APP_SCOPE,
     });
 
-    const response = await axios.post(
+    await axios.post(
       `${BACKEND_URL}/clients/therapists`,
       {
         specializationID: speciality,
@@ -93,38 +41,22 @@ export default function EvaluationResults() {
     const therapistRes = await axios.get(
       `${BACKEND_URL}/clients/${user.email}`
     );
-    console.log(therapistRes.data.therapists);
+
     setAssignedTherapists(therapistRes.data.therapists);
   };
 
   useEffect(() => {
     matchTherapist();
-
-    console.log(
-      `speciality`,
-      speciality,
-      `agePref`,
-      agePreference,
-      `language`,
-      language,
-      `religion`,
-      religion,
-      `gender preference`,
-      gender
-    );
   }, [user, speciality, agePreference, language, religion, gender]);
 
   //ON SUBMIT TO SET THERAPIST FOR CLIENT AND UPDATE NECESSARY INFO
   const ChoosenTherapist = async (e) => {
-    // e.preventDefault();
-    console.log(e);
-    // console.log(e.target.value);
     const accessToken = await getAccessTokenSilently({
       audience: process.env.REACT_APP_AUDIENCE,
       scope: process.env.REACT_APP_SCOPE,
     });
 
-    const response = await axios.put(
+    await axios.put(
       `${BACKEND_URL}/clients/`,
       {
         emailClient: user.email,
@@ -151,7 +83,7 @@ export default function EvaluationResults() {
       }
     );
 
-    const responseTwo = await axios.put(
+    await axios.put(
       `${BACKEND_URL}/clients/clientTherapist`,
       {
         chosenTherapist: true,
@@ -169,7 +101,6 @@ export default function EvaluationResults() {
   };
 
   const displayAllTherapists = assignedTherapists.map((elem) => {
-    console.log(elem.id);
     return (
       <Container size={350} px="xs">
         <Card shadow="sm" p="lg" radius="md" withBorder key={elem.id}>
@@ -235,7 +166,6 @@ export default function EvaluationResults() {
           </Container>
         </div>
       </div>
-      {/* <Footer /> */}
     </div>
   );
 }
