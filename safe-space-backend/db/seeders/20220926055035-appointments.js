@@ -4,7 +4,6 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert("appointments", [
       {
-        // id: 1,
         start_datetime: "2022-08-19 22:59:00.000 +0900",
         end_datetime: "2022-08-19 23:59:00.000 +0900",
         current_therapist: false,

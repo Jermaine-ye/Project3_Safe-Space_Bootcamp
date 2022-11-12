@@ -4,7 +4,6 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert("memoentries", [
       {
-        // id: 1,
         general_input: "The meme guy",
         behavior_input: "Narcissist",
         contenttherapy_input: "Nothing can be done to treat him",

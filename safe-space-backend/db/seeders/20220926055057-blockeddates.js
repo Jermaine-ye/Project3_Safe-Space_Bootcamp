@@ -4,7 +4,6 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert("blockeddates", [
       {
-        // id: 1,
         date: "2022-08-20 02:59:00.000 +0900",
         created_at: "2022-08-19 02:59:00.000 +0900",
         updated_at: "2022-08-19 02:59:00.000 +0900",

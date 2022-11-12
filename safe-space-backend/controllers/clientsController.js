@@ -1,5 +1,4 @@
 const cors = require("cors");
-const { Op } = require("sequelize");
 const BaseController = require("./baseController");
 
 class ClientsController extends BaseController {
@@ -44,7 +43,6 @@ class ClientsController extends BaseController {
 
   async getOnePk(req, res) {
     const { clientId } = req.params;
-    console.log(req.params);
     try {
       const output = await this.model.findByPk(clientId);
       return res.json(output);
@@ -148,7 +146,7 @@ class ClientsController extends BaseController {
   }
 
   //bulkCreate clients_therapists?
-  //After that, we query therapist table to grab all therapists that fit the client's preferences and we bulkcreate clients_therapists?
+  //After that, we query therapist table to grab all therapists that fit the client's preferences and we bulkcreate clients_therapists
   async insertBulk(req, res) {
     const {
       specializationID,
@@ -158,9 +156,7 @@ class ClientsController extends BaseController {
       languageId,
       clientId,
     } = req.body;
-    console.log(req.body);
     try {
-      //allTherapists is an array of objects
       const nextTherapists = await this.specializationTherapistsModel.findAll({
         where: {
           specializationId: specializationID,
