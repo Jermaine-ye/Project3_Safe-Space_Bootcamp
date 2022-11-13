@@ -1,6 +1,5 @@
 # Safe Space
 ### A Singapore-based online counselling platform providing customized therapist matching services for people seeking help
-Provide customised Therapist matching services based on their personal needs and help identify the type of help they need.
 
 
 For clients, this app allows users to:
