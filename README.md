@@ -41,6 +41,9 @@ For therapists, this app allows users to:
 ![Safe Space Therapist Calendar2](https://user-images.githubusercontent.com/105807323/201477663-c217042f-67a5-4a01-b9d5-e1b3ed629c48.png)
 ![Safe Space Therapist Patient](https://user-images.githubusercontent.com/105807323/201477666-6b05de8e-67fb-404d-af16-84a7ae1361e1.png)
 
+### DB Schema
+![SAFE SPACE PROJECT 3 (1)](https://user-images.githubusercontent.com/105807323/201513020-84191130-6602-4dcc-8713-fcd616612830.png)
+
 
 ## Built with
 
