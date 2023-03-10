@@ -16,6 +16,7 @@ For therapists, this app allows users to:
 5. Block certain dates off so that clients do not attempt to arrange appointments.
 
 https://www.youtube.com/watch?v=HYdlbe26U5U&list=PLxwmeZaKMKvNYg35dVbYuydFbZ-jN5q8x&index=4
+
 Please have subtitles on for project walkthrough :)
 
 ## Preview
